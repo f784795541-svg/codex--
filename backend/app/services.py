@@ -590,8 +590,13 @@ def build_rule_output(
     return warnings, suggestions
 
 
-def compute_daily_report(db: Session, user: models.User, report_date: date) -> schemas.DailyReportResponse:
-    targets = compute_targets(user)
+def compute_daily_report(
+    db: Session,
+    user: models.User,
+    report_date: date,
+    targets: dict[str, float] | None = None,
+) -> schemas.DailyReportResponse:
+    targets = targets or compute_targets(user)
 
     food_logs = (
         db.query(models.FoodLog)
@@ -707,9 +712,10 @@ def compute_weekly_report(
     start_date: date,
 ) -> schemas.WeeklyReportResponse:
     reports: list[schemas.DailyReportResponse] = []
+    shared_targets = compute_targets(user)
     for offset in range(7):
         current_date = start_date + timedelta(days=offset)
-        reports.append(compute_daily_report(db, user, current_date))
+        reports.append(compute_daily_report(db, user, current_date, shared_targets))
 
     count = len(reports) or 1
     average_intake = round(sum(item.total_intake_kcal for item in reports) / count, 2)
@@ -735,6 +741,7 @@ def build_dashboard_summary(
     target_date: date,
     weight_limit: int = 14,
 ) -> schemas.DashboardSummaryResponse:
+    targets = compute_targets(user)
     recent_weights = (
         db.query(models.WeightLog)
         .filter(models.WeightLog.user_id == user.id)
@@ -746,7 +753,7 @@ def build_dashboard_summary(
 
     return schemas.DashboardSummaryResponse(
         user=schemas.UserResponse.model_validate(user),
-        targets=compute_targets(user),
-        daily_report=compute_daily_report(db, user, target_date),
+        targets=targets,
+        daily_report=compute_daily_report(db, user, target_date, targets),
         recent_weights=[schemas.WeightLogResponse.model_validate(item) for item in recent_weights],
     )

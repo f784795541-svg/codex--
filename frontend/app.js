@@ -275,6 +275,9 @@ const state = {
   dashboardDate: new Date().toISOString().slice(0, 10),
   activePanel: "overview",
   activeRestaurantBrand: "",
+  dashboardRequestId: 0,
+  dashboardAbortController: null,
+  dashboardLoading: false,
 };
 
 const PANEL_NAMES = new Set(["overview", "food", "activity", "trend", "report", "assessment", "settings", "suggestion"]);
@@ -422,7 +425,10 @@ async function apiRequest(path, options = {}) {
       },
       ...options,
     });
-  } catch {
+  } catch (error) {
+    if (error?.name === "AbortError") {
+      throw error;
+    }
     throw new Error("后端服务未启动或不可访问，请先运行 docker compose up -d database backend frontend");
   }
 
@@ -436,6 +442,33 @@ async function apiRequest(path, options = {}) {
     throw new Error(body.detail || "请求失败");
   }
   return body;
+}
+
+function isAbortError(error) {
+  return error?.name === "AbortError";
+}
+
+function setDashboardLoading(isLoading) {
+  state.dashboardLoading = isLoading;
+  const refreshButton = $("refresh-dashboard-btn");
+  const dateInput = $("dashboard-date");
+  if (refreshButton) {
+    refreshButton.disabled = isLoading;
+    refreshButton.dataset.loading = isLoading ? "true" : "false";
+    refreshButton.textContent = isLoading ? "刷新中..." : "刷新首页";
+  }
+  if (dateInput) {
+    dateInput.disabled = isLoading;
+  }
+}
+
+function runSafeRenderStep(label, renderFn, fallbackFn = () => {}) {
+  try {
+    renderFn();
+  } catch (error) {
+    console.error(`${label} failed`, error);
+    fallbackFn(error);
+  }
 }
 
 function saveCurrentUser(user) {
@@ -1507,7 +1540,16 @@ function buildDynamicMealRecommendations(summary) {
   };
 }
 
-function renderOverviewRecommendation(summary) {
+function safeBuildDynamicMealRecommendations(summary) {
+  try {
+    return buildDynamicMealRecommendations(summary);
+  } catch (error) {
+    console.error("buildDynamicMealRecommendations failed", error);
+    return null;
+  }
+}
+
+function renderOverviewRecommendation(summary, recommendation = safeBuildDynamicMealRecommendations(summary)) {
   const statusEmoji =
     summary.daily_report.net_calorie_balance <= -500 ? "૮ ˶ᵔ ᵕ ᵔ˶ ა" : summary.daily_report.net_calorie_balance > 200 ? "( •̀ ω •́ )✧" : "(˶ᵔ ᵕ ᵔ˶)";
   const statusCopy =
@@ -1515,12 +1557,6 @@ function renderOverviewRecommendation(summary) {
       ? "今天热量略有富余，下面三餐会更偏向平衡和控制重复摄入。"
       : "今天还有调整空间，下面三餐会优先围绕当前缺口去补齐。";
   const mode = resolveRecommendationMode(summary.user);
-  let recommendation = null;
-  try {
-    recommendation = buildDynamicMealRecommendations(summary);
-  } catch (error) {
-    console.error("buildDynamicMealRecommendations failed in renderOverviewRecommendation", error);
-  }
   if (!recommendation) {
     return `
       <section class="hero-status-card hero-plan-board hero-plan-board-compact">
@@ -1600,13 +1636,7 @@ function renderOverviewRecommendation(summary) {
   `;
 }
 
-function renderOverviewSuggestionSection(summary) {
-  let recommendation = null;
-  try {
-    recommendation = buildDynamicMealRecommendations(summary);
-  } catch (error) {
-    console.error("buildDynamicMealRecommendations failed in renderOverviewSuggestionSection", error);
-  }
+function renderOverviewSuggestionSection(summary, recommendation = safeBuildDynamicMealRecommendations(summary)) {
   if (!recommendation) {
     return `
       <div class="section-heading">
@@ -1816,6 +1846,11 @@ function bindPickerTrigger(inputId, panelId) {
   if (!input) {
     return;
   }
+  input.addEventListener("mousedown", (event) => {
+    if (input.readOnly) {
+      event.preventDefault();
+    }
+  });
   input.addEventListener("focus", () => openPickerPanel(panelId, input.value));
   input.addEventListener("click", () => openPickerPanel(panelId, input.value));
 }
@@ -2004,18 +2039,24 @@ function positionPickerPanel(panel) {
   }
 
   const rect = trigger.getBoundingClientRect();
+  const fieldRect = field.getBoundingClientRect();
   const isTimeField = field?.classList.contains("time-picker-field");
-  const desiredWidth = isTimeField ? 196 : Math.max(rect.width, 220);
+  const desiredWidth = isTimeField ? 196 : Math.min(Math.max(rect.width, 220), 420);
   const width = Math.min(desiredWidth, window.innerWidth - 24);
-  const leftBase = isTimeField ? rect.left + rect.width / 2 - width / 2 : rect.left;
-  const left = Math.min(Math.max(12, leftBase), Math.max(12, window.innerWidth - width - 12));
+  const relativeLeftBase = isTimeField
+    ? rect.left - fieldRect.left + rect.width / 2 - width / 2
+    : rect.left - fieldRect.left;
+  const maxRelativeLeft = Math.max(fieldRect.width - width, 0);
+  const left = Math.min(Math.max(0, relativeLeftBase), maxRelativeLeft);
 
   panel.style.setProperty("--picker-left", `${left}px`);
   panel.style.setProperty("--picker-width", `${width}px`);
 
   const panelHeight = panel.offsetHeight || 240;
+  const triggerTop = rect.top - fieldRect.top;
+  const triggerBottom = rect.bottom - fieldRect.top;
   const fitsBelow = rect.bottom + 10 + panelHeight <= window.innerHeight - 12;
-  const top = fitsBelow ? rect.bottom + 10 : Math.max(12, rect.top - panelHeight - 10);
+  const top = fitsBelow ? triggerBottom + 10 : Math.max(-triggerTop, triggerTop - panelHeight - 10);
   panel.style.setProperty("--picker-top", `${top}px`);
 }
 
@@ -2306,6 +2347,8 @@ function bindInteractiveGlow(scope = document) {
   });
 }
 
+let dashboardTabIndicatorFrame = 0;
+
 function ensureDashboardTabIndicator() {
   const nav = document.querySelector(".dashboard-tabs");
   if (!nav) {
@@ -2333,8 +2376,18 @@ function updateDashboardTabIndicator() {
   const y = activeRect.top - navRect.top;
   indicator.style.width = `${activeRect.width}px`;
   indicator.style.height = `${activeRect.height}px`;
-  indicator.style.transform = `translate(${x}px, ${y}px)`;
+  indicator.style.transform = `translate3d(${x}px, ${y}px, 0)`;
   indicator.style.opacity = "1";
+}
+
+function scheduleDashboardTabIndicatorUpdate() {
+  if (dashboardTabIndicatorFrame) {
+    return;
+  }
+  dashboardTabIndicatorFrame = window.requestAnimationFrame(() => {
+    dashboardTabIndicatorFrame = 0;
+    updateDashboardTabIndicator();
+  });
 }
 
 function supportsViewTransition() {
@@ -2375,7 +2428,7 @@ function showPanel(panelName, options = {}) {
     document.querySelectorAll(".dashboard-tab").forEach((button) => {
       button.classList.toggle("active", button.dataset.panel === requestedPanel);
     });
-    updateDashboardTabIndicator();
+    scheduleDashboardTabIndicatorUpdate();
     document.querySelectorAll(".dashboard-panel").forEach((panel) => {
       const isActive = panel.id === `panel-${safePanel}`;
       panel.classList.toggle("active", isActive);
@@ -2461,6 +2514,7 @@ function fillDefaultDates() {
 }
 
 function renderOverview(summary) {
+  const recommendation = safeBuildDynamicMealRecommendations(summary);
   const latestWeight = `${summary.user.weight_kg} kg`;
   const targetSleep = summary.user.target_sleep_hours || 8;
   const timeline = computeGoalTimeline(summary);
@@ -2474,9 +2528,9 @@ function renderOverview(summary) {
   const recommendationMode = resolveRecommendationMode(summary.user);
 
   $("hero-status-grid").innerHTML = `
-    ${renderOverviewRecommendation(summary)}
+    ${renderOverviewRecommendation(summary, recommendation)}
   `;
-  $("overview-recommendation-anchor").innerHTML = renderOverviewSuggestionSection(summary);
+  $("overview-recommendation-anchor").innerHTML = renderOverviewSuggestionSection(summary, recommendation);
 
   $("overview-grid").innerHTML = `
     <div class="metric-card metric-card-action metric-card--accent" role="button" tabindex="0" data-switch-panel="report" data-scroll-target="panel-report">
@@ -3123,90 +3177,114 @@ async function loadDashboard() {
 
   const dateValue = $("dashboard-date").value || state.dashboardDate;
   state.dashboardDate = dateValue;
-  if (!state.foodDatabase.length) {
-    try {
-      state.foodDatabase = await apiRequest("/food/database?limit=500");
-    } catch {
-      state.foodDatabase = [];
+  state.dashboardRequestId += 1;
+  const requestId = state.dashboardRequestId;
+  state.dashboardAbortController?.abort();
+  const controller = new AbortController();
+  state.dashboardAbortController = controller;
+  setDashboardLoading(true);
+
+  try {
+    const summaryPromise = apiRequest(
+      `/dashboard/summary?user_id=${state.currentUser.id}&report_date=${encodeURIComponent(dateValue)}`,
+      { signal: controller.signal }
+    );
+    const foodDatabasePromise = state.foodDatabase.length
+      ? Promise.resolve(state.foodDatabase)
+      : apiRequest("/food/database?limit=500", { signal: controller.signal }).catch((error) => {
+          if (isAbortError(error)) {
+            throw error;
+          }
+          console.error("food database preload failed", error);
+          return [];
+        });
+
+    const [summary, foodDatabase] = await Promise.all([summaryPromise, foodDatabasePromise]);
+    if (requestId !== state.dashboardRequestId) {
+      return;
+    }
+
+    if (Array.isArray(foodDatabase) && foodDatabase.length) {
+      state.foodDatabase = foodDatabase;
+    }
+
+    saveCurrentUser(summary.user);
+    savePreferences({
+      ...loadPreferences(),
+      recommendation_mode: summary.user.recommendation_mode || "home",
+    });
+    $("welcome-title").textContent = `${summary.user.name} 的健康首页`;
+    $("user-pill").textContent = `${summary.user.username || summary.user.name} · ${goalLabel(summary.user.goal)}`;
+    $("hero-goal-line").textContent = "根据固定公式和记录结果，快速查看今天的执行重点";
+
+    runSafeRenderStep("renderGoalTargets", () => {
+      renderGoalTargets(summary);
+    }, () => {
+      $("goal-targets").innerHTML = "";
+    });
+
+    runSafeRenderStep("renderOverview", () => {
+      renderOverview(summary);
+    }, () => {
+      $("hero-status-grid").innerHTML = "";
+      $("overview-grid").innerHTML = "";
+      $("overview-recommendation-anchor").innerHTML = `
+        <div class="section-heading">
+          <p class="eyebrow">今日饮食建议</p>
+          <h3>建议模块暂时没有生成出来</h3>
+          <p class="muted-text">当前数据已经加载完成，你可以先继续记录饮食和运动，稍后刷新首页再试。</p>
+        </div>
+      `;
+      $("rules-detail-grid").innerHTML = "";
+    });
+
+    runSafeRenderStep("renderCompletionCurve", () => {
+      renderCompletionCurve(summary);
+    }, () => {
+      $("completion-curve").innerHTML = "";
+    });
+
+    runSafeRenderStep("renderWeightChart", () => {
+      renderWeightChart(summary.recent_weights || []);
+    }, () => {
+      $("weight-chart").innerHTML = `
+        <section class="chart-empty-state">
+          <div class="chart-empty-icon">○</div>
+          <strong>体重曲线暂时没有生成出来</strong>
+          <p>体重记录数据还在，但这张图刚才渲染失败了。你可以刷新首页后再看。</p>
+        </section>
+      `;
+    });
+
+    runSafeRenderStep("fillAssessmentForm", () => {
+      fillAssessmentForm(summary.user);
+    });
+
+    runSafeRenderStep("fillSettingsForm", () => {
+      fillSettingsForm(summary.user);
+    });
+
+    runSafeRenderStep("renderDailyReport", () => {
+      $("report-result").innerHTML = renderDailyReport(summary.daily_report);
+    }, () => {
+      $("report-result").innerHTML = renderReportEmptyState("报告模块暂时没有生成出来", "基础数据还在，刷新首页后会重新尝试生成日报。");
+    });
+
+    bindInteractiveGlow(document);
+    scheduleDashboardTabIndicatorUpdate();
+  } catch (error) {
+    if (isAbortError(error)) {
+      return;
+    }
+    throw error;
+  } finally {
+    if (state.dashboardAbortController === controller) {
+      state.dashboardAbortController = null;
+    }
+    if (requestId === state.dashboardRequestId) {
+      setDashboardLoading(false);
     }
   }
-
-  const summary = await apiRequest(
-    `/dashboard/summary?user_id=${state.currentUser.id}&report_date=${encodeURIComponent(dateValue)}`
-  );
-
-  saveCurrentUser(summary.user);
-  savePreferences({
-    ...loadPreferences(),
-    recommendation_mode: summary.user.recommendation_mode || "home",
-  });
-  $("welcome-title").textContent = `${summary.user.name} 的健康首页`;
-  $("user-pill").textContent = `${summary.user.username || summary.user.name} · ${goalLabel(summary.user.goal)}`;
-  $("hero-goal-line").textContent = "根据固定公式和记录结果，快速查看今天的执行重点";
-
-  try {
-    renderGoalTargets(summary);
-  } catch (error) {
-    console.error("renderGoalTargets failed", error);
-    $("goal-targets").innerHTML = "";
-  }
-
-  try {
-    renderOverview(summary);
-  } catch (error) {
-    console.error("renderOverview failed", error);
-    $("hero-status-grid").innerHTML = "";
-    $("overview-grid").innerHTML = "";
-    $("overview-recommendation-anchor").innerHTML = `
-      <div class="section-heading">
-        <p class="eyebrow">今日饮食建议</p>
-        <h3>建议模块暂时没有生成出来</h3>
-        <p class="muted-text">当前数据已经加载完成，你可以先继续记录饮食和运动，稍后刷新首页再试。</p>
-      </div>
-    `;
-    $("rules-detail-grid").innerHTML = "";
-  }
-
-  try {
-    renderCompletionCurve(summary);
-  } catch (error) {
-    console.error("renderCompletionCurve failed", error);
-    $("completion-curve").innerHTML = "";
-  }
-
-  try {
-    renderWeightChart(summary.recent_weights || []);
-  } catch (error) {
-    console.error("renderWeightChart failed", error);
-    $("weight-chart").innerHTML = `
-      <section class="chart-empty-state">
-        <div class="chart-empty-icon">○</div>
-        <strong>体重曲线暂时没有生成出来</strong>
-        <p>体重记录数据还在，但这张图刚才渲染失败了。你可以刷新首页后再看。</p>
-      </section>
-    `;
-  }
-
-  try {
-    fillAssessmentForm(summary.user);
-  } catch (error) {
-    console.error("fillAssessmentForm failed", error);
-  }
-
-  try {
-    fillSettingsForm(summary.user);
-  } catch (error) {
-    console.error("fillSettingsForm failed", error);
-  }
-
-  try {
-    $("report-result").innerHTML = renderDailyReport(summary.daily_report);
-  } catch (error) {
-    console.error("renderDailyReport failed", error);
-    $("report-result").innerHTML = renderReportEmptyState("报告模块暂时没有生成出来", "基础数据还在，刷新首页后会重新尝试生成日报。");
-  }
-
-  bindInteractiveGlow(document);
 }
 
 async function handleRegister(event) {
@@ -3415,17 +3493,42 @@ async function handleWeightLog(event) {
   }
 }
 
-function handleAssessmentSubmit(event) {
+async function handleAssessmentSubmit(event) {
   event.preventDefault();
   const payload = getFormData(event.currentTarget);
-  renderAssessment(
-    computeBmiProfile({
-      age: Number(payload.age),
-      gender: payload.gender,
-      height_cm: Number(payload.height_cm),
-      weight_kg: Number(payload.weight_kg),
-    })
-  );
+  const profilePayload = {
+    age: Number(payload.age),
+    gender: payload.gender,
+    height_cm: Number(payload.height_cm),
+    weight_kg: Number(payload.weight_kg),
+  };
+
+  renderAssessment(computeBmiProfile(profilePayload));
+
+  if (!state.currentUser) {
+    return;
+  }
+
+  try {
+    const data = await apiRequest("/user/update", {
+      method: "POST",
+      body: JSON.stringify({
+        user_id: state.currentUser.id,
+        age: profilePayload.age,
+        gender: profilePayload.gender,
+        height_cm: profilePayload.height_cm,
+        weight_kg: profilePayload.weight_kg,
+        body_type: payload.body_type || "balanced",
+      }),
+    });
+    saveCurrentUser(data.user);
+    fillAssessmentForm(data.user);
+    fillSettingsForm(data.user);
+    await loadDashboard();
+    navigateToPanel("overview", "overview-target-anchor");
+  } catch (error) {
+    console.error("handleAssessmentSubmit failed", error);
+  }
 }
 
 async function handleSettingsSave(event) {
@@ -3636,8 +3739,8 @@ function initialize() {
   bindInteractiveGlow(document);
   state.activePanel = resolvePanelFromHash();
   showPanel(state.activePanel);
-  updateDashboardTabIndicator();
-  window.addEventListener("resize", updateDashboardTabIndicator);
+  scheduleDashboardTabIndicatorUpdate();
+  window.addEventListener("resize", scheduleDashboardTabIndicatorUpdate, { passive: true });
   const user = loadCurrentUser();
   if (user) {
     saveCurrentUser(user);

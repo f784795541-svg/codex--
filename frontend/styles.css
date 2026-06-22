@@ -164,7 +164,7 @@ body[data-shell="app"] .auth-shell {
 .shortcut-card {
   border-radius: var(--radius-panel);
   background: var(--panel);
-  backdrop-filter: blur(24px) saturate(1.06);
+  backdrop-filter: blur(18px) saturate(1.04);
   box-shadow: var(--glass-highlight), var(--shadow);
 }
 
@@ -654,7 +654,7 @@ select:focus {
 }
 
 .picker-field.picker-open .picker-panel {
-  position: fixed;
+  position: absolute;
   top: var(--picker-top, 0);
   left: var(--picker-left, 0);
   right: auto;
@@ -2021,6 +2021,7 @@ select:focus {
   pointer-events: none;
   z-index: 0;
   opacity: 0;
+  will-change: transform, width, height, opacity;
 }
 
 .dashboard-tab {
@@ -3118,6 +3119,29 @@ select:focus {
   position: relative;
   isolation: isolate;
   overflow: hidden;
+  will-change: transform;
+}
+
+#refresh-dashboard-btn[disabled] {
+  cursor: wait;
+  opacity: 0.82;
+  transform: none !important;
+}
+
+@supports not ((-webkit-backdrop-filter: blur(1px)) or (backdrop-filter: blur(1px))) {
+  .auth-hero,
+  .auth-panel,
+  .hero-panel,
+  .rules-panel,
+  .card,
+  .dashboard-panel,
+  .feature-card,
+  .shortcut-card,
+  .dashboard-tabs,
+  .picker-panel {
+    backdrop-filter: none;
+    background: rgba(255, 251, 246, 0.98);
+  }
 }
 
 .interactive-glow::before {
