@@ -1,0 +1,21 @@
+<svg width="640" height="420" viewBox="0 0 640 420" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="640" height="420" rx="36" fill="#FFF4EB"/>
+  <circle cx="126" cy="90" r="70" fill="#FFDAB4"/>
+  <ellipse cx="320" cy="308" rx="192" ry="35" fill="#E8D5C5"/>
+  <g transform="translate(168 152)">
+    <rect x="0" y="38" width="292" height="44" rx="22" fill="#A74A3D"/>
+    <rect x="0" y="100" width="274" height="44" rx="22" fill="#B04D40"/>
+    <rect x="16" y="162" width="300" height="44" rx="22" fill="#A3463A"/>
+    <rect x="34" y="52" width="232" height="18" rx="9" fill="#FFD4C6"/>
+    <rect x="26" y="114" width="214" height="18" rx="9" fill="#FFD4C6"/>
+    <rect x="54" y="176" width="236" height="18" rx="9" fill="#FFD4C6"/>
+  </g>
+  <circle cx="314" cy="220" r="7" fill="#2F231E"/>
+  <circle cx="348" cy="220" r="7" fill="#2F231E"/>
+  <path d="M315 242C324 251 339 251 348 242" stroke="#2F231E" stroke-width="5" stroke-linecap="round"/>
+  <circle cx="278" cy="244" r="8" fill="#F2B29A"/>
+  <circle cx="384" cy="244" r="8" fill="#F2B29A"/>
+  <path d="M440 88C440 71.4315 453.431 58 470 58H580C596.569 58 610 71.4315 610 88V106C610 122.569 596.569 136 580 136H470C453.431 136 440 122.569 440 106V88Z" fill="#FFFDF9"/>
+  <path d="M440 98L422 88L440 78V98Z" fill="#FFFDF9"/>
+  <text x="525" y="101" fill="#9A4C35" font-size="22" font-family="Arial, sans-serif" text-anchor="middle">Rib Finger</text>
+</svg>

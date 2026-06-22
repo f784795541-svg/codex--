@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 220">
+  <rect width="320" height="220" rx="28" fill="#f8efe5"/>
+  <ellipse cx="160" cy="184" rx="108" ry="18" fill="#d7c2ad"/>
+  <path d="M108 78h104l-10 84H118l-10-84Z" fill="#cf3026"/>
+  <rect x="108" y="78" width="104" height="20" rx="10" fill="#fff7ef"/>
+  <path d="M126 88h68" stroke="#cf3026" stroke-width="6" stroke-linecap="round"/>
+  <path d="M120 64c10-10 24-10 34 0 7 6 10 15 6 23h-34c-4-8-1-17 6-23Z" fill="#cf712f"/>
+  <path d="M168 64c10-10 24-10 34 0 7 6 10 15 6 23h-34c-4-8-1-17 6-23Z" fill="#d88640"/>
+  <text x="160" y="52" text-anchor="middle" font-size="20" fill="#8f2a22" font-weight="700">KFC Original Chicken</text>
+</svg>

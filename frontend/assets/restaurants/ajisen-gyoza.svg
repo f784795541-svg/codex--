@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 220">
+  <rect width="320" height="220" rx="28" fill="#f8efe5"/>
+  <ellipse cx="160" cy="184" rx="110" ry="16" fill="#d7c2ad"/>
+  <rect x="84" y="82" width="152" height="74" rx="20" fill="#fff7ef" stroke="#cf3026" stroke-width="8"/>
+  <path d="M104 120c10-18 24-26 40-26s30 8 40 26" fill="none" stroke="#d9b28a" stroke-width="10" stroke-linecap="round"/>
+  <path d="M136 120c10-18 24-26 40-26s30 8 40 26" fill="none" stroke="#d9b28a" stroke-width="10" stroke-linecap="round"/>
+  <text x="160" y="56" text-anchor="middle" font-size="20" fill="#8f2a22" font-weight="700">Ajisen Gyoza</text>
+</svg>

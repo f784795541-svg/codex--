@@ -1,0 +1,18 @@
+<svg width="640" height="420" viewBox="0 0 640 420" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="640" height="420" rx="36" fill="#FFF0E7"/>
+  <circle cx="514" cy="90" r="72" fill="#FFD6BC"/>
+  <ellipse cx="320" cy="308" rx="188" ry="34" fill="#E7D2C2"/>
+  <path d="M216 244C216 204.788 247.788 173 287 173H385C434.706 173 475 213.294 475 263V273C475 298.957 453.957 320 428 320H283C246.549 320 217 290.451 217 254L216 244Z" fill="#A04338"/>
+  <path d="M250 236C250 209.49 271.49 188 298 188H378C414.451 188 444 217.549 444 254V265C444 279.912 431.912 292 417 292H295C270.147 292 250 271.853 250 247V236Z" fill="#E17264"/>
+  <rect x="276" y="208" width="16" height="88" rx="8" fill="#FFF4EC"/>
+  <rect x="318" y="202" width="16" height="94" rx="8" fill="#FFF4EC"/>
+  <rect x="360" y="210" width="16" height="86" rx="8" fill="#FFF4EC"/>
+  <circle cx="306" cy="224" r="7" fill="#2F231E"/>
+  <circle cx="344" cy="224" r="7" fill="#2F231E"/>
+  <path d="M307 246C316 254 334 254 343 246" stroke="#2F231E" stroke-width="5" stroke-linecap="round"/>
+  <circle cx="274" cy="246" r="8" fill="#F2B29A"/>
+  <circle cx="383" cy="246" r="8" fill="#F2B29A"/>
+  <path d="M58 88C58 71.4315 71.4315 58 88 58H198C214.569 58 228 71.4315 228 88V106C228 122.569 214.569 136 198 136H88C71.4315 136 58 122.569 58 106V88Z" fill="#FFFDF9"/>
+  <path d="M228 98L246 88L228 78V98Z" fill="#FFFDF9"/>
+  <text x="143" y="101" fill="#9A4C35" font-size="22" font-family="Arial, sans-serif" text-anchor="middle">Short Rib</text>
+</svg>

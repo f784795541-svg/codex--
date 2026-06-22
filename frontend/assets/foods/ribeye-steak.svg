@@ -1,0 +1,17 @@
+<svg width="640" height="420" viewBox="0 0 640 420" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="640" height="420" rx="36" fill="#FFF4EA"/>
+  <circle cx="126" cy="92" r="70" fill="#FFDCC6"/>
+  <ellipse cx="320" cy="308" rx="190" ry="34" fill="#E9D4C5"/>
+  <path d="M204 258C204 189.516 259.516 134 328 134H349C437.918 134 510 206.082 510 295V295C510 308.807 498.807 320 485 320H263C230.415 320 204 293.585 204 261V258Z" fill="#9F453A"/>
+  <path d="M240 248C240 203.265 276.265 167 321 167H341C400.647 167 449 215.353 449 275V275C449 284.941 440.941 293 431 293H288C261.49 293 240 271.51 240 245V248Z" fill="#E67D6E"/>
+  <ellipse cx="332" cy="226" rx="52" ry="42" fill="#FFDCCD"/>
+  <ellipse cx="334" cy="226" rx="23" ry="18" fill="#FFF7F1"/>
+  <circle cx="315" cy="220" r="7" fill="#2F231E"/>
+  <circle cx="347" cy="220" r="7" fill="#2F231E"/>
+  <path d="M315 242C324 250 338 250 347 242" stroke="#2F231E" stroke-width="5" stroke-linecap="round"/>
+  <circle cx="279" cy="246" r="8" fill="#F2B29A"/>
+  <circle cx="385" cy="246" r="8" fill="#F2B29A"/>
+  <path d="M432 92C432 75.4315 445.431 62 462 62H562C578.569 62 592 75.4315 592 92V110C592 126.569 578.569 140 562 140H462C445.431 140 432 126.569 432 110V92Z" fill="#FFFEFA"/>
+  <path d="M432 102L414 92L432 82V102Z" fill="#FFFEFA"/>
+  <text x="512" y="105" fill="#9A4C35" font-size="22" font-family="Arial, sans-serif" text-anchor="middle">Ribeye</text>
+</svg>

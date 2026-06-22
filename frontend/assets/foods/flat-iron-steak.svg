@@ -1,0 +1,17 @@
+<svg width="640" height="420" viewBox="0 0 640 420" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="640" height="420" rx="36" fill="#FFF3E8"/>
+  <circle cx="516" cy="92" r="70" fill="#FFDAB7"/>
+  <ellipse cx="320" cy="308" rx="192" ry="35" fill="#E9D3C1"/>
+  <path d="M188 260C188 209.19 229.19 168 280 168H377C443.826 168 498 222.174 498 289V289C498 306.121 484.121 320 467 320H249C215.311 320 188 292.689 188 259V260Z" fill="#9B443A"/>
+  <path d="M226 250C226 215.758 253.758 188 288 188H370C416.392 188 454 225.608 454 272V272C454 283.046 445.046 292 434 292H280C250.177 292 226 267.823 226 238V250Z" fill="#E57968"/>
+  <path d="M270 230H395" stroke="#FFD4C6" stroke-width="13" stroke-linecap="round"/>
+  <path d="M282 209C298 199 360 199 377 209" stroke="#FFD4C6" stroke-width="8" stroke-linecap="round"/>
+  <circle cx="310" cy="224" r="7" fill="#2F231E"/>
+  <circle cx="345" cy="224" r="7" fill="#2F231E"/>
+  <path d="M311 245C320 253 336 253 345 245" stroke="#2F231E" stroke-width="5" stroke-linecap="round"/>
+  <circle cx="274" cy="246" r="8" fill="#F2B29A"/>
+  <circle cx="384" cy="246" r="8" fill="#F2B29A"/>
+  <path d="M54 88C54 71.4315 67.4315 58 84 58H198C214.569 58 228 71.4315 228 88V106C228 122.569 214.569 136 198 136H84C67.4315 136 54 122.569 54 106V88Z" fill="#FFFDF9"/>
+  <path d="M228 98L246 88L228 78V98Z" fill="#FFFDF9"/>
+  <text x="141" y="101" fill="#9A4C35" font-size="22" font-family="Arial, sans-serif" text-anchor="middle">Flat Iron</text>
+</svg>

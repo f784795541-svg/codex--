@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 220">
+  <rect width="320" height="220" rx="28" fill="#f4f1e2"/>
+  <ellipse cx="160" cy="184" rx="98" ry="16" fill="#d7c2ad"/>
+  <path d="M122 62h76l-8 102h-60l-8-102Z" fill="#547c37"/>
+  <path d="M132 74h56" stroke="#fff7ef" stroke-width="8" stroke-linecap="round"/>
+  <g fill="#f2d27d">
+    <ellipse cx="148" cy="110" rx="12" ry="8"/><ellipse cx="176" cy="102" rx="12" ry="8"/><ellipse cx="162" cy="128" rx="12" ry="8"/>
+  </g>
+  <text x="160" y="44" text-anchor="middle" font-size="20" fill="#547c37" font-weight="700">Subway Chips</text>
+</svg>

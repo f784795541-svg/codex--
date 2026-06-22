@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 220">
+  <rect width="320" height="220" rx="28" fill="#f8efe5"/>
+  <ellipse cx="160" cy="184" rx="108" ry="16" fill="#d7c2ad"/>
+  <path d="M110 108h100l-10 44h-80l-10-44Z" fill="#cf3026"/>
+  <ellipse cx="160" cy="104" rx="56" ry="18" fill="#fff7ef"/>
+  <path d="M128 102c10-8 22-12 32-12s22 4 32 12" fill="none" stroke="#e3d39b" stroke-width="10" stroke-linecap="round"/>
+  <path d="M142 98h36" stroke="#b6815f" stroke-width="6" stroke-linecap="round"/>
+  <text x="160" y="60" text-anchor="middle" font-size="20" fill="#8f2a22" font-weight="700">KFC Mashed Potato</text>
+</svg>

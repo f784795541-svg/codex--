@@ -1,0 +1,17 @@
+<svg width="640" height="420" viewBox="0 0 640 420" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="640" height="420" rx="36" fill="#FFF4EC"/>
+  <circle cx="124" cy="96" r="70" fill="#FFDCC1"/>
+  <ellipse cx="320" cy="310" rx="192" ry="35" fill="#E8D4C6"/>
+  <path d="M196 266C196 199.726 249.726 146 316 146H376C439.513 146 491 197.487 491 261V275C491 299.853 470.853 320 446 320H256C222.863 320 196 293.137 196 260V266Z" fill="#9E473B"/>
+  <path d="M230 255C230 215.788 261.788 184 301 184H369C415.944 184 454 222.056 454 269V269C454 281.703 443.703 292 431 292H281C252.833 292 230 269.167 230 241V255Z" fill="#E68371"/>
+  <path d="M258 220C288 199 380 203 420 244" stroke="#FFD8CB" stroke-width="12" stroke-linecap="round"/>
+  <path d="M250 256C292 244 355 250 403 282" stroke="#FFD8CB" stroke-width="10" stroke-linecap="round"/>
+  <circle cx="309" cy="226" r="7" fill="#2F231E"/>
+  <circle cx="346" cy="226" r="7" fill="#2F231E"/>
+  <path d="M310 247C320 255 336 255 346 247" stroke="#2F231E" stroke-width="5" stroke-linecap="round"/>
+  <circle cx="274" cy="248" r="8" fill="#F2B29A"/>
+  <circle cx="386" cy="248" r="8" fill="#F2B29A"/>
+  <path d="M430 96C430 79.4315 443.431 66 460 66H578C594.569 66 608 79.4315 608 96V114C608 130.569 594.569 144 578 144H460C443.431 144 430 130.569 430 114V96Z" fill="#FFFDF9"/>
+  <path d="M430 106L412 96L430 86V106Z" fill="#FFFDF9"/>
+  <text x="519" y="109" fill="#9A4C35" font-size="22" font-family="Arial, sans-serif" text-anchor="middle">Brisket</text>
+</svg>

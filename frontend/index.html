@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>健康管理系统</title>
+    <link rel="stylesheet" href="/styles.css?v=20260622-0848" />
+  </head>
+  <body data-shell="auth">
+    <div class="auth-shell" id="auth-shell">
+      <section class="auth-hero">
+        <div class="auth-brand-row">
+          <div class="brand-badge">Health Manager</div>
+          <div class="brand-chip">固定公式 + 本地数据库</div>
+        </div>
+        <h1>开启你的每日健康管理</h1>
+        <p class="auth-lead">
+          建立个人档案后，你可以持续记录饮食、运动、睡眠与体重，系统会按固定公式自动生成 BMR、TDEE、BMI 和每日营养目标。
+        </p>
+        <p class="auth-sublead">
+          所有结论与建议都来自本地食物数据库、数学计算和 if/else 规则引擎，适合在手机、平板和电脑上长期追踪。
+        </p>
+        <div class="auth-stat-row">
+          <article class="auth-stat-card">
+            <strong>饮食 / 运动 / 睡眠</strong>
+            <span>按天记录，直接汇总到日报与周报</span>
+          </article>
+          <article class="auth-stat-card">
+            <strong>BMR / TDEE / BMI</strong>
+            <span>自动计算目标热量、蛋白、脂肪与碳水</span>
+          </article>
+          <article class="auth-stat-card">
+            <strong>适配多设备</strong>
+            <span>手机、iPad、电脑都能顺手查看与录入</span>
+          </article>
+        </div>
+        <div class="hero-points hero-points-compact">
+          <div class="point-card point-card-compact">
+            <strong>规则透明</strong>
+            <span>BMR、TDEE、热量差和建议都写清楚</span>
+          </div>
+          <div class="point-card point-card-compact">
+            <strong>交互更顺手</strong>
+            <span>关键选项点开即选，滚动列表悬浮时会放大</span>
+          </div>
+        </div>
+        <p class="auth-hero-note">固定公式 + 本地数据库 + 规则引擎，不依赖任何外部智能接口。</p>
+      </section>
+
+      <section class="auth-panel auth-panel-floating">
+        <div class="auth-tabs">
+          <button id="show-login-btn" class="tab-button active" type="button">登录</button>
+          <button id="show-register-btn" class="tab-button" type="button">注册</button>
+        </div>
+
+        <form id="login-form" class="auth-form">
+          <h2>登录系统</h2>
+          <div class="auth-grid single">
+            <input name="username" placeholder="用户名" required />
+            <input name="password" type="password" placeholder="密码" required />
+          </div>
+          <p class="auth-form-tip">已有账户可直接登录继续记录；如果是第一次使用，请切到注册并创建健康档案。</p>
+          <button type="submit" class="primary-btn auth-action-btn">进入健康系统</button>
+          <div id="login-result" class="inline-message"></div>
+        </form>
+
+        <form id="register-form" class="auth-form hidden">
+          <h2>创建账户</h2>
+          <div class="auth-grid">
+            <input name="username" placeholder="用户名" required />
+            <input name="password" type="password" placeholder="密码（至少 6 位）" required />
+            <input name="name" placeholder="姓名" required />
+            <div class="field-block picker-field">
+              <label for="register-age-input">年龄</label>
+              <div class="picker-trigger">
+                <input id="register-age-input" name="age" type="number" placeholder="点击后滚动选择年龄" required />
+                <span class="picker-inline-hint">点我选择</span>
+              </div>
+              <div id="register-age-panel" class="picker-panel hidden" aria-label="年龄滚动选项"></div>
+            </div>
+            <div class="field-block picker-field">
+              <label for="register-gender-display">性别</label>
+              <div class="picker-trigger">
+                <input id="register-gender-display" type="text" placeholder="点击后滚动选择性别" readonly />
+                <span class="picker-inline-hint">点我选择</span>
+              </div>
+              <input id="register-gender-input" name="gender" type="hidden" value="male" />
+              <div id="register-gender-panel" class="picker-panel hidden" aria-label="性别滚动选项"></div>
+            </div>
+            <div class="field-block picker-field">
+              <label for="register-height-input">身高</label>
+              <div class="picker-trigger">
+                <input id="register-height-input" name="height_cm" type="number" step="0.1" placeholder="点击后滚动选择身高 cm" required />
+                <span class="picker-inline-hint">点我选择</span>
+              </div>
+              <div id="register-height-panel" class="picker-panel hidden" aria-label="身高滚动选项"></div>
+            </div>
+            <div class="field-block span-2 picker-field">
+              <label>当前体重</label>
+              <div class="picker-trigger">
+                <input id="register-weight-input" name="weight_kg" type="number" step="0.1" placeholder="点击当前体重后滚动选择 kg" required />
+                <span class="picker-inline-hint">点我选择</span>
+              </div>
+              <div id="register-weight-panel" class="picker-panel hidden" aria-label="体重滚动选项"></div>
+            </div>
+            <div class="field-block picker-field">
+              <label>目标体重</label>
+              <div class="picker-trigger">
+                <input id="register-target-weight-input" name="target_weight_kg" type="number" step="0.1" placeholder="点击后滚动选择目标体重 kg" />
+                <span class="picker-inline-hint">点我选择</span>
+              </div>
+              <div id="register-target-weight-panel" class="picker-panel hidden" aria-label="目标体重滚动选项"></div>
+            </div>
+            <div class="field-block picker-field">
+              <label>目标睡眠时长</label>
+              <div class="picker-trigger">
+                <input id="register-target-sleep-input" name="target_sleep_hours" type="number" step="0.5" placeholder="点击后滚动选择睡眠时长 h" />
+                <span class="picker-inline-hint">点我选择</span>
+              </div>
+              <div id="register-target-sleep-panel" class="picker-panel hidden" aria-label="目标睡眠时长滚动选项"></div>
+            </div>
+            <div class="field-block span-2 auth-inline-note">
+              <strong>活动水平参考</strong>
+              <span>久坐：大部分时间坐着，运动很少。轻度：偶尔散步或每周少量训练。中等：每周规律训练 3-5 次。高强度：训练频率高、体力活动也更大。</span>
+            </div>
+            <select name="goal">
+              <option value="fat_loss">减脂</option>
+              <option value="maintain">维持</option>
+              <option value="muscle_gain">增肌</option>
+            </select>
+            <select name="activity_level" title="久坐：日常久坐少运动；轻度活动：每周少量步行或训练；中等活动：每周规律训练 3-5 次；高强度活动：训练频率和体力活动都更高">
+              <option value="sedentary">久坐（长期坐着，运动很少）</option>
+              <option value="light">轻度活动（偶尔散步或轻训练）</option>
+              <option value="medium" selected>中等活动（每周规律训练 3-5 次）</option>
+              <option value="high">高强度活动（训练频率高、体力活动大）</option>
+            </select>
+          </div>
+          <button id="toggle-register-pantry-btn" type="button" class="ghost-btn auth-inline-toggle">常备食材与推荐偏好</button>
+          <div id="register-pantry-panel" class="auth-inline-panel hidden">
+            <div class="auth-grid">
+              <div class="field-block span-2 auth-inline-note">
+                <strong>用途说明</strong>
+                <span>这里用于提前记录你的日常饮食环境。系统会优先参考你更常见、更容易准备到的食材来生成三餐建议，减少“推荐合理但家里没有”的情况。</span>
+              </div>
+              <div class="field-block">
+                <label for="register-recommendation-mode">推荐偏好</label>
+                <select id="register-recommendation-mode" name="recommendation_mode">
+                  <option value="home">家常模式</option>
+                  <option value="fitness">健身模式</option>
+                  <option value="eat_out">外食模式</option>
+                </select>
+                <p class="field-hint">家常模式更偏日常家庭饮食，健身模式更偏规律训练场景，外食模式会更偏向通勤、堂食或外卖场景。</p>
+              </div>
+              <div class="field-block span-2">
+                <label>家中常备食材</label>
+                <div id="register-pantry-chips" class="chip-select-grid"></div>
+                <p class="field-hint">建议优先勾选你家里常买、常做、常补货的食材。进入首页后，系统会优先从这些食材与常见家常食物中生成可替换的饮食建议。</p>
+              </div>
+            </div>
+          </div>
+          <button type="submit" class="primary-btn auth-action-btn">完成注册并进入系统</button>
+          <div id="register-result" class="inline-message"></div>
+        </form>
+      </section>
+    </div>
+
+    <div class="app-shell hidden" id="app-shell">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">Health Manager</p>
+          <h1 id="welcome-title">健康首页</h1>
+        </div>
+        <div class="topbar-actions">
+          <label class="date-control">
+            <span>查看日期</span>
+            <input id="dashboard-date" type="date" />
+          </label>
+          <button id="refresh-dashboard-btn" class="secondary-btn" type="button">刷新首页</button>
+          <button id="settings-btn" class="ghost-btn settings-btn" type="button">设置</button>
+          <div class="user-pill" id="user-pill"></div>
+          <button id="logout-btn" class="ghost-btn" type="button">退出登录</button>
+        </div>
+      </header>
+
+      <main class="dashboard">
+        <nav class="dashboard-tabs" aria-label="功能导航">
+          <button type="button" class="dashboard-tab active" data-panel="overview" data-scroll-target="overview-target-anchor">
+            <span class="tab-kicker">01</span>
+            <span class="tab-copy">
+              <strong>概览</strong>
+              <small>总览今日状态</small>
+            </span>
+          </button>
+          <button type="button" class="dashboard-tab" data-panel="food">
+            <span class="tab-kicker">02</span>
+            <span class="tab-copy">
+              <strong>饮食记录</strong>
+              <small>快速搜食物并录入</small>
+            </span>
+          </button>
+          <button type="button" class="dashboard-tab" data-panel="activity">
+            <span class="tab-kicker">03</span>
+            <span class="tab-copy">
+              <strong>运动睡眠</strong>
+              <small>分开记录更清楚</small>
+            </span>
+          </button>
+          <button type="button" class="dashboard-tab" data-panel="trend">
+            <span class="tab-kicker">04</span>
+            <span class="tab-copy">
+              <strong>体重趋势</strong>
+              <small>看最近变化曲线</small>
+            </span>
+          </button>
+          <button type="button" class="dashboard-tab" data-panel="report">
+            <span class="tab-kicker">05</span>
+            <span class="tab-copy">
+              <strong>报告中心</strong>
+              <small>集中查看日报周报</small>
+            </span>
+          </button>
+          <button type="button" class="dashboard-tab" data-panel="assessment">
+            <span class="tab-kicker">06</span>
+            <span class="tab-copy">
+              <strong>身体评估</strong>
+              <small>BMI 与身体状态</small>
+            </span>
+          </button>
+          <button type="button" class="dashboard-tab" data-panel="suggestion" data-scroll-target="overview-recommendation-anchor">
+            <span class="tab-kicker">07</span>
+            <span class="tab-copy">
+              <strong>饮食建议</strong>
+              <small>直达今日三餐推荐</small>
+            </span>
+          </button>
+        </nav>
+
+        <section class="hero-panel">
+          <div class="hero-copy">
+            <p class="eyebrow">今日概览</p>
+            <h2 id="hero-goal-line" class="hero-goal-line">根据固定公式和记录结果，快速查看今天的执行重点</h2>
+            <div id="hero-status-grid" class="hero-status-grid"></div>
+            <div id="overview-target-anchor" class="hero-main-grid">
+              <div id="goal-targets" class="goal-targets"></div>
+              <div id="overview-grid" class="overview-grid"></div>
+            </div>
+            <div id="completion-curve" class="completion-curve"></div>
+          </div>
+        </section>
+
+        <section id="panel-overview" class="dashboard-panel active">
+          <section id="overview-recommendation-anchor" class="card overview-suggestion-panel"></section>
+          <section class="rules-panel compact">
+            <div class="section-heading">
+              <p class="eyebrow">规则说明</p>
+              <h3>公式与 if/else 规则全部公开</h3>
+            </div>
+            <div class="rules-grid">
+              <article class="rule-card">
+                <strong>BMR</strong>
+                <span>10 × 体重 + 6.25 × 身高 - 5 × 年龄 + 性别修正</span>
+              </article>
+              <article class="rule-card">
+                <strong>TDEE</strong>
+                <span>BMR × 活动系数，久坐 1.2，轻度 1.375，中等 1.55，高强度 1.725</span>
+              </article>
+              <article class="rule-card">
+                <strong>目标</strong>
+                <span>减脂默认 TDEE - 400 kcal，蛋白 = 体重 × 1.6，脂肪 = 体重 × 0.8</span>
+              </article>
+              <article class="rule-card">
+                <strong>碳水目标</strong>
+                <span>碳水 = （目标热量 - 蛋白 × 4 - 脂肪 × 9）÷ 4，用剩余热量倒推</span>
+              </article>
+              <article class="rule-card">
+                <strong>建议</strong>
+                <span>只用 if/else 输出蛋白不足、热量超标、睡眠不足等预警</span>
+              </article>
+            </div>
+            <div id="rules-detail-grid" class="rules-grid rules-grid-extended"></div>
+          </section>
+        </section>
+
+        <section id="panel-food" class="dashboard-panel">
+          <article class="card">
+            <div class="module-head">
+              <div>
+                <p class="eyebrow">饮食记录</p>
+                <h3>Q版食物卡片 + 克数与时间滚动选择</h3>
+                <p class="muted-text">先搜索食物，再选克数、时间和日期。点击顶部五页切换器，可以快速跳去别的页面继续浏览。</p>
+              </div>
+              <img src="/assets/modules/food-log.svg" alt="饮食记录" class="module-illustration" />
+            </div>
+
+            <div class="search-row">
+              <input id="food-search-input" placeholder="例如：牛排、牛上脑、鸡胸肉、米饭" />
+              <button id="food-search-btn" type="button" class="primary-btn">搜索食物</button>
+            </div>
+            <div class="brand-filter-row" id="restaurant-brand-filters">
+              <button type="button" class="ghost-btn brand-filter-btn active" data-brand-filter="all">全部餐厅</button>
+              <button type="button" class="ghost-btn brand-filter-btn" data-brand-filter="麦当劳">麦当劳</button>
+              <button type="button" class="ghost-btn brand-filter-btn" data-brand-filter="肯德基">肯德基</button>
+              <button type="button" class="ghost-btn brand-filter-btn" data-brand-filter="赛百味">赛百味</button>
+              <button type="button" class="ghost-btn brand-filter-btn" data-brand-filter="味千拉面">味千拉面</button>
+            </div>
+            <div id="restaurant-brand-hero" class="restaurant-brand-hero"></div>
+            <div id="food-search-state" class="inline-message compact"></div>
+            <div id="food-results" class="food-results"></div>
+
+            <div class="selected-food" id="selected-food">
+              <div>
+                <p class="eyebrow">当前选择</p>
+                <h4 id="selected-food-name">还未选择食物</h4>
+                <p id="selected-food-meta" class="muted-text">搜索后点击卡片中的“记录这份食物”</p>
+              </div>
+              <img id="selected-food-image" class="selected-food-image hidden" alt="食物预览" />
+            </div>
+
+            <form id="food-log-form" class="module-form wide-form">
+              <div id="food-weight-block" class="field-block span-2">
+                <label for="food-weight-input">食用重量</label>
+                <div class="dual-input">
+                  <input id="food-weight-input" name="weight_g" type="number" step="0.1" placeholder="自己输入 g" required />
+                  <div class="picker-field compact-picker-field">
+                    <div class="picker-trigger">
+                      <input id="food-weight-preset-display" type="text" placeholder="点击滚动选择克数" aria-label="食用重量快捷选择" readonly />
+                      <span class="picker-inline-hint">点我选择</span>
+                    </div>
+                    <input id="food-weight-preset" type="hidden" />
+                    <div id="food-weight-preset-panel" class="picker-panel hidden" aria-label="食用重量滚动选项"></div>
+                  </div>
+                </div>
+                <p id="food-portion-hint" class="field-hint">选择食物后，这里会给出更贴近家中或餐厅份量的参考。</p>
+              </div>
+              <div id="food-serving-mode" class="field-block span-2 hidden">
+                <label>份量模式</label>
+                <div class="serving-mode-card">
+                  <strong id="food-serving-title">按 1 份记录</strong>
+                  <p id="food-serving-copy" class="field-hint">这类餐厅单品按固定份量提交，不需要再手动选择克数。</p>
+                </div>
+              </div>
+              <div id="food-cooking-block" class="field-block span-2 hidden">
+                <label for="food-cooking-method">做法选择</label>
+                <select id="food-cooking-method" name="cooking_method">
+                  <option value="">按基础做法记录</option>
+                </select>
+                <p id="food-cooking-hint" class="field-hint">选择食物后，这里会显示不同做法对热量和营养的影响提示。</p>
+              </div>
+              <div class="field-block">
+                <label>进食时间</label>
+                <div class="time-picker">
+                  <div class="picker-field compact-picker-field time-picker-field">
+                    <div class="picker-trigger">
+                      <input id="food-hour-display" type="text" aria-label="进食小时" readonly />
+                      <span class="picker-inline-hint">时</span>
+                    </div>
+                    <input id="food-hour" type="hidden" />
+                    <div id="food-hour-panel" class="picker-panel hidden" aria-label="进食小时滚动选项"></div>
+                  </div>
+                  <span>:</span>
+                  <div class="picker-field compact-picker-field time-picker-field">
+                    <div class="picker-trigger">
+                      <input id="food-minute-display" type="text" aria-label="进食分钟" readonly />
+                      <span class="picker-inline-hint">分</span>
+                    </div>
+                    <input id="food-minute" type="hidden" />
+                    <div id="food-minute-panel" class="picker-panel hidden" aria-label="进食分钟滚动选项"></div>
+                  </div>
+                </div>
+              </div>
+              <div class="field-block">
+                <label>记录日期</label>
+                <input name="log_date" type="date" />
+              </div>
+              <button type="submit" class="primary-btn span-2">提交饮食记录</button>
+            </form>
+            <div id="food-log-result" class="inline-message"></div>
+          </article>
+        </section>
+
+        <section id="panel-activity" class="dashboard-panel">
+          <div class="panel-grid">
+            <article class="card">
+              <div class="module-head">
+                <div>
+                  <p class="eyebrow">运动记录</p>
+                  <h3>运动类型、时长、时间都用滚动选项</h3>
+                  <p class="muted-text">跑步、步行、骑行、力量训练等都在这里。时长用滚动选项，消耗热量仍支持手输。</p>
+                </div>
+                <img src="/assets/modules/workout.svg" alt="运动记录" class="module-illustration" />
+              </div>
+
+              <form id="workout-form" class="module-form">
+                <div class="field-block span-2">
+                  <label>运动类型</label>
+                  <div class="picker-field">
+                    <div class="picker-trigger">
+                      <input id="workout-type-display" type="text" placeholder="点击后滚动选择运动类型" readonly />
+                      <span class="picker-inline-hint">点我选择</span>
+                    </div>
+                    <input id="workout-type-input" name="type" type="hidden" value="running_easy" />
+                    <div id="workout-type-panel" class="picker-panel hidden" aria-label="运动类型滚动选项"></div>
+                  </div>
+                </div>
+                <div class="field-block">
+                  <label>时长</label>
+                  <div class="picker-field">
+                    <div class="picker-trigger">
+                      <input id="workout-duration-input" name="duration_min" type="number" step="1" placeholder="点击后按分钟滚动选择" required />
+                      <span class="picker-inline-hint">点我选择</span>
+                    </div>
+                    <div id="workout-duration-panel" class="picker-panel hidden" aria-label="运动时长滚动选项"></div>
+                  </div>
+                </div>
+                <div class="field-block">
+                  <label>运动时间</label>
+                  <div class="time-picker">
+                    <div class="picker-field compact-picker-field time-picker-field">
+                      <div class="picker-trigger">
+                        <input id="workout-hour-display" type="text" aria-label="运动小时" readonly />
+                        <span class="picker-inline-hint">时</span>
+                      </div>
+                      <input id="workout-hour" type="hidden" />
+                      <div id="workout-hour-panel" class="picker-panel hidden" aria-label="运动小时滚动选项"></div>
+                    </div>
+                    <span>:</span>
+                    <div class="picker-field compact-picker-field time-picker-field">
+                      <div class="picker-trigger">
+                        <input id="workout-minute-display" type="text" aria-label="运动分钟" readonly />
+                        <span class="picker-inline-hint">分</span>
+                      </div>
+                      <input id="workout-minute" type="hidden" />
+                      <div id="workout-minute-panel" class="picker-panel hidden" aria-label="运动分钟滚动选项"></div>
+                    </div>
+                  </div>
+                </div>
+                <div class="field-block">
+                  <label>消耗热量</label>
+                  <input id="workout-calories-input" name="calories_burned" type="number" step="0.1" placeholder="会按当前体重自动估算，也可手动修改" required />
+                </div>
+                <div class="field-block">
+                  <label>记录日期</label>
+                  <input name="log_date" type="date" />
+                </div>
+                <button type="submit" class="secondary-btn span-2">提交运动记录</button>
+              </form>
+              <div id="workout-result" class="inline-message"></div>
+            </article>
+
+            <article class="card">
+              <div class="module-head">
+                <div>
+                  <p class="eyebrow">睡眠记录</p>
+                  <h3>开始和结束时间都能滚动选择</h3>
+                  <p class="muted-text">用时钟式滚动选项来记录入睡和起床时间，避免每次都手打。</p>
+                </div>
+                <img src="/assets/modules/sleep.svg" alt="睡眠记录" class="module-illustration" />
+              </div>
+
+              <form id="sleep-form" class="module-form">
+                <div class="field-block">
+                  <label>入睡时间</label>
+                  <div class="time-picker">
+                    <div class="picker-field compact-picker-field time-picker-field">
+                      <div class="picker-trigger">
+                        <input id="sleep-start-hour-display" type="text" aria-label="入睡小时" readonly />
+                        <span class="picker-inline-hint">时</span>
+                      </div>
+                      <input id="sleep-start-hour" type="hidden" />
+                      <div id="sleep-start-hour-panel" class="picker-panel hidden" aria-label="入睡小时滚动选项"></div>
+                    </div>
+                    <span>:</span>
+                    <div class="picker-field compact-picker-field time-picker-field">
+                      <div class="picker-trigger">
+                        <input id="sleep-start-minute-display" type="text" aria-label="入睡分钟" readonly />
+                        <span class="picker-inline-hint">分</span>
+                      </div>
+                      <input id="sleep-start-minute" type="hidden" />
+                      <div id="sleep-start-minute-panel" class="picker-panel hidden" aria-label="入睡分钟滚动选项"></div>
+                    </div>
+                  </div>
+                </div>
+                <div class="field-block">
+                  <label>起床时间</label>
+                  <div class="time-picker">
+                    <div class="picker-field compact-picker-field time-picker-field">
+                      <div class="picker-trigger">
+                        <input id="sleep-end-hour-display" type="text" aria-label="起床小时" readonly />
+                        <span class="picker-inline-hint">时</span>
+                      </div>
+                      <input id="sleep-end-hour" type="hidden" />
+                      <div id="sleep-end-hour-panel" class="picker-panel hidden" aria-label="起床小时滚动选项"></div>
+                    </div>
+                    <span>:</span>
+                    <div class="picker-field compact-picker-field time-picker-field">
+                      <div class="picker-trigger">
+                        <input id="sleep-end-minute-display" type="text" aria-label="起床分钟" readonly />
+                        <span class="picker-inline-hint">分</span>
+                      </div>
+                      <input id="sleep-end-minute" type="hidden" />
+                      <div id="sleep-end-minute-panel" class="picker-panel hidden" aria-label="起床分钟滚动选项"></div>
+                    </div>
+                  </div>
+                </div>
+                <div class="field-block span-2">
+                  <label>记录日期</label>
+                  <input name="log_date" type="date" />
+                </div>
+                <button type="submit" class="secondary-btn span-2">提交睡眠记录</button>
+              </form>
+              <div id="sleep-result" class="inline-message"></div>
+            </article>
+          </div>
+        </section>
+
+        <section id="panel-trend" class="dashboard-panel">
+          <div class="panel-grid">
+            <article class="card">
+              <div class="module-head">
+                <div>
+                  <p class="eyebrow">体重记录</p>
+                  <h3>记录当前体重并更新趋势</h3>
+                  <p class="muted-text">日期保留普通选择，记录时间改成滚动选择，体重手输更灵活。</p>
+                </div>
+                <img src="/assets/modules/weight.svg" alt="体重记录" class="module-illustration" />
+              </div>
+
+              <form id="weight-form" class="module-form">
+                <div class="field-block span-2">
+                  <label>当前体重</label>
+                  <div class="picker-field">
+                    <div class="picker-trigger">
+                      <input id="weight-kg-input" name="weight_kg" type="number" step="0.1" placeholder="点击后滚动选择当前体重 kg" required />
+                      <span class="picker-inline-hint">点我选择</span>
+                    </div>
+                    <div id="weight-kg-panel" class="picker-panel hidden" aria-label="体重趋势当前体重滚动选项"></div>
+                  </div>
+                </div>
+                <div class="field-block">
+                  <label>记录时间</label>
+                  <div class="time-picker">
+                    <div class="picker-field compact-picker-field time-picker-field">
+                      <div class="picker-trigger">
+                        <input id="weight-hour-display" type="text" aria-label="体重记录小时" readonly />
+                        <span class="picker-inline-hint">时</span>
+                      </div>
+                      <input id="weight-hour" type="hidden" />
+                      <div id="weight-hour-panel" class="picker-panel hidden" aria-label="体重记录小时滚动选项"></div>
+                    </div>
+                    <span>:</span>
+                    <div class="picker-field compact-picker-field time-picker-field">
+                      <div class="picker-trigger">
+                        <input id="weight-minute-display" type="text" aria-label="体重记录分钟" readonly />
+                        <span class="picker-inline-hint">分</span>
+                      </div>
+                      <input id="weight-minute" type="hidden" />
+                      <div id="weight-minute-panel" class="picker-panel hidden" aria-label="体重记录分钟滚动选项"></div>
+                    </div>
+                  </div>
+                </div>
+                <div class="field-block">
+                  <label>记录日期</label>
+                  <input name="record_date" type="date" />
+                </div>
+                <button type="submit" class="secondary-btn span-2">提交体重记录</button>
+              </form>
+              <div id="weight-result" class="inline-message"></div>
+            </article>
+
+            <article class="card">
+              <div class="section-heading">
+                <p class="eyebrow">体重曲线</p>
+                <h3>最近记录会按日期画成趋势</h3>
+              </div>
+              <div id="weight-chart" class="chart-shell"></div>
+            </article>
+          </div>
+        </section>
+
+        <section id="panel-report" class="dashboard-panel">
+          <article class="card">
+            <div class="module-head">
+              <div>
+                <p class="eyebrow">报告中心</p>
+                <h3>日报和周报分开看，不再挤在首页</h3>
+                <p class="muted-text">这里集中查看固定公式和规则引擎生成的结论、预警和建议。</p>
+              </div>
+              <img src="/assets/modules/report.svg" alt="报告中心" class="module-illustration" />
+            </div>
+            <div class="report-actions">
+              <button id="daily-report-btn" type="button" class="primary-btn">刷新日报</button>
+              <button id="weekly-report-btn" type="button" class="secondary-btn">查看周报</button>
+            </div>
+            <div id="report-result" class="report-box"></div>
+          </article>
+        </section>
+
+        <section id="panel-assessment" class="dashboard-panel">
+          <div class="panel-grid">
+            <article class="card">
+              <div class="module-head">
+                <div>
+                  <p class="eyebrow">身体评估</p>
+                  <h3>BMI、体重状态与基础代谢一页看清</h3>
+                  <p class="muted-text">输入年龄、身高和体重后，系统会展示 BMI、体重范围判断和当前所处区间。</p>
+                </div>
+                <img src="/assets/modules/weight.svg" alt="身体评估" class="module-illustration" />
+              </div>
+              <form id="assessment-form" class="module-form">
+                <div class="field-block">
+                  <label>年龄</label>
+                  <div class="picker-field">
+                    <div class="picker-trigger">
+                      <input id="assessment-age" name="age" type="number" min="1" max="120" placeholder="年龄" required />
+                      <span class="picker-inline-hint">点我选择</span>
+                    </div>
+                    <div id="assessment-age-panel" class="picker-panel hidden" aria-label="评估年龄滚动选项"></div>
+                  </div>
+                </div>
+                <div class="field-block">
+                  <label>身高</label>
+                  <div class="picker-field">
+                    <div class="picker-trigger">
+                      <input id="assessment-height" name="height_cm" type="number" step="0.1" placeholder="身高 cm" required />
+                      <span class="picker-inline-hint">点我选择</span>
+                    </div>
+                    <div id="assessment-height-panel" class="picker-panel hidden" aria-label="评估身高滚动选项"></div>
+                  </div>
+                </div>
+                <div class="field-block">
+                  <label>体重</label>
+                  <div class="picker-field">
+                    <div class="picker-trigger">
+                      <input id="assessment-weight" name="weight_kg" type="number" step="0.1" placeholder="体重 kg" required />
+                      <span class="picker-inline-hint">点我选择</span>
+                    </div>
+                    <div id="assessment-weight-panel" class="picker-panel hidden" aria-label="评估体重滚动选项"></div>
+                  </div>
+                </div>
+                <div class="field-block">
+                  <label>性别</label>
+                  <div class="picker-field">
+                    <div class="picker-trigger">
+                      <input id="assessment-gender-display" type="text" placeholder="点击后滚动选择性别" readonly />
+                      <span class="picker-inline-hint">点我选择</span>
+                    </div>
+                    <input id="assessment-gender" name="gender" type="hidden" value="male" />
+                    <div id="assessment-gender-panel" class="picker-panel hidden" aria-label="评估性别滚动选项"></div>
+                  </div>
+                </div>
+                <div class="field-block span-2">
+                  <label>体型参考</label>
+                  <div id="assessment-body-type" class="body-type-grid"></div>
+                  <input id="assessment-body-type-input" name="body_type" type="hidden" value="balanced" />
+                </div>
+                <button type="submit" class="primary-btn span-2">更新身体评估</button>
+              </form>
+            </article>
+            <article class="card">
+              <div class="section-heading">
+                <p class="eyebrow">评估结果</p>
+                <h3>当前身体状态范围</h3>
+              </div>
+              <div id="assessment-cards" class="assessment-cards"></div>
+              <div id="bmi-range-chart" class="assessment-chart"></div>
+              <div id="assessment-summary" class="report-box"></div>
+              <div id="body-type-summary" class="report-box"></div>
+            </article>
+          </div>
+        </section>
+
+        <section id="panel-settings" class="dashboard-panel">
+          <article class="card">
+            <div class="module-head">
+              <div>
+                <p class="eyebrow">设置</p>
+                <h3>语言、账号资料和目标偏好</h3>
+                <p class="muted-text">这里可以统一调整语言、用户名、密码、身高体重和当前目标状态。</p>
+              </div>
+              <img src="/assets/modules/report.svg" alt="设置" class="module-illustration" />
+            </div>
+            <form id="settings-form" class="module-form wide-form">
+              <div class="field-block">
+                <label>界面语言</label>
+                <select id="settings-language" name="language">
+                  <option value="zh-CN">简体中文</option>
+                  <option value="en-US">English</option>
+                </select>
+              </div>
+              <div class="field-block">
+                <label>用户名</label>
+                <input id="settings-username" name="username" placeholder="用户名" required />
+              </div>
+              <div class="field-block">
+                <label>姓名</label>
+                <input id="settings-name" name="name" placeholder="姓名" required />
+              </div>
+              <div class="field-block">
+                <label>年龄</label>
+                <div class="picker-field">
+                  <div class="picker-trigger">
+                    <input id="settings-age" name="age" type="number" min="1" max="120" placeholder="年龄" required />
+                    <span class="picker-inline-hint">点我选择</span>
+                  </div>
+                  <div id="settings-age-panel" class="picker-panel hidden" aria-label="设置年龄滚动选项"></div>
+                </div>
+              </div>
+              <div class="field-block">
+                <label>性别</label>
+                <select id="settings-gender" name="gender">
+                  <option value="male">男</option>
+                  <option value="female">女</option>
+                </select>
+              </div>
+              <div class="field-block">
+                <label>身高</label>
+                <div class="picker-field">
+                  <div class="picker-trigger">
+                    <input id="settings-height" name="height_cm" type="number" step="0.1" placeholder="身高 cm" required />
+                    <span class="picker-inline-hint">点我选择</span>
+                  </div>
+                  <div id="settings-height-panel" class="picker-panel hidden" aria-label="设置身高滚动选项"></div>
+                </div>
+              </div>
+              <div class="field-block">
+                <label>体重</label>
+                <div class="picker-field">
+                  <div class="picker-trigger">
+                    <input id="settings-weight" name="weight_kg" type="number" step="0.1" placeholder="体重 kg" required />
+                    <span class="picker-inline-hint">点我选择</span>
+                  </div>
+                  <div id="settings-weight-panel" class="picker-panel hidden" aria-label="设置体重滚动选项"></div>
+                </div>
+              </div>
+              <div class="field-block">
+                <label>目标体重</label>
+                <div class="picker-field">
+                  <div class="picker-trigger">
+                    <input id="settings-target-weight" name="target_weight_kg" type="number" step="0.1" placeholder="减脂或增肌目标 kg" />
+                    <span class="picker-inline-hint">点我选择</span>
+                  </div>
+                  <div id="settings-target-weight-panel" class="picker-panel hidden" aria-label="设置目标体重滚动选项"></div>
+                </div>
+              </div>
+              <div class="field-block">
+                <label>目标睡眠时长</label>
+                <div class="picker-field">
+                  <div class="picker-trigger">
+                    <input id="settings-target-sleep" name="target_sleep_hours" type="number" step="0.5" placeholder="例如 8.0 小时" />
+                    <span class="picker-inline-hint">点我选择</span>
+                  </div>
+                  <div id="settings-target-sleep-panel" class="picker-panel hidden" aria-label="设置目标睡眠滚动选项"></div>
+                </div>
+              </div>
+              <div class="field-block">
+                <label>当前目标</label>
+                <select id="settings-goal" name="goal">
+                  <option value="fat_loss">减脂</option>
+                  <option value="maintain">维持</option>
+                  <option value="muscle_gain">增肌</option>
+                </select>
+              </div>
+              <div class="field-block">
+                <label>活动水平</label>
+                <select id="settings-activity" name="activity_level">
+                  <option value="sedentary">久坐</option>
+                  <option value="light">轻度活动</option>
+                  <option value="medium">中等活动</option>
+                  <option value="high">高强度活动</option>
+                </select>
+                <p class="field-hint">久坐：大部分时间坐着，运动很少。轻度：偶尔散步或每周少量训练。中等：每周规律训练 3-5 次。高强度：训练频率高、体力活动也更大。</p>
+              </div>
+              <div class="field-block span-2">
+                <label>体型参考</label>
+                <div id="settings-body-type" class="body-type-grid compact"></div>
+                <input id="settings-body-type-input" name="body_type" type="hidden" value="balanced" />
+              </div>
+              <div class="field-block span-2">
+                <label>目标算法</label>
+                <select id="settings-target-algorithm" name="target_algorithm">
+                  <option value="classic">经典公式</option>
+                  <option value="body_type_adjusted">体型参考微调版</option>
+                </select>
+              </div>
+              <div class="field-block">
+                <label>推荐偏好</label>
+                <select id="settings-recommendation-mode" name="recommendation_mode">
+                  <option value="home">家常模式</option>
+                  <option value="fitness">健身模式</option>
+                  <option value="eat_out">外食模式</option>
+                </select>
+              </div>
+              <div class="field-block span-2">
+                <label>家中常备食材</label>
+                <div id="settings-pantry-chips" class="chip-select-grid"></div>
+                <p class="field-hint">先勾选家里常见、常买、常做的食材，三餐建议会优先从这些里面推荐。</p>
+              </div>
+              <div class="field-block">
+                <label>当前密码</label>
+                <input id="settings-current-password" name="current_password" type="password" placeholder="如需改密码请填写" />
+              </div>
+              <div class="field-block">
+                <label>新密码</label>
+                <input id="settings-new-password" name="new_password" type="password" placeholder="至少 6 位" />
+              </div>
+              <button type="submit" class="primary-btn span-2">保存设置</button>
+            </form>
+            <div id="settings-result" class="inline-message"></div>
+          </article>
+        </section>
+      </main>
+    </div>
+
+    <script src="/app.js?v=20260622-0848"></script>
+  </body>
+</html>

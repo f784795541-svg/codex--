@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 220">
+  <rect width="320" height="220" rx="28" fill="#f4f1e2"/>
+  <ellipse cx="160" cy="184" rx="114" ry="16" fill="#d7c2ad"/>
+  <rect x="42" y="92" width="236" height="46" rx="23" fill="#e7c883"/>
+  <path d="M56 112h208" stroke="#9ec45f" stroke-width="8" stroke-linecap="round"/>
+  <path d="M62 102h196" stroke="#d9a78b" stroke-width="10" stroke-linecap="round"/>
+  <text x="160" y="56" text-anchor="middle" font-size="20" fill="#547c37" font-weight="700">Subway Turkey 12&quot;</text>
+</svg>
