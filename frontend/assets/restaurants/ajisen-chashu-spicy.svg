@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 220">
+  <rect width="320" height="220" rx="28" fill="#f8efe5"/>
+  <ellipse cx="160" cy="186" rx="112" ry="16" fill="#d7c2ad"/>
+  <circle cx="160" cy="118" r="58" fill="#cf3026"/>
+  <circle cx="160" cy="118" r="46" fill="#fff7ef"/>
+  <path d="M128 116c14 11 30 18 48 20" fill="none" stroke="#f0c567" stroke-width="7" stroke-linecap="round"/>
+  <path d="M128 104c13 10 29 17 47 20" fill="none" stroke="#f0c567" stroke-width="7" stroke-linecap="round"/>
+  <circle cx="136" cy="126" r="10" fill="#d9a78b"/>
+  <circle cx="186" cy="96" r="9" fill="#d84f2b"/>
+  <circle cx="177" cy="126" r="4" fill="#d84f2b"/>
+  <text x="160" y="52" text-anchor="middle" font-size="20" fill="#8f2a22" font-weight="700">Ajisen Spicy Chashu</text>
+</svg>

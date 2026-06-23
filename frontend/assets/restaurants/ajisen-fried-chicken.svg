@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 220">
+  <rect width="320" height="220" rx="28" fill="#f8efe5"/>
+  <ellipse cx="160" cy="184" rx="110" ry="16" fill="#d7c2ad"/>
+  <rect x="100" y="78" width="120" height="84" rx="22" fill="#cf3026"/>
+  <rect x="112" y="90" width="96" height="60" rx="16" fill="#fff7ef"/>
+  <g fill="#d59643">
+    <circle cx="136" cy="112" r="14"/><circle cx="160" cy="102" r="14"/><circle cx="184" cy="114" r="14"/><circle cx="150" cy="128" r="14"/><circle cx="176" cy="132" r="14"/>
+  </g>
+  <text x="160" y="56" text-anchor="middle" font-size="20" fill="#8f2a22" font-weight="700">Ajisen Fried Chicken</text>
+</svg>

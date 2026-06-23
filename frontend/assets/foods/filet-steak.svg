@@ -1,0 +1,16 @@
+<svg width="640" height="420" viewBox="0 0 640 420" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="640" height="420" rx="36" fill="#FFF3EC"/>
+  <circle cx="118" cy="96" r="68" fill="#FFD8C0"/>
+  <ellipse cx="320" cy="310" rx="190" ry="34" fill="#E8D2C1"/>
+  <path d="M226 252C226 192.906 273.906 145 333 145C399.826 145 454 199.174 454 266V278C454 301.196 435.196 320 412 320H290C254.654 320 226 291.346 226 256V252Z" fill="#B84D42"/>
+  <path d="M258 245C258 204.697 290.697 172 331 172C379.049 172 418 210.951 418 259V269C418 282.255 407.255 293 394 293H302C277.699 293 258 273.301 258 249V245Z" fill="#EA8B7A"/>
+  <path d="M286 236C302 211 360 207 385 233C364 259 311 265 286 236Z" fill="#FFDACC"/>
+  <circle cx="314" cy="226" r="7" fill="#2F231E"/>
+  <circle cx="347" cy="226" r="7" fill="#2F231E"/>
+  <path d="M315 247C324 255 338 255 347 247" stroke="#2F231E" stroke-width="5" stroke-linecap="round"/>
+  <circle cx="280" cy="248" r="8" fill="#F2B29A"/>
+  <circle cx="380" cy="248" r="8" fill="#F2B29A"/>
+  <path d="M446 108C446 91.4315 459.431 78 476 78H554C570.569 78 584 91.4315 584 108V126C584 142.569 570.569 156 554 156H476C459.431 156 446 142.569 446 126V108Z" fill="#FFFDF9"/>
+  <path d="M446 118L428 108L446 98V118Z" fill="#FFFDF9"/>
+  <text x="515" y="121" fill="#9A4C35" font-size="22" font-family="Arial, sans-serif" text-anchor="middle">Filet</text>
+</svg>

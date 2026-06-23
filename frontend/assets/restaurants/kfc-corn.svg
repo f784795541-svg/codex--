@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 220">
+  <rect width="320" height="220" rx="28" fill="#f8efe5"/>
+  <ellipse cx="160" cy="184" rx="108" ry="16" fill="#d7c2ad"/>
+  <rect x="116" y="70" width="88" height="96" rx="22" fill="#cf3026"/>
+  <path d="M132 92c0-20 12-34 28-34s28 14 28 34-12 44-28 44-28-24-28-44Z" fill="#f3cf55"/>
+  <path d="M146 140c6 8 9 16 10 24M174 140c-6 8-9 16-10 24" fill="none" stroke="#78a84d" stroke-width="8" stroke-linecap="round"/>
+  <text x="160" y="54" text-anchor="middle" font-size="20" fill="#8f2a22" font-weight="700">KFC Corn</text>
+</svg>
