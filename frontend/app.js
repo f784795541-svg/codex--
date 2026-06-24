@@ -283,6 +283,9 @@ const state = {
   dashboardRequestId: 0,
   dashboardAbortController: null,
   dashboardLoading: false,
+  mobileKeyboardOpen: false,
+  mobileViewportBaseHeight: window.visualViewport?.height || window.innerHeight,
+  mobileToastTimer: null,
 };
 
 const PANEL_NAMES = new Set(["overview", "food", "activity", "trend", "report", "assessment", "settings", "suggestion"]);
@@ -474,6 +477,23 @@ function setMessage(id, message, explicitState = "") {
   `;
 }
 
+function showMobileToast(message, durationMs = 1000) {
+  const toast = $("mobile-toast");
+  if (!toast) {
+    return;
+  }
+  if (state.mobileToastTimer) {
+    window.clearTimeout(state.mobileToastTimer);
+    state.mobileToastTimer = null;
+  }
+  toast.textContent = String(message || "").trim();
+  toast.classList.add("is-visible");
+  state.mobileToastTimer = window.setTimeout(() => {
+    toast.classList.remove("is-visible");
+    state.mobileToastTimer = null;
+  }, durationMs);
+}
+
 function getFormData(form) {
   const data = Object.fromEntries(new FormData(form).entries());
   Object.keys(data).forEach((key) => {
@@ -637,7 +657,8 @@ function inferPanelFromMobileState() {
   return "overview";
 }
 
-function showMobileRecordTab(tab = "food") {
+function showMobileRecordTab(tab = "food", options = {}) {
+  const { alignPane = false } = options;
   const safeTab = MOBILE_RECORD_TABS.has(tab) ? tab : "food";
   state.mobileRecordTab = safeTab;
   document.querySelectorAll(".mobile-record-tab").forEach((button) => {
@@ -651,10 +672,13 @@ function showMobileRecordTab(tab = "food") {
     syncPanelHash(state.activePanel);
   }
   updateMobileTopbar();
+  if (alignPane && state.mobileScreen === "record") {
+    queueMobileRecordPaneAlignment(safeTab);
+  }
 }
 
 function showMobileScreen(screen = "home", options = {}) {
-  const { recordTab = state.mobileRecordTab, preserveScroll = false, syncPanel = true } = options;
+  const { recordTab = state.mobileRecordTab, preserveScroll = false, syncPanel = true, alignRecordPane = false } = options;
   const safeScreen = MOBILE_SCREEN_META[screen] ? screen : "home";
   state.mobileScreen = safeScreen;
   refreshLiveTimestampDefaults();
@@ -665,7 +689,7 @@ function showMobileScreen(screen = "home", options = {}) {
     button.classList.toggle("active", button.dataset.mobileScreen === safeScreen);
   });
   if (safeScreen === "record") {
-    showMobileRecordTab(recordTab);
+    showMobileRecordTab(recordTab, { alignPane: alignRecordPane });
   } else {
     updateMobileTopbar();
   }
@@ -673,9 +697,14 @@ function showMobileScreen(screen = "home", options = {}) {
     state.activePanel = inferPanelFromMobileState();
     syncPanelHash(state.activePanel);
   }
+  if (safeScreen === "record" && alignRecordPane) {
+    syncMobileKeyboardState();
+    return;
+  }
   if (!preserveScroll) {
     window.scrollTo({ top: 0, behavior: isMobilePerformanceMode() ? "auto" : "smooth" });
   }
+  syncMobileKeyboardState();
 }
 
 function routeMobilePanel(panelName) {
@@ -1002,6 +1031,7 @@ function syncResponsiveAppShell(options = {}) {
     if (state.mobileModulesMounted) {
       restoreMobileModules();
     }
+    syncMobileKeyboardState();
     return;
   }
 
@@ -1014,6 +1044,7 @@ function syncResponsiveAppShell(options = {}) {
     showMobileRecordTab(state.mobileRecordTab);
     showMobileScreen(state.mobileScreen, { recordTab: state.mobileRecordTab, preserveScroll: true });
     syncMobileProfile();
+    syncMobileKeyboardState();
     return;
   }
 
@@ -1023,6 +1054,7 @@ function syncResponsiveAppShell(options = {}) {
   if (switchedLayout) {
     showPanel(inferPanelFromMobileState(), { animate: false });
   }
+  syncMobileKeyboardState();
 }
 
 function goalLabel(goal) {
@@ -1263,6 +1295,31 @@ function scrollFoodLogFlow(targetId, block = "start", delayMs = 0) {
   }, delayMs);
 }
 
+function scrollMobileRecordPaneToTop(tab = state.mobileRecordTab, delayMs = 0) {
+  const safeTab = MOBILE_RECORD_TABS.has(tab) ? tab : "food";
+  window.setTimeout(() => {
+    window.requestAnimationFrame(() => {
+      const pane = document.querySelector(`[data-mobile-record-pane="${safeTab}"]`);
+      const target = pane?.querySelector(".module-head") || pane?.firstElementChild;
+      const tabs = document.querySelector("#mobile-screen-record .mobile-record-tabs");
+      if (!target || !tabs) {
+        return;
+      }
+      const stickyOffset = tabs.offsetHeight + 14;
+      const top = window.scrollY + target.getBoundingClientRect().top - stickyOffset;
+      window.scrollTo({
+        top: Math.max(0, top),
+        behavior: isMobilePerformanceMode() ? "auto" : "smooth",
+      });
+    });
+  }, delayMs);
+}
+
+function queueMobileRecordPaneAlignment(tab = state.mobileRecordTab) {
+  scrollMobileRecordPaneToTop(tab, 16);
+  scrollMobileRecordPaneToTop(tab, 220);
+}
+
 function scrollToFoodSearchSummary(delayMs = 0) {
   window.setTimeout(() => {
     const target = $("food-search-state") || $("food-results");
@@ -1271,6 +1328,52 @@ function scrollToFoodSearchSummary(delayMs = 0) {
     }
     target.scrollIntoView({ behavior: isMobilePerformanceMode() ? "auto" : "smooth", block: "start" });
   }, delayMs);
+}
+
+function isMobileTextEntryElement(element) {
+  if (!(element instanceof HTMLElement)) {
+    return false;
+  }
+  if (element instanceof HTMLTextAreaElement) {
+    return !element.readOnly && !element.disabled;
+  }
+  if (!(element instanceof HTMLInputElement)) {
+    return false;
+  }
+  if (element.readOnly || element.disabled) {
+    return false;
+  }
+  const textLikeTypes = new Set(["", "email", "number", "password", "search", "tel", "text", "url"]);
+  return textLikeTypes.has((element.type || "").toLowerCase());
+}
+
+function setMobileKeyboardState(open) {
+  state.mobileKeyboardOpen = Boolean(open) && state.mobileLayoutActive;
+  document.body.classList.toggle("mobile-keyboard-open", state.mobileKeyboardOpen);
+}
+
+function syncMobileKeyboardState() {
+  const hasVisualViewport = Boolean(window.visualViewport);
+  const viewportHeight = hasVisualViewport ? window.visualViewport.height : window.innerHeight;
+  if (!state.mobileLayoutActive || document.body.dataset.shell !== "app") {
+    state.mobileViewportBaseHeight = viewportHeight;
+    setMobileKeyboardState(false);
+    return;
+  }
+  if (!hasVisualViewport) {
+    state.mobileViewportBaseHeight = viewportHeight;
+    setMobileKeyboardState(false);
+    return;
+  }
+  const activeField = document.activeElement;
+  state.mobileViewportBaseHeight = Math.max(state.mobileViewportBaseHeight || 0, viewportHeight);
+  if (!isMobileTextEntryElement(activeField)) {
+    setMobileKeyboardState(false);
+    return;
+  }
+  const baseline = state.mobileViewportBaseHeight || viewportHeight;
+  const keyboardOpen = baseline - viewportHeight > 110;
+  setMobileKeyboardState(keyboardOpen);
 }
 
 function syncSelectedFoodCard() {
@@ -3555,14 +3658,15 @@ function renderAssessment(profile) {
     </article>
   `;
 
-  const markerPercent = Math.max(0, Math.min(((profile.bmi - 14) / (32 - 14)) * 100, 100));
+  const rawMarkerPercent = ((profile.bmi - 14) / (32 - 14)) * 100;
+  const markerPercent = Math.max(7, Math.min(rawMarkerPercent, 93));
   $("bmi-range-chart").innerHTML = `
     <div class="bmi-range">
       <div class="bmi-segment bmi-under">营养不良</div>
       <div class="bmi-segment bmi-normal">正常</div>
       <div class="bmi-segment bmi-over">超重</div>
       <div class="bmi-segment bmi-obese">肥胖</div>
-      <div class="bmi-marker" style="left: calc(${markerPercent}% - 10px);">
+      <div class="bmi-marker" style="left: ${markerPercent}%;">
         <span>${profile.bmi}</span>
       </div>
     </div>
@@ -3998,13 +4102,25 @@ async function handleFoodLog(event) {
       method: "POST",
       body: JSON.stringify(payload),
     });
+    const recordedFoodName = state.selectedFood.name;
+    const successMessage = `记录成功\n${recordedFoodName}${data.cooking_method ? ` · ${data.cooking_method}` : ""} ${data.weight_g}g · ${data.time}\n热量 ${data.nutrition.calories} kcal，蛋白 ${data.nutrition.protein}g，脂肪 ${data.nutrition.fat}g，碳水 ${data.nutrition.carbs}g`;
     setMessage(
       "food-log-result",
-      `记录成功\n${state.selectedFood.name}${data.cooking_method ? ` · ${data.cooking_method}` : ""} ${data.weight_g}g · ${data.time}\n热量 ${data.nutrition.calories} kcal，蛋白 ${data.nutrition.protein}g，脂肪 ${data.nutrition.fat}g，碳水 ${data.nutrition.carbs}g`
+      successMessage
     );
     resetLiveTimestampDefaults();
+    clearFoodSearchFlow(true);
     await loadDashboard();
-    scrollFoodLogFlow("food-search-input", "start", 1000);
+    if (isMobileAppLayout()) {
+      showMobileToast(`${recordedFoodName} ${data.weight_g}g 已记录成功`, 1100);
+      showMobileScreen("record", {
+        recordTab: "food",
+        preserveScroll: true,
+        alignRecordPane: true,
+      });
+    } else {
+      scrollFoodLogFlow("food-search-input", "start", 1000);
+    }
   } catch (error) {
     setMessage("food-log-result", error.message);
   }
@@ -4218,6 +4334,13 @@ function resetFoodSelection() {
   updateFoodServingMode(null);
 }
 
+function clearFoodSearchFlow(clearKeyword = false) {
+  resetFoodSelection();
+  if (clearKeyword && $("food-search-input")) {
+    $("food-search-input").value = "";
+  }
+}
+
 function bindEvents() {
   $("show-register-btn").addEventListener("click", () => showAuth("register"));
   $("show-login-btn").addEventListener("click", () => showAuth("login"));
@@ -4280,12 +4403,17 @@ function bindEvents() {
   });
   document.querySelectorAll(".mobile-nav-btn").forEach((button) => {
     button.addEventListener("click", () => {
-      showMobileScreen(button.dataset.mobileScreen);
+      const screen = button.dataset.mobileScreen;
+      showMobileScreen(screen, {
+        alignRecordPane: screen === "record",
+      });
     });
   });
   document.querySelectorAll(".mobile-record-tab").forEach((button) => {
     button.addEventListener("click", () => {
-      showMobileRecordTab(button.dataset.mobileRecordTab);
+      showMobileRecordTab(button.dataset.mobileRecordTab, {
+        alignPane: true,
+      });
     });
   });
 
@@ -4310,12 +4438,16 @@ function bindEvents() {
     if (mobileRecordTrigger) {
       showMobileScreen("record", {
         recordTab: mobileRecordTrigger.dataset.mobileRecordTab,
+        alignRecordPane: true,
       });
       return;
     }
     const mobileScreenTrigger = event.target.closest("[data-mobile-screen-link]");
     if (mobileScreenTrigger) {
-      showMobileScreen(mobileScreenTrigger.dataset.mobileScreenLink);
+      const screen = mobileScreenTrigger.dataset.mobileScreenLink;
+      showMobileScreen(screen, {
+        alignRecordPane: screen === "record",
+      });
       return;
     }
     const trigger = event.target.closest("[data-switch-panel]");
@@ -4358,6 +4490,24 @@ function bindEvents() {
       showPanel(nextPanel);
     }
   });
+  document.addEventListener("focusin", (event) => {
+    if (isMobileTextEntryElement(event.target)) {
+      window.setTimeout(syncMobileKeyboardState, 80);
+    }
+  });
+  document.addEventListener(
+    "focus",
+    (event) => {
+      if (isMobileTextEntryElement(event.target)) {
+        window.setTimeout(syncMobileKeyboardState, 80);
+      }
+    },
+    true
+  );
+  document.addEventListener("focusout", () => {
+    window.setTimeout(syncMobileKeyboardState, 120);
+  });
+  window.visualViewport?.addEventListener("resize", syncMobileKeyboardState);
 }
 
 function initialize() {
@@ -4378,6 +4528,7 @@ function initialize() {
     "resize",
     () => {
       syncResponsiveAppShell();
+      syncMobileKeyboardState();
       scheduleDashboardTabIndicatorUpdate();
       syncActiveDashboardTabIntoView();
     },
