@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 220">
+  <rect width="320" height="220" rx="28" fill="#f7eee7"/>
+  <ellipse cx="160" cy="184" rx="108" ry="16" fill="#d7c0ad"/>
+  <ellipse cx="160" cy="132" rx="76" ry="34" fill="#f7f0e9"/>
+  <ellipse cx="160" cy="138" rx="58" ry="22" fill="#fff8ef"/>
+  <path d="M117 127c12-11 31-18 47-18 18 0 32 8 41 19-8 12-22 19-40 19-22 0-38-6-48-20Z" fill="#bf5944"/>
+  <path d="M129 121c7-4 14-4 22 1-5 6-12 9-20 10-6-3-7-7-2-11Z" fill="#7da65f"/>
+  <path d="M169 123c7-4 14-4 22 1-5 6-12 9-20 10-6-3-7-7-2-11Z" fill="#d6aa51"/>
+  <text x="160" y="52" text-anchor="middle" font-size="16" fill="#955848" font-weight="700">NCX Twice Cooked Pork Rice</text>
+</svg>

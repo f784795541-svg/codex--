@@ -152,7 +152,7 @@ def search_food(q: str = Query(..., min_length=1), limit: int = Query(20, ge=1, 
     foods = db.query(models.FoodDatabase).all()
     matched: list[tuple[int, models.FoodDatabase]] = []
     for food in foods:
-        is_match, score = food_matches_query(food.name, food.category, q)
+        is_match, score = food_matches_query(food.name, food.category, q, food.brand)
         if is_match:
             matched.append((score, food))
 

@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 220">
+  <rect width="320" height="220" rx="28" fill="#f7eee3"/>
+  <ellipse cx="160" cy="184" rx="108" ry="16" fill="#d5c0ab"/>
+  <ellipse cx="160" cy="132" rx="76" ry="34" fill="#f5efe7"/>
+  <ellipse cx="160" cy="138" rx="58" ry="22" fill="#fff7ef"/>
+  <path d="M118 126c11-13 29-21 47-21 16 0 28 5 40 18-10 14-27 23-47 23-17 0-30-7-40-20Z" fill="#a74a31"/>
+  <path d="M124 133c20-10 42-10 73-1" stroke="#d07f54" stroke-width="7" stroke-linecap="round"/>
+  <circle cx="136" cy="124" r="4" fill="#6a8e54"/>
+  <circle cx="193" cy="121" r="4" fill="#6a8e54"/>
+  <text x="160" y="52" text-anchor="middle" font-size="20" fill="#8d452d" font-weight="700">Yu Xiang Pork Rice</text>
+</svg>

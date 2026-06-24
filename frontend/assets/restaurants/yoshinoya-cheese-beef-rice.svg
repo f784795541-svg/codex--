@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 220">
+  <rect width="320" height="220" rx="28" fill="#f8efe6"/>
+  <ellipse cx="160" cy="184" rx="108" ry="16" fill="#d7c2af"/>
+  <ellipse cx="160" cy="132" rx="76" ry="34" fill="#f7f0e9"/>
+  <ellipse cx="160" cy="138" rx="58" ry="22" fill="#fff8ef"/>
+  <path d="M118 126c11-11 30-17 47-17 18 0 31 7 41 18-8 12-21 19-39 19-23 1-39-5-49-20Z" fill="#9f5b3b"/>
+  <path d="M128 121c10-8 20-9 29-4-6 9-15 14-27 16-5-2-6-7-2-12Z" fill="#87523b"/>
+  <path d="M164 121c7-3 14-3 21 1-5 7-12 10-20 12-5-4-5-8-1-13Z" fill="#f2d982"/>
+  <text x="160" y="52" text-anchor="middle" font-size="17" fill="#875640" font-weight="700">Yoshinoya Cheese Beef</text>
+</svg>

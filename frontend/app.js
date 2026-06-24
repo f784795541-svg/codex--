@@ -375,8 +375,8 @@ const BODY_TYPE_OPTIONS = [
 
 const BRAND_HERO_CONFIG = {
   all: {
-    title: "连锁餐厅单品库",
-    description: "把常见快餐、三明治和拉面单品集中展示。餐厅食品默认按 1 份记录，适合快速回填外食数据。",
+    title: "餐厅与外卖单品库",
+    description: "把常见连锁餐厅、拌饭、盖饭和外卖单品集中展示。餐厅食品默认按 1 份记录，适合快速回填外食数据。",
     image: "/assets/restaurants/mcd-bigmac.svg",
   },
   "麦当劳": {
@@ -398,6 +398,36 @@ const BRAND_HERO_CONFIG = {
     title: "味千拉面固定单品",
     description: "以整碗拉面和常见日式配菜为主，更适合记录堂食型正餐。",
     image: "/assets/restaurants/ajisen-tonkotsu.svg",
+  },
+  "外卖常见": {
+    title: "外卖常见高频正餐",
+    description: "集中补足更贴近日常点单的盖饭、拌饭和日式饭类，适合快速记录学校、公司和居家外卖。",
+    image: "/assets/restaurants/takeaway-tomato-brisket-rice.svg",
+  },
+  "鱼籽村": {
+    title: "鱼籽村拌饭单品",
+    description: "以鱼籽拌饭和双拼拌饭为主，适合快速记录重口味外卖拌饭类正餐。",
+    image: "/assets/restaurants/yuzicun-signature-roe-rice.svg",
+  },
+  "米村拌饭": {
+    title: "米村拌饭固定单品",
+    description: "偏韩式拌饭和石锅饭风格，更适合记录带酱汁和肉类搭配的一人食正餐。",
+    image: "/assets/restaurants/micun-feiniu-mixed-rice.svg",
+  },
+  "南城香": {
+    title: "南城香外卖单品",
+    description: "以番茄肥牛饭这类更家常的中式快餐为主，适合通勤和工作日正餐记录。",
+    image: "/assets/restaurants/nanchengxiang-tomato-beef-rice.svg",
+  },
+  "吉野家": {
+    title: "吉野家固定单品",
+    description: "以牛肉饭这类标准化外食主食为主，适合快速回填常见连锁快餐数据。",
+    image: "/assets/restaurants/yoshinoya-beef-rice.svg",
+  },
+  "留学生餐厅": {
+    title: "留学生餐厅常见套餐",
+    description: "保留更贴近日常学校或留学生餐厅的高频正餐，适合记录本地固定外卖和食堂套餐。",
+    image: "/assets/restaurants/international-cafe-black-pepper-beef-rice.svg",
   },
 };
 
@@ -2363,6 +2393,64 @@ function foodImagePath(foodOrKey) {
         "味千拉面 冰绿茶": "/assets/restaurants/ajisen-iced-tea.svg",
         "味千拉面 温泉蛋": "/assets/restaurants/ajisen-egg.svg",
         "味千拉面 炸虾 3只": "/assets/restaurants/ajisen-fried-shrimp.svg",
+        "土豆牛肉饭": "/assets/restaurants/takeaway-potato-beef-rice.svg",
+        "黄焖鸡米饭": "/assets/restaurants/takeaway-braised-chicken-rice.svg",
+        "黑椒牛柳饭": "/assets/restaurants/takeaway-black-pepper-beef-rice.svg",
+        "肉末茄子饭": "/assets/restaurants/takeaway-minced-pork-eggplant-rice.svg",
+        "宫保鸡丁饭": "/assets/restaurants/takeaway-kung-pao-chicken-rice.svg",
+        "鱼香肉丝饭": "/assets/restaurants/takeaway-yuxiang-pork-rice.svg",
+        "麻婆豆腐饭": "/assets/restaurants/takeaway-mapo-tofu-rice.svg",
+        "香菇滑鸡饭": "/assets/restaurants/takeaway-mushroom-chicken-rice.svg",
+        "照烧鸡腿饭": "/assets/restaurants/takeaway-teriyaki-chicken-rice.svg",
+        "鱼籽村 蒜香鱼籽拌饭": "/assets/restaurants/yuzicun-garlic-roe-rice.svg",
+        "鱼籽村 招牌鱼籽拌饭": "/assets/restaurants/yuzicun-signature-roe-rice.svg",
+        "鱼籽村 双拼鱼籽拌饭": "/assets/restaurants/yuzicun-double-roe-rice.svg",
+        "鱼籽村 韩式辣鱼籽拌饭": "/assets/restaurants/yuzicun-korean-spicy-roe-rice.svg",
+        "鱼籽村 肥牛鱼籽拌饭": "/assets/restaurants/yuzicun-beef-roe-rice.svg",
+        "鱼籽村 芝士鸡排鱼籽拌饭": "/assets/restaurants/yuzicun-cheese-cutlet-roe-rice.svg",
+        "鱼籽村 辣白菜鱼籽拌饭": "/assets/restaurants/yuzicun-kimchi-roe-rice.svg",
+        "鱼籽村 照烧鸡腿鱼籽拌饭": "/assets/restaurants/yuzicun-teriyaki-chicken-roe-rice.svg",
+        "留学生餐厅 蒜香猪排咖喱饭": "/assets/restaurants/international-cafe-garlic-pork-curry-rice.svg",
+        "留学生餐厅 黑椒牛肉饭": "/assets/restaurants/international-cafe-black-pepper-beef-rice.svg",
+        "留学生餐厅 照烧鸡腿饭": "/assets/restaurants/international-cafe-teriyaki-chicken-rice.svg",
+        "留学生餐厅 台式卤肉饭": "/assets/restaurants/international-cafe-braised-pork-rice.svg",
+        "留学生餐厅 咖喱牛肉饭": "/assets/restaurants/international-cafe-curry-beef-rice.svg",
+        "留学生餐厅 黑椒鸡排饭": "/assets/restaurants/international-cafe-black-pepper-cutlet-rice.svg",
+        "留学生餐厅 鱼香肉丝饭": "/assets/restaurants/international-cafe-yuxiang-pork-rice.svg",
+        "米村拌饭 肥牛拌饭": "/assets/restaurants/micun-feiniu-mixed-rice.svg",
+        "米村拌饭 肥牛泡菜拌饭": "/assets/restaurants/micun-kimchi-beef-rice.svg",
+        "米村拌饭 照烧鸡排拌饭": "/assets/restaurants/micun-teriyaki-cutlet-rice.svg",
+        "米村拌饭 石锅拌饭": "/assets/restaurants/micun-stone-pot-rice.svg",
+        "米村拌饭 金枪鱼拌饭": "/assets/restaurants/micun-tuna-rice.svg",
+        "米村拌饭 辣白菜五花肉拌饭": "/assets/restaurants/micun-kimchi-pork-rice.svg",
+        "米村拌饭 烤肉拌饭": "/assets/restaurants/micun-bulgogi-rice.svg",
+        "米村拌饭 辣牛肉石锅拌饭": "/assets/restaurants/micun-spicy-beef-stone-pot-rice.svg",
+        "南城香 番茄肥牛饭": "/assets/restaurants/nanchengxiang-tomato-beef-rice.svg",
+        "南城香 农家小炒肉饭": "/assets/restaurants/nanchengxiang-farmhouse-pork-rice.svg",
+        "南城香 回锅肉饭": "/assets/restaurants/nanchengxiang-twice-cooked-pork-rice.svg",
+        "南城香 宫保鸡丁饭": "/assets/restaurants/nanchengxiang-kung-pao-chicken-rice.svg",
+        "南城香 黑椒鸡腿饭": "/assets/restaurants/nanchengxiang-black-pepper-chicken-rice.svg",
+        "南城香 梅菜扣肉饭": "/assets/restaurants/nanchengxiang-preserved-pork-rice.svg",
+        "南城香 鱼香肉丝饭": "/assets/restaurants/nanchengxiang-yuxiang-pork-rice.svg",
+        "南城香 番茄鸡腿饭": "/assets/restaurants/nanchengxiang-tomato-chicken-rice.svg",
+        "吉野家 招牌牛肉饭": "/assets/restaurants/yoshinoya-beef-rice.svg",
+        "吉野家 照烧牛肉饭": "/assets/restaurants/yoshinoya-teriyaki-beef-rice.svg",
+        "吉野家 照烧鸡排饭": "/assets/restaurants/yoshinoya-teriyaki-cutlet-rice.svg",
+        "吉野家 双拼牛肉饭": "/assets/restaurants/yoshinoya-double-beef-rice.svg",
+        "吉野家 咖喱牛肉饭": "/assets/restaurants/yoshinoya-curry-beef-rice.svg",
+        "吉野家 泡菜牛肉饭": "/assets/restaurants/yoshinoya-kimchi-beef-rice.svg",
+        "吉野家 芝士牛肉饭": "/assets/restaurants/yoshinoya-cheese-beef-rice.svg",
+        "吉野家 温泉蛋牛肉饭": "/assets/restaurants/yoshinoya-onsen-egg-beef-rice.svg",
+        "番茄牛腩饭": "/assets/restaurants/takeaway-tomato-brisket-rice.svg",
+        "青椒牛肉饭": "/assets/restaurants/takeaway-green-pepper-beef-rice.svg",
+        "农家小炒肉饭": "/assets/restaurants/takeaway-farmhouse-pork-rice.svg",
+        "回锅肉饭": "/assets/restaurants/takeaway-twice-cooked-pork-rice.svg",
+        "红烧排骨饭": "/assets/restaurants/takeaway-braised-ribs-rice.svg",
+        "鳗鱼饭": "/assets/restaurants/takeaway-eel-rice.svg",
+        "亲子丼": "/assets/restaurants/takeaway-oyakodon.svg",
+        "留学生餐厅 番茄牛腩饭": "/assets/restaurants/international-cafe-tomato-brisket-rice.svg",
+        "照烧牛肉饭": "/assets/restaurants/takeaway-teriyaki-beef-rice.svg",
+        "奥尔良鸡腿饭": "/assets/restaurants/takeaway-orleans-chicken-rice.svg",
         };
       return brandImageMap[foodOrKey.name] || resolveRegularFoodImagePath(foodOrKey);
     }
@@ -3838,6 +3926,12 @@ async function handleRestaurantBrandFilter(brand) {
     "肯德基": "肯德基",
     "赛百味": "赛百味",
     "味千拉面": "味千拉面",
+    "外卖常见": "外卖常见",
+    "鱼籽村": "鱼籽村",
+    "米村拌饭": "米村拌饭",
+    "南城香": "南城香",
+    "吉野家": "吉野家",
+    "留学生餐厅": "留学生餐厅",
   };
   const keyword = keywordMap[brand] || brand;
   $("food-search-input").value = brand === "all" ? "" : keyword;
@@ -3845,9 +3939,9 @@ async function handleRestaurantBrandFilter(brand) {
   try {
     let foods;
     if (brand === "all") {
-      const allFoods = await apiRequest("/food/database?limit=260&offset=0");
+      const allFoods = await apiRequest("/food/database?limit=400&offset=0");
       foods = allFoods.filter((food) => food.brand);
-      setMessage("food-search-state", `当前展示 ${foods.length} 条连锁餐厅单品`);
+      setMessage("food-search-state", `当前展示 ${foods.length} 条餐厅与外卖单品`);
     } else {
       foods = await apiRequest(`/food/search?q=${encodeURIComponent(keyword)}&limit=40`);
       foods = foods.filter((food) => food.brand === brand);

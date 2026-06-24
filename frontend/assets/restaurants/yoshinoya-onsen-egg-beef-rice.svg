@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 220">
+  <rect width="320" height="220" rx="28" fill="#f8efe7"/>
+  <ellipse cx="160" cy="184" rx="108" ry="16" fill="#d7c2af"/>
+  <ellipse cx="160" cy="132" rx="76" ry="34" fill="#f7f0e9"/>
+  <ellipse cx="160" cy="138" rx="58" ry="22" fill="#fff8f0"/>
+  <path d="M118 126c11-11 30-17 47-17 18 0 31 7 41 18-8 12-22 19-40 19-22 1-38-5-48-20Z" fill="#a15d3d"/>
+  <circle cx="160" cy="123" r="12" fill="#fff0c3"/>
+  <circle cx="160" cy="123" r="6" fill="#f5cb4f"/>
+  <path d="M126 129c10 6 21 9 34 9 14 0 24-3 34-9" stroke="#8b553d" stroke-width="5" stroke-linecap="round"/>
+  <text x="160" y="52" text-anchor="middle" font-size="16" fill="#8a5941" font-weight="700">Yoshinoya Onsen Egg Beef</text>
+</svg>

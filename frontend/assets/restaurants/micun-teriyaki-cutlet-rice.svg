@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 220">
+  <rect width="320" height="220" rx="28" fill="#f6eee5"/>
+  <ellipse cx="160" cy="184" rx="108" ry="16" fill="#cec0b0"/>
+  <ellipse cx="160" cy="132" rx="76" ry="34" fill="#585757"/>
+  <ellipse cx="160" cy="138" rx="58" ry="22" fill="#fff7ee"/>
+  <path d="M118 127c13-11 31-17 46-17 18 0 31 7 41 18-8 11-21 18-38 19-22 1-38-6-49-20Z" fill="#b76c3e"/>
+  <path d="M129 117h54c-2 18-10 27-29 28-17 0-25-8-25-28Z" fill="#d39c52"/>
+  <path d="M129 126h54" stroke="#8d5131" stroke-width="5" stroke-linecap="round"/>
+  <text x="160" y="52" text-anchor="middle" font-size="16" fill="#7a5549" font-weight="700">Micun Teriyaki Cutlet Rice</text>
+</svg>

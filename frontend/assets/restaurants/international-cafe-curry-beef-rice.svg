@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 220">
+  <rect width="320" height="220" rx="28" fill="#f6ede5"/>
+  <ellipse cx="160" cy="184" rx="108" ry="16" fill="#d5beaa"/>
+  <ellipse cx="160" cy="132" rx="76" ry="34" fill="#f5efe7"/>
+  <ellipse cx="160" cy="138" rx="58" ry="22" fill="#fff8ef"/>
+  <path d="M118 126c12-12 29-18 46-18 18 0 31 7 40 18-8 13-22 20-41 20-20 0-35-7-45-20Z" fill="#c48d46"/>
+  <path d="M128 121c10-8 19-9 29-3-6 9-15 14-27 16-5-2-6-7-2-13Z" fill="#8d563f"/>
+  <text x="160" y="52" text-anchor="middle" font-size="16" fill="#885643" font-weight="700">Intl Cafe Curry Beef Rice</text>
+</svg>

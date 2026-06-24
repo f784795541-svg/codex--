@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 220">
+  <rect width="320" height="220" rx="28" fill="#f5ece4"/>
+  <ellipse cx="160" cy="184" rx="108" ry="16" fill="#ccb9a7"/>
+  <ellipse cx="160" cy="132" rx="76" ry="34" fill="#4f5158"/>
+  <ellipse cx="160" cy="138" rx="58" ry="22" fill="#fff8ee"/>
+  <path d="M120 126c13-12 30-16 46-16 17 0 30 6 40 18-10 12-25 18-43 18-21 0-34-6-43-20Z" fill="#e7d7ae"/>
+  <path d="M131 121c11-8 22-9 31-4-6 10-15 15-27 17-6-2-7-7-4-13Z" fill="#cc7c6f"/>
+  <circle cx="178" cy="123" r="8" fill="#7db05b"/>
+  <text x="160" y="52" text-anchor="middle" font-size="18" fill="#7b5548" font-weight="700">Micun Tuna Rice</text>
+</svg>

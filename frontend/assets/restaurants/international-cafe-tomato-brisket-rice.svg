@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 220">
+  <rect width="320" height="220" rx="28" fill="#f6ede5"/>
+  <ellipse cx="160" cy="184" rx="108" ry="16" fill="#d5bfad"/>
+  <ellipse cx="160" cy="132" rx="76" ry="34" fill="#f5efe8"/>
+  <ellipse cx="160" cy="138" rx="58" ry="22" fill="#fff8f1"/>
+  <path d="M118 126c14-12 30-18 47-18 16 0 31 7 40 18-8 11-20 18-37 19-23 1-39-6-50-19Z" fill="#be6145"/>
+  <circle cx="133" cy="124" r="9" fill="#df8f64"/>
+  <circle cx="156" cy="120" r="8" fill="#e4aa63"/>
+  <circle cx="179" cy="128" r="9" fill="#9d5b45"/>
+  <text x="160" y="52" text-anchor="middle" font-size="15" fill="#8e5641" font-weight="700">International Cafe Brisket</text>
+</svg>

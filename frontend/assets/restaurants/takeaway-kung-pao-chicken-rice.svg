@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 220">
+  <rect width="320" height="220" rx="28" fill="#f9efe4"/>
+  <ellipse cx="160" cy="184" rx="108" ry="16" fill="#d6beaa"/>
+  <ellipse cx="160" cy="132" rx="76" ry="34" fill="#f6f0e8"/>
+  <ellipse cx="160" cy="138" rx="58" ry="22" fill="#fff7ef"/>
+  <path d="M116 126c10-12 28-20 48-20 14 0 28 6 40 18-9 14-27 22-47 22-18 0-31-6-41-20Z" fill="#b35d36"/>
+  <circle cx="132" cy="127" r="10" fill="#c58f3a"/>
+  <circle cx="154" cy="121" r="9" fill="#b54d2b"/>
+  <circle cx="176" cy="129" r="10" fill="#7d3c21"/>
+  <circle cx="196" cy="121" r="8" fill="#d0a85c"/>
+  <circle cx="168" cy="117" r="4" fill="#e9d1a0"/>
+  <text x="160" y="52" text-anchor="middle" font-size="19" fill="#91492d" font-weight="700">Kung Pao Chicken Rice</text>
+</svg>

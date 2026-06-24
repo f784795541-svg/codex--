@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 220">
+  <rect width="320" height="220" rx="28" fill="#f8efe6"/>
+  <ellipse cx="160" cy="184" rx="108" ry="16" fill="#d7c2b0"/>
+  <ellipse cx="160" cy="132" rx="76" ry="34" fill="#f6f0e8"/>
+  <ellipse cx="160" cy="138" rx="58" ry="22" fill="#fff7ef"/>
+  <path d="M118 125c12-10 30-16 46-16 18 0 31 7 41 18-8 11-21 18-38 18-23 1-39-5-49-20Z" fill="#9c5a39"/>
+  <path d="M122 125c18 6 38 7 61 4" stroke="#d99a53" stroke-width="6" stroke-linecap="round"/>
+  <text x="160" y="52" text-anchor="middle" font-size="18" fill="#87553c" font-weight="700">Yoshinoya Teriyaki Beef Rice</text>
+</svg>

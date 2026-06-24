@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 220">
+  <rect width="320" height="220" rx="28" fill="#f8efe7"/>
+  <ellipse cx="160" cy="184" rx="108" ry="16" fill="#d7c2af"/>
+  <ellipse cx="160" cy="132" rx="76" ry="34" fill="#f7f1ea"/>
+  <ellipse cx="160" cy="138" rx="58" ry="22" fill="#fff9f1"/>
+  <path d="M118 126c13-11 31-17 47-17 18 0 31 7 41 18-8 12-22 19-39 19-23 1-39-5-49-20Z" fill="#ba7240"/>
+  <path d="M129 117h52c-2 17-9 26-27 27-17 0-25-7-25-27Z" fill="#d7aa61"/>
+  <path d="M129 126h52" stroke="#8c5534" stroke-width="5" stroke-linecap="round"/>
+  <text x="160" y="52" text-anchor="middle" font-size="16" fill="#8d5b45" font-weight="700">Yoshinoya Teriyaki Cutlet</text>
+</svg>

@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 220">
+  <rect width="320" height="220" rx="28" fill="#f7efe7"/>
+  <ellipse cx="160" cy="184" rx="108" ry="16" fill="#d8c3af"/>
+  <ellipse cx="160" cy="132" rx="76" ry="34" fill="#f5efe7"/>
+  <ellipse cx="160" cy="138" rx="58" ry="22" fill="#fff7ef"/>
+  <path d="M116 124c12-13 32-20 52-20 13 0 26 5 36 16-9 16-27 25-48 25-20 0-31-5-40-21Z" fill="#f0d7a8"/>
+  <circle cx="132" cy="124" r="8" fill="#ee7a3c"/>
+  <circle cx="151" cy="118" r="9" fill="#ea6c2b"/>
+  <circle cx="171" cy="127" r="8" fill="#ef8c52"/>
+  <circle cx="190" cy="119" r="9" fill="#e45d21"/>
+  <circle cx="206" cy="126" r="7" fill="#f59f71"/>
+  <text x="160" y="52" text-anchor="middle" font-size="19" fill="#ad5c2c" font-weight="700">Yuzicun Garlic Roe Rice</text>
+</svg>

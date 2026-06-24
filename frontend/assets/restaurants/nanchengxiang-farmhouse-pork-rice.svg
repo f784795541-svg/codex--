@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 220">
+  <rect width="320" height="220" rx="28" fill="#f7efe8"/>
+  <ellipse cx="160" cy="184" rx="108" ry="16" fill="#d7c0af"/>
+  <ellipse cx="160" cy="132" rx="76" ry="34" fill="#f6f0e9"/>
+  <ellipse cx="160" cy="138" rx="58" ry="22" fill="#fff8f0"/>
+  <path d="M118 126c13-11 31-17 46-17 18 0 32 7 42 18-8 12-22 19-40 20-22 0-38-7-48-21Z" fill="#ae5a40"/>
+  <circle cx="133" cy="120" r="8" fill="#72914f"/>
+  <circle cx="156" cy="118" r="7" fill="#d7b15b"/>
+  <circle cx="180" cy="126" r="8" fill="#884b35"/>
+  <text x="160" y="52" text-anchor="middle" font-size="17" fill="#8f5640" font-weight="700">NCX Farmhouse Pork Rice</text>
+</svg>

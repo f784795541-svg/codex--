@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 220">
+  <rect width="320" height="220" rx="28" fill="#f5ece4"/>
+  <ellipse cx="160" cy="184" rx="108" ry="16" fill="#ccb9a8"/>
+  <ellipse cx="160" cy="132" rx="76" ry="34" fill="#4f5158"/>
+  <ellipse cx="160" cy="138" rx="58" ry="22" fill="#fff8ee"/>
+  <path d="M119 124c12-10 30-15 46-15 18 0 31 6 40 17-9 12-22 19-40 19-21 0-37-6-46-21Z" fill="#c86a47"/>
+  <path d="M127 119c7 0 14 4 20 10-10 5-19 7-28 5 1-8 4-12 8-15Z" fill="#ef8752"/>
+  <circle cx="177" cy="123" r="8" fill="#8a533a"/>
+  <text x="160" y="52" text-anchor="middle" font-size="18" fill="#7f5446" font-weight="700">Micun Kimchi Beef Rice</text>
+</svg>

@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 220">
+  <rect width="320" height="220" rx="28" fill="#f6eee6"/>
+  <ellipse cx="160" cy="184" rx="108" ry="16" fill="#d5bfac"/>
+  <ellipse cx="160" cy="132" rx="76" ry="34" fill="#f5efe7"/>
+  <ellipse cx="160" cy="138" rx="58" ry="22" fill="#fff8ef"/>
+  <path d="M117 127c12-11 31-18 47-18 18 0 32 7 41 19-8 12-22 19-40 19-22 0-38-6-48-20Z" fill="#905039"/>
+  <path d="M128 121c8-6 17-6 25 0-7 7-15 11-25 12-5-3-5-8 0-12Z" fill="#7fa057"/>
+  <path d="M164 123c9-6 17-6 25 0-7 7-15 11-25 12-5-3-5-8 0-12Z" fill="#a96546"/>
+  <text x="160" y="52" text-anchor="middle" font-size="15" fill="#875441" font-weight="700">Intl Cafe Braised Pork Rice</text>
+</svg>

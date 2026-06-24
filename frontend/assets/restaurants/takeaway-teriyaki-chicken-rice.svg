@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 220">
+  <rect width="320" height="220" rx="28" fill="#f7efe4"/>
+  <ellipse cx="160" cy="184" rx="108" ry="16" fill="#d5beaa"/>
+  <ellipse cx="160" cy="132" rx="76" ry="34" fill="#f5efe7"/>
+  <ellipse cx="160" cy="138" rx="58" ry="22" fill="#fff7ef"/>
+  <path d="M116 125c10-13 30-20 48-20 14 0 28 5 40 18-9 14-27 23-47 23-18 0-31-7-41-21Z" fill="#965a32"/>
+  <path d="M126 132c24-5 48-5 72 0" stroke="#f1c46f" stroke-width="6" stroke-linecap="round"/>
+  <circle cx="137" cy="124" r="4" fill="#f3d580"/>
+  <circle cx="190" cy="124" r="4" fill="#f3d580"/>
+  <text x="160" y="52" text-anchor="middle" font-size="19" fill="#845028" font-weight="700">Teriyaki Chicken Rice</text>
+</svg>
