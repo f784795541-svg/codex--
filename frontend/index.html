@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>健康管理系统</title>
-    <link rel="stylesheet" href="/styles.css?v=20260624-mobilepolish1" />
+    <link rel="stylesheet" href="/styles.css?v=20260628-pickerfix22" />
   </head>
   <body data-shell="auth">
     <div class="auth-shell" id="auth-shell" data-auth-mode="login">
@@ -53,12 +53,21 @@
             <span class="auth-mobile-pill">Health Manager</span>
             <span class="auth-mobile-pill auth-mobile-pill-soft">固定公式 + 规则引擎</span>
           </div>
-          <div class="auth-mobile-copy">
-            <p class="auth-mobile-kicker">每日健康管理</p>
-            <h2 class="auth-mobile-title">把记录、目标和建议收进同一个入口</h2>
-            <p class="auth-mobile-subtitle">
-              先完成账户建档，饮食、运动、睡眠和体重会按固定规则统一管理，后续查看趋势和建议也更顺手。
-            </p>
+          <div class="auth-mobile-copy-stack">
+            <div class="auth-mobile-copy auth-mobile-copy-panel" data-auth-copy="login">
+              <p class="auth-mobile-kicker">每日健康管理</p>
+              <h2 class="auth-mobile-title">把记录、目标和建议收进同一个入口</h2>
+              <p class="auth-mobile-subtitle">
+                先完成账户建档，饮食、运动、睡眠和体重会按固定规则统一管理，后续查看趋势和建议也更顺手。
+              </p>
+            </div>
+            <div class="auth-mobile-copy auth-mobile-copy-panel" data-auth-copy="register">
+              <p class="auth-mobile-kicker">开始建档</p>
+              <h2 class="auth-mobile-title">先把基础信息补齐，再让首页真正懂你</h2>
+              <p class="auth-mobile-subtitle">
+                年龄、身高、体重、目标和活动水平会一起决定后面的热量目标、趋势判断和饮食建议，先花半分钟建好这份档案。
+              </p>
+            </div>
           </div>
           <div class="auth-mobile-highlights">
             <article class="auth-mobile-highlight">
@@ -75,128 +84,129 @@
           <button id="show-login-btn" class="tab-button active" type="button">登录</button>
           <button id="show-register-btn" class="tab-button" type="button">注册</button>
         </div>
+        <div class="auth-form-stage" id="auth-form-stage">
+          <form id="login-form" class="auth-form">
+            <h2>登录系统</h2>
+            <div class="auth-mobile-form-head">
+              <p>欢迎回来</p>
+              <h3>登录后继续今天的记录</h3>
+              <span>已有账户直接进入首页；第一次使用就在下方切换到注册。</span>
+            </div>
+            <div class="auth-grid single">
+              <input name="username" placeholder="用户名" required />
+              <input name="password" type="password" placeholder="密码" required />
+            </div>
+            <p class="auth-form-tip">已有账户可直接登录继续记录；如果是第一次使用，请切到注册并创建健康档案。</p>
+            <button type="submit" class="primary-btn auth-action-btn">进入健康系统</button>
+            <div id="login-result" class="inline-message"></div>
+          </form>
 
-        <form id="login-form" class="auth-form">
-          <h2>登录系统</h2>
-          <div class="auth-mobile-form-head">
-            <p>欢迎回来</p>
-            <h3>登录后继续今天的记录</h3>
-            <span>已有账户直接进入首页；第一次使用就在下方切换到注册。</span>
-          </div>
-          <div class="auth-grid single">
-            <input name="username" placeholder="用户名" required />
-            <input name="password" type="password" placeholder="密码" required />
-          </div>
-          <p class="auth-form-tip">已有账户可直接登录继续记录；如果是第一次使用，请切到注册并创建健康档案。</p>
-          <button type="submit" class="primary-btn auth-action-btn">进入健康系统</button>
-          <div id="login-result" class="inline-message"></div>
-        </form>
-
-        <form id="register-form" class="auth-form hidden">
-          <h2>创建账户</h2>
-          <div class="auth-mobile-form-head">
-            <p>创建账户</p>
-            <h3>先建档，再开始记录</h3>
-            <span>用一套完整的基础信息把目标、记录和后续建议统一起来。</span>
-          </div>
-          <div class="auth-grid">
-            <div class="auth-mobile-section-label span-2">账户信息</div>
-            <input name="username" placeholder="用户名" required />
-            <input name="password" type="password" placeholder="密码（至少 6 位）" required />
-            <input name="name" placeholder="姓名" required />
-            <div class="auth-mobile-section-label span-2">身体档案</div>
-            <div class="field-block picker-field">
-              <label for="register-age-input">年龄</label>
-              <div class="picker-trigger">
-                <input id="register-age-input" name="age" type="number" placeholder="点击后滚动选择年龄" required />
-                <span class="picker-inline-hint">点我选择</span>
-              </div>
-              <div id="register-age-panel" class="picker-panel hidden" aria-label="年龄滚动选项"></div>
+          <form id="register-form" class="auth-form hidden">
+            <h2>创建账户</h2>
+            <div class="auth-mobile-form-head">
+              <p>创建账户</p>
+              <h3>先建档，再开始记录</h3>
+              <span>用一套完整的基础信息把目标、记录和后续建议统一起来。</span>
             </div>
-            <div class="field-block picker-field">
-              <label for="register-gender-display">性别</label>
-              <div class="picker-trigger">
-                <input id="register-gender-display" type="text" placeholder="点击后滚动选择性别" readonly />
-                <span class="picker-inline-hint">点我选择</span>
-              </div>
-              <input id="register-gender-input" name="gender" type="hidden" value="male" />
-              <div id="register-gender-panel" class="picker-panel hidden" aria-label="性别滚动选项"></div>
-            </div>
-            <div class="field-block picker-field">
-              <label for="register-height-input">身高</label>
-              <div class="picker-trigger">
-                <input id="register-height-input" name="height_cm" type="number" step="0.1" placeholder="点击后滚动选择身高 cm" required />
-                <span class="picker-inline-hint">点我选择</span>
-              </div>
-              <div id="register-height-panel" class="picker-panel hidden" aria-label="身高滚动选项"></div>
-            </div>
-            <div class="field-block span-2 picker-field">
-              <label>当前体重</label>
-              <div class="picker-trigger">
-                <input id="register-weight-input" name="weight_kg" type="number" step="0.1" placeholder="点击当前体重后滚动选择 kg" required />
-                <span class="picker-inline-hint">点我选择</span>
-              </div>
-              <div id="register-weight-panel" class="picker-panel hidden" aria-label="体重滚动选项"></div>
-            </div>
-            <div class="auth-mobile-section-label span-2">目标设置</div>
-            <div class="field-block picker-field">
-              <label>目标体重</label>
-              <div class="picker-trigger">
-                <input id="register-target-weight-input" name="target_weight_kg" type="number" step="0.1" placeholder="点击后滚动选择目标体重 kg" />
-                <span class="picker-inline-hint">点我选择</span>
-              </div>
-              <div id="register-target-weight-panel" class="picker-panel hidden" aria-label="目标体重滚动选项"></div>
-            </div>
-            <div class="field-block picker-field">
-              <label>目标睡眠时长</label>
-              <div class="picker-trigger">
-                <input id="register-target-sleep-input" name="target_sleep_hours" type="number" step="0.5" placeholder="点击后滚动选择睡眠时长 h" />
-                <span class="picker-inline-hint">点我选择</span>
-              </div>
-              <div id="register-target-sleep-panel" class="picker-panel hidden" aria-label="目标睡眠时长滚动选项"></div>
-            </div>
-            <div class="field-block span-2 auth-inline-note">
-              <strong>活动水平参考</strong>
-              <span>久坐：大部分时间坐着，运动很少。轻度：偶尔散步或每周少量训练。中等：每周规律训练 3-5 次。高强度：训练频率高、体力活动也更大。</span>
-            </div>
-            <select name="goal">
-              <option value="fat_loss">减脂</option>
-              <option value="maintain">维持</option>
-              <option value="muscle_gain">增肌</option>
-            </select>
-            <select name="activity_level" title="久坐：日常久坐少运动；轻度活动：每周少量步行或训练；中等活动：每周规律训练 3-5 次；高强度活动：训练频率和体力活动都更高">
-              <option value="sedentary">久坐（长期坐着，运动很少）</option>
-              <option value="light">轻度活动（偶尔散步或轻训练）</option>
-              <option value="medium" selected>中等活动（每周规律训练 3-5 次）</option>
-              <option value="high">高强度活动（训练频率高、体力活动大）</option>
-            </select>
-          </div>
-          <button id="toggle-register-pantry-btn" type="button" class="ghost-btn auth-inline-toggle">常备食材与推荐偏好</button>
-          <div id="register-pantry-panel" class="auth-inline-panel hidden">
             <div class="auth-grid">
+              <div class="auth-mobile-section-label span-2">账户信息</div>
+              <input name="username" placeholder="用户名" required />
+              <input name="password" type="password" placeholder="密码（至少 6 位）" required />
+              <input name="name" placeholder="姓名" required />
+              <div class="auth-mobile-section-label span-2">身体档案</div>
+              <div class="field-block picker-field">
+                <label for="register-age-input">年龄</label>
+                <div class="picker-trigger">
+                  <input id="register-age-input" name="age" type="text" inputmode="decimal" placeholder="点击后滚动选择年龄" readonly required />
+                  <span class="picker-inline-hint">点我选择</span>
+                </div>
+                <div id="register-age-panel" class="picker-panel hidden" aria-label="年龄滚动选项"></div>
+              </div>
+              <div class="field-block picker-field">
+                <label for="register-gender-display">性别</label>
+                <div class="picker-trigger">
+                  <input id="register-gender-display" type="text" placeholder="点击后滚动选择性别" readonly />
+                  <span class="picker-inline-hint">点我选择</span>
+                </div>
+                <input id="register-gender-input" name="gender" type="hidden" value="male" />
+                <div id="register-gender-panel" class="picker-panel hidden" aria-label="性别滚动选项"></div>
+              </div>
+              <div class="field-block picker-field">
+                <label for="register-height-input">身高</label>
+                <div class="picker-trigger">
+                  <input id="register-height-input" name="height_cm" type="text" inputmode="decimal" placeholder="点击后滚动选择身高 cm" readonly required />
+                  <span class="picker-inline-hint">点我选择</span>
+                </div>
+                <div id="register-height-panel" class="picker-panel hidden" aria-label="身高滚动选项"></div>
+              </div>
+              <div class="field-block span-2 picker-field">
+                <label>当前体重</label>
+                <div class="picker-trigger">
+                  <input id="register-weight-input" name="weight_kg" type="text" inputmode="decimal" placeholder="点击当前体重后滚动选择 kg" readonly required />
+                  <span class="picker-inline-hint">点我选择</span>
+                </div>
+                <div id="register-weight-panel" class="picker-panel hidden" aria-label="体重滚动选项"></div>
+              </div>
+              <div class="auth-mobile-section-label span-2">目标设置</div>
+              <div class="field-block picker-field">
+                <label>目标体重</label>
+                <div class="picker-trigger">
+                  <input id="register-target-weight-input" name="target_weight_kg" type="text" inputmode="decimal" placeholder="点击后滚动选择目标体重 kg" readonly />
+                  <span class="picker-inline-hint">点我选择</span>
+                </div>
+                <div id="register-target-weight-panel" class="picker-panel hidden" aria-label="目标体重滚动选项"></div>
+              </div>
+              <div class="field-block picker-field">
+                <label>目标睡眠时长</label>
+                <div class="picker-trigger">
+                  <input id="register-target-sleep-input" name="target_sleep_hours" type="text" inputmode="decimal" placeholder="点击后滚动选择睡眠时长 h" readonly />
+                  <span class="picker-inline-hint">点我选择</span>
+                </div>
+                <div id="register-target-sleep-panel" class="picker-panel hidden" aria-label="目标睡眠时长滚动选项"></div>
+              </div>
               <div class="field-block span-2 auth-inline-note">
-                <strong>用途说明</strong>
-                <span>这里用于提前记录你的日常饮食环境。系统会优先参考你更常见、更容易准备到的食材来生成三餐建议，减少“推荐合理但家里没有”的情况。</span>
+                <strong>活动水平参考</strong>
+                <span>久坐：大部分时间坐着，运动很少。轻度：偶尔散步或每周少量训练。中等：每周规律训练 3-5 次。高强度：训练频率高、体力活动也更大。</span>
               </div>
-              <div class="field-block">
-                <label for="register-recommendation-mode">推荐偏好</label>
-                <select id="register-recommendation-mode" name="recommendation_mode">
-                  <option value="home">家常模式</option>
-                  <option value="fitness">健身模式</option>
-                  <option value="eat_out">外食模式</option>
-                </select>
-                <p class="field-hint">家常模式更偏日常家庭饮食，健身模式更偏规律训练场景，外食模式会更偏向通勤、堂食或外卖场景。</p>
-              </div>
-              <div class="field-block span-2">
-                <label>家中常备食材</label>
-                <div id="register-pantry-chips" class="chip-select-grid"></div>
-                <p class="field-hint">建议优先勾选你家里常买、常做、常补货的食材。进入首页后，系统会优先从这些食材与常见家常食物中生成可替换的饮食建议。</p>
+              <select name="goal">
+                <option value="fat_loss">减脂</option>
+                <option value="maintain">维持</option>
+                <option value="muscle_gain">增肌</option>
+              </select>
+              <select name="activity_level" title="久坐：日常久坐少运动；轻度活动：每周少量步行或训练；中等活动：每周规律训练 3-5 次；高强度活动：训练频率和体力活动都更高">
+                <option value="sedentary">久坐（长期坐着，运动很少）</option>
+                <option value="light">轻度活动（偶尔散步或轻训练）</option>
+                <option value="medium" selected>中等活动（每周规律训练 3-5 次）</option>
+                <option value="high">高强度活动（训练频率高、体力活动大）</option>
+              </select>
+            </div>
+            <button id="toggle-register-pantry-btn" type="button" class="ghost-btn auth-inline-toggle">常备食材与推荐偏好</button>
+            <div id="register-pantry-panel" class="auth-inline-panel hidden">
+              <div class="auth-grid">
+                <div class="field-block span-2 auth-inline-note">
+                  <strong>用途说明</strong>
+                  <span>这里用于提前记录你的日常饮食环境。系统会优先参考你更常见、更容易准备到的食材来生成三餐建议，减少“推荐合理但家里没有”的情况。</span>
+                </div>
+                <div class="field-block">
+                  <label for="register-recommendation-mode">推荐偏好</label>
+                  <select id="register-recommendation-mode" name="recommendation_mode">
+                    <option value="home">家常模式</option>
+                    <option value="fitness">健身模式</option>
+                    <option value="eat_out">外食模式</option>
+                  </select>
+                  <p class="field-hint">家常模式更偏日常家庭饮食，健身模式更偏规律训练场景，外食模式会更偏向通勤、堂食或外卖场景。</p>
+                </div>
+                <div class="field-block span-2">
+                  <label>家中常备食材</label>
+                  <div id="register-pantry-chips" class="chip-select-grid"></div>
+                  <p class="field-hint">建议优先勾选你家里常买、常做、常补货的食材。进入首页后，系统会优先从这些食材与常见家常食物中生成可替换的饮食建议。</p>
+                </div>
               </div>
             </div>
-          </div>
-          <button type="submit" class="primary-btn auth-action-btn">完成注册并进入系统</button>
-          <div id="register-result" class="inline-message"></div>
-        </form>
+            <button type="submit" class="primary-btn auth-action-btn">完成注册并进入系统</button>
+            <div id="register-result" class="inline-message"></div>
+          </form>
+        </div>
       </section>
     </div>
 
@@ -956,6 +966,6 @@
       </main>
     </div>
 
-    <script src="/app.js?v=20260624-mobilepolish1"></script>
+    <script src="/app.js?v=20260628-pickerfix22"></script>
   </body>
 </html>

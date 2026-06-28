@@ -40,6 +40,7 @@ const EXACT_FOOD_IMAGE_MAP = {
   紫菜蛋花汤: "egg-plate",
   酸辣汤: "meal",
 };
+
 const FOOD_IMAGE_RULES = [
   { keywords: ["米饭", "糙米饭", "寿司饭"], asset: "rice-bowl" },
   { keywords: ["燕麦片"], asset: "oatmeal-bowl" },
@@ -286,6 +287,10 @@ const state = {
   mobileKeyboardOpen: false,
   mobileViewportBaseHeight: window.visualViewport?.height || window.innerHeight,
   mobileToastTimer: null,
+  registerPicker: {
+    fieldKey: "",
+  },
+  authTransitionMode: "",
 };
 
 const PANEL_NAMES = new Set(["overview", "food", "activity", "trend", "report", "assessment", "settings", "suggestion"]);
@@ -307,6 +312,100 @@ const LIVE_TIMESTAMP_FIELDS = [
   ["workout-hour", "workout-hour-display", "workout-minute", "workout-minute-display"],
   ["weight-hour", "weight-hour-display", "weight-minute", "weight-minute-display"],
 ];
+const REGISTER_NUMBER_PICKER_CONFIG = {
+  age: {
+    inputId: "register-age-input",
+    label: "年龄",
+    hint: "滑动选择年龄",
+    options: buildNumericOptions(12, 80, 1).map((value) => ({ value, label: `${value} 岁` })),
+  },
+  height: {
+    inputId: "register-height-input",
+    label: "身高",
+    hint: "滑动选择身高",
+    options: buildNumericOptions(140, 210, 1).map((value) => ({ value, label: `${value} cm` })),
+  },
+  weight: {
+    inputId: "register-weight-input",
+    label: "当前体重",
+    hint: "滑动选择当前体重",
+    options: buildNumericOptions(35, 150, 0.1, 1).map((value) => ({ value, label: `${value} kg` })),
+  },
+  targetWeight: {
+    inputId: "register-target-weight-input",
+    label: "目标体重",
+    hint: "滑动选择目标体重",
+    options: buildNumericOptions(35, 150, 0.1, 1).map((value) => ({ value, label: `${value} kg` })),
+  },
+  targetSleep: {
+    inputId: "register-target-sleep-input",
+    label: "目标睡眠时长",
+    hint: "滑动选择睡眠时长",
+    options: buildNumericOptions(6, 10, 0.5, 1).map((value) => ({ value, label: `${value} 小时` })),
+  },
+};
+Object.assign(REGISTER_NUMBER_PICKER_CONFIG, {
+  assessmentAge: {
+    inputId: "assessment-age",
+    label: "年龄",
+    hint: "滑动选择年龄",
+    options: buildNumericOptions(12, 80, 1).map((value) => ({ value, label: `${value} 岁` })),
+  },
+  assessmentHeight: {
+    inputId: "assessment-height",
+    label: "身高",
+    hint: "滑动选择身高",
+    options: buildNumericOptions(140, 210, 1).map((value) => ({ value, label: `${value} cm` })),
+  },
+  assessmentWeight: {
+    inputId: "assessment-weight",
+    label: "体重",
+    hint: "滑动选择体重",
+    options: buildNumericOptions(35, 150, 0.1, 1).map((value) => ({ value, label: `${value} kg` })),
+  },
+  weightLogWeight: {
+    inputId: "weight-kg-input",
+    label: "当前体重",
+    hint: "滑动选择当前体重",
+    options: buildNumericOptions(35, 150, 0.1, 1).map((value) => ({ value, label: `${value} kg` })),
+  },
+  workoutDuration: {
+    inputId: "workout-duration-input",
+    label: "运动时长",
+    hint: "滑动选择运动时长",
+    options: buildNumericOptions(1, 240, 1).map((value) => ({ value, label: `${value} 分钟` })),
+  },
+  settingsAge: {
+    inputId: "settings-age",
+    label: "年龄",
+    hint: "滑动选择年龄",
+    options: buildNumericOptions(12, 80, 1).map((value) => ({ value, label: `${value} 岁` })),
+  },
+  settingsHeight: {
+    inputId: "settings-height",
+    label: "身高",
+    hint: "滑动选择身高",
+    options: buildNumericOptions(140, 210, 1).map((value) => ({ value, label: `${value} cm` })),
+  },
+  settingsWeight: {
+    inputId: "settings-weight",
+    label: "体重",
+    hint: "滑动选择体重",
+    options: buildNumericOptions(35, 150, 0.1, 1).map((value) => ({ value, label: `${value} kg` })),
+  },
+  settingsTargetWeight: {
+    inputId: "settings-target-weight",
+    label: "目标体重",
+    hint: "滑动选择目标体重",
+    options: buildNumericOptions(35, 150, 0.1, 1).map((value) => ({ value, label: `${value} kg` })),
+  },
+  settingsTargetSleep: {
+    inputId: "settings-target-sleep",
+    label: "目标睡眠时长",
+    hint: "滑动选择睡眠时长",
+    options: buildNumericOptions(6, 10, 0.5, 1).map((value) => ({ value, label: `${value} 小时` })),
+  },
+});
 const MOBILE_PANEL_ROUTES = {
   overview: { screen: "home" },
   suggestion: { screen: "home" },
@@ -352,6 +451,9 @@ const MOBILE_MODULES = {
   },
 };
 const mobileModuleRegistry = new Map();
+const pickerScrollTimers = new WeakMap();
+const PICKER_SCROLL_SETTLE_DELAY = 140;
+const PICKER_TAP_MOVE_THRESHOLD = 10;
 const BODY_TYPE_OPTIONS = [
   {
     value: "slim",
@@ -534,6 +636,61 @@ function getFormData(form) {
   return data;
 }
 
+const API_ERROR_FIELD_LABELS = {
+  username: "用户名",
+  password: "密码",
+  name: "姓名",
+  age: "年龄",
+  gender: "性别",
+  height_cm: "身高",
+  weight_kg: "当前体重",
+  target_weight_kg: "目标体重",
+  target_sleep_hours: "目标睡眠时长",
+  goal: "目标",
+  activity_level: "活动水平",
+  recommendation_mode: "推荐模式",
+  body_type: "体型",
+  target_algorithm: "算法",
+};
+
+function formatApiValidationDetail(detail) {
+  if (!Array.isArray(detail) || !detail.length) {
+    return "";
+  }
+  return detail
+    .slice(0, 3)
+    .map((item) => {
+      const path = Array.isArray(item?.loc) ? item.loc.filter((part) => typeof part === "string" && part !== "body") : [];
+      const fieldKey = path[path.length - 1] || "";
+      const label = API_ERROR_FIELD_LABELS[fieldKey] || fieldKey || "提交内容";
+      const message = typeof item?.msg === "string" ? item.msg.trim() : "";
+      if (!message) {
+        return `${label}填写有误`;
+      }
+      if (message.includes("Field required")) {
+        return `请先填写${label}`;
+      }
+      if (message.includes("JSON decode error")) {
+        return "提交内容格式不正确，请重新填写后再试";
+      }
+      if (message.includes("greater than or equal to")) {
+        return `${label}低于允许范围`;
+      }
+      if (message.includes("less than or equal to")) {
+        return `${label}超出允许范围`;
+      }
+      if (message.includes("greater than")) {
+        return `${label}需要大于 0`;
+      }
+      if (message.includes("at least")) {
+        return `${label}长度不够`;
+      }
+      return `${label}：${message}`;
+    })
+    .filter(Boolean)
+    .join("；");
+}
+
 async function apiRequest(path, options = {}) {
   let response;
   try {
@@ -557,7 +714,23 @@ async function apiRequest(path, options = {}) {
     body = {};
   }
   if (!response.ok) {
-    throw new Error(body.detail || "请求失败");
+    const detail =
+      typeof body?.detail === "string"
+        ? body.detail
+        : formatApiValidationDetail(body?.detail) || (typeof body?.message === "string"
+          ? body.message
+          : response.status === 400
+            ? "提交内容有误，请检查后重试"
+            : response.status === 401
+              ? "用户名或密码不正确"
+            : response.status === 404
+                ? "请求的内容不存在"
+                : response.status === 422
+                  ? "注册信息里有未正确填写的字段，请检查后重试"
+                : response.status >= 500
+                  ? "后端服务处理失败，请稍后重试"
+                  : "请求失败");
+    throw new Error(detail);
   }
   return body;
 }
@@ -1020,8 +1193,15 @@ function renderMobileMealRecommendation(recommendation) {
         .map((meal) => {
           const foods = meal.items
             .slice(0, 3)
-            .map((item) => escapeHtml(item.name))
-            .join(" / ");
+            .map(
+              (item) => `
+                <span class="mobile-meal-food-chip">
+                  <strong>${escapeHtml(item.name)}</strong>
+                  <small>${item.grams} g</small>
+                </span>
+              `
+            )
+            .join("");
           const alternatives = meal.alternatives.length
             ? meal.alternatives.slice(0, 2).map((name) => escapeHtml(name)).join(" / ")
             : "同类主食、蛋白或蔬菜都可以替换";
@@ -1032,7 +1212,7 @@ function renderMobileMealRecommendation(recommendation) {
                 <strong>${escapeHtml(meal.focus)}</strong>
               </div>
               <p class="mobile-meal-copy">${escapeHtml(meal.structure)}</p>
-              <p class="mobile-meal-foods">${foods}</p>
+              <div class="mobile-meal-foods">${foods}</div>
               <div class="mobile-meal-meta">
                 <span>${escapeHtml(meal.status)}</span>
                 <strong>约 ${meal.totalKcal} kcal</strong>
@@ -2174,6 +2354,19 @@ function renderOverviewRecommendation(summary, recommendation = safeBuildDynamic
       ? "今天热量略有富余，下面三餐会更偏向平衡和控制重复摄入。"
       : "今天还有调整空间，下面三餐会优先围绕当前缺口去补齐。";
   const mode = resolveRecommendationMode(summary.user);
+  const mealPortionChips = recommendation
+    ? recommendation.meals
+        .map(
+          (meal) => `
+            <article class="hero-plan-chip hero-plan-chip-meal">
+              <strong>${escapeHtml(meal.label)}</strong>
+              <span>${meal.totalKcal} kcal</span>
+              <small>${meal.items.map((item) => `${escapeHtml(item.name)} ${item.grams}g`).join(" / ")}</small>
+            </article>
+          `
+        )
+        .join("")
+    : "";
   if (!recommendation) {
     return `
       <section class="hero-status-card hero-plan-board hero-plan-board-compact">
@@ -2248,6 +2441,7 @@ function renderOverviewRecommendation(summary, recommendation = safeBuildDynamic
           <strong>净热量差</strong>
           <span>${summary.daily_report.net_calorie_balance} kcal</span>
         </article>
+        ${mealPortionChips}
       </div>
     </section>
   `;
@@ -2553,18 +2747,148 @@ function setPickerInputValue(inputId, value, displayId = "", formatter = null) {
   }
 }
 
+function bindTapIntent(node, onTap, options = {}) {
+  if (!node || node.dataset.tapIntentBound === "true") {
+    return;
+  }
+  const { shouldHandle = null } = options;
+  let touchStartX = 0;
+  let touchStartY = 0;
+  let touchMoved = false;
+
+  const canHandle = () => (typeof shouldHandle === "function" ? shouldHandle() : true);
+
+  node.dataset.tapIntentBound = "true";
+  node.addEventListener(
+    "touchstart",
+    (event) => {
+      if (!canHandle()) {
+        return;
+      }
+      const touch = event.touches?.[0];
+      if (!touch) {
+        return;
+      }
+      touchStartX = touch.clientX;
+      touchStartY = touch.clientY;
+      touchMoved = false;
+    },
+    { passive: true }
+  );
+  node.addEventListener(
+    "touchmove",
+    (event) => {
+      if (!canHandle()) {
+        return;
+      }
+      const touch = event.touches?.[0];
+      if (!touch) {
+        return;
+      }
+      if (
+        Math.abs(touch.clientX - touchStartX) > PICKER_TAP_MOVE_THRESHOLD ||
+        Math.abs(touch.clientY - touchStartY) > PICKER_TAP_MOVE_THRESHOLD
+      ) {
+        touchMoved = true;
+      }
+    },
+    { passive: true }
+  );
+  node.addEventListener(
+    "touchend",
+    (event) => {
+      if (!canHandle() || touchMoved) {
+        return;
+      }
+      event.preventDefault();
+      onTap(event);
+    },
+    { passive: false }
+  );
+}
+
 function bindPickerTrigger(inputId, panelId) {
   const input = $(inputId);
   if (!input) {
     return;
   }
+  const openPicker = () => openPickerPanel(panelId, input.value);
   input.addEventListener("mousedown", (event) => {
     if (input.readOnly) {
       event.preventDefault();
     }
   });
-  input.addEventListener("focus", () => openPickerPanel(panelId, input.value));
-  input.addEventListener("click", () => openPickerPanel(panelId, input.value));
+  bindTapIntent(input, () => {
+    if (input.readOnly) {
+      openPicker();
+    }
+  }, { shouldHandle: () => input.readOnly });
+  input.addEventListener("focus", () => {
+    if (!window.matchMedia("(max-width: 640px)").matches || !input.readOnly) {
+      openPicker();
+    }
+  });
+  input.addEventListener("click", () => {
+    if (!window.matchMedia("(max-width: 640px)").matches || !input.readOnly) {
+      openPicker();
+    }
+  });
+}
+
+function bindPickerContainerTrigger(inputId, panelId) {
+  const input = $(inputId);
+  const trigger = input?.closest(".picker-trigger");
+  if (!input || !trigger) {
+    return;
+  }
+
+  const openPicker = () => openPickerPanel(panelId, input.value);
+  const shouldHandleMobilePicker = () => window.matchMedia("(max-width: 640px)").matches && input.readOnly;
+  bindTapIntent(trigger, () => {
+    if (shouldHandleMobilePicker()) {
+      openPicker();
+    }
+  }, { shouldHandle: shouldHandleMobilePicker });
+
+  trigger.addEventListener("click", (event) => {
+    if (!shouldHandleMobilePicker()) {
+      return;
+    }
+    event.preventDefault();
+    openPicker();
+  });
+}
+
+function bindEditablePickerInput(inputId, panelId) {
+  const input = $(inputId);
+  if (!input) {
+    return;
+  }
+  input.addEventListener("input", () => {
+    if (!input.readOnly) {
+      closeAllPickerPanels();
+    }
+  });
+  input.addEventListener("keydown", (event) => {
+    if (!input.readOnly && (event.key === "Enter" || event.key === "Tab" || event.key === "Escape")) {
+      closeAllPickerPanels();
+    }
+  });
+  input.addEventListener("change", () => {
+    if (!input.readOnly) {
+      closeAllPickerPanels();
+    }
+  });
+  input.addEventListener("blur", () => {
+    if (!input.readOnly) {
+      window.setTimeout(() => {
+        const panel = $(panelId);
+        if (panel && !panel.contains(document.activeElement)) {
+          closeAllPickerPanels();
+        }
+      }, 0);
+    }
+  });
 }
 
 function buildPickerOptions(containerId, options, onSelect) {
@@ -2574,8 +2898,10 @@ function buildPickerOptions(containerId, options, onSelect) {
   }
   container.innerHTML = `
     <div class="picker-list-shell">
+      <div class="picker-selection-window" aria-hidden="true"></div>
       <div class="picker-gradient picker-gradient-top"></div>
-      <div class="picker-options" tabindex="0">
+      <div class="picker-options picker-wheel" tabindex="0">
+        <div class="picker-spacer" aria-hidden="true"></div>
       ${options
         .map(
           (option, index) => `
@@ -2591,29 +2917,95 @@ function buildPickerOptions(containerId, options, onSelect) {
           `
         )
         .join("")}
+        <div class="picker-spacer" aria-hidden="true"></div>
       </div>
       <div class="picker-gradient picker-gradient-bottom"></div>
     </div>
   `;
+  const optionsContainer = container.querySelector(".picker-options");
+  if (optionsContainer) {
+    optionsContainer.__pickerOnSelect = onSelect;
+  }
   container.querySelectorAll(".picker-option").forEach((button) => {
     button.addEventListener("click", () => {
-      onSelect(button.dataset.value, button.dataset.label);
+      const owner = button.closest(".picker-options");
+      const buttons = owner ? Array.from(owner.querySelectorAll(".picker-option")) : [];
+      const index = buttons.indexOf(button);
+      if (index >= 0 && owner) {
+        snapPickerToIndex(owner, index, { behavior: "smooth", emit: true });
+      } else {
+        onSelect(button.dataset.value, button.dataset.label);
+      }
       closeAllPickerPanels();
     });
   });
   initializePickerDock(container);
 }
 
+function getPickerOptionButtons(optionsContainer) {
+  return Array.from(optionsContainer?.querySelectorAll(".picker-option") || []);
+}
+
+function getPickerOptionValue(option) {
+  if (!option) {
+    return "";
+  }
+  return String(option.dataset.registerPickerValue || option.dataset.value || "");
+}
+
+function getPickerOptionLabel(option) {
+  if (!option) {
+    return "";
+  }
+  return option.dataset.label || option.textContent?.trim() || "";
+}
+
+function getPickerOptionMetrics(optionsContainer) {
+  const options = getPickerOptionButtons(optionsContainer);
+  const first = options[0];
+  const second = options[1];
+  const optionHeight = first?.offsetHeight || 54;
+  const step = second ? second.offsetTop - first.offsetTop : optionHeight;
+  return {
+    optionHeight,
+    step: step > 0 ? step : optionHeight,
+  };
+}
+
+function findClosestPickerOptionIndex(optionsContainer) {
+  const options = getPickerOptionButtons(optionsContainer);
+  if (!options.length) {
+    return -1;
+  }
+  const centerLine = optionsContainer.scrollTop + optionsContainer.clientHeight / 2;
+  let closestIndex = 0;
+  let closestDistance = Number.POSITIVE_INFINITY;
+  options.forEach((option, index) => {
+    const optionCenter = option.offsetTop + option.offsetHeight / 2;
+    const distance = Math.abs(optionCenter - centerLine);
+    if (distance < closestDistance) {
+      closestDistance = distance;
+      closestIndex = index;
+    }
+  });
+  return closestIndex;
+}
+
 function setPickerDockState(optionsContainer, activeIndex = -1) {
   if (!optionsContainer) {
     return;
   }
-  const options = Array.from(optionsContainer.querySelectorAll(".picker-option"));
+  const options = getPickerOptionButtons(optionsContainer);
   if (!options.length) {
     return;
   }
   const isActive = activeIndex >= 0;
   optionsContainer.classList.toggle("is-dock-active", isActive);
+  if (isActive) {
+    optionsContainer.dataset.activeIndex = String(activeIndex);
+  } else {
+    delete optionsContainer.dataset.activeIndex;
+  }
   options.forEach((option, index) => {
     if (!isActive) {
       option.removeAttribute("data-dock-distance");
@@ -2621,13 +3013,14 @@ function setPickerDockState(optionsContainer, activeIndex = -1) {
       option.style.removeProperty("--dock-x");
       option.style.removeProperty("--dock-y");
       option.style.removeProperty("--dock-blur");
+      option.classList.remove("is-active", "is-selected");
       return;
     }
     const distance = index - activeIndex;
     const absDistance = Math.abs(distance);
     option.dataset.dockDistance = String(distance);
-    const scaleMap = [1.2, 1.12, 1.06, 1.02];
-    const verticalOffsetMap = [-4, -2, -1, 0];
+    const scaleMap = [1.08, 1.03, 0.99, 0.96];
+    const verticalOffsetMap = [0, 0, 0, 0];
     const horizontalOffsetMap = [0, 0, 0, 0];
     const cappedDistance = Math.min(absDistance, scaleMap.length - 1);
     const scale = scaleMap[cappedDistance] || 1;
@@ -2638,6 +3031,8 @@ function setPickerDockState(optionsContainer, activeIndex = -1) {
     option.style.setProperty("--dock-x", `${translateX}px`);
     option.style.setProperty("--dock-y", `${translateY}px`);
     option.style.setProperty("--dock-blur", "0px");
+    option.classList.toggle("is-active", index === activeIndex);
+    option.classList.toggle("is-selected", index === activeIndex);
   });
 }
 
@@ -2663,18 +3058,71 @@ function updatePickerGradients(optionsContainer) {
   }
 }
 
+function syncRegisterNumberPickerCurrentDisplay(option) {
+  const current = $("register-number-picker-current");
+  if (!current) {
+    return;
+  }
+  const label = getPickerOptionLabel(option);
+  if (label) {
+    current.textContent = label;
+    current.classList.remove("hidden");
+  }
+}
+
+function emitPickerSelection(optionsContainer, activeIndex) {
+  const options = getPickerOptionButtons(optionsContainer);
+  const option = options[activeIndex];
+  if (!option) {
+    return;
+  }
+  const nextValue = getPickerOptionValue(option);
+  if (optionsContainer.dataset.committedValue === nextValue) {
+    syncRegisterNumberPickerCurrentDisplay(option);
+    return;
+  }
+  optionsContainer.dataset.committedValue = nextValue;
+  syncRegisterNumberPickerCurrentDisplay(option);
+  if (typeof optionsContainer.__pickerOnSelect === "function") {
+    optionsContainer.__pickerOnSelect(nextValue, getPickerOptionLabel(option));
+  }
+}
+
+function snapPickerToIndex(optionsContainer, activeIndex, options = {}) {
+  if (!optionsContainer || activeIndex < 0) {
+    return;
+  }
+  const { behavior = "smooth", emit = false } = options;
+  const buttons = getPickerOptionButtons(optionsContainer);
+  const target = buttons[activeIndex];
+  if (!target) {
+    return;
+  }
+  const safeBehavior = behavior === "instant" ? "auto" : behavior;
+  const targetTop = Math.max(0, target.offsetTop - (optionsContainer.clientHeight - target.offsetHeight) / 2);
+  optionsContainer.scrollTo({
+    top: targetTop,
+    behavior: safeBehavior,
+  });
+  setPickerDockState(optionsContainer, activeIndex);
+  updatePickerGradients(optionsContainer);
+  if (emit) {
+    emitPickerSelection(optionsContainer, activeIndex);
+  }
+}
+
 function scrollPickerToCurrent(panel, currentValue = "") {
   const optionsContainer = panel?.querySelector(".picker-options");
   if (!optionsContainer) {
     return;
   }
-  const target = Array.from(optionsContainer.querySelectorAll(".picker-option")).find(
-    (button) => String(button.dataset.value) === String(currentValue)
+  const targetIndex = getPickerOptionButtons(optionsContainer).findIndex(
+    (button) => getPickerOptionValue(button) === String(currentValue)
   );
-  if (target) {
-    target.scrollIntoView({ block: "center", behavior: "instant" });
-    const targetIndex = Number(target.dataset.index || -1);
-    setPickerDockState(optionsContainer, targetIndex);
+  if (targetIndex >= 0) {
+    snapPickerToIndex(optionsContainer, targetIndex, { behavior: "instant", emit: true });
+  } else {
+    setPickerDockState(optionsContainer, findClosestPickerOptionIndex(optionsContainer));
   }
   updatePickerGradients(optionsContainer);
 }
@@ -2685,27 +3133,69 @@ function initializePickerDock(panel) {
     return;
   }
   optionsContainer.dataset.dockBound = "true";
-  const optionButtons = Array.from(optionsContainer.querySelectorAll(".picker-option"));
-  optionButtons.forEach((button, index) => {
-    button.addEventListener("mouseenter", () => {
-      setPickerDockState(optionsContainer, index);
-    });
-    button.addEventListener("focus", () => {
-      setPickerDockState(optionsContainer, index);
-    });
+  const settlePicker = () => {
+    const activeIndex = findClosestPickerOptionIndex(optionsContainer);
+    if (activeIndex < 0) {
+      return;
+    }
+    optionsContainer.classList.remove("is-scrolling");
+    snapPickerToIndex(optionsContainer, activeIndex, { behavior: "auto", emit: true });
+  };
+  const scheduleSettle = () => {
+    const timer = pickerScrollTimers.get(optionsContainer);
+    if (timer) {
+      window.clearTimeout(timer);
+    }
+    pickerScrollTimers.set(
+      optionsContainer,
+      window.setTimeout(() => {
+        settlePicker();
+      }, PICKER_SCROLL_SETTLE_DELAY)
+    );
+  };
+  optionsContainer.addEventListener("pointerdown", () => {
+    optionsContainer.classList.add("is-scrolling");
+    const timer = pickerScrollTimers.get(optionsContainer);
+    if (timer) {
+      window.clearTimeout(timer);
+    }
   });
-  optionsContainer.addEventListener("mouseleave", () => {
-    setPickerDockState(optionsContainer, -1);
-  });
+  optionsContainer.addEventListener("touchstart", () => {
+    optionsContainer.classList.add("is-scrolling");
+    const timer = pickerScrollTimers.get(optionsContainer);
+    if (timer) {
+      window.clearTimeout(timer);
+    }
+  }, { passive: true });
   optionsContainer.addEventListener("scroll", () => {
+    setPickerDockState(optionsContainer, findClosestPickerOptionIndex(optionsContainer));
     updatePickerGradients(optionsContainer);
+    optionsContainer.classList.add("is-scrolling");
+    scheduleSettle();
   });
-  optionsContainer.addEventListener("focusout", () => {
-    requestAnimationFrame(() => {
-      if (!optionsContainer.contains(document.activeElement)) {
-        setPickerDockState(optionsContainer, -1);
+  optionsContainer.addEventListener("keydown", (event) => {
+    const activeIndex = Number(optionsContainer.dataset.activeIndex || findClosestPickerOptionIndex(optionsContainer));
+    if (event.key === "ArrowDown" || event.key === "ArrowUp") {
+      event.preventDefault();
+      const nextIndex = event.key === "ArrowDown" ? activeIndex + 1 : activeIndex - 1;
+      const buttons = getPickerOptionButtons(optionsContainer);
+      const boundedIndex = Math.max(0, Math.min(buttons.length - 1, nextIndex));
+      snapPickerToIndex(optionsContainer, boundedIndex, { behavior: "smooth", emit: true });
+      return;
+    }
+    if (event.key === "Enter") {
+      event.preventDefault();
+      if (panel?.id === "register-number-picker-overlay") {
+        closeRegisterNumberPicker();
+      } else {
+        closeAllPickerPanels();
       }
-    });
+    }
+  });
+  requestAnimationFrame(() => {
+    const activeIndex = findClosestPickerOptionIndex(optionsContainer);
+    setPickerDockState(optionsContainer, activeIndex);
+    updatePickerGradients(optionsContainer);
   });
   updatePickerGradients(optionsContainer);
 }
@@ -2799,6 +3289,380 @@ function closeAllPickerPanels(exceptId = "") {
   }
 }
 
+function getFieldValidationMessage(field) {
+  const fieldLabelMap = {
+    username: "用户名",
+    password: "密码",
+    name: "姓名",
+    age: "年龄",
+    gender: "性别",
+    height_cm: "身高",
+    weight_kg: "当前体重",
+    target_weight_kg: "目标体重",
+    target_sleep_hours: "目标睡眠时长",
+    goal: "目标",
+    activity_level: "活动水平",
+  };
+  const label = fieldLabelMap[field.name] || field.getAttribute("aria-label") || field.placeholder || "当前字段";
+  if (field.validity.valueMissing) {
+    return `请先填写${label}`;
+  }
+  if (field.validity.tooShort) {
+    return `${label}长度还不够`;
+  }
+  if (field.validity.rangeUnderflow || field.validity.rangeOverflow) {
+    return `${label}超出了可填写范围`;
+  }
+  if (field.validity.typeMismatch || field.validity.badInput) {
+    return `${label}格式不正确`;
+  }
+  if (field.validity.stepMismatch) {
+    return `请按正确格式填写${label}`;
+  }
+  return `请检查${label}`;
+}
+
+function bindFormValidationFeedback(formId, messageId) {
+  const form = $(formId);
+  if (!form) {
+    return;
+  }
+
+  form.addEventListener(
+    "invalid",
+    (event) => {
+      const field = event.target;
+      if (!(field instanceof HTMLInputElement || field instanceof HTMLSelectElement || field instanceof HTMLTextAreaElement)) {
+        return;
+      }
+      field.classList.add("input-invalid");
+      setMessage(messageId, getFieldValidationMessage(field), "error");
+    },
+    true
+  );
+
+  const clearInvalidState = (event) => {
+    const field = event.target;
+    if (field instanceof HTMLInputElement || field instanceof HTMLSelectElement || field instanceof HTMLTextAreaElement) {
+      field.classList.remove("input-invalid");
+    }
+  };
+
+  form.addEventListener("input", clearInvalidState);
+  form.addEventListener("change", clearInvalidState);
+}
+
+function syncRegisterNumericPickerMode() {
+  const useMobilePickerMode = window.matchMedia("(max-width: 640px)").matches;
+  [
+    "register-age-input",
+    "register-height-input",
+    "register-weight-input",
+    "register-target-weight-input",
+    "register-target-sleep-input",
+  ].forEach((inputId) => {
+    const input = $(inputId);
+    const trigger = input?.closest(".picker-trigger");
+    if (!input) {
+      return;
+    }
+    input.readOnly = useMobilePickerMode;
+    input.type = "text";
+    input.inputMode = useMobilePickerMode ? "none" : "decimal";
+    input.tabIndex = useMobilePickerMode ? -1 : 0;
+    trigger?.classList.toggle("picker-trigger-locked", useMobilePickerMode);
+  });
+  if (!useMobilePickerMode) {
+    closeRegisterNumberPicker();
+  }
+}
+
+function syncMobileNumericPickerMode() {
+  const useMobilePickerMode = window.matchMedia("(max-width: 640px)").matches;
+  [
+    "assessment-age",
+    "assessment-height",
+    "assessment-weight",
+    "weight-kg-input",
+    "workout-duration-input",
+    "settings-age",
+    "settings-height",
+    "settings-weight",
+    "settings-target-weight",
+    "settings-target-sleep",
+  ].forEach((inputId) => {
+    const input = $(inputId);
+    const trigger = input?.closest(".picker-trigger");
+    if (!input) {
+      return;
+    }
+    input.readOnly = useMobilePickerMode;
+    input.type = useMobilePickerMode ? "text" : "number";
+    input.inputMode = useMobilePickerMode ? "none" : "decimal";
+    trigger?.classList.toggle("picker-trigger-locked", useMobilePickerMode);
+  });
+}
+
+function getNumericPickerFieldKeyByInputId(inputId = "") {
+  return Object.entries(REGISTER_NUMBER_PICKER_CONFIG).find(([, config]) => config.inputId === inputId)?.[0] || "";
+}
+
+function isMobileRegisterNumberPickerEnabled() {
+  return window.matchMedia("(max-width: 640px)").matches;
+}
+
+function ensureRegisterNumberPickerOverlay() {
+  let overlay = $("register-number-picker-overlay");
+  if (overlay) {
+    return overlay;
+  }
+  overlay = document.createElement("div");
+  overlay.id = "register-number-picker-overlay";
+  overlay.className = "register-number-picker-overlay hidden";
+  overlay.innerHTML = `
+    <div class="register-number-picker-backdrop" data-register-picker-close="true"></div>
+    <div class="register-number-picker-sheet" role="dialog" aria-modal="true" aria-labelledby="register-number-picker-title">
+      <div class="register-number-picker-head">
+        <div class="register-number-picker-copy">
+          <p id="register-number-picker-kicker" class="register-number-picker-kicker"></p>
+          <h3 id="register-number-picker-title" class="register-number-picker-title"></h3>
+        </div>
+        <button
+          type="button"
+          class="register-number-picker-close"
+          aria-label="关闭"
+          data-register-picker-close="true"
+        >
+          关闭
+        </button>
+      </div>
+      <div id="register-number-picker-current" class="register-number-picker-current hidden"></div>
+      <div class="register-number-picker-body">
+        <div class="picker-list-shell">
+          <div class="picker-selection-window" aria-hidden="true"></div>
+          <div class="picker-gradient picker-gradient-top"></div>
+          <div id="register-number-picker-options" class="picker-options" tabindex="0"></div>
+          <div class="picker-gradient picker-gradient-bottom"></div>
+        </div>
+      </div>
+    </div>
+  `;
+  document.body.appendChild(overlay);
+  return overlay;
+}
+
+function getRegisterNumberPickerConfig(fieldKey = "") {
+  return REGISTER_NUMBER_PICKER_CONFIG[fieldKey] || null;
+}
+
+function scrollRegisterNumberPickerToCurrent(optionsContainer, currentValue = "") {
+  if (!optionsContainer) {
+    return;
+  }
+  const targetIndex = getPickerOptionButtons(optionsContainer).findIndex(
+    (button) => getPickerOptionValue(button) === String(currentValue)
+  );
+  if (targetIndex < 0) {
+    setPickerDockState(optionsContainer, findClosestPickerOptionIndex(optionsContainer));
+    updatePickerGradients(optionsContainer);
+    return;
+  }
+  snapPickerToIndex(optionsContainer, targetIndex, { behavior: "instant", emit: false });
+  syncRegisterNumberPickerCurrentDisplay(getPickerOptionButtons(optionsContainer)[targetIndex]);
+}
+
+function renderRegisterNumberPickerOptions(fieldKey) {
+  const config = getRegisterNumberPickerConfig(fieldKey);
+  const overlay = ensureRegisterNumberPickerOverlay();
+  const title = $("register-number-picker-title");
+  const kicker = $("register-number-picker-kicker");
+  const current = $("register-number-picker-current");
+  const optionsContainer = $("register-number-picker-options");
+  const input = config ? $(config.inputId) : null;
+  if (!config || !overlay || !title || !kicker || !current || !optionsContainer || !input) {
+    return;
+  }
+
+  title.textContent = config.label;
+  kicker.textContent = config.hint;
+
+  if (input.value) {
+    const activeOption = config.options.find((option) => String(option.value) === String(input.value));
+    current.textContent = activeOption?.label || input.value;
+    current.classList.remove("hidden");
+  } else {
+    current.textContent = "";
+    current.classList.add("hidden");
+  }
+
+  optionsContainer.__pickerOnSelect = (nextValue, nextLabel) => {
+    input.value = nextValue;
+    input.dispatchEvent(new Event("input", { bubbles: true }));
+    current.textContent = nextLabel;
+    current.classList.remove("hidden");
+  };
+
+  optionsContainer.innerHTML = `
+    <div class="picker-spacer" aria-hidden="true"></div>
+    ${config.options
+      .map((option, index) => {
+        const isSelected = String(option.value) === String(input.value);
+        return `
+          <button
+            type="button"
+            class="picker-option register-number-picker-option${isSelected ? " is-selected" : ""}"
+            data-register-picker-value="${option.value}"
+            data-index="${index}"
+            data-field-key="${fieldKey}"
+          >
+            ${option.label}
+          </button>
+        `;
+      })
+      .join("")}
+    <div class="picker-spacer" aria-hidden="true"></div>
+  `;
+
+  initializePickerDock(overlay);
+  requestAnimationFrame(() => {
+    let preferredValue = input.value;
+    if (!preferredValue && fieldKey === "weight") {
+      const gender = $("register-gender-input")?.value || "male";
+      preferredValue = gender === "female" ? "60.0" : "80.0";
+    }
+    if (!preferredValue && fieldKey === "targetWeight") {
+      preferredValue = $("register-weight-input")?.value || (($("register-gender-input")?.value || "male") === "female" ? "55.0" : "75.0");
+    }
+    scrollRegisterNumberPickerToCurrent(optionsContainer, preferredValue);
+    window.setTimeout(() => {
+      scrollRegisterNumberPickerToCurrent(optionsContainer, preferredValue);
+    }, 30);
+    const activeIndex = findClosestPickerOptionIndex(optionsContainer);
+    if (activeIndex >= 0) {
+      const activeOption = getPickerOptionButtons(optionsContainer)[activeIndex];
+      syncRegisterNumberPickerCurrentDisplay(activeOption);
+    }
+    optionsContainer.focus({ preventScroll: true });
+  });
+}
+
+function openRegisterNumberPicker(fieldKey) {
+  if (!isMobileRegisterNumberPickerEnabled()) {
+    return;
+  }
+  const config = getRegisterNumberPickerConfig(fieldKey);
+  const overlay = ensureRegisterNumberPickerOverlay();
+  if (!config || !overlay) {
+    return;
+  }
+  closeAllPickerPanels();
+  if (document.activeElement instanceof HTMLElement) {
+    document.activeElement.blur();
+  }
+  state.registerPicker.fieldKey = fieldKey;
+  document.body.classList.add("register-number-picker-active");
+  overlay.classList.remove("hidden");
+  renderRegisterNumberPickerOptions(fieldKey);
+}
+
+function closeRegisterNumberPicker() {
+  const overlay = $("register-number-picker-overlay");
+  state.registerPicker.fieldKey = "";
+  document.body.classList.remove("register-number-picker-active");
+  if (overlay) {
+    overlay.classList.add("hidden");
+  }
+}
+
+function setRegisterNumberPickerValue(fieldKey, value) {
+  const config = getRegisterNumberPickerConfig(fieldKey);
+  const input = config ? $(config.inputId) : null;
+  if (!config || !input) {
+    return;
+  }
+  input.value = value;
+  input.dispatchEvent(new Event("input", { bubbles: true }));
+  input.dispatchEvent(new Event("change", { bubbles: true }));
+  closeRegisterNumberPicker();
+}
+
+function bindRegisterNumberPickers() {
+  const overlay = ensureRegisterNumberPickerOverlay();
+  if (overlay && overlay.dataset.bound !== "true") {
+    overlay.dataset.bound = "true";
+    const sheet = overlay.querySelector(".register-number-picker-sheet");
+    sheet?.addEventListener("click", (event) => {
+      const option = event.target.closest("[data-register-picker-value]");
+      if (option) {
+        setRegisterNumberPickerValue(option.dataset.fieldKey || "", option.dataset.registerPickerValue || "");
+        return;
+      }
+      if (event.target.closest("[data-register-picker-close]")) {
+        closeRegisterNumberPicker();
+      }
+    });
+    overlay.addEventListener("click", (event) => {
+      if (event.target === overlay || event.target.closest(".register-number-picker-backdrop")) {
+        closeRegisterNumberPicker();
+      }
+    });
+  }
+
+  Object.entries(REGISTER_NUMBER_PICKER_CONFIG).forEach(([fieldKey, config]) => {
+    const input = $(config.inputId);
+    const field = input?.closest(".field-block");
+    if (!input || !field || field.dataset.registerNumberPickerBound === "true") {
+      return;
+    }
+    field.dataset.registerNumberPickerBound = "true";
+    field.dataset.registerNumberField = fieldKey;
+    const openHandler = (event) => {
+      if (!isMobileRegisterNumberPickerEnabled()) {
+        return;
+      }
+      event.preventDefault();
+      openRegisterNumberPicker(fieldKey);
+    };
+    field.addEventListener("click", openHandler);
+    bindTapIntent(
+      field,
+      (event) => {
+        if (isMobileRegisterNumberPickerEnabled()) {
+          openHandler(event);
+        }
+      },
+      { shouldHandle: isMobileRegisterNumberPickerEnabled }
+    );
+    field.addEventListener("keydown", (event) => {
+      if (!isMobileRegisterNumberPickerEnabled()) {
+        return;
+      }
+      if (event.key === "Enter" || event.key === " " || event.key === "ArrowDown") {
+        openHandler(event);
+      }
+    });
+    input.addEventListener("focus", (event) => {
+      if (!isMobileRegisterNumberPickerEnabled()) {
+        return;
+      }
+      if (event.sourceCapabilities?.firesTouchEvents) {
+        return;
+      }
+      event.preventDefault();
+      openRegisterNumberPicker(fieldKey);
+    });
+  });
+
+  if (document.body.dataset.registerNumberPickerEscapeBound !== "true") {
+    document.body.dataset.registerNumberPickerEscapeBound = "true";
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && state.registerPicker.fieldKey) {
+        closeRegisterNumberPicker();
+      }
+    });
+  }
+}
+
 window.addEventListener("resize", () => {
   document.querySelectorAll(".picker-field.picker-open .picker-panel:not(.hidden)").forEach((panel) => {
     positionPickerPanel(panel);
@@ -2816,6 +3680,8 @@ window.addEventListener(
 );
 
 function initializeAuthPickers() {
+  syncRegisterNumericPickerMode();
+  bindRegisterNumberPickers();
   buildPickerOptions(
     "register-age-panel",
     buildNumericOptions(12, 80, 1).map((value) => ({ value, label: `${value} 岁` })),
@@ -2846,7 +3712,7 @@ function initializeAuthPickers() {
 
   buildPickerOptions(
     "register-weight-panel",
-    buildNumericOptions(35, 150, 0.5, 1).map((value) => ({ value, label: `${value} kg` })),
+    buildNumericOptions(35, 150, 0.1, 1).map((value) => ({ value, label: `${value} kg` })),
     (value) => {
       $("register-weight-input").value = value;
     }
@@ -2854,7 +3720,7 @@ function initializeAuthPickers() {
 
   buildPickerOptions(
     "register-target-weight-panel",
-    buildNumericOptions(35, 150, 0.5, 1).map((value) => ({ value, label: `${value} kg` })),
+    buildNumericOptions(35, 150, 0.1, 1).map((value) => ({ value, label: `${value} kg` })),
     (value) => {
       $("register-target-weight-input").value = value;
     }
@@ -2871,37 +3737,34 @@ function initializeAuthPickers() {
   $("register-gender-input").value = "male";
   $("register-gender-display").value = "男";
 
-  [
-    ["register-age-input", "register-age-panel"],
-    ["register-gender-display", "register-gender-panel"],
-    ["register-height-input", "register-height-panel"],
-    ["register-weight-input", "register-weight-panel"],
-    ["register-target-weight-input", "register-target-weight-panel"],
-    ["register-target-sleep-input", "register-target-sleep-panel"],
-  ].forEach(([inputId, panelId]) => {
-    const input = $(inputId);
-    input.addEventListener("focus", () => openPickerPanel(panelId));
-    input.addEventListener("click", () => openPickerPanel(panelId));
-  });
+  bindPickerTrigger("register-gender-display", "register-gender-panel");
 
   document.addEventListener("click", (event) => {
     if (!event.target.closest(".picker-field")) {
       closeAllPickerPanels();
     }
   });
+
+  [
+    ["register-age-input", "register-age-panel"],
+    ["register-height-input", "register-height-panel"],
+    ["register-weight-input", "register-weight-panel"],
+    ["register-target-weight-input", "register-target-weight-panel"],
+    ["register-target-sleep-input", "register-target-sleep-panel"],
+  ].forEach(() => {});
 }
 
 function initializeProfilePickers() {
   [
     ["assessment-age-panel", "assessment-age", 12, 80, 1, 0, "岁"],
     ["assessment-height-panel", "assessment-height", 140, 210, 1, 0, "cm"],
-    ["assessment-weight-panel", "assessment-weight", 35, 150, 0.5, 1, "kg"],
-    ["weight-kg-panel", "weight-kg-input", 35, 150, 0.5, 1, "kg"],
+    ["assessment-weight-panel", "assessment-weight", 35, 150, 0.1, 1, "kg"],
+    ["weight-kg-panel", "weight-kg-input", 35, 150, 0.1, 1, "kg"],
     ["workout-duration-panel", "workout-duration-input", 1, 240, 1, 0, "分钟"],
     ["settings-age-panel", "settings-age", 12, 80, 1, 0, "岁"],
     ["settings-height-panel", "settings-height", 140, 210, 1, 0, "cm"],
-    ["settings-weight-panel", "settings-weight", 35, 150, 0.5, 1, "kg"],
-    ["settings-target-weight-panel", "settings-target-weight", 35, 150, 0.5, 1, "kg"],
+    ["settings-weight-panel", "settings-weight", 35, 150, 0.1, 1, "kg"],
+    ["settings-target-weight-panel", "settings-target-weight", 35, 150, 0.1, 1, "kg"],
     ["settings-target-sleep-panel", "settings-target-sleep", 6, 10, 0.5, 1, "小时"],
   ].forEach(([panelId, inputId, start, end, step, digits, unit]) => {
     buildPickerOptions(
@@ -2914,10 +3777,21 @@ function initializeProfilePickers() {
 
     const input = $(inputId);
     if (input) {
-      input.addEventListener("focus", () => openPickerPanel(panelId));
-      input.addEventListener("click", () => openPickerPanel(panelId));
+      input.addEventListener("focus", () => {
+        if (!window.matchMedia("(max-width: 640px)").matches) {
+          openPickerPanel(panelId);
+        }
+      });
+      input.addEventListener("click", () => {
+        if (!window.matchMedia("(max-width: 640px)").matches) {
+          openPickerPanel(panelId);
+        }
+      });
       if (inputId === "workout-duration-input") {
         input.addEventListener("input", refreshWorkoutEstimate);
+      }
+      if (!input.readOnly) {
+        bindEditablePickerInput(inputId, panelId);
       }
     }
   });
@@ -3068,6 +3942,24 @@ function bindInteractiveGlow(scope = document) {
 
 let dashboardTabIndicatorFrame = 0;
 let dashboardTabScrollFrame = 0;
+let authTransitionTimer = 0;
+
+function syncAuthStageHeight() {
+  const stage = $("auth-form-stage");
+  const authShell = $("auth-shell");
+  if (!stage || !authShell || authShell.dataset.authMode !== "register" && authShell.dataset.authMode !== "login") {
+    return;
+  }
+  const activeForm = authShell.dataset.authMode === "register" ? $("register-form") : $("login-form");
+  if (!activeForm) {
+    return;
+  }
+  const targetHeight = activeForm.offsetHeight;
+  if (!targetHeight) {
+    return;
+  }
+  stage.style.height = `${targetHeight}px`;
+}
 
 function isMobilePerformanceMode() {
   return window.matchMedia("(max-width: 860px), (hover: none) and (pointer: coarse)").matches;
@@ -3160,21 +4052,68 @@ function scrollMobileRegisterFormToTop(form) {
 }
 
 function showAuth(mode = "login") {
+  closeRegisterNumberPicker();
   setShellMode("auth");
   const authShell = $("auth-shell");
+  const loginForm = $("login-form");
+  const registerForm = $("register-form");
+  const nextForm = mode === "register" ? registerForm : loginForm;
+  const previousForm = mode === "register" ? loginForm : registerForm;
+  const lastMode = authShell?.dataset.authMode || state.authTransitionMode || "login";
+  const transitionMode = mode === lastMode ? "" : mode === "register" ? "forward" : "backward";
+  if (authTransitionTimer) {
+    window.clearTimeout(authTransitionTimer);
+    authTransitionTimer = 0;
+  }
   authShell.classList.remove("hidden");
   authShell.dataset.authMode = mode;
+  authShell.dataset.authTransition = transitionMode;
+  authShell.style.setProperty("--auth-page-shift", transitionMode === "forward" ? "18px" : transitionMode === "backward" ? "-18px" : "0px");
+  authShell.style.setProperty("--auth-tab-shift", mode === "register" ? "100%" : "0%");
+  window.requestAnimationFrame(() => {
+    authShell.style.setProperty("--auth-page-shift", "0px");
+  });
+  state.authTransitionMode = mode;
   $("app-shell").classList.add("hidden");
-  $("register-form").classList.toggle("hidden", mode !== "register");
-  $("login-form").classList.toggle("hidden", mode !== "login");
+  if (transitionMode && previousForm && nextForm && previousForm !== nextForm) {
+    previousForm.classList.remove("hidden");
+    nextForm.classList.remove("hidden");
+  } else {
+    registerForm.classList.toggle("hidden", mode !== "register");
+    loginForm.classList.toggle("hidden", mode !== "login");
+  }
   $("show-register-btn").classList.toggle("active", mode === "register");
   $("show-login-btn").classList.toggle("active", mode === "login");
-  const activeForm = mode === "register" ? $("register-form") : $("login-form");
+  if (previousForm && nextForm && previousForm !== nextForm && transitionMode) {
+    previousForm.classList.remove("form-exit", "form-exit-forward", "form-exit-backward", "form-enter", "form-enter-forward", "form-enter-backward");
+    nextForm.classList.remove("form-exit", "form-exit-forward", "form-exit-backward", "form-enter", "form-enter-forward", "form-enter-backward");
+    previousForm.classList.add("form-exit", transitionMode === "forward" ? "form-exit-backward" : "form-exit-forward");
+    nextForm.classList.add(transitionMode === "forward" ? "form-enter-forward" : "form-enter-backward");
+  }
+  const activeForm = nextForm;
   if (activeForm) {
     activeForm.classList.remove("form-enter");
     void activeForm.offsetWidth;
-    activeForm.classList.add("form-enter");
+    if (!transitionMode) {
+      activeForm.classList.add("form-enter");
+    }
   }
+  requestAnimationFrame(syncAuthStageHeight);
+  window.setTimeout(syncAuthStageHeight, 120);
+  authTransitionTimer = window.setTimeout(() => {
+    authShell.dataset.authTransition = "";
+    authShell.style.setProperty("--auth-page-shift", "0px");
+    if (previousForm) {
+      previousForm.classList.remove("form-exit", "form-exit-forward", "form-exit-backward");
+      previousForm.classList.toggle("hidden", previousForm !== nextForm);
+    }
+    if (nextForm) {
+      nextForm.classList.remove("form-enter-forward", "form-enter-backward");
+      nextForm.classList.remove("hidden");
+    }
+    syncAuthStageHeight();
+    authTransitionTimer = 0;
+  }, 520);
   if (window.matchMedia("(max-width: 640px)").matches) {
     if (mode === "register" && activeForm) {
       scrollMobileRegisterFormToTop(activeForm);
@@ -4078,6 +5017,8 @@ async function loadDashboard() {
 
 async function handleRegister(event) {
   event.preventDefault();
+  closeAllPickerPanels();
+  closeRegisterNumberPicker();
   const payload = getFormData(event.currentTarget);
   payload.age = Number(payload.age);
   payload.height_cm = Number(payload.height_cm);
@@ -4439,6 +5380,23 @@ function bindEvents() {
   $("show-register-btn").addEventListener("click", () => showAuth("register"));
   $("show-login-btn").addEventListener("click", () => showAuth("login"));
   $("register-form").addEventListener("submit", handleRegister);
+  bindFormValidationFeedback("register-form", "register-result");
+  document.addEventListener(
+    "pointerdown",
+    (event) => {
+      if (!event.target.closest(".picker-field")) {
+        closeAllPickerPanels();
+      }
+      if (
+        state.registerPicker.fieldKey &&
+        !event.target.closest(".register-number-picker-sheet") &&
+        !event.target.closest("[data-register-number-field]")
+      ) {
+        closeRegisterNumberPicker();
+      }
+    },
+    true
+  );
   $("toggle-register-pantry-btn")?.addEventListener("click", () => {
     const panel = $("register-pantry-panel");
     if (!panel) {
@@ -4446,6 +5404,8 @@ function bindEvents() {
     }
     const isHidden = panel.classList.contains("hidden");
     panel.classList.toggle("hidden");
+    requestAnimationFrame(syncAuthStageHeight);
+    window.setTimeout(syncAuthStageHeight, 120);
     if (isHidden) {
       requestAnimationFrame(() => {
         const submitButton = document.querySelector("#register-form .auth-action-btn");
@@ -4608,6 +5568,7 @@ function initialize() {
   savePreferences(loadPreferences());
   initializePickerOptions();
   initializeAuthPickers();
+  syncMobileNumericPickerMode();
   fillRegisterPreferences();
   initializeProfilePickers();
   bindEvents();
@@ -4621,6 +5582,8 @@ function initialize() {
   window.addEventListener(
     "resize",
     () => {
+      syncRegisterNumericPickerMode();
+      syncMobileNumericPickerMode();
       syncResponsiveAppShell();
       syncMobileKeyboardState();
       scheduleDashboardTabIndicatorUpdate();
