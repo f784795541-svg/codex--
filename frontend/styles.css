@@ -1758,8 +1758,9 @@ select:focus {
   height: 64px;
   border-radius: 18px;
   object-fit: cover;
-  background: rgba(255, 247, 239, 0.95);
+  background: linear-gradient(180deg, rgba(255, 252, 246, 0.98), rgba(246, 237, 226, 0.92));
   border: 1px solid rgba(96, 73, 47, 0.06);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.65);
 }
 
 .hero-overview-food-card > div {
@@ -2915,14 +2916,14 @@ select:focus {
 .food-result-card img {
   width: 100%;
   height: 188px;
-  object-fit: contain;
+  object-fit: cover;
   display: block;
-  padding: 16px 16px 10px;
+  padding: 10px 10px 0;
   background:
-    radial-gradient(circle at top left, rgba(255,255,255,0.78), transparent 24%),
-    radial-gradient(circle at 80% 24%, rgba(255, 233, 214, 0.4), transparent 18%),
-    linear-gradient(180deg, #fff8ef, #f2e7da);
+    radial-gradient(circle at top left, rgba(255,255,255,0.62), transparent 22%),
+    linear-gradient(180deg, #fffaf4, #f3e8dc);
   transition: transform 0.34s var(--ease-premium), filter 0.34s ease;
+  border-radius: 22px 22px 18px 18px;
 }
 
 .food-result-card:hover img,
@@ -3058,11 +3059,12 @@ select:focus {
 .selected-food-image {
   width: 180px;
   height: 130px;
-  object-fit: contain;
-  padding: 8px;
+  object-fit: cover;
+  padding: 0;
   border-radius: 20px;
   border: 1px solid rgba(96, 73, 47, 0.08);
-  background: linear-gradient(180deg, #fff8ef, #f4ecdf);
+  background: linear-gradient(180deg, #fffaf4, #f3e8dc);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.72);
 }
 
 .serving-mode-card {
@@ -4965,6 +4967,10 @@ select:focus {
     height: 180px;
   }
 
+  .selected-food-image {
+    object-fit: cover;
+  }
+
   .auth-hero h1 {
     white-space: normal;
   }
@@ -5183,6 +5189,7 @@ select:focus {
     width: 100%;
     max-width: 220px;
     align-self: center;
+    object-fit: cover;
   }
 
   .food-result-card {
@@ -5192,6 +5199,7 @@ select:focus {
   .food-result-card img {
     height: 132px;
     padding: 5px 10px 3px;
+    object-fit: cover;
   }
 
   .food-result-body {
@@ -5917,10 +5925,12 @@ select:focus {
 
   .selected-food-image {
     max-width: 180px;
+    object-fit: cover;
   }
 
   .food-result-card img {
     height: 150px;
+    object-fit: cover;
   }
 
   .goal-orb-card {
@@ -6005,6 +6015,7 @@ select:focus {
 
   .selected-food-image {
     align-self: stretch;
+    object-fit: cover;
   }
 }
 

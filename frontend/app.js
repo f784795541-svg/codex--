@@ -2,6 +2,47 @@ const API_BASE = window.__HEALTH_API_BASE__ || "/api";
 const STORAGE_KEY = "health_manager_current_user";
 const PREFERENCES_KEY = "health_manager_preferences";
 const DEFAULT_FOOD_IMAGE = "/assets/foods/meal.svg";
+const REALISTIC_FOOD_IMAGE_BASE = "/assets/foods/realistic";
+const REALISTIC_FOOD_IMAGE_MAP = {
+  rice: "rice-photo.webp",
+  noodle: "noodle-photo.webp",
+  egg: "egg-photo.webp",
+  chicken: "chicken-photo.webp",
+  beef: "beef-photo.webp",
+  seafood: "seafood-photo.webp",
+  tofu: "tofu-photo.webp",
+  vegetable: "vegetable-photo.webp",
+};
+const REALISTIC_CATEGORY_IMAGE_MAP = {
+  主食: "rice",
+  蛋类: "egg",
+  肉类: "chicken",
+  海鲜: "seafood",
+  豆制品: "tofu",
+  蔬菜: "vegetable",
+  水果: "vegetable",
+  轻食: "chicken",
+  家常炒菜: "beef",
+  湘菜: "beef",
+  东北菜: "beef",
+  江浙菜: "seafood",
+  川菜: "beef",
+  广东菜: "seafood",
+  卤味: "chicken",
+  火锅类: "beef",
+  烧烤夜宵: "beef",
+};
+const REALISTIC_FOOD_IMAGE_RULES = [
+  { keywords: ["米饭", "糙米饭", "寿司饭", "饭团", "炒饭", "便当"], key: "rice" },
+  { keywords: ["面", "粉", "米线", "河粉", "意大利面", "馄饨", "宽粉", "魔芋丝", "凉皮"], key: "noodle" },
+  { keywords: ["鸡蛋", "鸭蛋", "茶叶蛋"], key: "egg" },
+  { keywords: ["鸡胸肉", "鸡腿肉", "鸡翅", "白切鸡", "烤鸡", "鸡肉"], key: "chicken" },
+  { keywords: ["牛", "肥牛", "牛肉串", "羊肉串", "麻辣烫", "冒菜", "串串香", "火锅"], key: "beef", exclude: ["牛奶", "酸牛奶", "纯牛奶", "奶茶", "拿铁", "酸奶", "希腊酸奶"] },
+  { keywords: ["鱼", "虾", "鱿鱼", "生蚝", "三文鱼", "小龙虾"], key: "seafood" },
+  { keywords: ["豆腐", "豆干", "鱼豆腐", "豆浆"], key: "tofu" },
+  { keywords: ["菜", "西兰花", "菠菜", "生菜", "黄瓜", "番茄", "茄子", "韭菜", "金针菇", "苹果", "香蕉", "橙子", "草莓", "蓝莓", "西瓜", "芒果", "菠萝"], key: "vegetable" },
+  { keywords: ["三明治", "沙拉", "鸡肉卷"], key: "chicken" },
+];
 const EXACT_FOOD_IMAGE_MAP = {
   菲力牛排: "filet-steak",
   牛里脊: "filet-steak",
@@ -1757,7 +1798,7 @@ function renderFoodCard(food, index = 0) {
   const isSelected = isSameFoodSelection(food, state.selectedFood);
   return `
     <article class="food-result-card${isSelected ? " is-selected" : ""}" style="--card-index:${index}">
-      <img src="${foodImagePath(food)}" alt="${food.name}" />
+      <img src="${foodImagePath(food)}" alt="${food.name}" loading="lazy" decoding="async" />
       <div class="food-result-body">
         <h4>${food.name}</h4>
         <p>${food.brand ? `${food.brand} · ` : ""}${food.category} · 每 100g ${food.calories_per_100g} kcal · 蛋白 ${food.protein}g · 脂肪 ${food.fat}g · 碳水 ${food.carbs}g</p>
@@ -2817,7 +2858,7 @@ function renderOverviewSuggestionSection(summary, recommendation = safeBuildDyna
                   .map(
                     (item) => `
                       <div class="hero-overview-food-card">
-                        <img src="${item.image}" alt="${escapeHtml(item.name)}" />
+                        <img src="${item.image}" alt="${escapeHtml(item.name)}" loading="lazy" decoding="async" />
                         <div>
                           <strong>${escapeHtml(item.name)}</strong>
                           <span>${item.grams} g · ${item.kcal} kcal</span>
@@ -2838,6 +2879,20 @@ function renderOverviewSuggestionSection(summary, recommendation = safeBuildDyna
 }
 
 function resolveRegularFoodImagePath(food) {
+  const realisticRule = REALISTIC_FOOD_IMAGE_RULES.find((rule) => {
+    const hit = includesFoodKeyword(food.name, rule.keywords);
+    const excluded = rule.exclude ? includesFoodKeyword(food.name, rule.exclude) : false;
+    return hit && !excluded;
+  });
+  if (realisticRule) {
+    return `${REALISTIC_FOOD_IMAGE_BASE}/${REALISTIC_FOOD_IMAGE_MAP[realisticRule.key]}`;
+  }
+
+  const realisticCategory = REALISTIC_CATEGORY_IMAGE_MAP[food.category];
+  if (realisticCategory) {
+    return `${REALISTIC_FOOD_IMAGE_BASE}/${REALISTIC_FOOD_IMAGE_MAP[realisticCategory]}`;
+  }
+
   const exactRenderAsset = Object.keys(HIGH_RECOGNITION_IMAGE_MAP).find((name) => food.name.includes(name));
   if (exactRenderAsset) {
     return `/assets/foods/${HIGH_RECOGNITION_IMAGE_MAP[exactRenderAsset]}.svg`;
