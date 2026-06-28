@@ -6,6 +6,7 @@ from sqlalchemy import inspect, or_, text
 from sqlalchemy.exc import OperationalError
 from sqlalchemy.orm import Session
 
+from .build_food_catalog import build_food_catalog, write_food_catalog
 from .database import Base, engine
 from .models import FoodDatabase
 from .services import hash_password
@@ -15,16 +16,13 @@ SEED_FILE = Path(__file__).resolve().parent / "foods.json"
 
 
 def seed_food_database(db: Session) -> None:
-    foods = json.loads(SEED_FILE.read_text(encoding="utf-8"))
+    foods = build_food_catalog()
+    write_food_catalog(foods)
+    next_food_id = (db.query(FoodDatabase.food_id).order_by(FoodDatabase.food_id.desc()).first() or [0])[0] + 1
     for item in foods:
         with db.no_autoflush:
-            existing = (
-                db.query(FoodDatabase)
-                .filter(or_(FoodDatabase.food_id == item["food_id"], FoodDatabase.name == item["name"]))
-                .first()
-            )
+            existing = db.query(FoodDatabase).filter(FoodDatabase.name == item["name"]).first()
         if existing:
-            existing.food_id = item["food_id"]
             existing.name = item["name"]
             existing.category = item["category"]
             existing.calories_per_100g = item["calories_per_100g"]
@@ -36,7 +34,10 @@ def seed_food_database(db: Session) -> None:
             existing.portion_hint = item.get("portion_hint")
             existing.cooking_options_json = item.get("cooking_options_json")
             continue
-        db.add(FoodDatabase(**item))
+        payload = dict(item)
+        payload["food_id"] = next_food_id
+        next_food_id += 1
+        db.add(FoodDatabase(**payload))
     db.commit()
 
 

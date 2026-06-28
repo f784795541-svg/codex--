@@ -1,0 +1,233 @@
+[
+  {
+    "name": "青岛啤酒 经典10度",
+    "category": "酒类",
+    "calories_per_100g": 43,
+    "protein": 0.5,
+    "fat": 0.0,
+    "carbs": 3.6,
+    "brand": "青岛啤酒",
+    "serving_size_g": 500,
+    "portion_hint": "常见一听或一瓶约 500ml，按约 500g 记录"
+  },
+  {
+    "name": "雪花啤酒 纯生",
+    "category": "酒类",
+    "calories_per_100g": 41,
+    "protein": 0.4,
+    "fat": 0.0,
+    "carbs": 3.4,
+    "brand": "雪花啤酒",
+    "serving_size_g": 500,
+    "portion_hint": "常见一听或一瓶约 500ml，按约 500g 记录"
+  },
+  {
+    "name": "百威啤酒",
+    "category": "酒类",
+    "calories_per_100g": 41,
+    "protein": 0.4,
+    "fat": 0.0,
+    "carbs": 3.3,
+    "brand": "百威",
+    "serving_size_g": 500,
+    "portion_hint": "常见一听或一瓶约 500ml，按约 500g 记录"
+  },
+  {
+    "name": "哈尔滨啤酒 冰纯",
+    "category": "酒类",
+    "calories_per_100g": 40,
+    "protein": 0.4,
+    "fat": 0.0,
+    "carbs": 3.2,
+    "brand": "哈尔滨啤酒",
+    "serving_size_g": 500,
+    "portion_hint": "常见一听或一瓶约 500ml，按约 500g 记录"
+  },
+  {
+    "name": "燕京啤酒 鲜啤",
+    "category": "酒类",
+    "calories_per_100g": 39,
+    "protein": 0.4,
+    "fat": 0.0,
+    "carbs": 3.1,
+    "brand": "燕京啤酒",
+    "serving_size_g": 500,
+    "portion_hint": "常见一听或一瓶约 500ml，按约 500g 记录"
+  },
+  {
+    "name": "乌苏啤酒",
+    "category": "酒类",
+    "calories_per_100g": 46,
+    "protein": 0.5,
+    "fat": 0.0,
+    "carbs": 3.9,
+    "brand": "乌苏啤酒",
+    "serving_size_g": 620,
+    "portion_hint": "常见一瓶大乌苏约 620ml，按约 620g 记录"
+  },
+  {
+    "name": "科罗娜啤酒",
+    "category": "酒类",
+    "calories_per_100g": 43,
+    "protein": 0.4,
+    "fat": 0.0,
+    "carbs": 3.6,
+    "brand": "科罗娜",
+    "serving_size_g": 330,
+    "portion_hint": "常见一瓶约 330ml，按约 330g 记录"
+  },
+  {
+    "name": "1664白啤",
+    "category": "酒类",
+    "calories_per_100g": 47,
+    "protein": 0.5,
+    "fat": 0.0,
+    "carbs": 4.0,
+    "brand": "1664",
+    "serving_size_g": 330,
+    "portion_hint": "常见一瓶约 330ml，按约 330g 记录"
+  },
+  {
+    "name": "福佳白啤",
+    "category": "酒类",
+    "calories_per_100g": 46,
+    "protein": 0.5,
+    "fat": 0.0,
+    "carbs": 3.9,
+    "brand": "福佳",
+    "serving_size_g": 330,
+    "portion_hint": "常见一瓶约 330ml，按约 330g 记录"
+  },
+  {
+    "name": "喜力啤酒",
+    "category": "酒类",
+    "calories_per_100g": 42,
+    "protein": 0.4,
+    "fat": 0.0,
+    "carbs": 3.4,
+    "brand": "喜力",
+    "serving_size_g": 330,
+    "portion_hint": "常见一瓶约 330ml，按约 330g 记录"
+  },
+  {
+    "name": "朝日啤酒",
+    "category": "酒类",
+    "calories_per_100g": 41,
+    "protein": 0.4,
+    "fat": 0.0,
+    "carbs": 3.3,
+    "brand": "朝日",
+    "serving_size_g": 330,
+    "portion_hint": "常见一听约 330ml，按约 330g 记录"
+  },
+  {
+    "name": "麒麟一番榨",
+    "category": "酒类",
+    "calories_per_100g": 43,
+    "protein": 0.4,
+    "fat": 0.0,
+    "carbs": 3.5,
+    "brand": "麒麟",
+    "serving_size_g": 330,
+    "portion_hint": "常见一听约 330ml，按约 330g 记录"
+  },
+  {
+    "name": "茅台 53度飞天",
+    "category": "酒类",
+    "calories_per_100g": 298,
+    "protein": 0.0,
+    "fat": 0.0,
+    "carbs": 0.0,
+    "brand": "茅台",
+    "serving_size_g": 50,
+    "portion_hint": "常见一两白酒约 50ml，按约 50g 记录"
+  },
+  {
+    "name": "五粮液 52度",
+    "category": "酒类",
+    "calories_per_100g": 292,
+    "protein": 0.0,
+    "fat": 0.0,
+    "carbs": 0.0,
+    "brand": "五粮液",
+    "serving_size_g": 50,
+    "portion_hint": "常见一两白酒约 50ml，按约 50g 记录"
+  },
+  {
+    "name": "汾酒 53度",
+    "category": "酒类",
+    "calories_per_100g": 298,
+    "protein": 0.0,
+    "fat": 0.0,
+    "carbs": 0.0,
+    "brand": "汾酒",
+    "serving_size_g": 50,
+    "portion_hint": "常见一两白酒约 50ml，按约 50g 记录"
+  },
+  {
+    "name": "剑南春 52度",
+    "category": "酒类",
+    "calories_per_100g": 292,
+    "protein": 0.0,
+    "fat": 0.0,
+    "carbs": 0.0,
+    "brand": "剑南春",
+    "serving_size_g": 50,
+    "portion_hint": "常见一两白酒约 50ml，按约 50g 记录"
+  },
+  {
+    "name": "洋河蓝色经典 42度",
+    "category": "酒类",
+    "calories_per_100g": 235,
+    "protein": 0.0,
+    "fat": 0.0,
+    "carbs": 0.0,
+    "brand": "洋河",
+    "serving_size_g": 50,
+    "portion_hint": "常见一两白酒约 50ml，按约 50g 记录"
+  },
+  {
+    "name": "泸州老窖 52度",
+    "category": "酒类",
+    "calories_per_100g": 292,
+    "protein": 0.0,
+    "fat": 0.0,
+    "carbs": 0.0,
+    "brand": "泸州老窖",
+    "serving_size_g": 50,
+    "portion_hint": "常见一两白酒约 50ml，按约 50g 记录"
+  },
+  {
+    "name": "古井贡酒 50度",
+    "category": "酒类",
+    "calories_per_100g": 280,
+    "protein": 0.0,
+    "fat": 0.0,
+    "carbs": 0.0,
+    "brand": "古井贡酒",
+    "serving_size_g": 50,
+    "portion_hint": "常见一两白酒约 50ml，按约 50g 记录"
+  },
+  {
+    "name": "牛栏山二锅头 42度",
+    "category": "酒类",
+    "calories_per_100g": 235,
+    "protein": 0.0,
+    "fat": 0.0,
+    "carbs": 0.0,
+    "brand": "牛栏山",
+    "serving_size_g": 50,
+    "portion_hint": "常见一两白酒约 50ml，按约 50g 记录"
+  },
+  {
+    "name": "红星二锅头 56度",
+    "category": "酒类",
+    "calories_per_100g": 315,
+    "protein": 0.0,
+    "fat": 0.0,
+    "carbs": 0.0,
+    "brand": "红星",
+    "serving_size_g": 50,
+    "portion_hint": "常见一两白酒约 50ml，按约 50g 记录"
+  }
+]

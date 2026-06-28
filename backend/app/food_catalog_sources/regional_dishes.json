@@ -1,0 +1,312 @@
+[
+  {
+    "name": "红烧肉",
+    "category": "家常炒菜",
+    "calories_per_100g": 395,
+    "protein": 11.2,
+    "fat": 37.1,
+    "carbs": 4.6,
+    "serving_size_g": 180,
+    "portion_hint": "家常一小盘红烧肉常见约 160-220g"
+  },
+  {
+    "name": "回锅肉",
+    "category": "川菜",
+    "calories_per_100g": 286,
+    "protein": 13.2,
+    "fat": 23.8,
+    "carbs": 4.5,
+    "serving_size_g": 180,
+    "portion_hint": "餐馆常见一盘回锅肉约 160-220g"
+  },
+  {
+    "name": "鱼香肉丝",
+    "category": "川菜",
+    "calories_per_100g": 176,
+    "protein": 11.4,
+    "fat": 9.8,
+    "carbs": 10.7,
+    "serving_size_g": 200,
+    "portion_hint": "餐馆常见一盘鱼香肉丝约 180-240g"
+  },
+  {
+    "name": "宫保鸡丁",
+    "category": "川菜",
+    "calories_per_100g": 195,
+    "protein": 12.8,
+    "fat": 10.2,
+    "carbs": 12.6,
+    "serving_size_g": 200,
+    "portion_hint": "餐馆常见一盘宫保鸡丁约 180-240g"
+  },
+  {
+    "name": "夫妻肺片",
+    "category": "川菜",
+    "calories_per_100g": 214,
+    "protein": 15.3,
+    "fat": 14.9,
+    "carbs": 4.2,
+    "serving_size_g": 150,
+    "portion_hint": "常见一份凉菜约 130-180g"
+  },
+  {
+    "name": "水煮牛肉",
+    "category": "川菜",
+    "calories_per_100g": 188,
+    "protein": 13.6,
+    "fat": 12.1,
+    "carbs": 6.3,
+    "serving_size_g": 260,
+    "portion_hint": "餐馆常见一份水煮牛肉约 220-320g"
+  },
+  {
+    "name": "辣子鸡",
+    "category": "川菜",
+    "calories_per_100g": 252,
+    "protein": 16.4,
+    "fat": 18.2,
+    "carbs": 5.1,
+    "serving_size_g": 220,
+    "portion_hint": "餐馆常见一盘辣子鸡约 180-240g"
+  },
+  {
+    "name": "酸菜鱼",
+    "category": "川菜",
+    "calories_per_100g": 131,
+    "protein": 10.1,
+    "fat": 8.2,
+    "carbs": 4.1,
+    "serving_size_g": 280,
+    "portion_hint": "常见一份酸菜鱼连鱼肉和配菜约 240-320g"
+  },
+  {
+    "name": "毛血旺",
+    "category": "川菜",
+    "calories_per_100g": 171,
+    "protein": 11.5,
+    "fat": 11.2,
+    "carbs": 5.3,
+    "serving_size_g": 260,
+    "portion_hint": "常见一份毛血旺可食部分约 220-300g"
+  },
+  {
+    "name": "麻辣香锅",
+    "category": "川菜",
+    "calories_per_100g": 168,
+    "protein": 8.4,
+    "fat": 10.6,
+    "carbs": 9.8,
+    "serving_size_g": 300,
+    "portion_hint": "常见一份麻辣香锅可食部分约 250-350g"
+  },
+  {
+    "name": "白切鸡",
+    "category": "广东菜",
+    "calories_per_100g": 181,
+    "protein": 20.1,
+    "fat": 10.2,
+    "carbs": 0.4,
+    "serving_size_g": 180,
+    "portion_hint": "常见一份白切鸡可食部分约 150-220g"
+  },
+  {
+    "name": "烧鹅",
+    "category": "广东菜",
+    "calories_per_100g": 282,
+    "protein": 17.3,
+    "fat": 22.1,
+    "carbs": 2.5,
+    "serving_size_g": 180,
+    "portion_hint": "常见一份烧鹅可食部分约 150-220g"
+  },
+  {
+    "name": "叉烧",
+    "category": "广东菜",
+    "calories_per_100g": 241,
+    "protein": 18.7,
+    "fat": 14.3,
+    "carbs": 8.6,
+    "serving_size_g": 150,
+    "portion_hint": "常见一份叉烧约 120-180g"
+  },
+  {
+    "name": "豉汁蒸排骨",
+    "category": "广东菜",
+    "calories_per_100g": 218,
+    "protein": 13.4,
+    "fat": 16.3,
+    "carbs": 4.3,
+    "serving_size_g": 180,
+    "portion_hint": "常见一份豉汁蒸排骨约 150-200g"
+  },
+  {
+    "name": "清蒸鲈鱼",
+    "category": "广东菜",
+    "calories_per_100g": 128,
+    "protein": 18.4,
+    "fat": 5.1,
+    "carbs": 2.1,
+    "serving_size_g": 220,
+    "portion_hint": "常见一份清蒸鲈鱼可食部分约 180-260g"
+  },
+  {
+    "name": "蜜汁叉烧饭",
+    "category": "广东菜",
+    "calories_per_100g": 183,
+    "protein": 8.2,
+    "fat": 6.2,
+    "carbs": 23.6,
+    "serving_size_g": 380,
+    "portion_hint": "常见一份叉烧饭约 350-400g"
+  },
+  {
+    "name": "烧鸭饭",
+    "category": "广东菜",
+    "calories_per_100g": 191,
+    "protein": 8.1,
+    "fat": 7.5,
+    "carbs": 22.8,
+    "serving_size_g": 400,
+    "portion_hint": "常见一份烧鸭饭约 360-420g"
+  },
+  {
+    "name": "肠粉",
+    "category": "广东菜",
+    "calories_per_100g": 133,
+    "protein": 4.1,
+    "fat": 3.2,
+    "carbs": 21.7,
+    "serving_size_g": 220,
+    "portion_hint": "常见一份鸡蛋或牛肉肠粉约 200-240g"
+  },
+  {
+    "name": "皮蛋瘦肉粥",
+    "category": "家常炒菜",
+    "calories_per_100g": 62,
+    "protein": 3.2,
+    "fat": 1.7,
+    "carbs": 8.4,
+    "serving_size_g": 320,
+    "portion_hint": "常见一碗皮蛋瘦肉粥约 280-350g"
+  },
+  {
+    "name": "白灼生菜",
+    "category": "广东菜",
+    "calories_per_100g": 36,
+    "protein": 1.6,
+    "fat": 1.8,
+    "carbs": 4.2,
+    "serving_size_g": 180,
+    "portion_hint": "常见一盘白灼生菜约 150-200g"
+  },
+  {
+    "name": "卤鸡腿",
+    "category": "卤味",
+    "calories_per_100g": 216,
+    "protein": 18.4,
+    "fat": 14.1,
+    "carbs": 2.8,
+    "serving_size_g": 120,
+    "portion_hint": "常见一只卤鸡腿可食部分约 100-130g"
+  },
+  {
+    "name": "卤鸡爪",
+    "category": "卤味",
+    "calories_per_100g": 254,
+    "protein": 20.1,
+    "fat": 16.8,
+    "carbs": 4.3,
+    "serving_size_g": 80,
+    "portion_hint": "常见两到三只卤鸡爪可食部分约 60-90g"
+  },
+  {
+    "name": "卤牛肉",
+    "category": "卤味",
+    "calories_per_100g": 182,
+    "protein": 24.1,
+    "fat": 8.2,
+    "carbs": 2.7,
+    "serving_size_g": 120,
+    "portion_hint": "常见一份卤牛肉约 100-140g"
+  },
+  {
+    "name": "卤鸭脖",
+    "category": "卤味",
+    "calories_per_100g": 261,
+    "protein": 18.6,
+    "fat": 18.4,
+    "carbs": 4.2,
+    "serving_size_g": 90,
+    "portion_hint": "常见一份卤鸭脖可食部分约 70-100g"
+  },
+  {
+    "name": "卤蛋",
+    "category": "卤味",
+    "calories_per_100g": 160,
+    "protein": 12.8,
+    "fat": 10.9,
+    "carbs": 2.0,
+    "serving_size_g": 55,
+    "portion_hint": "常见一颗卤蛋约 50-60g"
+  },
+  {
+    "name": "凉拌黄瓜",
+    "category": "家常炒菜",
+    "calories_per_100g": 34,
+    "protein": 0.9,
+    "fat": 1.8,
+    "carbs": 4.0,
+    "serving_size_g": 180,
+    "portion_hint": "常见一盘凉拌黄瓜约 150-200g"
+  },
+  {
+    "name": "蒜蓉西兰花",
+    "category": "家常炒菜",
+    "calories_per_100g": 68,
+    "protein": 3.1,
+    "fat": 3.4,
+    "carbs": 6.7,
+    "serving_size_g": 180,
+    "portion_hint": "常见一盘蒜蓉西兰花约 150-200g"
+  },
+  {
+    "name": "地三鲜",
+    "category": "家常炒菜",
+    "calories_per_100g": 126,
+    "protein": 2.1,
+    "fat": 7.6,
+    "carbs": 12.7,
+    "serving_size_g": 200,
+    "portion_hint": "常见一盘地三鲜约 180-240g"
+  },
+  {
+    "name": "青椒土豆丝",
+    "category": "家常炒菜",
+    "calories_per_100g": 92,
+    "protein": 1.8,
+    "fat": 4.2,
+    "carbs": 11.9,
+    "serving_size_g": 200,
+    "portion_hint": "常见一盘青椒土豆丝约 180-240g"
+  },
+  {
+    "name": "番茄炒蛋",
+    "category": "家常炒菜",
+    "calories_per_100g": 121,
+    "protein": 6.5,
+    "fat": 8.2,
+    "carbs": 5.0,
+    "serving_size_g": 180,
+    "portion_hint": "常见一盘番茄炒蛋约 160-220g"
+  },
+  {
+    "name": "梅菜扣肉",
+    "category": "家常炒菜",
+    "calories_per_100g": 312,
+    "protein": 10.5,
+    "fat": 27.2,
+    "carbs": 6.1,
+    "serving_size_g": 180,
+    "portion_hint": "常见一份梅菜扣肉约 160-220g"
+  }
+]
