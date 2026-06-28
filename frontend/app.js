@@ -2914,6 +2914,15 @@ function renderOverviewSuggestionSection(summary, recommendation = safeBuildDyna
 }
 
 function resolveRegularFoodImagePath(food) {
+  if (food.category === "酒类") {
+    const exactAlcoholAsset = Object.keys(EXACT_FOOD_IMAGE_MAP).find((name) => food.name.includes(name));
+    if (exactAlcoholAsset) {
+      return `/assets/foods/${EXACT_FOOD_IMAGE_MAP[exactAlcoholAsset]}.svg`;
+    }
+    const alcoholCategoryAsset = CATEGORY_FOOD_IMAGE_MAP[food.category];
+    return alcoholCategoryAsset ? `/assets/foods/${alcoholCategoryAsset}.svg` : DEFAULT_FOOD_IMAGE;
+  }
+
   const realisticRule = REALISTIC_FOOD_IMAGE_RULES.find((rule) => {
     const hit = includesFoodKeyword(food.name, rule.keywords);
     const excluded = rule.exclude ? includesFoodKeyword(food.name, rule.exclude) : false;
