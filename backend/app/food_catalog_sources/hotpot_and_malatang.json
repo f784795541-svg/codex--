@@ -1,0 +1,182 @@
+[
+  {
+    "name": "麻辣烫",
+    "category": "火锅类",
+    "calories_per_100g": 132,
+    "protein": 6.2,
+    "fat": 7.1,
+    "carbs": 10.4,
+    "serving_size_g": 350,
+    "portion_hint": "常见一碗麻辣烫可食部分约 300-380g"
+  },
+  {
+    "name": "清汤麻辣烫",
+    "category": "火锅类",
+    "calories_per_100g": 98,
+    "protein": 6.0,
+    "fat": 4.2,
+    "carbs": 8.1,
+    "serving_size_g": 350,
+    "portion_hint": "常见一碗清汤麻辣烫可食部分约 300-380g"
+  },
+  {
+    "name": "冒菜",
+    "category": "火锅类",
+    "calories_per_100g": 146,
+    "protein": 7.3,
+    "fat": 8.6,
+    "carbs": 10.3,
+    "serving_size_g": 360,
+    "portion_hint": "常见一份冒菜可食部分约 320-400g"
+  },
+  {
+    "name": "串串香",
+    "category": "火锅类",
+    "calories_per_100g": 171,
+    "protein": 8.0,
+    "fat": 10.7,
+    "carbs": 11.0,
+    "serving_size_g": 320,
+    "portion_hint": "常见一份串串香可食部分约 280-360g"
+  },
+  {
+    "name": "麻辣香锅 双人份",
+    "category": "火锅类",
+    "calories_per_100g": 182,
+    "protein": 8.8,
+    "fat": 11.9,
+    "carbs": 10.5,
+    "serving_size_g": 500,
+    "portion_hint": "常见一份双人麻辣香锅可食部分约 450-550g"
+  },
+  {
+    "name": "火锅肥牛卷",
+    "category": "火锅类",
+    "calories_per_100g": 287,
+    "protein": 14.1,
+    "fat": 24.7,
+    "carbs": 1.6,
+    "serving_size_g": 120,
+    "portion_hint": "常见一份火锅肥牛卷约 100-130g"
+  },
+  {
+    "name": "火锅羊肉卷",
+    "category": "火锅类",
+    "calories_per_100g": 301,
+    "protein": 13.8,
+    "fat": 26.4,
+    "carbs": 1.2,
+    "serving_size_g": 120,
+    "portion_hint": "常见一份火锅羊肉卷约 100-130g"
+  },
+  {
+    "name": "毛肚",
+    "category": "火锅类",
+    "calories_per_100g": 72,
+    "protein": 11.5,
+    "fat": 2.2,
+    "carbs": 1.4,
+    "serving_size_g": 120,
+    "portion_hint": "常见一份毛肚约 100-130g"
+  },
+  {
+    "name": "黄喉",
+    "category": "火锅类",
+    "calories_per_100g": 96,
+    "protein": 14.0,
+    "fat": 3.8,
+    "carbs": 1.5,
+    "serving_size_g": 120,
+    "portion_hint": "常见一份黄喉约 100-130g"
+  },
+  {
+    "name": "鸭肠",
+    "category": "火锅类",
+    "calories_per_100g": 127,
+    "protein": 13.7,
+    "fat": 6.8,
+    "carbs": 1.9,
+    "serving_size_g": 100,
+    "portion_hint": "常见一份鸭肠约 80-110g"
+  },
+  {
+    "name": "虾滑",
+    "category": "火锅类",
+    "calories_per_100g": 103,
+    "protein": 12.4,
+    "fat": 4.6,
+    "carbs": 3.2,
+    "serving_size_g": 120,
+    "portion_hint": "常见一份虾滑约 100-130g"
+  },
+  {
+    "name": "鱼豆腐",
+    "category": "火锅类",
+    "calories_per_100g": 146,
+    "protein": 9.4,
+    "fat": 8.1,
+    "carbs": 8.2,
+    "serving_size_g": 120,
+    "portion_hint": "常见一份鱼豆腐约 100-130g"
+  },
+  {
+    "name": "午餐肉",
+    "category": "火锅类",
+    "calories_per_100g": 262,
+    "protein": 11.8,
+    "fat": 21.4,
+    "carbs": 4.6,
+    "serving_size_g": 100,
+    "portion_hint": "常见一份午餐肉约 80-110g"
+  },
+  {
+    "name": "蟹柳",
+    "category": "火锅类",
+    "calories_per_100g": 101,
+    "protein": 7.0,
+    "fat": 1.6,
+    "carbs": 14.7,
+    "serving_size_g": 100,
+    "portion_hint": "常见一份蟹柳约 80-110g"
+  },
+  {
+    "name": "娃娃菜",
+    "category": "火锅类",
+    "calories_per_100g": 18,
+    "protein": 1.5,
+    "fat": 0.2,
+    "carbs": 3.2,
+    "serving_size_g": 150,
+    "portion_hint": "常见一份娃娃菜约 130-160g"
+  },
+  {
+    "name": "金针菇",
+    "category": "火锅类",
+    "calories_per_100g": 29,
+    "protein": 2.4,
+    "fat": 0.3,
+    "carbs": 5.0,
+    "serving_size_g": 150,
+    "portion_hint": "常见一份金针菇约 130-160g"
+  },
+  {
+    "name": "宽粉",
+    "category": "火锅类",
+    "calories_per_100g": 119,
+    "protein": 0.3,
+    "fat": 0.1,
+    "carbs": 29.1,
+    "serving_size_g": 120,
+    "portion_hint": "常见一份宽粉煮熟后约 100-130g"
+  },
+  {
+    "name": "魔芋丝",
+    "category": "火锅类",
+    "calories_per_100g": 17,
+    "protein": 0.2,
+    "fat": 0.1,
+    "carbs": 3.6,
+    "serving_size_g": 120,
+    "portion_hint": "常见一份魔芋丝约 100-130g"
+  }
+]

@@ -1,0 +1,156 @@
+[
+  {
+    "name": "7-11 全麦鸡胸三明治",
+    "category": "连锁餐厅",
+    "calories_per_100g": 214,
+    "protein": 10.1,
+    "fat": 7.8,
+    "carbs": 24.9,
+    "brand": "7-11",
+    "serving_size_g": 165,
+    "portion_hint": "按一个便利店三明治固定值估算，常见一份约 150-170g"
+  },
+  {
+    "name": "7-11 海苔肉松饭团",
+    "category": "连锁餐厅",
+    "calories_per_100g": 206,
+    "protein": 5.2,
+    "fat": 5.8,
+    "carbs": 32.8,
+    "brand": "7-11",
+    "serving_size_g": 115,
+    "portion_hint": "按一个饭团固定值估算，常见一份约 105-120g"
+  },
+  {
+    "name": "7-11 低糖希腊酸奶",
+    "category": "乳制品",
+    "calories_per_100g": 78,
+    "protein": 4.8,
+    "fat": 2.9,
+    "carbs": 8.1,
+    "brand": "7-11",
+    "serving_size_g": 180,
+    "portion_hint": "常见一杯便利店酸奶约 170-190g"
+  },
+  {
+    "name": "全家 低糖希腊酸奶",
+    "category": "乳制品",
+    "calories_per_100g": 79,
+    "protein": 4.9,
+    "fat": 2.8,
+    "carbs": 8.3,
+    "brand": "全家",
+    "serving_size_g": 180,
+    "portion_hint": "常见一杯便利店酸奶约 170-190g"
+  },
+  {
+    "name": "全家 香葱肉松面包",
+    "category": "甜品烘焙",
+    "calories_per_100g": 342,
+    "protein": 8.6,
+    "fat": 13.8,
+    "carbs": 45.6,
+    "brand": "全家",
+    "serving_size_g": 95,
+    "portion_hint": "常见一个便利店肉松面包约 85-100g"
+  },
+  {
+    "name": "罗森 巧克力可颂",
+    "category": "甜品烘焙",
+    "calories_per_100g": 419,
+    "protein": 8.0,
+    "fat": 23.4,
+    "carbs": 44.8,
+    "brand": "罗森",
+    "serving_size_g": 70,
+    "portion_hint": "常见一个便利店巧克力可颂约 60-75g"
+  },
+  {
+    "name": "罗森 冰美式咖啡",
+    "category": "饮品",
+    "calories_per_100g": 2,
+    "protein": 0.3,
+    "fat": 0.0,
+    "carbs": 0.1,
+    "brand": "罗森",
+    "serving_size_g": 360,
+    "portion_hint": "常见一杯便利店冰美式约 320-380g"
+  },
+  {
+    "name": "全家 冰拿铁",
+    "category": "饮品",
+    "calories_per_100g": 47,
+    "protein": 2.1,
+    "fat": 1.7,
+    "carbs": 5.7,
+    "brand": "全家",
+    "serving_size_g": 360,
+    "portion_hint": "常见一杯便利店冰拿铁约 320-380g"
+  },
+  {
+    "name": "7-11 冰美式咖啡",
+    "category": "饮品",
+    "calories_per_100g": 2,
+    "protein": 0.3,
+    "fat": 0.0,
+    "carbs": 0.1,
+    "brand": "7-11",
+    "serving_size_g": 360,
+    "portion_hint": "常见一杯便利店冰美式约 320-380g"
+  },
+  {
+    "name": "罗森 抹茶蛋糕卷",
+    "category": "甜品烘焙",
+    "calories_per_100g": 327,
+    "protein": 5.1,
+    "fat": 19.3,
+    "carbs": 32.0,
+    "brand": "罗森",
+    "serving_size_g": 90,
+    "portion_hint": "常见一份便利店蛋糕卷约 80-95g"
+  },
+  {
+    "name": "山姆 烤鸡",
+    "category": "加工食品",
+    "calories_per_100g": 214,
+    "protein": 21.1,
+    "fat": 12.8,
+    "carbs": 2.6,
+    "brand": "山姆",
+    "serving_size_g": 180,
+    "portion_hint": "常见一份超市烤鸡可食部分约 160-200g"
+  },
+  {
+    "name": "山姆 凯撒鸡肉沙拉",
+    "category": "轻食",
+    "calories_per_100g": 126,
+    "protein": 8.1,
+    "fat": 7.3,
+    "carbs": 7.2,
+    "brand": "山姆",
+    "serving_size_g": 220,
+    "portion_hint": "常见一份超市即食沙拉约 200-230g"
+  },
+  {
+    "name": "盒马 三文鱼寿司",
+    "category": "加工食品",
+    "calories_per_100g": 168,
+    "protein": 6.7,
+    "fat": 5.1,
+    "carbs": 23.6,
+    "brand": "盒马",
+    "serving_size_g": 180,
+    "portion_hint": "常见一盒三文鱼寿司约 160-190g"
+  },
+  {
+    "name": "盒马 鸡胸肉沙拉",
+    "category": "轻食",
+    "calories_per_100g": 88,
+    "protein": 9.4,
+    "fat": 3.9,
+    "carbs": 3.8,
+    "brand": "盒马",
+    "serving_size_g": 200,
+    "portion_hint": "常见一份盒马鸡胸肉沙拉约 180-210g"
+  }
+]

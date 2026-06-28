@@ -19,6 +19,10 @@ SOURCE_FILES = [
     "noodles_and_staples_batch_two.json",
     "regional_dishes_batch_three.json",
     "convenience_and_dairy_batch_two.json",
+    "hotpot_and_malatang.json",
+    "barbecue_and_late_night.json",
+    "desserts_and_bakery.json",
+    "retail_ready_foods_batch_three.json",
 ]
 
 

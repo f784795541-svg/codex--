@@ -1,0 +1,202 @@
+[
+  {
+    "name": "珍珠奶茶",
+    "category": "甜品烘焙",
+    "calories_per_100g": 87,
+    "protein": 1.0,
+    "fat": 1.5,
+    "carbs": 17.5,
+    "serving_size_g": 500,
+    "portion_hint": "常见一杯全糖珍珠奶茶约 450-550g"
+  },
+  {
+    "name": "杨枝甘露",
+    "category": "甜品烘焙",
+    "calories_per_100g": 112,
+    "protein": 1.1,
+    "fat": 3.2,
+    "carbs": 19.8,
+    "serving_size_g": 300,
+    "portion_hint": "常见一碗杨枝甘露约 260-320g"
+  },
+  {
+    "name": "双皮奶",
+    "category": "甜品烘焙",
+    "calories_per_100g": 132,
+    "protein": 4.5,
+    "fat": 5.7,
+    "carbs": 15.3,
+    "serving_size_g": 180,
+    "portion_hint": "常见一碗双皮奶约 160-190g"
+  },
+  {
+    "name": "芋圆",
+    "category": "甜品烘焙",
+    "calories_per_100g": 156,
+    "protein": 1.8,
+    "fat": 2.3,
+    "carbs": 31.7,
+    "serving_size_g": 220,
+    "portion_hint": "常见一碗芋圆甜品约 200-230g"
+  },
+  {
+    "name": "仙草冻",
+    "category": "甜品烘焙",
+    "calories_per_100g": 58,
+    "protein": 0.6,
+    "fat": 0.2,
+    "carbs": 13.5,
+    "serving_size_g": 220,
+    "portion_hint": "常见一碗仙草冻约 200-230g"
+  },
+  {
+    "name": "绿豆沙",
+    "category": "甜品烘焙",
+    "calories_per_100g": 96,
+    "protein": 2.4,
+    "fat": 0.6,
+    "carbs": 20.8,
+    "serving_size_g": 300,
+    "portion_hint": "常见一杯绿豆沙约 260-320g"
+  },
+  {
+    "name": "红豆沙",
+    "category": "甜品烘焙",
+    "calories_per_100g": 103,
+    "protein": 2.6,
+    "fat": 0.8,
+    "carbs": 22.0,
+    "serving_size_g": 300,
+    "portion_hint": "常见一杯红豆沙约 260-320g"
+  },
+  {
+    "name": "蛋挞",
+    "category": "甜品烘焙",
+    "calories_per_100g": 305,
+    "protein": 6.4,
+    "fat": 18.9,
+    "carbs": 27.2,
+    "serving_size_g": 60,
+    "portion_hint": "常见一个蛋挞约 55-65g"
+  },
+  {
+    "name": "泡芙",
+    "category": "甜品烘焙",
+    "calories_per_100g": 282,
+    "protein": 5.8,
+    "fat": 17.2,
+    "carbs": 25.8,
+    "serving_size_g": 70,
+    "portion_hint": "常见两个泡芙约 60-80g"
+  },
+  {
+    "name": "瑞士卷",
+    "category": "甜品烘焙",
+    "calories_per_100g": 323,
+    "protein": 5.2,
+    "fat": 19.1,
+    "carbs": 31.6,
+    "serving_size_g": 80,
+    "portion_hint": "常见一片瑞士卷约 70-90g"
+  },
+  {
+    "name": "奶油蛋糕",
+    "category": "甜品烘焙",
+    "calories_per_100g": 344,
+    "protein": 4.9,
+    "fat": 21.8,
+    "carbs": 32.7,
+    "serving_size_g": 100,
+    "portion_hint": "常见一块奶油蛋糕约 90-110g"
+  },
+  {
+    "name": "芝士蛋糕",
+    "category": "甜品烘焙",
+    "calories_per_100g": 358,
+    "protein": 6.1,
+    "fat": 24.0,
+    "carbs": 29.1,
+    "serving_size_g": 100,
+    "portion_hint": "常见一块芝士蛋糕约 90-110g"
+  },
+  {
+    "name": "可颂",
+    "category": "甜品烘焙",
+    "calories_per_100g": 411,
+    "protein": 8.2,
+    "fat": 22.4,
+    "carbs": 44.7,
+    "serving_size_g": 60,
+    "portion_hint": "常见一个可颂约 55-65g"
+  },
+  {
+    "name": "肉松面包",
+    "category": "甜品烘焙",
+    "calories_per_100g": 356,
+    "protein": 9.2,
+    "fat": 14.8,
+    "carbs": 46.5,
+    "serving_size_g": 90,
+    "portion_hint": "常见一个肉松面包约 80-95g"
+  },
+  {
+    "name": "豆沙面包",
+    "category": "甜品烘焙",
+    "calories_per_100g": 318,
+    "protein": 7.0,
+    "fat": 8.3,
+    "carbs": 53.9,
+    "serving_size_g": 90,
+    "portion_hint": "常见一个豆沙面包约 80-95g"
+  },
+  {
+    "name": "奶黄面包",
+    "category": "甜品烘焙",
+    "calories_per_100g": 331,
+    "protein": 7.1,
+    "fat": 10.9,
+    "carbs": 51.0,
+    "serving_size_g": 90,
+    "portion_hint": "常见一个奶黄面包约 80-95g"
+  },
+  {
+    "name": "拿破仑蛋糕",
+    "category": "甜品烘焙",
+    "calories_per_100g": 376,
+    "protein": 5.3,
+    "fat": 23.5,
+    "carbs": 35.8,
+    "serving_size_g": 100,
+    "portion_hint": "常见一块拿破仑蛋糕约 90-110g"
+  },
+  {
+    "name": "提拉米苏",
+    "category": "甜品烘焙",
+    "calories_per_100g": 304,
+    "protein": 5.0,
+    "fat": 20.1,
+    "carbs": 25.4,
+    "serving_size_g": 100,
+    "portion_hint": "常见一块提拉米苏约 90-110g"
+  },
+  {
+    "name": "美式咖啡",
+    "category": "饮品",
+    "calories_per_100g": 2,
+    "protein": 0.3,
+    "fat": 0.0,
+    "carbs": 0.1,
+    "serving_size_g": 350,
+    "portion_hint": "常见一杯美式咖啡约 300-380g"
+  },
+  {
+    "name": "生椰拿铁",
+    "category": "饮品",
+    "calories_per_100g": 63,
+    "protein": 1.5,
+    "fat": 3.1,
+    "carbs": 7.3,
+    "serving_size_g": 350,
+    "portion_hint": "常见一杯生椰拿铁约 300-380g"
+  }
+]
