@@ -229,7 +229,7 @@ const CATEGORY_FOOD_IMAGE_MAP = {
   零食: "snack",
   补剂: "protein-shake",
   饮品: "meal",
-  酒类: "beijing-soda",
+  酒类: "alcohol/generic-alcohol-bottle",
   加工食品: "meal",
   轻食: "meal",
   川菜: "meal",
@@ -410,27 +410,27 @@ const HIGH_RECOGNITION_IMAGE_MAP = {
   咖啡: "coffee-cup",
   拿铁: "latte-cup",
   酸奶饮品: "yogurt-drink-bottle",
-  青岛啤酒: "beijing-soda",
-  雪花啤酒: "beijing-soda",
-  百威啤酒: "beijing-soda",
-  哈尔滨啤酒: "beijing-soda",
-  燕京啤酒: "beijing-soda",
-  乌苏啤酒: "beijing-soda",
-  科罗娜啤酒: "beijing-soda",
-  "1664白啤": "beijing-soda",
-  福佳白啤: "beijing-soda",
-  喜力啤酒: "beijing-soda",
-  朝日啤酒: "beijing-soda",
-  麒麟一番榨: "beijing-soda",
-  茅台: "beijing-soda",
-  五粮液: "beijing-soda",
-  汾酒: "beijing-soda",
-  剑南春: "beijing-soda",
-  洋河蓝色经典: "beijing-soda",
-  泸州老窖: "beijing-soda",
-  古井贡酒: "beijing-soda",
-  牛栏山二锅头: "beijing-soda",
-  红星二锅头: "beijing-soda",
+  青岛啤酒: "alcohol/qingdao-beer-can",
+  雪花啤酒: "alcohol/snow-beer-can",
+  百威啤酒: "alcohol/budweiser-beer-bottle",
+  哈尔滨啤酒: "alcohol/harbin-beer-can",
+  燕京啤酒: "alcohol/yanjing-beer-can",
+  乌苏啤酒: "alcohol/wusu-beer-bottle",
+  科罗娜啤酒: "alcohol/corona-beer-bottle",
+  "1664白啤": "alcohol/kronenbourg-1664-bottle",
+  福佳白啤: "alcohol/hoegaarden-beer-bottle",
+  喜力啤酒: "alcohol/heineken-beer-bottle",
+  朝日啤酒: "alcohol/asahi-beer-can",
+  麒麟一番榨: "alcohol/kirin-beer-can",
+  茅台: "alcohol/moutai-baijiu-bottle",
+  五粮液: "alcohol/wuliangye-baijiu-bottle",
+  汾酒: "alcohol/fenjiu-baijiu-bottle",
+  剑南春: "alcohol/jiannanchun-baijiu-bottle",
+  洋河蓝色经典: "alcohol/yanghe-baijiu-bottle",
+  泸州老窖: "alcohol/luzhou-laojiao-baijiu-bottle",
+  古井贡酒: "alcohol/gujinggong-baijiu-bottle",
+  牛栏山二锅头: "alcohol/niulanshan-erguotou-bottle",
+  红星二锅头: "alcohol/hongxing-erguotou-bottle",
   牛肉干: "beef-jerky-pack",
   鸡肉肠: "chicken-sausage",
   火腿: "ham-slices",
@@ -2915,6 +2915,10 @@ function renderOverviewSuggestionSection(summary, recommendation = safeBuildDyna
 
 function resolveRegularFoodImagePath(food) {
   if (food.category === "酒类") {
+    const alcoholHighRecognitionAsset = Object.keys(HIGH_RECOGNITION_IMAGE_MAP).find((name) => food.name.includes(name));
+    if (alcoholHighRecognitionAsset) {
+      return `/assets/foods/${HIGH_RECOGNITION_IMAGE_MAP[alcoholHighRecognitionAsset]}.svg`;
+    }
     const exactAlcoholAsset = Object.keys(EXACT_FOOD_IMAGE_MAP).find((name) => food.name.includes(name));
     if (exactAlcoholAsset) {
       return `/assets/foods/${EXACT_FOOD_IMAGE_MAP[exactAlcoholAsset]}.svg`;

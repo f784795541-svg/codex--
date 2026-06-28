@@ -1,0 +1,14 @@
+﻿<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 220">
+  <rect width="320" height="220" rx="28" fill="#eef8ef"/>
+  <ellipse cx="160" cy="188" rx="92" ry="16" fill="#d8dfe8"/>
+  <rect x="124" y="34" width="72" height="14" rx="7" fill="#bfc7cf"/>
+  <rect x="116" y="46" width="88" height="146" rx="20" fill="#347a3d"/>
+  <rect x="124" y="56" width="72" height="120" rx="16" fill="rgba(255,255,255,0.10)"/>
+  <rect x="132" y="78" width="56" height="72" rx="14" fill="#fdfefb" stroke="rgba(0,0,0,0.08)"/>
+  <rect x="132" y="64" width="56" height="10" rx="5" fill="#e7f2a8"/>
+  <path d="M136 54c8 0 14 6 14 14v82c0 14-10 26-22 28" fill="none" stroke="rgba(255,255,255,0.35)" stroke-width="8" stroke-linecap="round"/>
+  <text x='160' y='106' fill='#224d28' font-size='13' font-family="'PingFang SC','Microsoft YaHei',sans-serif" font-weight='700' text-anchor='middle'>燕京啤酒</text>
+  <text x='160' y='126' fill='#224d28' font-size='11' font-family="'PingFang SC','Microsoft YaHei',sans-serif" font-weight='600' text-anchor='middle'>鲜啤</text>
+  <circle cx="160" cy="153" r="13" fill="#e7f2a8" opacity="0.9"/>
+  <path d="M154 153l5 5 9-12" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
