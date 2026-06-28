@@ -3,6 +3,29 @@ from __future__ import annotations
 from collections.abc import Iterable
 
 
+BEEF_NAME_KEYWORDS = (
+    "牛肉",
+    "牛排",
+    "牛腩",
+    "牛腱",
+    "牛柳",
+    "牛杂",
+    "肥牛",
+    "牛肋",
+    "牛板腱",
+    "牛上脑",
+    "牛里脊",
+    "牛眼肉",
+    "牛西冷",
+    "牛小排",
+    "牛霖",
+    "牛舌",
+    "牛筋",
+    "牛尾",
+    "牛腱子",
+)
+
+
 EXPLICIT_ALIASES: dict[str, list[str]] = {
     "牛上脑": ["牛排", "牛肉", "高蛋白", "肩胛肉"],
     "牛里脊": ["牛排", "牛肉", "菲力", "高蛋白"],
@@ -151,6 +174,8 @@ CATEGORY_ALIASES: dict[str, list[str]] = {
     "卤味": ["卤菜", "熟食", "下酒菜"],
     "家常炒菜": ["家常菜", "下饭菜", "热菜"],
     "湘菜": ["湘味", "辣菜", "下饭菜"],
+    "东北菜": ["东北味", "下饭菜", "炖菜"],
+    "江浙菜": ["本帮菜", "苏浙菜", "清鲜"],
 }
 
 IMAGE_KEYWORDS: list[tuple[Iterable[str], str]] = [
@@ -164,6 +189,8 @@ IMAGE_KEYWORDS: list[tuple[Iterable[str], str]] = [
     (["豆", "豆腐", "豆浆", "豆奶", "腐竹"], "soy"),
     (["啤酒", "白酒", "红酒", "威士忌", "鸡尾酒", "乌苏", "青岛", "雪花", "百威", "茅台", "五粮液", "汾酒", "二锅头"], "beijing-soda"),
     (["可口可乐", "元气森林", "东方树叶", "三得利", "冰红茶", "奶茶", "柠檬茶", "红牛", "东鹏", "果粒橙"], "beijing-soda"),
+    (["牛肉面", "小面", "米粉", "螺蛳粉", "热干面", "炸酱面", "担担面", "刀削面", "拌面", "云吞面", "米线", "河粉", "炒面"], "grains"),
+    (["烧麦", "小笼包", "生煎包", "韭菜盒子", "鸡蛋灌饼", "手抓饼", "煎饼果子", "肉夹馍", "锅贴", "油条"], "grains"),
     (["巧克力", "薯片", "饼干", "可乐", "牛肉干"], "snack"),
 ]
 
@@ -173,7 +200,7 @@ def get_food_aliases(name: str, category: str) -> list[str]:
     for keyword, alias_list in EXPLICIT_ALIASES.items():
         if keyword in name:
             aliases.update(alias_list)
-    if "牛" in name and "牛排" not in aliases:
+    if any(keyword in name for keyword in BEEF_NAME_KEYWORDS) and "牛排" not in aliases:
         aliases.update(["牛肉", "高蛋白"])
     if "蛋" in name:
         aliases.update(["蛋白质"])
@@ -199,6 +226,8 @@ def get_food_image_key(name: str, category: str) -> str:
         "卤味": "meal",
         "家常炒菜": "meal",
         "湘菜": "meal",
+        "东北菜": "meal",
+        "江浙菜": "meal",
         "饮品": "beijing-soda",
         "连锁餐厅": "meal",
         "轻食": "meal",

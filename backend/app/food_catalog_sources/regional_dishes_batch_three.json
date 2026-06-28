@@ -1,0 +1,302 @@
+[
+  {
+    "name": "小鸡炖蘑菇",
+    "category": "东北菜",
+    "calories_per_100g": 176,
+    "protein": 12.8,
+    "fat": 10.1,
+    "carbs": 8.2,
+    "serving_size_g": 260,
+    "portion_hint": "常见一份小鸡炖蘑菇约 220-300g"
+  },
+  {
+    "name": "猪肉炖粉条",
+    "category": "东北菜",
+    "calories_per_100g": 196,
+    "protein": 10.2,
+    "fat": 12.9,
+    "carbs": 10.8,
+    "serving_size_g": 260,
+    "portion_hint": "常见一份猪肉炖粉条约 220-300g"
+  },
+  {
+    "name": "东北乱炖",
+    "category": "东北菜",
+    "calories_per_100g": 102,
+    "protein": 4.3,
+    "fat": 5.6,
+    "carbs": 9.7,
+    "serving_size_g": 280,
+    "portion_hint": "常见一份东北乱炖约 240-320g"
+  },
+  {
+    "name": "溜肉段",
+    "category": "东北菜",
+    "calories_per_100g": 241,
+    "protein": 11.6,
+    "fat": 14.7,
+    "carbs": 15.1,
+    "serving_size_g": 200,
+    "portion_hint": "常见一盘溜肉段约 180-220g"
+  },
+  {
+    "name": "杀猪菜",
+    "category": "东北菜",
+    "calories_per_100g": 118,
+    "protein": 7.8,
+    "fat": 6.2,
+    "carbs": 7.6,
+    "serving_size_g": 260,
+    "portion_hint": "常见一份杀猪菜约 220-300g"
+  },
+  {
+    "name": "尖椒干豆腐",
+    "category": "东北菜",
+    "calories_per_100g": 144,
+    "protein": 9.5,
+    "fat": 8.7,
+    "carbs": 7.1,
+    "serving_size_g": 200,
+    "portion_hint": "常见一盘尖椒干豆腐约 180-220g"
+  },
+  {
+    "name": "排骨炖豆角",
+    "category": "东北菜",
+    "calories_per_100g": 158,
+    "protein": 8.9,
+    "fat": 9.7,
+    "carbs": 8.5,
+    "serving_size_g": 260,
+    "portion_hint": "常见一份排骨炖豆角约 220-300g"
+  },
+  {
+    "name": "酸菜白肉",
+    "category": "东北菜",
+    "calories_per_100g": 172,
+    "protein": 10.8,
+    "fat": 12.9,
+    "carbs": 3.7,
+    "serving_size_g": 220,
+    "portion_hint": "常见一份酸菜白肉约 180-240g"
+  },
+  {
+    "name": "东北大拉皮",
+    "category": "东北菜",
+    "calories_per_100g": 126,
+    "protein": 4.3,
+    "fat": 6.4,
+    "carbs": 13.0,
+    "serving_size_g": 250,
+    "portion_hint": "常见一盘东北大拉皮约 220-280g"
+  },
+  {
+    "name": "拔丝地瓜",
+    "category": "东北菜",
+    "calories_per_100g": 233,
+    "protein": 2.1,
+    "fat": 6.9,
+    "carbs": 40.2,
+    "serving_size_g": 180,
+    "portion_hint": "常见一盘拔丝地瓜约 160-200g"
+  },
+  {
+    "name": "锅塌豆腐",
+    "category": "东北菜",
+    "calories_per_100g": 164,
+    "protein": 10.7,
+    "fat": 9.8,
+    "carbs": 8.4,
+    "serving_size_g": 200,
+    "portion_hint": "常见一盘锅塌豆腐约 180-220g"
+  },
+  {
+    "name": "老厨白菜",
+    "category": "东北菜",
+    "calories_per_100g": 94,
+    "protein": 2.9,
+    "fat": 5.2,
+    "carbs": 10.1,
+    "serving_size_g": 220,
+    "portion_hint": "常见一盘老厨白菜约 200-240g"
+  },
+  {
+    "name": "东坡肉",
+    "category": "江浙菜",
+    "calories_per_100g": 356,
+    "protein": 10.1,
+    "fat": 32.7,
+    "carbs": 4.9,
+    "serving_size_g": 160,
+    "portion_hint": "常见一份东坡肉可食部分约 140-180g"
+  },
+  {
+    "name": "糖醋小排",
+    "category": "江浙菜",
+    "calories_per_100g": 266,
+    "protein": 13.5,
+    "fat": 18.4,
+    "carbs": 11.2,
+    "serving_size_g": 180,
+    "portion_hint": "常见一份糖醋小排约 160-200g"
+  },
+  {
+    "name": "油爆虾",
+    "category": "江浙菜",
+    "calories_per_100g": 194,
+    "protein": 16.8,
+    "fat": 11.2,
+    "carbs": 5.6,
+    "serving_size_g": 180,
+    "portion_hint": "常见一盘油爆虾可食部分约 150-190g"
+  },
+  {
+    "name": "西湖醋鱼",
+    "category": "江浙菜",
+    "calories_per_100g": 144,
+    "protein": 12.9,
+    "fat": 7.1,
+    "carbs": 6.4,
+    "serving_size_g": 220,
+    "portion_hint": "常见一份西湖醋鱼可食部分约 180-240g"
+  },
+  {
+    "name": "龙井虾仁",
+    "category": "江浙菜",
+    "calories_per_100g": 148,
+    "protein": 15.6,
+    "fat": 6.9,
+    "carbs": 4.1,
+    "serving_size_g": 180,
+    "portion_hint": "常见一盘龙井虾仁约 150-190g"
+  },
+  {
+    "name": "叫花鸡",
+    "category": "江浙菜",
+    "calories_per_100g": 176,
+    "protein": 18.7,
+    "fat": 10.6,
+    "carbs": 1.9,
+    "serving_size_g": 220,
+    "portion_hint": "常见一份叫花鸡可食部分约 180-240g"
+  },
+  {
+    "name": "红烧狮子头",
+    "category": "江浙菜",
+    "calories_per_100g": 248,
+    "protein": 13.2,
+    "fat": 18.7,
+    "carbs": 6.6,
+    "serving_size_g": 180,
+    "portion_hint": "常见两颗狮子头约 160-200g"
+  },
+  {
+    "name": "扬州炒饭",
+    "category": "江浙菜",
+    "calories_per_100g": 186,
+    "protein": 6.3,
+    "fat": 7.1,
+    "carbs": 23.4,
+    "serving_size_g": 250,
+    "portion_hint": "常见一盘扬州炒饭约 220-280g"
+  },
+  {
+    "name": "松鼠桂鱼",
+    "category": "江浙菜",
+    "calories_per_100g": 178,
+    "protein": 12.6,
+    "fat": 8.2,
+    "carbs": 13.0,
+    "serving_size_g": 220,
+    "portion_hint": "常见一份松鼠桂鱼可食部分约 180-240g"
+  },
+  {
+    "name": "腌笃鲜",
+    "category": "江浙菜",
+    "calories_per_100g": 121,
+    "protein": 8.1,
+    "fat": 7.3,
+    "carbs": 5.2,
+    "serving_size_g": 260,
+    "portion_hint": "常见一碗腌笃鲜约 220-300g"
+  },
+  {
+    "name": "梅干菜烧肉",
+    "category": "江浙菜",
+    "calories_per_100g": 298,
+    "protein": 10.6,
+    "fat": 25.8,
+    "carbs": 6.5,
+    "serving_size_g": 180,
+    "portion_hint": "常见一份梅干菜烧肉约 160-200g"
+  },
+  {
+    "name": "清炒虾仁",
+    "category": "江浙菜",
+    "calories_per_100g": 137,
+    "protein": 15.1,
+    "fat": 6.2,
+    "carbs": 2.4,
+    "serving_size_g": 160,
+    "portion_hint": "常见一盘清炒虾仁约 140-180g"
+  },
+  {
+    "name": "油焖春笋",
+    "category": "江浙菜",
+    "calories_per_100g": 88,
+    "protein": 2.5,
+    "fat": 4.8,
+    "carbs": 9.3,
+    "serving_size_g": 180,
+    "portion_hint": "常见一盘油焖春笋约 160-200g"
+  },
+  {
+    "name": "响油鳝糊",
+    "category": "江浙菜",
+    "calories_per_100g": 184,
+    "protein": 13.1,
+    "fat": 11.4,
+    "carbs": 7.2,
+    "serving_size_g": 180,
+    "portion_hint": "常见一盘响油鳝糊约 150-190g"
+  },
+  {
+    "name": "蟹粉豆腐",
+    "category": "江浙菜",
+    "calories_per_100g": 146,
+    "protein": 8.2,
+    "fat": 9.1,
+    "carbs": 7.4,
+    "serving_size_g": 180,
+    "portion_hint": "常见一份蟹粉豆腐约 160-200g"
+  },
+  {
+    "name": "雪菜毛豆",
+    "category": "江浙菜",
+    "calories_per_100g": 98,
+    "protein": 5.4,
+    "fat": 5.1,
+    "carbs": 8.7,
+    "serving_size_g": 180,
+    "portion_hint": "常见一盘雪菜毛豆约 160-200g"
+  },
+  {
+    "name": "杭椒牛柳",
+    "category": "江浙菜",
+    "calories_per_100g": 173,
+    "protein": 11.9,
+    "fat": 9.2,
+    "carbs": 8.1,
+    "serving_size_g": 200,
+    "portion_hint": "常见一盘杭椒牛柳约 180-220g"
+  },
+  {
+    "name": "雪菜黄鱼",
+    "category": "江浙菜",
+    "calories_per_100g": 139,
+    "protein": 13.6,
+    "fat": 7.5,
+    "carbs": 4.1,
+    "serving_size_g": 200,
+    "portion_hint": "常见一份雪菜黄鱼可食部分约 170-220g"
+  }
+]

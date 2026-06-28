@@ -1,0 +1,167 @@
+[
+  {
+    "name": "伊利 纯牛奶",
+    "category": "乳制品",
+    "calories_per_100g": 62,
+    "protein": 3.2,
+    "fat": 3.5,
+    "carbs": 4.8,
+    "brand": "伊利",
+    "serving_size_g": 250,
+    "portion_hint": "常见一盒纯牛奶约 250ml，按约 250g 记录"
+  },
+  {
+    "name": "蒙牛 纯牛奶",
+    "category": "乳制品",
+    "calories_per_100g": 61,
+    "protein": 3.1,
+    "fat": 3.4,
+    "carbs": 4.8,
+    "brand": "蒙牛",
+    "serving_size_g": 250,
+    "portion_hint": "常见一盒纯牛奶约 250ml，按约 250g 记录"
+  },
+  {
+    "name": "光明 莫斯利安原味酸奶",
+    "category": "乳制品",
+    "calories_per_100g": 90,
+    "protein": 3.0,
+    "fat": 2.9,
+    "carbs": 12.9,
+    "brand": "光明",
+    "serving_size_g": 200,
+    "portion_hint": "常见一盒莫斯利安酸奶约 200g"
+  },
+  {
+    "name": "伊利 优酸乳原味",
+    "category": "乳制品",
+    "calories_per_100g": 73,
+    "protein": 1.0,
+    "fat": 1.0,
+    "carbs": 15.0,
+    "brand": "伊利",
+    "serving_size_g": 250,
+    "portion_hint": "常见一盒优酸乳约 250g"
+  },
+  {
+    "name": "养乐多 活菌型乳酸菌饮品",
+    "category": "乳制品",
+    "calories_per_100g": 67,
+    "protein": 1.0,
+    "fat": 0.1,
+    "carbs": 15.6,
+    "brand": "养乐多",
+    "serving_size_g": 100,
+    "portion_hint": "常见两瓶养乐多约 100g"
+  },
+  {
+    "name": "7-11 黑椒牛肉便当",
+    "category": "连锁餐厅",
+    "calories_per_100g": 172,
+    "protein": 8.7,
+    "fat": 5.9,
+    "carbs": 21.0,
+    "brand": "7-11",
+    "serving_size_g": 360,
+    "portion_hint": "按一份便利店便当固定值估算，常见一份约 340-380g"
+  },
+  {
+    "name": "7-11 厚切火腿三明治",
+    "category": "连锁餐厅",
+    "calories_per_100g": 231,
+    "protein": 8.9,
+    "fat": 10.8,
+    "carbs": 24.1,
+    "brand": "7-11",
+    "serving_size_g": 165,
+    "portion_hint": "按一个便利店三明治固定值估算，常见一份约 150-170g"
+  },
+  {
+    "name": "全家 金枪鱼三明治",
+    "category": "连锁餐厅",
+    "calories_per_100g": 224,
+    "protein": 9.4,
+    "fat": 9.7,
+    "carbs": 23.9,
+    "brand": "全家",
+    "serving_size_g": 165,
+    "portion_hint": "按一个便利店三明治固定值估算，常见一份约 150-170g"
+  },
+  {
+    "name": "全家 黑椒牛肉便当",
+    "category": "连锁餐厅",
+    "calories_per_100g": 175,
+    "protein": 8.9,
+    "fat": 6.0,
+    "carbs": 21.2,
+    "brand": "全家",
+    "serving_size_g": 360,
+    "portion_hint": "按一份便利店便当固定值估算，常见一份约 340-380g"
+  },
+  {
+    "name": "全家 关东煮鱼豆腐",
+    "category": "连锁餐厅",
+    "calories_per_100g": 116,
+    "protein": 8.3,
+    "fat": 6.0,
+    "carbs": 7.0,
+    "brand": "全家",
+    "serving_size_g": 100,
+    "portion_hint": "按一份关东煮鱼豆腐固定值估算，常见一份约 90-110g"
+  },
+  {
+    "name": "罗森 鸡胸肉沙拉",
+    "category": "轻食",
+    "calories_per_100g": 82,
+    "protein": 9.0,
+    "fat": 3.4,
+    "carbs": 3.8,
+    "brand": "罗森",
+    "serving_size_g": 180,
+    "portion_hint": "按一份便利店沙拉固定值估算，常见一份约 160-200g"
+  },
+  {
+    "name": "罗森 海苔肉松饭团",
+    "category": "连锁餐厅",
+    "calories_per_100g": 208,
+    "protein": 5.3,
+    "fat": 6.1,
+    "carbs": 32.4,
+    "brand": "罗森",
+    "serving_size_g": 115,
+    "portion_hint": "按一个饭团固定值估算，常见一份约 105-120g"
+  },
+  {
+    "name": "罗森 关东煮魔芋结",
+    "category": "连锁餐厅",
+    "calories_per_100g": 11,
+    "protein": 0.1,
+    "fat": 0.0,
+    "carbs": 2.5,
+    "brand": "罗森",
+    "serving_size_g": 110,
+    "portion_hint": "按一份关东煮魔芋结固定值估算，常见一份约 100-120g"
+  },
+  {
+    "name": "罗森 关东煮鱼豆腐",
+    "category": "连锁餐厅",
+    "calories_per_100g": 117,
+    "protein": 8.4,
+    "fat": 6.0,
+    "carbs": 7.1,
+    "brand": "罗森",
+    "serving_size_g": 100,
+    "portion_hint": "按一份关东煮鱼豆腐固定值估算，常见一份约 90-110g"
+  },
+  {
+    "name": "元气森林 冰茶",
+    "category": "饮品",
+    "calories_per_100g": 12,
+    "protein": 0.0,
+    "fat": 0.0,
+    "carbs": 2.9,
+    "brand": "元气森林",
+    "serving_size_g": 450,
+    "portion_hint": "常见一瓶元气森林冰茶约 450ml，按约 450g 记录"
+  }
+]

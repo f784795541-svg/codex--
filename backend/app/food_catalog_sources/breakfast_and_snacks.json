@@ -1,0 +1,302 @@
+[
+  {
+    "name": "烧麦",
+    "category": "主食",
+    "calories_per_100g": 228,
+    "protein": 6.8,
+    "fat": 6.4,
+    "carbs": 36.0,
+    "serving_size_g": 120,
+    "portion_hint": "常见一笼 4 到 5 个烧麦约 100-130g"
+  },
+  {
+    "name": "小笼包",
+    "category": "主食",
+    "calories_per_100g": 230,
+    "protein": 8.2,
+    "fat": 7.1,
+    "carbs": 33.2,
+    "serving_size_g": 150,
+    "portion_hint": "常见一笼 6 个小笼包约 130-160g"
+  },
+  {
+    "name": "生煎包",
+    "category": "主食",
+    "calories_per_100g": 271,
+    "protein": 8.1,
+    "fat": 10.8,
+    "carbs": 35.1,
+    "serving_size_g": 140,
+    "portion_hint": "常见一份 4 个生煎包约 120-150g"
+  },
+  {
+    "name": "韭菜盒子",
+    "category": "主食",
+    "calories_per_100g": 230,
+    "protein": 6.4,
+    "fat": 9.8,
+    "carbs": 29.6,
+    "serving_size_g": 140,
+    "portion_hint": "常见一个韭菜盒子约 120-150g"
+  },
+  {
+    "name": "鸡蛋灌饼",
+    "category": "主食",
+    "calories_per_100g": 246,
+    "protein": 8.7,
+    "fat": 11.2,
+    "carbs": 27.5,
+    "serving_size_g": 180,
+    "portion_hint": "常见一个鸡蛋灌饼约 160-200g"
+  },
+  {
+    "name": "手抓饼",
+    "category": "主食",
+    "calories_per_100g": 306,
+    "protein": 6.2,
+    "fat": 17.8,
+    "carbs": 30.1,
+    "serving_size_g": 120,
+    "portion_hint": "常见一张原味手抓饼约 100-130g"
+  },
+  {
+    "name": "煎饼果子",
+    "category": "主食",
+    "calories_per_100g": 221,
+    "protein": 8.4,
+    "fat": 9.3,
+    "carbs": 26.1,
+    "serving_size_g": 220,
+    "portion_hint": "常见一个煎饼果子约 200-240g"
+  },
+  {
+    "name": "肉夹馍",
+    "category": "主食",
+    "calories_per_100g": 295,
+    "protein": 11.6,
+    "fat": 13.5,
+    "carbs": 31.8,
+    "serving_size_g": 170,
+    "portion_hint": "常见一个肉夹馍约 150-180g"
+  },
+  {
+    "name": "豆腐脑",
+    "category": "主食",
+    "calories_per_100g": 67,
+    "protein": 3.9,
+    "fat": 3.1,
+    "carbs": 5.6,
+    "serving_size_g": 300,
+    "portion_hint": "常见一碗豆腐脑约 280-320g"
+  },
+  {
+    "name": "胡辣汤",
+    "category": "主食",
+    "calories_per_100g": 53,
+    "protein": 2.1,
+    "fat": 2.3,
+    "carbs": 6.2,
+    "serving_size_g": 300,
+    "portion_hint": "常见一碗胡辣汤约 280-320g"
+  },
+  {
+    "name": "油条",
+    "category": "主食",
+    "calories_per_100g": 386,
+    "protein": 6.9,
+    "fat": 20.5,
+    "carbs": 43.1,
+    "serving_size_g": 80,
+    "portion_hint": "常见一根油条约 70-90g"
+  },
+  {
+    "name": "糍饭团",
+    "category": "主食",
+    "calories_per_100g": 218,
+    "protein": 5.6,
+    "fat": 6.2,
+    "carbs": 34.7,
+    "serving_size_g": 180,
+    "portion_hint": "常见一个糍饭团约 160-190g"
+  },
+  {
+    "name": "粢饭糕",
+    "category": "主食",
+    "calories_per_100g": 234,
+    "protein": 4.1,
+    "fat": 9.8,
+    "carbs": 31.2,
+    "serving_size_g": 120,
+    "portion_hint": "常见两块粢饭糕约 100-130g"
+  },
+  {
+    "name": "豆沙包",
+    "category": "主食",
+    "calories_per_100g": 247,
+    "protein": 6.2,
+    "fat": 3.8,
+    "carbs": 47.1,
+    "serving_size_g": 120,
+    "portion_hint": "常见两个豆沙包约 100-130g"
+  },
+  {
+    "name": "奶黄包",
+    "category": "主食",
+    "calories_per_100g": 255,
+    "protein": 6.0,
+    "fat": 5.4,
+    "carbs": 45.7,
+    "serving_size_g": 120,
+    "portion_hint": "常见两个奶黄包约 100-130g"
+  },
+  {
+    "name": "叉烧包",
+    "category": "主食",
+    "calories_per_100g": 242,
+    "protein": 8.1,
+    "fat": 6.3,
+    "carbs": 38.4,
+    "serving_size_g": 130,
+    "portion_hint": "常见两个叉烧包约 110-140g"
+  },
+  {
+    "name": "馄饨",
+    "category": "主食",
+    "calories_per_100g": 135,
+    "protein": 6.5,
+    "fat": 3.8,
+    "carbs": 19.2,
+    "serving_size_g": 250,
+    "portion_hint": "常见一碗馄饨约 220-280g"
+  },
+  {
+    "name": "鲜肉小馄饨",
+    "category": "主食",
+    "calories_per_100g": 142,
+    "protein": 7.1,
+    "fat": 4.1,
+    "carbs": 19.4,
+    "serving_size_g": 260,
+    "portion_hint": "常见一碗小馄饨约 240-280g"
+  },
+  {
+    "name": "锅贴",
+    "category": "主食",
+    "calories_per_100g": 243,
+    "protein": 8.2,
+    "fat": 11.1,
+    "carbs": 28.7,
+    "serving_size_g": 150,
+    "portion_hint": "常见一份 6 个锅贴约 130-160g"
+  },
+  {
+    "name": "葱油饼",
+    "category": "主食",
+    "calories_per_100g": 290,
+    "protein": 6.1,
+    "fat": 13.9,
+    "carbs": 35.4,
+    "serving_size_g": 120,
+    "portion_hint": "常见一张葱油饼约 100-130g"
+  },
+  {
+    "name": "凉皮",
+    "category": "主食",
+    "calories_per_100g": 117,
+    "protein": 2.8,
+    "fat": 2.3,
+    "carbs": 21.6,
+    "serving_size_g": 250,
+    "portion_hint": "常见一份凉皮约 220-280g"
+  },
+  {
+    "name": "凉面",
+    "category": "主食",
+    "calories_per_100g": 146,
+    "protein": 4.9,
+    "fat": 3.8,
+    "carbs": 23.4,
+    "serving_size_g": 250,
+    "portion_hint": "常见一份凉面约 220-280g"
+  },
+  {
+    "name": "烤冷面",
+    "category": "主食",
+    "calories_per_100g": 211,
+    "protein": 6.7,
+    "fat": 8.9,
+    "carbs": 25.6,
+    "serving_size_g": 180,
+    "portion_hint": "常见一份烤冷面约 160-190g"
+  },
+  {
+    "name": "臭豆腐",
+    "category": "零食",
+    "calories_per_100g": 129,
+    "protein": 8.3,
+    "fat": 7.2,
+    "carbs": 7.4,
+    "serving_size_g": 150,
+    "portion_hint": "常见一份臭豆腐约 130-160g"
+  },
+  {
+    "name": "烤面筋",
+    "category": "零食",
+    "calories_per_100g": 182,
+    "protein": 10.6,
+    "fat": 5.4,
+    "carbs": 22.1,
+    "serving_size_g": 120,
+    "portion_hint": "常见两到三串烤面筋约 100-130g"
+  },
+  {
+    "name": "糖油粑粑",
+    "category": "零食",
+    "calories_per_100g": 252,
+    "protein": 2.9,
+    "fat": 8.7,
+    "carbs": 39.8,
+    "serving_size_g": 120,
+    "portion_hint": "常见一份糖油粑粑约 100-130g"
+  },
+  {
+    "name": "驴肉火烧",
+    "category": "主食",
+    "calories_per_100g": 278,
+    "protein": 13.8,
+    "fat": 10.6,
+    "carbs": 31.5,
+    "serving_size_g": 170,
+    "portion_hint": "常见一个驴肉火烧约 150-180g"
+  },
+  {
+    "name": "牛肉馅饼",
+    "category": "主食",
+    "calories_per_100g": 251,
+    "protein": 10.3,
+    "fat": 11.8,
+    "carbs": 26.1,
+    "serving_size_g": 160,
+    "portion_hint": "常见一个牛肉馅饼约 140-170g"
+  },
+  {
+    "name": "鸭血粉丝汤",
+    "category": "主食",
+    "calories_per_100g": 72,
+    "protein": 5.6,
+    "fat": 2.6,
+    "carbs": 6.7,
+    "serving_size_g": 350,
+    "portion_hint": "常见一碗鸭血粉丝汤约 320-380g"
+  },
+  {
+    "name": "酒酿圆子",
+    "category": "主食",
+    "calories_per_100g": 118,
+    "protein": 2.2,
+    "fat": 1.4,
+    "carbs": 23.9,
+    "serving_size_g": 250,
+    "portion_hint": "常见一碗酒酿圆子约 220-280g"
+  }
+]

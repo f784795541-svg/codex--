@@ -15,6 +15,10 @@ SOURCE_FILES = [
     "regional_dishes.json",
     "regional_dishes_batch_two.json",
     "drinks_and_convenience.json",
+    "breakfast_and_snacks.json",
+    "noodles_and_staples_batch_two.json",
+    "regional_dishes_batch_three.json",
+    "convenience_and_dairy_batch_two.json",
 ]
 
 

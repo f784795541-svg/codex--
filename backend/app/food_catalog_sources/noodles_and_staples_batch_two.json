@@ -1,0 +1,302 @@
+[
+  {
+    "name": "兰州牛肉面",
+    "category": "主食",
+    "calories_per_100g": 136,
+    "protein": 6.4,
+    "fat": 3.4,
+    "carbs": 19.8,
+    "serving_size_g": 450,
+    "portion_hint": "常见一碗兰州牛肉面约 420-500g"
+  },
+  {
+    "name": "重庆小面",
+    "category": "主食",
+    "calories_per_100g": 151,
+    "protein": 4.8,
+    "fat": 6.9,
+    "carbs": 18.1,
+    "serving_size_g": 350,
+    "portion_hint": "常见一碗重庆小面约 320-380g"
+  },
+  {
+    "name": "酸辣粉",
+    "category": "主食",
+    "calories_per_100g": 123,
+    "protein": 2.3,
+    "fat": 3.6,
+    "carbs": 20.7,
+    "serving_size_g": 400,
+    "portion_hint": "常见一碗酸辣粉约 360-420g"
+  },
+  {
+    "name": "桂林米粉",
+    "category": "主食",
+    "calories_per_100g": 109,
+    "protein": 4.2,
+    "fat": 2.1,
+    "carbs": 18.4,
+    "serving_size_g": 420,
+    "portion_hint": "常见一碗桂林米粉约 380-450g"
+  },
+  {
+    "name": "柳州螺蛳粉",
+    "category": "主食",
+    "calories_per_100g": 124,
+    "protein": 4.1,
+    "fat": 4.0,
+    "carbs": 17.9,
+    "serving_size_g": 420,
+    "portion_hint": "常见一碗螺蛳粉约 380-450g"
+  },
+  {
+    "name": "热干面",
+    "category": "主食",
+    "calories_per_100g": 188,
+    "protein": 6.1,
+    "fat": 7.4,
+    "carbs": 24.1,
+    "serving_size_g": 300,
+    "portion_hint": "常见一份热干面约 260-320g"
+  },
+  {
+    "name": "炸酱面",
+    "category": "主食",
+    "calories_per_100g": 167,
+    "protein": 7.3,
+    "fat": 6.2,
+    "carbs": 20.8,
+    "serving_size_g": 350,
+    "portion_hint": "常见一碗炸酱面约 320-380g"
+  },
+  {
+    "name": "担担面",
+    "category": "主食",
+    "calories_per_100g": 186,
+    "protein": 6.5,
+    "fat": 8.7,
+    "carbs": 20.2,
+    "serving_size_g": 320,
+    "portion_hint": "常见一碗担担面约 280-340g"
+  },
+  {
+    "name": "刀削面",
+    "category": "主食",
+    "calories_per_100g": 141,
+    "protein": 4.9,
+    "fat": 3.1,
+    "carbs": 23.4,
+    "serving_size_g": 350,
+    "portion_hint": "常见一碗刀削面约 320-380g"
+  },
+  {
+    "name": "油泼面",
+    "category": "主食",
+    "calories_per_100g": 201,
+    "protein": 5.6,
+    "fat": 9.2,
+    "carbs": 24.3,
+    "serving_size_g": 320,
+    "portion_hint": "常见一碗油泼面约 280-340g"
+  },
+  {
+    "name": "葱油拌面",
+    "category": "主食",
+    "calories_per_100g": 174,
+    "protein": 4.8,
+    "fat": 7.1,
+    "carbs": 22.5,
+    "serving_size_g": 300,
+    "portion_hint": "常见一碗葱油拌面约 260-320g"
+  },
+  {
+    "name": "阳春面",
+    "category": "主食",
+    "calories_per_100g": 87,
+    "protein": 3.0,
+    "fat": 1.2,
+    "carbs": 16.1,
+    "serving_size_g": 350,
+    "portion_hint": "常见一碗阳春面约 320-380g"
+  },
+  {
+    "name": "红烧牛肉面",
+    "category": "主食",
+    "calories_per_100g": 152,
+    "protein": 6.0,
+    "fat": 4.9,
+    "carbs": 20.9,
+    "serving_size_g": 420,
+    "portion_hint": "常见一碗红烧牛肉面约 380-450g"
+  },
+  {
+    "name": "雪菜肉丝面",
+    "category": "主食",
+    "calories_per_100g": 138,
+    "protein": 5.7,
+    "fat": 4.3,
+    "carbs": 18.9,
+    "serving_size_g": 380,
+    "portion_hint": "常见一碗雪菜肉丝面约 340-400g"
+  },
+  {
+    "name": "馄饨面",
+    "category": "主食",
+    "calories_per_100g": 129,
+    "protein": 5.5,
+    "fat": 3.2,
+    "carbs": 18.7,
+    "serving_size_g": 380,
+    "portion_hint": "常见一碗馄饨面约 340-400g"
+  },
+  {
+    "name": "肥肠粉",
+    "category": "主食",
+    "calories_per_100g": 135,
+    "protein": 4.1,
+    "fat": 5.4,
+    "carbs": 17.8,
+    "serving_size_g": 380,
+    "portion_hint": "常见一碗肥肠粉约 340-400g"
+  },
+  {
+    "name": "牛肉粉",
+    "category": "主食",
+    "calories_per_100g": 126,
+    "protein": 5.8,
+    "fat": 3.3,
+    "carbs": 18.1,
+    "serving_size_g": 400,
+    "portion_hint": "常见一碗牛肉粉约 360-420g"
+  },
+  {
+    "name": "排骨米线",
+    "category": "主食",
+    "calories_per_100g": 132,
+    "protein": 5.7,
+    "fat": 4.1,
+    "carbs": 18.3,
+    "serving_size_g": 420,
+    "portion_hint": "常见一碗排骨米线约 380-450g"
+  },
+  {
+    "name": "砂锅米线",
+    "category": "主食",
+    "calories_per_100g": 118,
+    "protein": 4.2,
+    "fat": 3.2,
+    "carbs": 18.5,
+    "serving_size_g": 420,
+    "portion_hint": "常见一碗砂锅米线约 380-450g"
+  },
+  {
+    "name": "鸡丝凉面",
+    "category": "主食",
+    "calories_per_100g": 151,
+    "protein": 7.6,
+    "fat": 4.8,
+    "carbs": 19.7,
+    "serving_size_g": 320,
+    "portion_hint": "常见一份鸡丝凉面约 280-340g"
+  },
+  {
+    "name": "肉酱拌面",
+    "category": "主食",
+    "calories_per_100g": 173,
+    "protein": 7.0,
+    "fat": 6.5,
+    "carbs": 21.4,
+    "serving_size_g": 320,
+    "portion_hint": "常见一碗肉酱拌面约 280-340g"
+  },
+  {
+    "name": "过桥米线",
+    "category": "主食",
+    "calories_per_100g": 122,
+    "protein": 4.9,
+    "fat": 3.5,
+    "carbs": 18.0,
+    "serving_size_g": 430,
+    "portion_hint": "常见一碗过桥米线约 390-460g"
+  },
+  {
+    "name": "云吞面",
+    "category": "主食",
+    "calories_per_100g": 137,
+    "protein": 6.1,
+    "fat": 3.8,
+    "carbs": 19.1,
+    "serving_size_g": 380,
+    "portion_hint": "常见一碗云吞面约 340-400g"
+  },
+  {
+    "name": "牛肉河粉",
+    "category": "主食",
+    "calories_per_100g": 134,
+    "protein": 6.0,
+    "fat": 3.7,
+    "carbs": 18.8,
+    "serving_size_g": 400,
+    "portion_hint": "常见一碗牛肉河粉约 360-420g"
+  },
+  {
+    "name": "干炒牛河",
+    "category": "主食",
+    "calories_per_100g": 192,
+    "protein": 7.2,
+    "fat": 7.8,
+    "carbs": 23.1,
+    "serving_size_g": 320,
+    "portion_hint": "常见一盘干炒牛河约 280-340g"
+  },
+  {
+    "name": "炒米粉",
+    "category": "主食",
+    "calories_per_100g": 171,
+    "protein": 5.1,
+    "fat": 6.4,
+    "carbs": 22.9,
+    "serving_size_g": 320,
+    "portion_hint": "常见一盘炒米粉约 280-340g"
+  },
+  {
+    "name": "肉丝炒面",
+    "category": "主食",
+    "calories_per_100g": 182,
+    "protein": 7.6,
+    "fat": 7.1,
+    "carbs": 23.0,
+    "serving_size_g": 320,
+    "portion_hint": "常见一盘肉丝炒面约 280-340g"
+  },
+  {
+    "name": "武汉豆皮",
+    "category": "主食",
+    "calories_per_100g": 214,
+    "protein": 8.2,
+    "fat": 9.6,
+    "carbs": 24.0,
+    "serving_size_g": 180,
+    "portion_hint": "常见一份武汉豆皮约 160-200g"
+  },
+  {
+    "name": "炒方便面",
+    "category": "主食",
+    "calories_per_100g": 208,
+    "protein": 5.4,
+    "fat": 9.2,
+    "carbs": 25.6,
+    "serving_size_g": 220,
+    "portion_hint": "常见一份炒方便面约 200-240g"
+  },
+  {
+    "name": "三鲜伊面",
+    "category": "主食",
+    "calories_per_100g": 176,
+    "protein": 6.2,
+    "fat": 6.8,
+    "carbs": 22.9,
+    "serving_size_g": 320,
+    "portion_hint": "常见一碗三鲜伊面约 280-340g"
+  }
+]
