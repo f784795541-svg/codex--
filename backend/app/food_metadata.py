@@ -149,6 +149,8 @@ CATEGORY_ALIASES: dict[str, list[str]] = {
     "川菜": ["川味", "下饭菜", "辣菜"],
     "广东菜": ["粤菜", "烧腊", "广式"],
     "卤味": ["卤菜", "熟食", "下酒菜"],
+    "家常炒菜": ["家常菜", "下饭菜", "热菜"],
+    "湘菜": ["湘味", "辣菜", "下饭菜"],
 }
 
 IMAGE_KEYWORDS: list[tuple[Iterable[str], str]] = [
@@ -161,6 +163,7 @@ IMAGE_KEYWORDS: list[tuple[Iterable[str], str]] = [
     (["牛奶", "酸奶", "奶酪", "拿铁"], "dairy"),
     (["豆", "豆腐", "豆浆", "豆奶", "腐竹"], "soy"),
     (["啤酒", "白酒", "红酒", "威士忌", "鸡尾酒", "乌苏", "青岛", "雪花", "百威", "茅台", "五粮液", "汾酒", "二锅头"], "beijing-soda"),
+    (["可口可乐", "元气森林", "东方树叶", "三得利", "冰红茶", "奶茶", "柠檬茶", "红牛", "东鹏", "果粒橙"], "beijing-soda"),
     (["巧克力", "薯片", "饼干", "可乐", "牛肉干"], "snack"),
 ]
 
@@ -194,6 +197,11 @@ def get_food_image_key(name: str, category: str) -> str:
         "川菜": "meal",
         "广东菜": "meal",
         "卤味": "meal",
+        "家常炒菜": "meal",
+        "湘菜": "meal",
+        "饮品": "beijing-soda",
+        "连锁餐厅": "meal",
+        "轻食": "meal",
     }
     return category_map.get(category, "meal")
 

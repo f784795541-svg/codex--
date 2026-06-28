@@ -13,6 +13,8 @@ SOURCE_FILES = [
     "fruits_expanded.json",
     "alcohol_brands.json",
     "regional_dishes.json",
+    "regional_dishes_batch_two.json",
+    "drinks_and_convenience.json",
 ]
 
 
