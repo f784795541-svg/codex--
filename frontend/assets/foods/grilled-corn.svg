@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" role="img" aria-labelledby="title desc">
+  <title id="title">烤玉米</title>
+  <desc id="desc">带有烤痕的整根烤玉米插画</desc>
+  <defs>
+    <linearGradient id="cornBody" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ffe37d"/>
+      <stop offset="55%" stop-color="#f7c94a"/>
+      <stop offset="100%" stop-color="#eba72a"/>
+    </linearGradient>
+    <linearGradient id="leafGreen" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#74c76d"/>
+      <stop offset="100%" stop-color="#2f8b4a"/>
+    </linearGradient>
+  </defs>
+  <rect width="256" height="256" rx="48" fill="#f6efe1"/>
+  <ellipse cx="128" cy="212" rx="72" ry="18" fill="#d7c2a5" opacity=".45"/>
+  <g transform="rotate(-14 128 128)">
+    <path d="M68 168c13 23 32 37 58 40l-6-83c-30 4-47 17-52 43z" fill="url(#leafGreen)"/>
+    <path d="M188 168c-13 23-32 37-58 40l6-83c30 4 47 17 52 43z" fill="url(#leafGreen)"/>
+    <path d="M128 42c35 0 61 35 61 82 0 48-26 88-61 88s-61-40-61-88c0-47 26-82 61-82z" fill="url(#cornBody)" stroke="#d8931f" stroke-width="6"/>
+    <g opacity=".72" stroke="#fbe58e" stroke-width="5" stroke-linecap="round">
+      <path d="M95 66v122"/>
+      <path d="M111 58v138"/>
+      <path d="M128 54v144"/>
+      <path d="M145 58v138"/>
+      <path d="M161 66v122"/>
+    </g>
+    <g opacity=".5" stroke="#9f5c1f" stroke-width="9" stroke-linecap="round">
+      <path d="M84 87h88"/>
+      <path d="M79 111h98"/>
+      <path d="M76 137h104"/>
+      <path d="M81 163h94"/>
+    </g>
+    <g opacity=".28" fill="#ffffff">
+      <ellipse cx="106" cy="82" rx="20" ry="10"/>
+      <ellipse cx="123" cy="102" rx="24" ry="12"/>
+    </g>
+  </g>
+</svg>

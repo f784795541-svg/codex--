@@ -193,7 +193,7 @@ const FOOD_IMAGE_RULES = [
   { keywords: ["鸡翅中 烧烤"], asset: "chicken-wings-real" },
   { keywords: ["烤茄子"], asset: "eggplant-real" },
   { keywords: ["烤金针菇"], asset: "button-mushroom" },
-  { keywords: ["烤玉米"], asset: "corn-cob" },
+  { keywords: ["烤玉米"], asset: "grilled-corn" },
   { keywords: ["生蚝", "烤鱿鱼"], asset: "fish" },
   { keywords: ["烧麦", "小笼包", "生煎包", "韭菜盒子", "鸡蛋灌饼", "手抓饼", "煎饼果子", "肉夹馍", "豆腐脑", "胡辣汤", "油条", "糍饭团", "粢饭糕", "豆沙包", "奶黄包", "叉烧包", "馄饨", "锅贴", "葱油饼", "凉皮", "凉面", "烤冷面", "驴肉火烧"], asset: "grains" },
   { keywords: ["牛肉面", "小面", "酸辣粉", "米粉", "螺蛳粉", "热干面", "炸酱面", "担担面", "刀削面", "油泼面", "拌面", "阳春面", "馄饨面", "米线", "河粉", "炒米粉", "炒面", "豆皮", "伊面"], asset: "noodle-bowl" },
@@ -635,7 +635,7 @@ const HIGH_RECOGNITION_IMAGE_MAP = {
   "烤茄子": "eggplant-real",
   "烤韭菜": "greens-bowl",
   "烤金针菇": "button-mushroom",
-  "烤玉米": "corn-cob",
+  "烤玉米": "grilled-corn",
   "烤豆腐": "tofu-block",
   "生蚝": "fish",
   "烤鱿鱼": "fish",
@@ -2144,6 +2144,12 @@ function includesFoodKeyword(name, keywords) {
   return keywords.some((keyword) => name.includes(keyword));
 }
 
+function findBestImageKeywordMatch(imageMap, foodName) {
+  return Object.keys(imageMap)
+    .filter((keyword) => foodName.includes(keyword))
+    .sort((left, right) => right.length - left.length)[0];
+}
+
 function isChineseHomeStaple(food) {
   return /米饭|糙米饭|馒头|面条|玉米|红薯|小米粥|燕麦片|山药|南瓜|包子/.test(food.name);
 }
@@ -2915,16 +2921,26 @@ function renderOverviewSuggestionSection(summary, recommendation = safeBuildDyna
 
 function resolveRegularFoodImagePath(food) {
   if (food.category === "酒类") {
-    const alcoholHighRecognitionAsset = Object.keys(HIGH_RECOGNITION_IMAGE_MAP).find((name) => food.name.includes(name));
+    const alcoholHighRecognitionAsset = findBestImageKeywordMatch(HIGH_RECOGNITION_IMAGE_MAP, food.name);
     if (alcoholHighRecognitionAsset) {
       return `/assets/foods/${HIGH_RECOGNITION_IMAGE_MAP[alcoholHighRecognitionAsset]}.svg`;
     }
-    const exactAlcoholAsset = Object.keys(EXACT_FOOD_IMAGE_MAP).find((name) => food.name.includes(name));
+    const exactAlcoholAsset = findBestImageKeywordMatch(EXACT_FOOD_IMAGE_MAP, food.name);
     if (exactAlcoholAsset) {
       return `/assets/foods/${EXACT_FOOD_IMAGE_MAP[exactAlcoholAsset]}.svg`;
     }
     const alcoholCategoryAsset = CATEGORY_FOOD_IMAGE_MAP[food.category];
     return alcoholCategoryAsset ? `/assets/foods/${alcoholCategoryAsset}.svg` : DEFAULT_FOOD_IMAGE;
+  }
+
+  const exactRenderAsset = findBestImageKeywordMatch(HIGH_RECOGNITION_IMAGE_MAP, food.name);
+  if (exactRenderAsset) {
+    return `/assets/foods/${HIGH_RECOGNITION_IMAGE_MAP[exactRenderAsset]}.svg`;
+  }
+
+  const exactFoodName = findBestImageKeywordMatch(EXACT_FOOD_IMAGE_MAP, food.name);
+  if (exactFoodName) {
+    return `/assets/foods/${EXACT_FOOD_IMAGE_MAP[exactFoodName]}.svg`;
   }
 
   const realisticRule = REALISTIC_FOOD_IMAGE_RULES.find((rule) => {
@@ -2936,21 +2952,6 @@ function resolveRegularFoodImagePath(food) {
     return `${REALISTIC_FOOD_IMAGE_BASE}/${REALISTIC_FOOD_IMAGE_MAP[realisticRule.key]}`;
   }
 
-  const realisticCategory = REALISTIC_CATEGORY_IMAGE_MAP[food.category];
-  if (realisticCategory) {
-    return `${REALISTIC_FOOD_IMAGE_BASE}/${REALISTIC_FOOD_IMAGE_MAP[realisticCategory]}`;
-  }
-
-  const exactRenderAsset = Object.keys(HIGH_RECOGNITION_IMAGE_MAP).find((name) => food.name.includes(name));
-  if (exactRenderAsset) {
-    return `/assets/foods/${HIGH_RECOGNITION_IMAGE_MAP[exactRenderAsset]}.svg`;
-  }
-
-  const exactFoodName = Object.keys(EXACT_FOOD_IMAGE_MAP).find((name) => food.name.includes(name));
-  if (exactFoodName) {
-    return `/assets/foods/${EXACT_FOOD_IMAGE_MAP[exactFoodName]}.svg`;
-  }
-
   const matchedRule = FOOD_IMAGE_RULES.find((rule) => {
     const hit = includesFoodKeyword(food.name, rule.keywords);
     const excluded = rule.exclude ? includesFoodKeyword(food.name, rule.exclude) : false;
@@ -2958,6 +2959,11 @@ function resolveRegularFoodImagePath(food) {
   });
   if (matchedRule) {
     return `/assets/foods/${matchedRule.asset}.svg`;
+  }
+
+  const realisticCategory = REALISTIC_CATEGORY_IMAGE_MAP[food.category];
+  if (realisticCategory) {
+    return `${REALISTIC_FOOD_IMAGE_BASE}/${REALISTIC_FOOD_IMAGE_MAP[realisticCategory]}`;
   }
 
   if (food.image_key && food.image_key !== "meal") {
