@@ -1,0 +1,233 @@
+<view class="screen screen-trend">
+  <view class="hero-panel">
+    <view class="hero-kicker">TREND VIEW</view>
+    <view class="hero-title">趋势</view>
+    <view class="hero-subtitle">把今天日报、本周摘要和近期体重先压到一条连贯的浏览路径里。先看结论，再回看细项变化。</view>
+    <view class="hero-pill-row">
+      <view class="hero-pill" wx:for="{{heroPills}}" wx:key="label">
+        <text class="hero-pill-label">{{item.label}}</text>
+        <text class="hero-pill-value">{{item.value}}</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="card" wx:if="{{assessment}}">
+    <view class="card-head">
+      <view>
+        <text class="card-kicker">身体评估</text>
+        <view class="section-title">当前状态与参考区间</view>
+      </view>
+      <view class="card-badge">{{assessment.status}}</view>
+    </view>
+    <view class="support-inline-copy">这部分按当前档案里的年龄、身高、体重和性别做说明性评估，不替代医疗判断。</view>
+
+    <view class="metric-grid trend-compact-grid">
+      <view class="metric-card">
+        <view class="metric-label">BMI 指数</view>
+        <view class="metric-value">{{assessment.bmi}}</view>
+        <view class="metric-note">中国常见成人参考区间</view>
+      </view>
+      <view class="metric-card">
+        <view class="metric-label">基础代谢</view>
+        <view class="metric-value">{{assessment.bmr}} kcal</view>
+        <view class="metric-note">按身高、体重、年龄估算</view>
+      </view>
+      <view class="metric-card">
+        <view class="metric-label">当前体重</view>
+        <view class="metric-value">{{assessment.currentWeight}}</view>
+        <view class="metric-note">会跟随最新资料与记录刷新</view>
+      </view>
+      <view class="metric-card">
+        <view class="metric-label">目标体重</view>
+        <view class="metric-value">{{assessment.targetWeight}}</view>
+        <view class="metric-note">可在“我的”页继续调整</view>
+      </view>
+    </view>
+
+    <view class="bmi-range-shell">
+      <view class="bmi-range">
+        <view class="bmi-segment bmi-under">偏轻</view>
+        <view class="bmi-segment bmi-normal">正常</view>
+        <view class="bmi-segment bmi-over">偏高</view>
+        <view class="bmi-segment bmi-obese">肥胖</view>
+        <view class="bmi-marker" style="left: {{assessment.markerPercent}}%;">
+          <text>{{assessment.bmi}}</text>
+        </view>
+      </view>
+      <view class="bmi-scale">
+        <text>14</text>
+        <text>18.5</text>
+        <text>24</text>
+        <text>28</text>
+        <text>32+</text>
+      </view>
+    </view>
+
+    <view class="trend-summary-panel">
+      <view class="item-title">{{assessment.status}}</view>
+      <view class="item-meta">{{assessment.description}}</view>
+    </view>
+  </view>
+
+  <view class="card" wx:if="{{dailyReport}}">
+    <view class="card-head">
+      <view>
+        <text class="card-kicker">今日摘要</text>
+        <view class="section-title">今日日报</view>
+      </view>
+      <view class="card-badge">实时结论</view>
+    </view>
+    <view class="support-inline-copy">先把今天的净差、睡眠、摄入和运动压缩成一屏摘要，再往下看解释。</view>
+
+    <view class="metric-grid trend-compact-grid">
+      <view class="metric-card" wx:for="{{dailyItems}}" wx:key="label">
+        <view class="metric-label">{{item.label}}</view>
+        <view class="metric-value">{{item.value}}</view>
+        <view class="metric-note">{{item.note}}</view>
+      </view>
+    </view>
+
+    <view class="trend-summary-panel">
+      <view class="item-title">今日结论</view>
+      <view class="item-meta">{{dailyReport.conclusion}}</view>
+    </view>
+    <view class="suggestion-list" wx:if="{{suggestionItems.length}}">
+      <view class="suggestion-item" wx:for="{{suggestionItems}}" wx:key="*this">
+        <view class="suggestion-dot"></view>
+        <view class="suggestion-copy">{{item}}</view>
+      </view>
+    </view>
+    <view class="warning-strip" wx:if="{{warningItems.length}}">
+      <text class="warning-chip" wx:for="{{warningItems}}" wx:key="*this">{{item}}</text>
+    </view>
+  </view>
+
+  <view class="card" wx:if="{{macroItems.length}}">
+    <view class="card-head">
+      <view>
+        <text class="card-kicker">营养结构</text>
+        <view class="section-title">今天吃得是否均衡</view>
+      </view>
+      <view class="card-badge">{{dailyReport.sleep_status}}</view>
+    </view>
+    <view class="support-inline-copy">把蛋白质、脂肪和碳水的完成度压在一处，先判断今天偏差来自哪一类。</view>
+
+    <view class="macro-row {{index === macroItems.length - 1 ? 'macro-row-last' : ''}}" wx:for="{{macroItems}}" wx:key="label">
+      <view class="macro-row-head">
+        <view class="item-title">{{item.label}}</view>
+        <view class="macro-row-value">{{item.actual}} / {{item.target}} g</view>
+      </view>
+      <view class="macro-row-meta">{{item.note}} · 完成 {{item.percent}}%</view>
+      <view class="progress-track">
+        <view class="progress-fill {{item.accentClass}}" style="width: {{item.percent}}%;"></view>
+      </view>
+    </view>
+  </view>
+
+  <view class="card" wx:if="{{weeklyReport}}">
+    <view class="card-head">
+      <view>
+        <text class="card-kicker">七天概览</text>
+        <view class="section-title">本周摘要</view>
+      </view>
+      <view class="card-badge">{{weeklyRangeLabel}}</view>
+    </view>
+    <view class="support-inline-copy">这里看周均摄入、消耗、睡眠和净值，用来判断最近一周有没有偏离。</view>
+
+    <view class="metric-grid">
+      <view class="metric-card" wx:for="{{weeklyItems}}" wx:key="label">
+        <view class="metric-label">{{item.label}}</view>
+        <view class="metric-value">{{item.value}}</view>
+        <view class="metric-note">{{item.note}}</view>
+      </view>
+    </view>
+
+    <view class="trend-report-list" wx:if="{{weeklyDetails.length}}">
+      <view class="trend-report-item" wx:for="{{weeklyDetails}}" wx:key="date">
+        <view class="trend-report-head">
+          <view class="item-title">{{item.date}}</view>
+          <view class="pill">{{item.status}}</view>
+        </view>
+        <view class="trend-report-grid">
+          <view class="trend-report-metric">
+            <text class="metric-label">摄入</text>
+            <text class="trend-mini-value">{{item.intake}}</text>
+          </view>
+          <view class="trend-report-metric">
+            <text class="metric-label">运动</text>
+            <text class="trend-mini-value">{{item.burned}}</text>
+          </view>
+          <view class="trend-report-metric">
+            <text class="metric-label">睡眠</text>
+            <text class="trend-mini-value">{{item.sleep}}</text>
+          </view>
+          <view class="trend-report-metric">
+            <text class="metric-label">净差</text>
+            <text class="trend-mini-value">{{item.balance}}</text>
+          </view>
+        </view>
+        <view class="item-meta">{{item.conclusion}}</view>
+      </view>
+    </view>
+  </view>
+
+  <view class="card" wx:if="{{weights.length}}">
+    <view class="card-head">
+      <view>
+        <text class="card-kicker">近期变化</text>
+        <view class="section-title">最近体重</view>
+      </view>
+      <view class="card-badge">{{weights.length}} 条</view>
+    </view>
+    <view class="support-inline-copy">先看最新样本，再往下看列表，不在趋势页堆完整图表版本。</view>
+    <view class="metric-grid trend-compact-grid" wx:if="{{weightStats.length}}">
+      <view class="metric-card" wx:for="{{weightStats}}" wx:key="label">
+        <view class="metric-label">{{item.label}}</view>
+        <view class="metric-value">{{item.value}}</view>
+        <view class="metric-note">{{item.note}}</view>
+      </view>
+    </view>
+    <view class="trend-weight-highlight" wx:if="{{weightSummary}}">
+      <view>
+        <view class="metric-label">最新样本</view>
+        <view class="trend-weight-value">{{weightSummary.latest}}</view>
+      </view>
+      <view class="trend-weight-note">{{weightSummary.note}}</view>
+    </view>
+
+    <view class="weight-mini-chart" wx:if="{{weightBars.length}}">
+      <view class="weight-mini-chart-head">
+        <view class="item-title">最近 7 条体重变化</view>
+        <view class="section-caption">只看高低和节奏，不在这里堆完整折线图。</view>
+      </view>
+      <view class="weight-mini-bars">
+        <view class="weight-mini-bar-item" wx:for="{{weightBars}}" wx:key="id">
+          <view class="weight-mini-bar-value">{{item.value}}</view>
+          <view class="weight-mini-bar-track">
+            <view class="weight-mini-bar-fill" style="height: {{item.heightPercent}}%;"></view>
+          </view>
+          <view class="weight-mini-bar-date">{{item.date}}</view>
+        </view>
+      </view>
+    </view>
+
+    <view class="weight-list">
+      <view class="weight-row" wx:for="{{weights}}" wx:key="id">
+        <view>
+          <view class="weight-value">{{item.weight_kg}} kg</view>
+          <view class="weight-date">{{item.record_date}}{{item.record_time ? ' ' + item.record_time : ''}}</view>
+        </view>
+        <view class="weight-chip">趋势样本</view>
+      </view>
+    </view>
+  </view>
+
+  <view wx:if="{{loading}}" class="empty">
+    <text class="empty-title">趋势数据加载中</text>
+    正在拉取日报、周报和体重历史，稍后就能看到近期变化。
+  </view>
+  <view wx:elif="{{!dailyReport && !weeklyReport && !weights.length}}" class="empty">
+    <text class="empty-title">趋势页还没有数据</text>
+    先去记录页补一条饮食、睡眠、运动或体重，再回来查看变化摘要。
+  </view>
+</view>

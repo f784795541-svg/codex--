@@ -1,0 +1,8 @@
+{
+  "projectname": "health-manager-miniprogram-local",
+  "appid": "touristappid",
+  "setting": {
+    "compileHotReLoad": true,
+    "urlCheck": false
+  }
+}

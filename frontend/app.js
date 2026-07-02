@@ -5044,7 +5044,13 @@ function renderWeightChart(weights) {
     return;
   }
 
-  const data = weights.slice(-14);
+  const data = [...weights]
+    .sort((left, right) => {
+      const leftKey = `${left.record_date || ""} ${left.record_time || ""}`;
+      const rightKey = `${right.record_date || ""} ${right.record_time || ""}`;
+      return leftKey.localeCompare(rightKey);
+    })
+    .slice(-14);
   const values = data.map((item) => item.weight_kg);
   const min = Math.min(...values);
   const max = Math.max(...values);
@@ -5173,7 +5179,7 @@ function renderAssessment(profile) {
         <strong>${bodyType.label}</strong>
       </div>
       <div class="summary-stack-list">
-        <div><span>当前模式</span><strong>${bodyType.face}</strong></div>
+        <div><span>当前模式</span><strong>${bodyType.label}</strong></div>
         <div><span>定位</span><strong>说明性参考</strong></div>
       </div>
       <p>${bodyType.description}</p>
@@ -5502,7 +5508,11 @@ async function handleRegister(event) {
       console.error(dashboardError);
     }
   } catch (error) {
-    setMessage("register-result", error.message);
+    const registerErrorMessage =
+      error.message === "用户名已存在"
+        ? "用户名已存在，请更换一个用户名后再注册。"
+        : error.message;
+    setMessage("register-result", registerErrorMessage);
   }
 }
 

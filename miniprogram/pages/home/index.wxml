@@ -1,0 +1,140 @@
+<view class="screen screen-home">
+  <block wx:if="{{summary}}">
+    <view class="hero-panel hero-panel-home">
+      <view class="hero-kicker">TODAY FOCUS</view>
+      <view class="hero-title">你好，{{summary.user.name}}</view>
+      <view class="hero-subtitle">把今天最关键的状态放在最前面。先看重要数字，再决定今天是补记录、补睡眠，还是把热量节奏拉回正轨。</view>
+      <view class="hero-summary-card">{{heroSummary}}</view>
+      <view class="hero-pill-row">
+        <view class="hero-pill" wx:for="{{heroPills}}" wx:key="label">
+          <text class="hero-pill-label">{{item.label}}</text>
+          <text class="hero-pill-value">{{item.value}}</text>
+        </view>
+      </view>
+    </view>
+
+    <view class="card">
+      <view class="card-head">
+        <view>
+          <text class="card-kicker">核心指标</text>
+          <view class="section-title">先看体重、时间线和目标热量</view>
+        </view>
+        <view class="card-badge">首屏重点</view>
+      </view>
+      <view class="support-inline-copy">把最影响当天判断的 6 个数字压到同一屏，先看结果，再决定去补哪一条记录。</view>
+      <view class="metric-grid metric-grid-dense">
+        <view class="metric-card" wx:for="{{homeMetrics}}" wx:key="label">
+          <view class="metric-label">{{item.label}}</view>
+          <view class="metric-value">{{item.value}}</view>
+          <view class="metric-note">{{item.note}}</view>
+        </view>
+      </view>
+    </view>
+
+    <view class="card">
+      <view class="card-head">
+        <view>
+          <text class="card-kicker">目标完成度</text>
+          <view class="section-title">不用进详情，也能先判断今天差在哪</view>
+        </view>
+        <view class="card-badge">{{summary.daily_report.sleep_status}}</view>
+      </view>
+      <view class="support-inline-copy">这里保留行动价值最高的四项完成度，避免和上面的核心指标重复。</view>
+      <view class="macro-row {{index === goalItems.length - 1 ? 'macro-row-last' : ''}}" wx:for="{{goalItems}}" wx:key="label">
+        <view class="macro-row-head">
+          <view class="item-title">{{item.label}}</view>
+          <view class="macro-row-value">{{item.actual}} / {{item.target}} {{item.unit}}</view>
+        </view>
+        <view class="macro-row-meta">完成 {{item.percent}}%</view>
+        <view class="progress-track">
+          <view class="progress-fill {{item.accentClass || 'progress-fill-default'}}" style="width: {{item.percent}}%;"></view>
+        </view>
+      </view>
+    </view>
+
+    <view class="card" wx:if="{{mealRecommendation}}">
+      <view class="card-head">
+        <view>
+          <text class="card-kicker">今日推荐饮食</text>
+          <view class="section-title">按当前模式给你一版更容易执行的三餐</view>
+        </view>
+        <view class="card-badge">{{mealRecommendation.modeLabel}}</view>
+      </view>
+      <view class="card-note">{{mealRecommendation.headline}}</view>
+      <view class="support-inline-copy">{{mealRecommendation.note}}</view>
+      <view class="meal-grid">
+        <view class="meal-card" wx:for="{{mealRecommendation.meals}}" wx:key="label" wx:for-item="meal">
+          <view class="meal-card-head">
+            <view class="meal-card-badge">{{meal.label}}</view>
+            <view class="meal-card-kcal">约 {{meal.totalKcal}} kcal</view>
+          </view>
+          <view class="meal-card-focus">{{meal.focus}}</view>
+          <view class="meal-card-structure">{{meal.structure}}</view>
+          <view class="meal-card-summary">{{meal.summary}}</view>
+          <view class="meal-item-list">
+            <view class="meal-item-row" wx:for="{{meal.items}}" wx:key="name" wx:for-item="food">
+              <text class="meal-item-name">{{food.name}}</text>
+              <text class="meal-item-meta">{{food.grams}}g · {{food.kcal}} kcal</text>
+            </view>
+          </view>
+          <view class="meal-card-status">{{meal.status}}</view>
+        </view>
+      </view>
+    </view>
+
+    <view class="card">
+      <view class="card-head">
+        <view>
+          <text class="card-kicker">行动建议</text>
+          <view class="section-title">今天先做什么</view>
+        </view>
+        <view class="card-badge">{{summary.daily_report.sleep_status}}</view>
+      </view>
+      <view class="card-note">{{summary.daily_report.conclusion}}</view>
+      <view class="suggestion-list">
+        <view class="suggestion-item" wx:for="{{suggestionItems}}" wx:key="*this">
+          <view class="suggestion-dot"></view>
+          <view class="suggestion-copy">{{item}}</view>
+        </view>
+      </view>
+      <view class="warning-strip" wx:if="{{warningItems.length}}">
+        <text class="warning-chip" wx:for="{{warningItems}}" wx:key="*this">{{item}}</text>
+      </view>
+      <view class="action-row">
+        <button class="button-secondary action-button" bindtap="goTrend">看完整趋势</button>
+        <button class="button action-button" bindtap="goRecord">现在去记录</button>
+      </view>
+    </view>
+
+    <view class="card" wx:if="{{recentWeightItems.length}}">
+      <view class="card-head">
+        <view>
+          <text class="card-kicker">近期变化</text>
+          <view class="section-title">最近体重</view>
+        </view>
+        <view class="card-badge">{{recentWeightItems.length}} 条</view>
+      </view>
+      <view class="card-note">最近录入的体重会优先显示在这里，方便你快速确认趋势有没有回到预期节奏。</view>
+      <view class="support-inline-copy">只保留最近几条样本，避免首页被长列表拖长。</view>
+      <view class="weight-list">
+        <view class="weight-row" wx:for="{{recentWeightItems}}" wx:key="id">
+          <view>
+            <view class="weight-value">{{item.weight_kg}} kg</view>
+            <view class="weight-date">{{item.record_date}}{{item.record_time ? ' ' + item.record_time : ''}}</view>
+          </view>
+          <view class="weight-chip">已记录</view>
+        </view>
+      </view>
+    </view>
+  </block>
+
+  <view wx:elif="{{loading}}" class="empty">
+    <text class="empty-title">首页数据加载中</text>
+    稍等一下，正在把今天的汇总、目标和建议整理出来。
+  </view>
+
+  <view wx:else class="empty">
+    <text class="empty-title">首页还没拿到数据</text>
+    当前接口或域名配置还没有顺利返回首页汇总，请先检查联调环境。
+  </view>
+</view>

@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>健康管理系统</title>
-    <link rel="stylesheet" href="/styles.css?v=20260629-foodphoto01" />
+    <link rel="stylesheet" href="/styles.css?v=20260702-authsync01" />
   </head>
   <body data-shell="auth">
     <div class="auth-shell" id="auth-shell" data-auth-mode="login">
@@ -111,6 +111,10 @@
             <div class="auth-grid">
               <div class="auth-mobile-section-label span-2">账户信息</div>
               <input name="username" placeholder="用户名" required />
+              <div class="field-block span-2 auth-inline-note">
+                <strong>用户名规则</strong>
+                <span>用户名至少 3 位，且不能和已有用户名重复。若提示“用户名已存在”，请换一个再注册。</span>
+              </div>
               <input name="password" type="password" placeholder="密码（至少 6 位）" required />
               <input name="name" placeholder="姓名" required />
               <div class="auth-mobile-section-label span-2">身体档案</div>
@@ -966,6 +970,6 @@
       </main>
     </div>
 
-    <script src="/app.js?v=20260629-foodphoto01"></script>
+    <script src="/app.js?v=20260702-authsync01"></script>
   </body>
 </html>

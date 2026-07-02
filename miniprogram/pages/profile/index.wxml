@@ -1,0 +1,166 @@
+<view class="screen screen-profile">
+  <view wx:if="{{loading && !showProfileContent}}" class="empty">
+    <text class="empty-title">账户信息加载中</text>
+    正在拉取你的资料和目标设置，稍后就能继续编辑。
+  </view>
+
+  <block wx:elif="{{showProfileContent}}">
+    <view class="hero-panel">
+      <view class="hero-kicker">PERSONAL SPACE</view>
+      <view class="hero-title">我的</view>
+      <view class="hero-subtitle">把账户、目标和基础设置放在一个更清楚的层级里。先把当前身体数据和节奏目标放稳，后面再细修偏好项。</view>
+      <view class="hero-pill-row">
+        <view class="hero-pill">
+          <text class="hero-pill-label">账号</text>
+          <text class="hero-pill-value">{{user.username}}</text>
+        </view>
+        <view class="hero-pill">
+          <text class="hero-pill-label">当前体重</text>
+          <text class="hero-pill-value">{{displayWeight}}</text>
+        </view>
+        <view class="hero-pill">
+          <text class="hero-pill-label">推荐模式</text>
+          <text class="hero-pill-value">{{recommendationLabels[recommendationModeIndex]}}</text>
+        </view>
+      </view>
+      <view class="profile-focus-row">
+        <view class="profile-focus-chip" wx:for="{{profileFocus}}" wx:key="*this">{{item}}</view>
+      </view>
+    </view>
+
+    <view class="card">
+      <view class="card-head">
+        <view>
+          <text class="card-kicker">账户概览</text>
+          <view class="section-title">账户信息</view>
+        </view>
+        <view class="card-badge">资料可编辑</view>
+      </view>
+      <view class="card-note">这里放的是会直接影响首页摘要、趋势解释和记录默认值的核心资料。</view>
+      <view class="profile-account-row">
+        <view class="profile-account-copy">
+          <view class="profile-name">{{displayName}}</view>
+          <view class="section-caption">用户名：{{user.username}}</view>
+        </view>
+        <button class="profile-logout-btn" bindtap="logout">退出登录</button>
+      </view>
+      <view class="support-inline-copy">优先维护这里的基础资料，其他页面的数据解释会跟着同步。</view>
+
+      <view class="profile-section-row">
+        <view class="profile-section-title">基础资料</view>
+        <view class="profile-section-note">优先保证体重、身高和年龄准确。</view>
+      </view>
+      <view class="field">
+        <text class="field-label">昵称</text>
+        <input class="input" value="{{name}}" data-field="name" bindinput="handleInput" />
+      </view>
+
+      <view class="row">
+        <view class="field">
+          <text class="field-label">年龄</text>
+          <picker class="picker" mode="selector" range="{{ageOptions}}" range-key="label" value="{{ageIndex}}" data-field="age" data-index-field="ageIndex" data-options="ageOptions" bindchange="handleValuePicker">
+            <view class="picker-display">
+              <text class="picker-display-text">{{ageOptions[ageIndex].label}}</text>
+              <text class="picker-display-icon">›</text>
+            </view>
+          </picker>
+        </view>
+        <view class="field">
+          <text class="field-label">身高(cm)</text>
+          <picker class="picker" mode="selector" range="{{heightOptions}}" range-key="label" value="{{heightIndex}}" data-field="height_cm" data-index-field="heightIndex" data-options="heightOptions" bindchange="handleValuePicker">
+            <view class="picker-display">
+              <text class="picker-display-text">{{heightOptions[heightIndex].label}}</text>
+              <text class="picker-display-icon">›</text>
+            </view>
+          </picker>
+        </view>
+      </view>
+
+      <view class="row">
+        <view class="field">
+          <text class="field-label">当前体重(kg)</text>
+          <picker class="picker" mode="selector" range="{{weightOptions}}" range-key="label" value="{{weightIndex}}" data-field="weight_kg" data-index-field="weightIndex" data-options="weightOptions" bindchange="handleValuePicker">
+            <view class="picker-display">
+              <text class="picker-display-text">{{weightOptions[weightIndex].label}}</text>
+              <text class="picker-display-icon">›</text>
+            </view>
+          </picker>
+        </view>
+        <view class="field">
+          <text class="field-label">目标体重(kg)</text>
+          <picker class="picker" mode="selector" range="{{targetWeightOptions}}" range-key="label" value="{{targetWeightIndex}}" data-field="target_weight_kg" data-index-field="targetWeightIndex" data-options="targetWeightOptions" bindchange="handleValuePicker">
+            <view class="picker-display">
+              <text class="picker-display-text">{{targetWeightOptions[targetWeightIndex].label}}</text>
+              <text class="picker-display-icon">›</text>
+            </view>
+          </picker>
+        </view>
+      </view>
+    </view>
+
+    <view class="card">
+      <view class="card-head">
+        <view>
+          <text class="card-kicker">节奏设定</text>
+          <view class="section-title">基础目标</view>
+        </view>
+        <view class="card-badge">用于首页与趋势</view>
+      </view>
+      <view class="card-note">这些设置会影响首页建议、每日热量目标和趋势页摘要的解释口径。</view>
+      <view class="profile-save-notice" wx:if="{{saveNotice}}">{{saveNotice}}</view>
+
+      <view class="profile-section-row">
+        <view class="profile-section-title">节奏目标</view>
+        <view class="profile-section-note">这部分决定系统如何理解你的健康节奏。</view>
+      </view>
+
+      <view class="row">
+        <view class="field">
+          <text class="field-label">目标睡眠(h)</text>
+          <picker class="picker" mode="selector" range="{{sleepOptions}}" range-key="label" value="{{targetSleepIndex}}" data-field="target_sleep_hours" data-index-field="targetSleepIndex" data-options="sleepOptions" bindchange="handleValuePicker">
+            <view class="picker-display">
+              <text class="picker-display-text">{{sleepOptions[targetSleepIndex].label}}</text>
+              <text class="picker-display-icon">›</text>
+            </view>
+          </picker>
+        </view>
+        <view class="field">
+          <text class="field-label">目标</text>
+          <picker class="picker" mode="selector" range="{{goalLabels}}" value="{{goalIndex}}" data-field="goalIndex" bindchange="handlePicker">
+            <view class="picker-display">
+              <text class="picker-display-text">{{goalLabels[goalIndex]}}</text>
+              <text class="picker-display-icon">›</text>
+            </view>
+          </picker>
+        </view>
+      </view>
+
+      <view class="field">
+        <text class="field-label">活动水平</text>
+        <picker class="picker" mode="selector" range="{{activityLabels}}" value="{{activityIndex}}" data-field="activityIndex" bindchange="handlePicker">
+          <view class="picker-display">
+            <text class="picker-display-text">{{activityLabels[activityIndex]}}</text>
+            <text class="picker-display-icon">›</text>
+          </view>
+        </picker>
+      </view>
+
+      <view class="field">
+        <text class="field-label">推荐模式</text>
+        <picker class="picker" mode="selector" range="{{recommendationLabels}}" value="{{recommendationModeIndex}}" data-field="recommendationModeIndex" bindchange="handlePicker">
+          <view class="picker-display">
+            <text class="picker-display-text">{{recommendationLabels[recommendationModeIndex]}}</text>
+            <text class="picker-display-icon">›</text>
+          </view>
+        </picker>
+      </view>
+
+      <button class="button" loading="{{saving}}" disabled="{{saving}}" bindtap="submit">{{saveButtonText}}</button>
+    </view>
+  </block>
+
+  <view wx:else class="empty">
+    <text class="empty-title">还没有拿到账户资料</text>
+    请先确认登录状态和接口联调，再回来编辑个人资料。
+  </view>
+</view>

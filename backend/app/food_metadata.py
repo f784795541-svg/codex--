@@ -244,28 +244,56 @@ def get_food_image_key(name: str, category: str) -> str:
     return category_map.get(category, "meal")
 
 
+def compact_search_text(text: str) -> str:
+    return "".join(text.lower().split())
+
+
+def ordered_subsequence_score(query: str, target: str, base_score: int) -> int:
+    if len(query) < 3 or len(target) < len(query):
+        return 0
+
+    index = 0
+    for char in target:
+        if char == query[index]:
+            index += 1
+            if index == len(query):
+                gap_penalty = min(len(target) - len(query), 10)
+                return max(base_score - gap_penalty * 3, 0)
+
+    return 0
+
+
 def food_matches_query(name: str, category: str, query: str, brand: str | None = None) -> tuple[bool, int]:
-    normalized_query = query.strip().lower()
+    normalized_query = compact_search_text(query.strip())
     if not normalized_query:
         return False, 0
 
     aliases = get_food_aliases(name, category)
-    name_lower = name.lower()
-    category_lower = category.lower()
-    brand_lower = (brand or "").lower()
+    name_lower = compact_search_text(name)
+    category_lower = compact_search_text(category)
+    brand_lower = compact_search_text(brand or "")
+    alias_lowers = [compact_search_text(alias) for alias in aliases]
 
     score = 0
     if normalized_query in name_lower:
         score += 100
+    else:
+        score += ordered_subsequence_score(normalized_query, name_lower, 72)
     if name_lower.startswith(normalized_query):
         score += 20
     if normalized_query in category_lower:
         score += 40
+    else:
+        score += ordered_subsequence_score(normalized_query, category_lower, 24)
     if brand_lower and normalized_query in brand_lower:
         score += 85
+    elif brand_lower:
+        score += ordered_subsequence_score(normalized_query, brand_lower, 52)
     if brand_lower.startswith(normalized_query):
         score += 15
-    if any(normalized_query in alias.lower() for alias in aliases):
+    if any(normalized_query in alias_lower for alias_lower in alias_lowers):
         score += 70
+    else:
+        score += max((ordered_subsequence_score(normalized_query, alias_lower, 44) for alias_lower in alias_lowers), default=0)
 
     return score > 0, score

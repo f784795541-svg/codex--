@@ -1,0 +1,43 @@
+<view class="screen screen-auth">
+  <view class="auth-intro-card">
+    <view class="auth-brand-row">
+      <text class="auth-brand-pill">Health Manager</text>
+      <text class="auth-brand-pill auth-brand-pill-soft">固定公式 + 规则引擎</text>
+    </view>
+    <view class="hero-title">雾屿轻养</view>
+    <view class="hero-subtitle">把记录、目标和建议收进同一个入口。先登录，再继续今天的健康节奏。</view>
+    <view class="auth-highlight-grid">
+      <view class="auth-highlight-card">
+        <text class="auth-highlight-title">记录一体</text>
+        <text class="auth-highlight-copy">饮食、运动、睡眠和体重统一回到一个账户里。</text>
+      </view>
+      <view class="auth-highlight-card">
+        <text class="auth-highlight-title">规则透明</text>
+        <text class="auth-highlight-copy">目标和建议都按固定规则生成，不走黑盒推荐。</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="card auth-form-card">
+    <view class="auth-form-head">
+      <text class="auth-form-kicker">欢迎回来</text>
+      <view class="section-title">登录后继续今天的记录</view>
+      <view class="section-caption">已有账户直接进入首页；第一次使用就在下方去注册。</view>
+    </view>
+
+    <view class="field">
+      <text class="field-label">用户名</text>
+      <input class="input" placeholder="请输入用户名" value="{{username}}" data-field="username" bindinput="handleInput" />
+    </view>
+
+    <view class="field">
+      <text class="field-label">密码</text>
+      <input class="input" password placeholder="请输入密码" value="{{password}}" data-field="password" bindinput="handleInput" />
+    </view>
+
+    <view class="auth-tip">先登录，再继续今天的首页查看、记录补齐和趋势回看。</view>
+
+    <button class="button auth-primary-button" loading="{{loading}}" disabled="{{loading}}" bindtap="submit">进入健康系统</button>
+    <button class="button-secondary auth-secondary-button" bindtap="goRegister">没有账号，去注册</button>
+  </view>
+</view>

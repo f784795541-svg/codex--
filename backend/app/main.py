@@ -1,6 +1,6 @@
 from datetime import date
 
-from sqlalchemy import or_
+from sqlalchemy import nulls_last, or_
 from fastapi import Depends, FastAPI, HTTPException, Query
 from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.orm import Session
@@ -39,12 +39,16 @@ def health_check():
 
 @app.post("/auth/register", response_model=schemas.AuthResponse)
 def register_user(payload: schemas.AuthRegister, db: Session = Depends(get_db)):
-    existing = db.query(models.User).filter(models.User.username == payload.username).first()
+    username = services.normalize_username(payload.username)
+    if not username or len(username) < 3:
+        raise HTTPException(status_code=400, detail="用户名至少 3 位，且不能只包含空格")
+
+    existing = db.query(models.User).filter(models.User.username == username).first()
     if existing:
         raise HTTPException(status_code=400, detail="用户名已存在")
 
     user = models.User(
-        username=payload.username,
+        username=username,
         password_hash=services.hash_password(payload.password),
         name=payload.name,
         age=payload.age,
@@ -66,7 +70,7 @@ def register_user(payload: schemas.AuthRegister, db: Session = Depends(get_db)):
     weight_log = models.WeightLog(
         user_id=user.id,
         weight_kg=user.weight_kg,
-        record_date=date.today(),
+        record_date=services.local_today(),
     )
     db.add(weight_log)
     db.commit()
@@ -76,7 +80,11 @@ def register_user(payload: schemas.AuthRegister, db: Session = Depends(get_db)):
 
 @app.post("/auth/login", response_model=schemas.AuthResponse)
 def login_user(payload: schemas.AuthLogin, db: Session = Depends(get_db)):
-    user = db.query(models.User).filter(models.User.username == payload.username).first()
+    username = services.normalize_username(payload.username)
+    if not username:
+        raise HTTPException(status_code=401, detail="用户名或密码错误")
+
+    user = db.query(models.User).filter(models.User.username == username).first()
     if not user or not services.verify_password(payload.password, user.password_hash):
         raise HTTPException(status_code=401, detail="用户名或密码错误")
     return {"message": "登录成功", "user": user}
@@ -106,10 +114,13 @@ def update_user_info(payload: schemas.UserUpdateRequest, db: Session = Depends(g
         raise HTTPException(status_code=404, detail="用户不存在")
 
     if payload.username and payload.username != user.username:
-        existing = db.query(models.User).filter(models.User.username == payload.username).first()
+        normalized_username = services.normalize_username(payload.username)
+        if not normalized_username or len(normalized_username) < 3:
+            raise HTTPException(status_code=400, detail="用户名至少 3 位，且不能只包含空格")
+        existing = db.query(models.User).filter(models.User.username == normalized_username).first()
         if existing and existing.id != user.id:
             raise HTTPException(status_code=400, detail="用户名已存在")
-        user.username = payload.username
+        user.username = normalized_username
 
     if payload.new_password:
         if not payload.current_password or not services.verify_password(payload.current_password, user.password_hash):
@@ -128,7 +139,7 @@ def update_user_info(payload: schemas.UserUpdateRequest, db: Session = Depends(g
             models.WeightLog(
                 user_id=user.id,
                 weight_kg=user.weight_kg,
-                record_date=date.today(),
+                record_date=services.local_today(),
             )
         )
 
@@ -218,7 +229,7 @@ def create_food_log(payload: schemas.FoodLogCreate, db: Session = Depends(get_db
         weight_g=payload.weight_g,
         cooking_method=payload.cooking_method,
         time=payload.time,
-        log_date=payload.log_date or date.today(),
+        log_date=payload.log_date or services.local_today(),
     )
     db.add(log)
     db.commit()
@@ -258,7 +269,7 @@ def create_workout_log(payload: schemas.WorkoutLogCreate, db: Session = Depends(
         duration_min=payload.duration_min,
         calories_burned=payload.calories_burned,
         workout_time=payload.workout_time,
-        log_date=payload.log_date or date.today(),
+        log_date=payload.log_date or services.local_today(),
     )
     db.add(log)
     db.commit()
@@ -283,7 +294,7 @@ def create_sleep_log(payload: schemas.SleepLogCreate, db: Session = Depends(get_
         user_id=payload.user_id,
         sleep_start=payload.sleep_start,
         sleep_end=payload.sleep_end,
-        log_date=payload.log_date or date.today(),
+        log_date=payload.log_date or services.local_today(),
     )
     db.add(log)
     db.commit()
@@ -306,7 +317,7 @@ def create_weight_log(payload: schemas.WeightLogCreate, db: Session = Depends(ge
     log = models.WeightLog(
         user_id=payload.user_id,
         weight_kg=payload.weight_kg,
-        record_date=payload.record_date or date.today(),
+        record_date=payload.record_date or services.local_today(),
         record_time=payload.record_time,
     )
     user.weight_kg = payload.weight_kg
@@ -329,11 +340,10 @@ def get_weight_history(
     logs = (
         db.query(models.WeightLog)
         .filter(models.WeightLog.user_id == user_id)
-        .order_by(models.WeightLog.record_date.desc(), models.WeightLog.record_time.desc())
+        .order_by(models.WeightLog.record_date.desc(), nulls_last(models.WeightLog.record_time.desc()))
         .limit(limit)
         .all()
     )
-    logs.reverse()
     return logs
 
 
@@ -346,7 +356,7 @@ def get_dashboard_summary(
     user = db.get(models.User, user_id)
     if not user:
         raise HTTPException(status_code=404, detail="用户不存在")
-    return services.build_dashboard_summary(db, user, report_date or date.today())
+    return services.build_dashboard_summary(db, user, report_date or services.local_today())
 
 
 @app.get("/report/daily", response_model=schemas.DailyReportResponse)
@@ -358,7 +368,7 @@ def get_daily_report(
     user = db.get(models.User, user_id)
     if not user:
         raise HTTPException(status_code=404, detail="用户不存在")
-    return services.compute_daily_report(db, user, report_date or date.today())
+    return services.compute_daily_report(db, user, report_date or services.local_today())
 
 
 @app.get("/report/weekly", response_model=schemas.WeeklyReportResponse)
@@ -370,4 +380,4 @@ def get_weekly_report(
     user = db.get(models.User, user_id)
     if not user:
         raise HTTPException(status_code=404, detail="用户不存在")
-    return services.compute_weekly_report(db, user, start_date or date.today())
+    return services.compute_weekly_report(db, user, start_date or services.local_today())

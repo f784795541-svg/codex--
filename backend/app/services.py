@@ -2,8 +2,10 @@ from __future__ import annotations
 
 import hashlib
 import json
-from datetime import date, datetime, time, timedelta
+import re
+from datetime import date, datetime, time, timedelta, timezone
 
+from sqlalchemy import nulls_last
 from sqlalchemy.orm import Session, joinedload
 
 from . import models, schemas
@@ -17,6 +19,18 @@ ACTIVITY_FACTORS = {
     "medium": 1.55,
     "high": 1.725,
 }
+
+APP_TIMEZONE = timezone(timedelta(hours=8))
+
+
+def local_today() -> date:
+    return datetime.now(APP_TIMEZONE).date()
+
+
+def normalize_username(username: str | None) -> str | None:
+    if username is None:
+        return None
+    return username.strip()
 
 ACTIVITY_LABELS = {
     "sedentary": "久坐",
@@ -192,6 +206,91 @@ def verify_password(password: str, password_hash: str | None) -> bool:
     return hash_password(password) == password_hash
 
 
+PORTION_RANGE_PATTERN = re.compile(r"(\d+(?:\.\d+)?)\s*[-~至]\s*(\d+(?:\.\d+)?)\s*(?:g|克)", re.IGNORECASE)
+PORTION_SINGLE_PATTERN = re.compile(r"(\d+(?:\.\d+)?)\s*(?:g|克)", re.IGNORECASE)
+
+
+def round_serving_size(value: float) -> float:
+    return round(max(min(value, 1000.0), 5.0), 2)
+
+
+def extract_portion_candidates(portion_hint: str | None) -> list[float]:
+    text = portion_hint or ""
+    candidates: list[float] = []
+
+    for match in PORTION_RANGE_PATTERN.finditer(text):
+      candidates.append(float(match.group(1)))
+      candidates.append(float(match.group(2)))
+
+    for match in PORTION_SINGLE_PATTERN.finditer(text):
+      candidates.append(float(match.group(1)))
+
+    return [value for value in candidates if value > 0]
+
+
+def infer_serving_size(food: models.FoodDatabase) -> float:
+    name = food.name or ""
+    category = food.category or ""
+
+    if re.search(r"米饭|糙米饭|寿司饭", name):
+        return 220.0
+    if re.search(r"面条|意面|意大利面|河粉|米线|粉丝|米粉|凉面|拌面|面片|刀削面|拉面|牛肉面|小面|螺蛳粉|酸辣粉|热干面|馄饨面|云吞面", name):
+        return 350.0
+    if re.search(r"粥|汤面|汤粉", name):
+        return 300.0
+    if re.search(r"燕麦|麦片", name):
+        return 60.0
+    if re.search(r"面包|吐司|贝果|可颂|馒头|包子|花卷|烧麦|饺子|春卷|蛋挞|披萨", name):
+        return 120.0
+    if re.search(r"玉米|红薯|紫薯|土豆|山药|南瓜|芋头", name):
+        return 180.0
+    if re.search(r"鸡胸|火鸡胸|牛肉|牛腱|牛排|猪里脊|猪肉|羊肉|鸭胸|鱼|三文鱼|鳕鱼|虾|虾仁|贝|鱿鱼|海参", name):
+        return 160.0
+    if re.search(r"鸡蛋|炒蛋|蛋羹|蒸蛋", name) or category == "蛋类":
+        return 120.0
+    if re.search(r"牛奶|豆浆", name):
+        return 250.0
+    if re.search(r"酸奶|奶昔|奶茶|咖啡|可乐|汽水|果汁|茶饮|苏打水", name) or category == "饮品":
+        return 300.0
+    if re.search(r"香蕉", name):
+        return 120.0
+    if re.search(r"苹果|梨|橙|橘|柚|桃|李|猕猴桃|火龙果|芒果", name):
+        return 180.0
+    if re.search(r"葡萄|草莓|蓝莓|车厘子|樱桃", name):
+        return 120.0
+    if re.search(r"西瓜|哈密瓜|木瓜|菠萝", name):
+        return 250.0
+    if "水果" in category:
+        return 180.0
+    if category in {"蔬菜", "轻食"}:
+        return 200.0
+    if category in {"豆制品", "家常炒菜"}:
+        return 180.0
+    if category in {"零食", "甜点", "烘焙", "补剂"}:
+        return 60.0
+    if category in {"油脂", "调味"}:
+        return 15.0
+    if category == "连锁餐厅":
+        return 180.0
+    if category == "主食":
+        return 180.0
+    if category in {"肉类", "海鲜"}:
+        return 160.0
+    return 150.0
+
+
+def resolve_serving_size_g(food: models.FoodDatabase) -> float:
+    candidates: list[float] = []
+    if food.serving_size_g and food.serving_size_g > 0:
+        candidates.append(float(food.serving_size_g))
+    candidates.extend(extract_portion_candidates(food.portion_hint))
+
+    if candidates:
+        return round_serving_size(max(candidates))
+
+    return round_serving_size(infer_serving_size(food))
+
+
 def serialize_food(food: models.FoodDatabase) -> dict:
     return {
         "food_id": food.food_id,
@@ -205,7 +304,7 @@ def serialize_food(food: models.FoodDatabase) -> dict:
         "aliases": get_food_aliases(food.name, food.category),
         "image_key": get_food_image_key(food.name, food.category),
         "brand": food.brand,
-        "serving_size_g": food.serving_size_g,
+        "serving_size_g": resolve_serving_size_g(food),
         "portion_hint": food.portion_hint,
         "cooking_options": get_cooking_options(food),
     }
@@ -745,11 +844,10 @@ def build_dashboard_summary(
     recent_weights = (
         db.query(models.WeightLog)
         .filter(models.WeightLog.user_id == user.id)
-        .order_by(models.WeightLog.record_date.desc(), models.WeightLog.record_time.desc())
+        .order_by(models.WeightLog.record_date.desc(), nulls_last(models.WeightLog.record_time.desc()))
         .limit(max(weight_limit, 1))
         .all()
     )
-    recent_weights.reverse()
 
     return schemas.DashboardSummaryResponse(
         user=schemas.UserResponse.model_validate(user),

@@ -5,3 +5,4 @@ __pycache__/
 *.pyc
 ._*
 .DS_Store
+miniprogram/project.private.config.json

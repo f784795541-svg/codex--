@@ -1,0 +1,9 @@
+{
+  "desc": "health manager miniprogram sitemap",
+  "rules": [
+    {
+      "action": "allow",
+      "page": "*"
+    }
+  ]
+}

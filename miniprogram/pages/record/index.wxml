@@ -1,0 +1,266 @@
+<view class="screen screen-record">
+  <view class="hero-panel">
+    <view class="hero-kicker">DAILY LOG</view>
+    <view class="hero-title">记录</view>
+    <view class="hero-subtitle">把今天的饮食、运动、睡眠和体重按最顺手的方式补齐。先保证能提交、能继续下一条，再把节奏慢慢收回来。</view>
+    <view class="hero-pill-row">
+      <view class="hero-pill hero-pill-wide">
+        <text class="hero-pill-label">当前分栏</text>
+        <text class="hero-pill-value">{{activeTabLabel}}</text>
+      </view>
+      <view class="hero-pill hero-pill-wide">
+        <text class="hero-pill-label">执行重点</text>
+        <text class="hero-pill-value hero-pill-value-note">{{activeTabNote}}</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="record-tabs-shell">
+    <view
+      wx:for="{{tabs}}"
+      wx:key="key"
+      class="tab {{activeTab === item.key ? 'tab-active' : ''}}"
+      data-tab="{{item.key}}"
+      bindtap="switchTab"
+    >
+      {{item.label}}
+    </view>
+  </view>
+
+  <view class="status-banner" wx:if="{{lastSubmission}}">
+    <view>
+      <view class="status-banner-title">{{lastSubmission.title}}</view>
+      <view class="status-banner-copy">{{lastSubmission.detail}}</view>
+    </view>
+    <view class="status-banner-action" bindtap="dismissSubmission">收起</view>
+  </view>
+
+  <view class="card" id="record-food-card" wx:if="{{activeTab === 'food'}}">
+    <view class="card-head">
+      <view>
+        <text class="card-kicker">饮食录入</text>
+        <view class="section-title">饮食记录</view>
+      </view>
+      <view class="card-badge">{{selectedFood ? '待提交' : '第 1 步'}}</view>
+    </view>
+    <view class="card-note">搜索到食物后点选，再填克数和时间。提交成功后会自动清空，方便连续录入。</view>
+    <view class="food-default-note">默认克重会优先按常见一份或一碗的参考值带入，提交前可以按实际情况微调。</view>
+    <view class="step-row">
+      <view class="step-chip">1 输入关键词</view>
+      <view class="step-chip">2 自动匹配</view>
+      <view class="step-chip">3 选中并录入</view>
+    </view>
+
+    <view class="field">
+      <text class="field-label">搜索食物</text>
+      <input class="input" placeholder="例如：米饭、鸡胸肉、烤玉米" value="{{foodQuery}}" data-field="foodQuery" bindinput="handleInput" bindconfirm="handleFoodSearchConfirm" confirm-type="search" />
+    </view>
+    <view class="support-copy">{{foodResultSummary}}</view>
+
+    <view class="food-selected" wx:if="{{selectedFood}}">
+      <view class="food-selected-head">
+        <view>
+          <view class="food-selected-name">{{selectedFood.name}}</view>
+          <view class="food-selected-meta">{{selectedFood.category}} · {{selectedFood.calories_per_100g}} kcal / 100g</view>
+        </view>
+        <view class="food-selected-badge">已选</view>
+      </view>
+      <view class="food-preview-chip">{{foodPreview}}</view>
+      <view class="support-copy" wx:if="{{selectedFood.portion_hint}}">{{selectedFood.portion_hint}}</view>
+    </view>
+
+    <view class="food-results" wx:if="{{foodResults.length}}">
+      <view
+        class="food-result-item {{selectedFoodIndex === index ? 'food-result-item-active' : ''}}"
+        wx:for="{{foodResults}}"
+        wx:key="food_id"
+        data-index="{{index}}"
+        bindtap="selectFood"
+      >
+        <view class="item-title">{{item.name}}</view>
+        <view class="item-meta">{{item.category}} · {{item.calories_per_100g}} kcal / 100g</view>
+      </view>
+    </view>
+    <view class="empty food-empty" wx:elif="{{hasSearchedFood}}">
+      <text class="empty-title">没找到匹配食物</text>
+      试试更短的关键词，比如把“煎鸡胸肉”改成“鸡胸肉”。
+    </view>
+
+    <view class="row">
+      <view class="field">
+        <text class="field-label">克数</text>
+        <picker class="picker" mode="selector" range="{{foodWeightOptions}}" range-key="label" value="{{foodWeightIndex}}" data-field="foodWeight" data-index-field="foodWeightIndex" data-options="foodWeightOptions" bindchange="handleValuePicker">
+          <view class="picker-display">
+            <text class="picker-display-text">{{foodWeightOptions[foodWeightIndex].label}}</text>
+            <text class="picker-display-icon">›</text>
+          </view>
+        </picker>
+      </view>
+      <view class="field">
+        <text class="field-label">时间</text>
+        <picker class="picker" mode="time" value="{{foodTime}}" data-field="foodTime" bindchange="handleInput">
+          <view class="picker-display">
+            <text class="picker-display-text">{{foodTime}}</text>
+            <text class="picker-display-icon">›</text>
+          </view>
+        </picker>
+      </view>
+    </view>
+
+    <view class="insight-panel">
+      <view class="insight-label">本次预估</view>
+      <view class="insight-value">{{foodPreview}}</view>
+    </view>
+    <button class="button" id="record-food-action" bindtap="submitFood">提交饮食记录</button>
+  </view>
+
+  <view class="card" id="record-workout-card" wx:if="{{activeTab === 'workout'}}">
+    <view class="card-head">
+      <view>
+        <text class="card-kicker">活动记录</text>
+        <view class="section-title">运动记录</view>
+      </view>
+      <view class="card-badge">第 2 步</view>
+    </view>
+    <view class="card-note">先选运动类型和时长，能自动估算就先估算，再决定是否手动微调消耗热量。</view>
+    <view class="support-copy">建议先让系统估算一版，再按真实手表或器械数据微调。</view>
+
+    <view class="field">
+      <text class="field-label">运动类型</text>
+      <picker class="picker" mode="selector" range="{{workoutOptions}}" range-key="label" value="{{workoutTypeIndex}}" bindchange="handleWorkoutType">
+        <view class="picker-display">
+          <text class="picker-display-text {{workoutOptions.length ? '' : 'picker-display-placeholder'}}">{{workoutOptions.length ? workoutOptions[workoutTypeIndex].label : '加载中...'}}</text>
+          <text class="picker-display-icon">›</text>
+        </view>
+      </picker>
+    </view>
+    <view class="soft-tip">先选择运动类型与时长，再决定是否用系统估算的热量值。</view>
+    <view class="insight-panel insight-panel-compact">
+      <view class="insight-label">当前组合</view>
+      <view class="insight-value">{{workoutPreview}}</view>
+    </view>
+
+    <view class="row">
+      <view class="field">
+        <text class="field-label">时长(分钟)</text>
+        <picker class="picker" mode="selector" range="{{workoutDurationOptions}}" range-key="label" value="{{workoutDurationIndex}}" data-field="workoutDuration" data-index-field="workoutDurationIndex" data-options="workoutDurationOptions" bindchange="handleValuePicker">
+          <view class="picker-display">
+            <text class="picker-display-text">{{workoutDurationOptions[workoutDurationIndex].label}}</text>
+            <text class="picker-display-icon">›</text>
+          </view>
+        </picker>
+      </view>
+      <view class="field">
+        <text class="field-label">时间</text>
+        <picker class="picker" mode="time" value="{{workoutTime}}" data-field="workoutTime" bindchange="handleInput">
+          <view class="picker-display">
+            <text class="picker-display-text">{{workoutTime}}</text>
+            <text class="picker-display-icon">›</text>
+          </view>
+        </picker>
+      </view>
+    </view>
+
+    <view class="field">
+      <text class="field-label">消耗热量(kcal)</text>
+      <picker class="picker" mode="selector" range="{{workoutCalorieOptions}}" range-key="label" value="{{workoutCalorieIndex}}" data-field="workoutCalories" data-index-field="workoutCalorieIndex" data-options="workoutCalorieOptions" bindchange="handleValuePicker">
+        <view class="picker-display">
+          <text class="picker-display-text {{workoutCalories ? '' : 'picker-display-placeholder'}}">{{workoutCalories ? workoutCalories + ' kcal' : '选择或先自动估算'}}</text>
+          <text class="picker-display-icon">›</text>
+        </view>
+      </picker>
+    </view>
+
+    <button class="button-secondary" id="record-workout-action" bindtap="estimateWorkout">自动估算热量</button>
+    <button class="button" bindtap="submitWorkout">提交运动记录</button>
+  </view>
+
+  <view class="card" id="record-sleep-card" wx:if="{{activeTab === 'sleep'}}">
+    <view class="card-head">
+      <view>
+        <text class="card-kicker">恢复节奏</text>
+        <view class="section-title">睡眠记录</view>
+      </view>
+      <view class="card-badge">直接补齐</view>
+    </view>
+    <view class="card-note">只记录入睡和起床时间，系统会按时段自动回算今天的睡眠时长。</view>
+    <view class="support-copy">这里优先保证时间真实，不需要手算睡了多久。</view>
+    <view class="soft-tip">如果昨晚跨天入睡，直接按真实入睡和起床时间填写即可。</view>
+    <view class="insight-panel insight-panel-compact">
+      <view class="insight-label">预计睡眠</view>
+      <view class="insight-value">{{sleepPreview}}</view>
+    </view>
+
+    <view class="row">
+      <view class="field">
+        <text class="field-label">入睡时间</text>
+        <picker class="picker" mode="time" value="{{sleepStart}}" data-field="sleepStart" bindchange="handleInput">
+          <view class="picker-display">
+            <text class="picker-display-text">{{sleepStart}}</text>
+            <text class="picker-display-icon">›</text>
+          </view>
+        </picker>
+      </view>
+      <view class="field">
+        <text class="field-label">起床时间</text>
+        <picker class="picker" mode="time" value="{{sleepEnd}}" data-field="sleepEnd" bindchange="handleInput">
+          <view class="picker-display">
+            <text class="picker-display-text">{{sleepEnd}}</text>
+            <text class="picker-display-icon">›</text>
+          </view>
+        </picker>
+      </view>
+    </view>
+
+    <button class="button" id="record-sleep-action" bindtap="submitSleep">提交睡眠记录</button>
+  </view>
+
+  <view class="card" id="record-weight-card" wx:if="{{activeTab === 'weight'}}">
+    <view class="card-head">
+      <view>
+        <text class="card-kicker">体重变化</text>
+        <view class="section-title">体重记录</view>
+      </view>
+      <view class="card-badge">同步趋势</view>
+    </view>
+    <view class="card-note">体重会同步到首页和趋势页，默认沿用当前用户体重作为本次录入起点。</view>
+    <view class="support-copy">记录后会立即影响首页与趋势页，不需要再单独刷新其它资料。</view>
+    <view class="soft-tip">建议固定在每天相近时段记录，这样趋势会更稳定。</view>
+    <view class="insight-panel insight-panel-compact">
+      <view class="insight-label">本次记录</view>
+      <view class="insight-value">{{weightPreview}}</view>
+    </view>
+
+    <view class="row">
+      <view class="field">
+        <text class="field-label">体重(kg)</text>
+        <picker class="picker" mode="selector" range="{{weightValueOptions}}" range-key="label" value="{{weightValueIndex}}" data-field="weightValue" data-index-field="weightValueIndex" data-options="weightValueOptions" bindchange="handleValuePicker">
+          <view class="picker-display">
+            <text class="picker-display-text">{{weightValueOptions[weightValueIndex].label}}</text>
+            <text class="picker-display-icon">›</text>
+          </view>
+        </picker>
+      </view>
+      <view class="field">
+        <text class="field-label">日期</text>
+        <picker class="picker" mode="date" value="{{weightDate}}" data-field="weightDate" bindchange="handleInput">
+          <view class="picker-display">
+            <text class="picker-display-text">{{weightDate}}</text>
+            <text class="picker-display-icon">›</text>
+          </view>
+        </picker>
+      </view>
+    </view>
+    <view class="field">
+      <text class="field-label">时间</text>
+      <picker class="picker" mode="time" value="{{weightTime}}" data-field="weightTime" bindchange="handleInput">
+        <view class="picker-display">
+          <text class="picker-display-text">{{weightTime}}</text>
+          <text class="picker-display-icon">›</text>
+        </view>
+      </picker>
+    </view>
+
+    <button class="button" id="record-weight-action" bindtap="submitWeight">提交体重记录</button>
+  </view>
+</view>

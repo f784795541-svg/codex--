@@ -1,0 +1,139 @@
+<view class="screen screen-auth">
+  <view class="auth-intro-card">
+    <view class="auth-brand-row">
+      <text class="auth-brand-pill">开始建档</text>
+      <text class="auth-brand-pill auth-brand-pill-soft">先补齐基础信息</text>
+    </view>
+    <view class="hero-title">创建账号</view>
+    <view class="hero-subtitle">先把年龄、体重、目标和活动水平建好，后面的建议、趋势和记录默认值才会更顺手。</view>
+    <view class="auth-highlight-grid auth-highlight-grid-single">
+      <view class="auth-highlight-card">
+        <text class="auth-highlight-title">先建档，再开始记录</text>
+        <text class="auth-highlight-copy">同一个账户会串起首页、记录、趋势和我的页，后面不用反复补资料。</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="card auth-form-card">
+    <view class="auth-form-head">
+      <text class="auth-form-kicker">创建账户</text>
+      <view class="section-title">先建档，再开始记录</view>
+      <view class="section-caption">先补核心资料，后面首页、记录和趋势都会自动接上。</view>
+    </view>
+
+    <view class="auth-section-label">账户信息</view>
+    <view class="field">
+      <text class="field-label">用户名</text>
+      <input class="input" placeholder="至少 3 位" value="{{username}}" data-field="username" bindinput="handleInput" />
+    </view>
+
+    <view class="auth-inline-note">
+      <text class="auth-inline-note-title">用户名规则</text>
+      <text class="auth-inline-note-copy">用户名至少 3 位，且不能和已有用户名重复。若提示“用户名已存在”，请更换后再注册。</text>
+    </view>
+
+    <view class="field">
+      <text class="field-label">密码</text>
+      <input class="input" password placeholder="至少 6 位" value="{{password}}" data-field="password" bindinput="handleInput" />
+    </view>
+
+    <view class="field">
+      <text class="field-label">昵称</text>
+      <input class="input" placeholder="请输入昵称" value="{{name}}" data-field="name" bindinput="handleInput" />
+    </view>
+
+    <view class="auth-section-label">身体档案</view>
+    <view class="row">
+      <view class="field">
+        <text class="field-label">年龄</text>
+        <picker class="picker" mode="selector" range="{{ageOptions}}" range-key="label" value="{{ageIndex}}" data-field="age" data-index-field="ageIndex" data-options="ageOptions" bindchange="handleValuePicker">
+          <view class="picker-display">
+            <text class="picker-display-text">{{ageOptions[ageIndex].label}}</text>
+            <text class="picker-display-icon">›</text>
+          </view>
+        </picker>
+      </view>
+      <view class="field">
+        <text class="field-label">性别</text>
+        <picker class="picker" mode="selector" range="{{genderLabels}}" value="{{genderIndex}}" data-field="genderIndex" bindchange="handlePicker">
+          <view class="picker-display">
+            <text class="picker-display-text">{{genderLabels[genderIndex]}}</text>
+            <text class="picker-display-icon">›</text>
+          </view>
+        </picker>
+      </view>
+    </view>
+
+    <view class="row">
+      <view class="field">
+        <text class="field-label">身高(cm)</text>
+        <picker class="picker" mode="selector" range="{{heightOptions}}" range-key="label" value="{{heightIndex}}" data-field="height_cm" data-index-field="heightIndex" data-options="heightOptions" bindchange="handleValuePicker">
+          <view class="picker-display">
+            <text class="picker-display-text">{{heightOptions[heightIndex].label}}</text>
+            <text class="picker-display-icon">›</text>
+          </view>
+        </picker>
+      </view>
+      <view class="field">
+        <text class="field-label">体重(kg)</text>
+        <picker class="picker" mode="selector" range="{{weightOptions}}" range-key="label" value="{{weightIndex}}" data-field="weight_kg" data-index-field="weightIndex" data-options="weightOptions" bindchange="handleValuePicker">
+          <view class="picker-display">
+            <text class="picker-display-text">{{weightOptions[weightIndex].label}}</text>
+            <text class="picker-display-icon">›</text>
+          </view>
+        </picker>
+      </view>
+    </view>
+
+    <view class="auth-section-label">目标设置</view>
+    <view class="row">
+      <view class="field">
+        <text class="field-label">目标体重(kg)</text>
+        <picker class="picker" mode="selector" range="{{targetWeightOptions}}" range-key="label" value="{{targetWeightIndex}}" data-field="target_weight_kg" data-index-field="targetWeightIndex" data-options="targetWeightOptions" bindchange="handleValuePicker">
+          <view class="picker-display">
+            <text class="picker-display-text">{{targetWeightOptions[targetWeightIndex].label}}</text>
+            <text class="picker-display-icon">›</text>
+          </view>
+        </picker>
+      </view>
+      <view class="field">
+        <text class="field-label">目标睡眠(h)</text>
+        <picker class="picker" mode="selector" range="{{sleepOptions}}" range-key="label" value="{{targetSleepIndex}}" data-field="target_sleep_hours" data-index-field="targetSleepIndex" data-options="sleepOptions" bindchange="handleValuePicker">
+          <view class="picker-display">
+            <text class="picker-display-text">{{sleepOptions[targetSleepIndex].label}}</text>
+            <text class="picker-display-icon">›</text>
+          </view>
+        </picker>
+      </view>
+    </view>
+
+    <view class="row">
+      <view class="field">
+        <text class="field-label">目标</text>
+        <picker class="picker" mode="selector" range="{{goalLabels}}" value="{{goalIndex}}" data-field="goalIndex" bindchange="handlePicker">
+          <view class="picker-display">
+            <text class="picker-display-text">{{goalLabels[goalIndex]}}</text>
+            <text class="picker-display-icon">›</text>
+          </view>
+        </picker>
+      </view>
+      <view class="field">
+        <text class="field-label">活动水平</text>
+        <picker class="picker" mode="selector" range="{{activityLabels}}" value="{{activityIndex}}" data-field="activityIndex" bindchange="handlePicker">
+          <view class="picker-display">
+            <text class="picker-display-text">{{activityLabels[activityIndex]}}</text>
+            <text class="picker-display-icon">›</text>
+          </view>
+        </picker>
+      </view>
+    </view>
+
+    <view class="auth-inline-note">
+      <text class="auth-inline-note-title">活动水平参考</text>
+      <text class="auth-inline-note-copy">低：日常久坐，运动较少。中：每周规律训练 3 到 5 次。高：训练频率高或体力活动较大。</text>
+    </view>
+
+    <button class="button auth-primary-button" loading="{{loading}}" disabled="{{loading}}" bindtap="submit">注册并进入</button>
+    <button class="button-secondary auth-secondary-button" bindtap="goLogin">已有账号，去登录</button>
+  </view>
+</view>
