@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 180" role="img" aria-labelledby="title desc">
+  <title id="title">夜宵 烤玉米 [dish-726]</title>
+  <desc id="desc">Generated local illustration fallback for dish-726</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#f6f3ef"/>
+      <stop offset="100%" stop-color="#ffffff"/>
+    </linearGradient>
+  </defs>
+  <rect width="180" height="180" rx="28" fill="url(#bg)"/>
+  <rect x="18" y="18" width="144" height="24" rx="12" fill="#566573" opacity="0.14"/>
+  <text x="28" y="34" font-family="Arial, sans-serif" font-size="12" fill="#566573" font-weight="700">PRODUCT</text>
+  
+        <rect x="83" y="54" width="16" height="70" rx="8" fill="#f4d03f"/>
+        <circle cx="76" cy="70" r="8" fill="#f7dc6f"/>
+        <circle cx="92" cy="66" r="8" fill="#f4d03f"/>
+        <circle cx="112" cy="70" r="8" fill="#f7dc6f"/>
+        <circle cx="76" cy="88" r="8" fill="#f4d03f"/>
+        <circle cx="92" cy="84" r="8" fill="#f7dc6f"/>
+        <circle cx="112" cy="88" r="8" fill="#f4d03f"/>
+        <circle cx="76" cy="106" r="8" fill="#f7dc6f"/>
+        <circle cx="92" cy="102" r="8" fill="#f4d03f"/>
+        <circle cx="112" cy="106" r="8" fill="#f7dc6f"/>
+        <path d="M83 118 Q74 130 66 144" stroke="#58d68d" stroke-width="6" fill="none" stroke-linecap="round"/>
+        <path d="M99 118 Q114 130 122 144" stroke="#58d68d" stroke-width="6" fill="none" stroke-linecap="round"/>
+        
+  <rect x="18" y="144" width="144" height="18" rx="9" fill="#ffffff" opacity="0.86"/>
+  <text x="28" y="157" font-family="Arial, sans-serif" font-size="10" fill="#5d6d7e">dish-726</text>
+</svg>

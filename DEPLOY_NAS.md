@@ -11,7 +11,7 @@
 - `backend/`
 - `frontend/`
 
-建议你上传后，把 `.env.example` 复制成 `.env`，再按需修改端口、数据库密码和基础镜像地址。
+建议你上传后，把 `.env.example` 复制成 `.env`，再按需修改端口、数据库密码和基础镜像地址。生产环境必须修改 `POSTGRES_PASSWORD`，不要使用示例密码。
 
 ## 推荐部署方式
 
@@ -23,7 +23,7 @@
 cp .env.example .env
 ```
 
-3. 如需修改端口或密码，编辑 `.env`
+3. 修改 `.env`，至少把 `POSTGRES_PASSWORD` 和 `APP_SECRET_KEY` 改成长随机值
 4. 如果飞牛拉 Docker Hub 不稳定，建议把 `.env` 里的基础镜像改成镜像站地址，例如：
 
 ```env
@@ -119,10 +119,79 @@ LIMIT 50;
 
 ## 升级项目
 
+升级前先备份数据库：
+
+```powershell
+.\scripts\backup_db.ps1
+```
+
 后续你更新项目文件后，在项目目录执行：
 
 ```bash
 docker compose up -d --build
+```
+
+`docker compose up -d --build` 不会删除 PostgreSQL 命名数据卷。不要在升级时执行 `docker compose down -v`，也不要手动删除 `postgres_data` 数据卷。
+
+升级后检查：
+
+```powershell
+.\scripts\check_runtime.ps1
+docker logs --tail 200 health_backend
+docker logs --tail 200 health_frontend
+```
+
+## 回滚项目
+
+如果升级后发现核心功能异常：
+
+1. 不要删除数据卷。
+2. 保留当前日志：
+
+```bash
+docker logs --tail 300 health_backend
+docker logs --tail 300 health_frontend
+```
+
+3. 回到上一版项目文件。
+4. 重新启动服务：
+
+```bash
+docker compose up -d --build
+```
+
+5. 如果数据库结构或数据也需要回退，按 `BACKUP_AND_RESTORE.md` 使用恢复脚本，恢复前必须确认备份来源和目标库。
+
+## 日志查看
+
+```bash
+docker logs --tail 200 health_backend
+docker logs --tail 200 health_frontend
+docker logs --tail 200 health_database
+```
+
+重点看：
+
+- `/health` 是否 200
+- `/food/search` 是否 200
+- `/dashboard/summary` 是否 200
+- 后端日志是否有 500、Traceback、ERROR
+
+## 备份检查
+
+查看最近备份：
+
+```powershell
+Get-ChildItem .\backups\db\*.dump | Sort-Object LastWriteTime -Descending | Select-Object -First 5
+```
+
+验证备份文件可被 PostgreSQL 识别：
+
+```powershell
+$latest = Get-ChildItem .\backups\db\*.dump | Sort-Object LastWriteTime -Descending | Select-Object -First 1
+docker cp $latest.FullName "health_database:/tmp/verify.dump"
+docker exec health_database pg_restore --list /tmp/verify.dump
+docker exec health_database rm -f /tmp/verify.dump
 ```
 
 ## 备份建议
@@ -131,6 +200,14 @@ docker compose up -d --build
 
 1. 项目目录本身
 2. PostgreSQL 数据卷
+
+本项目已提供 PowerShell 备份与恢复脚本，详见 `BACKUP_AND_RESTORE.md`：
+
+```powershell
+.\scripts\backup_db.ps1
+```
+
+恢复会覆盖当前项目数据库，必须按文档带显式确认文本执行，不要在未确认备份来源和目标数据库时恢复。
 
 如果后面你愿意，我可以继续帮你补一版：
 

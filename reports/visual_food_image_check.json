@@ -1,0 +1,3858 @@
+{
+  "desktop": {
+    "name": "desktop",
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "screenshot": "reports\\visual_desktop_food_images.png",
+    "results": [
+      {
+        "keyword": "鸡排",
+        "title": "咖喱鸡排饭",
+        "imageKey": "takeaway-252",
+        "src": "/assets/foods/takeaway-252.svg",
+        "card": {
+          "width": 555,
+          "height": 485
+        },
+        "image": {
+          "width": 553,
+          "height": 188
+        }
+      },
+      {
+        "keyword": "鸡排",
+        "title": "米村拌饭 照烧鸡排拌饭",
+        "imageKey": "micun-266",
+        "src": "/assets/foods/micun-266.svg",
+        "card": {
+          "width": 555,
+          "height": 485
+        },
+        "image": {
+          "width": 553,
+          "height": 188
+        }
+      },
+      {
+        "keyword": "鸡排",
+        "title": "吉野家 照烧鸡排饭",
+        "imageKey": "yoshinoya-270",
+        "src": "/assets/foods/yoshinoya-270.svg",
+        "card": {
+          "width": 555,
+          "height": 485
+        },
+        "image": {
+          "width": 553,
+          "height": 188
+        }
+      },
+      {
+        "keyword": "麦当劳 巨无霸",
+        "title": "麦当劳 巨无霸",
+        "imageKey": "mcd-138",
+        "src": "/assets/foods/mcd-138.webp",
+        "card": {
+          "width": 555,
+          "height": 485
+        },
+        "image": {
+          "width": 553,
+          "height": 188
+        }
+      },
+      {
+        "keyword": "麦当劳 中薯条",
+        "title": "麦当劳 中薯条",
+        "imageKey": "mcd-140",
+        "src": "/assets/foods/mcd-140.webp",
+        "card": {
+          "width": 555,
+          "height": 485
+        },
+        "image": {
+          "width": 553,
+          "height": 188
+        }
+      },
+      {
+        "keyword": "麦当劳 麦辣鸡腿堡",
+        "title": "麦当劳 麦辣鸡腿堡",
+        "imageKey": "mcd-141",
+        "src": "/assets/foods/mcd-141.webp",
+        "card": {
+          "width": 555,
+          "height": 459
+        },
+        "image": {
+          "width": 553,
+          "height": 188
+        }
+      },
+      {
+        "keyword": "麦当劳 双吉",
+        "title": "麦当劳 双层吉士汉堡",
+        "imageKey": "mcd-139",
+        "src": "/assets/foods/mcd-139.webp",
+        "card": {
+          "width": 555,
+          "height": 485
+        },
+        "image": {
+          "width": 553,
+          "height": 188
+        }
+      },
+      {
+        "keyword": "KFC 鸡翅",
+        "title": "肯德基 新奥尔良烤翅 2块",
+        "imageKey": "kfc-156",
+        "src": "/assets/foods/kfc-156.webp",
+        "card": {
+          "width": 555,
+          "height": 459
+        },
+        "image": {
+          "width": 553,
+          "height": 188
+        }
+      },
+      {
+        "keyword": "KFC 鸡翅",
+        "title": "肯德基 香辣鸡翅 2块",
+        "imageKey": "kfc-157",
+        "src": "/assets/foods/kfc-157.webp",
+        "card": {
+          "width": 555,
+          "height": 459
+        },
+        "image": {
+          "width": 553,
+          "height": 188
+        }
+      },
+      {
+        "keyword": "KFC 原味鸡",
+        "title": "肯德基 吮指原味鸡 2块",
+        "imageKey": "kfc-155",
+        "src": "/assets/foods/kfc-155.webp",
+        "card": {
+          "width": 555,
+          "height": 459
+        },
+        "image": {
+          "width": 553,
+          "height": 188
+        }
+      },
+      {
+        "keyword": "KFC 原味鸡",
+        "title": "肯德基 吮指原味鸡 1块",
+        "imageKey": "kfc-669",
+        "src": "/assets/foods/kfc-669.webp",
+        "card": {
+          "width": 555,
+          "height": 459
+        },
+        "image": {
+          "width": 553,
+          "height": 188
+        }
+      },
+      {
+        "keyword": "KFC 原味鸡",
+        "title": "肯德基 原味鸡",
+        "imageKey": "kfc-142",
+        "src": "/assets/foods/kfc-142.webp",
+        "card": {
+          "width": 555,
+          "height": 459
+        },
+        "image": {
+          "width": 553,
+          "height": 188
+        }
+      },
+      {
+        "keyword": "炸鸡",
+        "title": "味千拉面 炸鸡块",
+        "imageKey": "ajisen-175",
+        "src": "/assets/foods/ajisen-175.svg",
+        "card": {
+          "width": 555,
+          "height": 485
+        },
+        "image": {
+          "width": 553,
+          "height": 188
+        }
+      },
+      {
+        "keyword": "炸鸡",
+        "title": "米村拌饭 韩式炸鸡",
+        "imageKey": "micun-656",
+        "src": "/assets/foods/micun-656.svg",
+        "card": {
+          "width": 555,
+          "height": 485
+        },
+        "image": {
+          "width": 553,
+          "height": 188
+        }
+      },
+      {
+        "keyword": "炸鸡",
+        "title": "米村拌饭 照烧鸡排拌饭",
+        "imageKey": "micun-266",
+        "src": "/assets/foods/micun-266.svg",
+        "card": {
+          "width": 555,
+          "height": 485
+        },
+        "image": {
+          "width": 553,
+          "height": 188
+        }
+      },
+      {
+        "keyword": "玉米油",
+        "title": "玉米油",
+        "imageKey": "corn-oil-bottle",
+        "src": "/assets/foods/corn-oil-bottle.svg",
+        "card": {
+          "width": 555,
+          "height": 459
+        },
+        "image": {
+          "width": 553,
+          "height": 188
+        }
+      },
+      {
+        "keyword": "烤玉米",
+        "title": "夜宵 烤玉米",
+        "imageKey": "dish-726",
+        "src": "/assets/foods/dish-726.svg",
+        "card": {
+          "width": 555,
+          "height": 459
+        },
+        "image": {
+          "width": 553,
+          "height": 188
+        }
+      },
+      {
+        "keyword": "烤玉米",
+        "title": "烤玉米",
+        "imageKey": "dish-553",
+        "src": "/assets/foods/dish-553.svg",
+        "card": {
+          "width": 555,
+          "height": 459
+        },
+        "image": {
+          "width": 553,
+          "height": 188
+        }
+      },
+      {
+        "keyword": "瑞幸 生椰",
+        "title": "瑞幸 生椰拿铁 标准杯",
+        "imageKey": "luckin-622",
+        "src": "/assets/foods/luckin-622.webp",
+        "card": {
+          "width": 555,
+          "height": 459
+        },
+        "image": {
+          "width": 553,
+          "height": 188
+        }
+      },
+      {
+        "keyword": "瑞幸 生椰",
+        "title": "瑞幸 椰云拿铁 标准杯",
+        "imageKey": "luckin-678",
+        "src": "/assets/foods/luckin-678.webp",
+        "card": {
+          "width": 555,
+          "height": 459
+        },
+        "image": {
+          "width": 553,
+          "height": 188
+        }
+      },
+      {
+        "keyword": "瑞幸 厚乳",
+        "title": "瑞幸 厚乳拿铁 标准杯",
+        "imageKey": "luckin-623",
+        "src": "/assets/foods/luckin-623.webp",
+        "card": {
+          "width": 555,
+          "height": 459
+        },
+        "image": {
+          "width": 553,
+          "height": 188
+        }
+      },
+      {
+        "keyword": "瑞幸 椰云",
+        "title": "瑞幸 椰云拿铁 标准杯",
+        "imageKey": "luckin-678",
+        "src": "/assets/foods/luckin-678.webp",
+        "card": {
+          "width": 555,
+          "height": 459
+        },
+        "image": {
+          "width": 553,
+          "height": 188
+        }
+      },
+      {
+        "keyword": "星巴克 星冰乐",
+        "title": "星巴克 星冰乐 摩卡风味中杯",
+        "imageKey": "starbucks-628",
+        "src": "/assets/foods/starbucks-628.webp",
+        "card": {
+          "width": 555,
+          "height": 459
+        },
+        "image": {
+          "width": 553,
+          "height": 188
+        }
+      },
+      {
+        "keyword": "星巴克 星冰乐",
+        "title": "星巴克 抹茶星冰乐 中杯",
+        "imageKey": "starbucks-681",
+        "src": "/assets/foods/starbucks-681.webp",
+        "card": {
+          "width": 555,
+          "height": 459
+        },
+        "image": {
+          "width": 553,
+          "height": 188
+        }
+      },
+      {
+        "keyword": "星巴克 拿铁",
+        "title": "星巴克 拿铁 中杯",
+        "imageKey": "starbucks-626",
+        "src": "/assets/foods/starbucks-626.webp",
+        "card": {
+          "width": 555,
+          "height": 459
+        },
+        "image": {
+          "width": 553,
+          "height": 188
+        }
+      },
+      {
+        "keyword": "星巴克 拿铁",
+        "title": "星巴克 香草拿铁 中杯",
+        "imageKey": "starbucks-680",
+        "src": "/assets/foods/starbucks-680.webp",
+        "card": {
+          "width": 555,
+          "height": 459
+        },
+        "image": {
+          "width": 553,
+          "height": 188
+        }
+      },
+      {
+        "keyword": "星巴克 香草拿铁",
+        "title": "星巴克 香草拿铁 中杯",
+        "imageKey": "starbucks-680",
+        "src": "/assets/foods/starbucks-680.webp",
+        "card": {
+          "width": 555,
+          "height": 459
+        },
+        "image": {
+          "width": 553,
+          "height": 188
+        }
+      },
+      {
+        "keyword": "星巴克 冷萃",
+        "title": "星巴克 冷萃咖啡 中杯",
+        "imageKey": "starbucks-682",
+        "src": "/assets/foods/starbucks-682.webp",
+        "card": {
+          "width": 555,
+          "height": 459
+        },
+        "image": {
+          "width": 553,
+          "height": 188
+        }
+      },
+      {
+        "keyword": "星巴克 美式",
+        "title": "星巴克 美式咖啡 中杯",
+        "imageKey": "starbucks-627",
+        "src": "/assets/foods/starbucks-627.webp",
+        "card": {
+          "width": 555,
+          "height": 459
+        },
+        "image": {
+          "width": 553,
+          "height": 188
+        }
+      },
+      {
+        "keyword": "星巴克 美式",
+        "title": "星巴克 冷萃咖啡 中杯",
+        "imageKey": "starbucks-682",
+        "src": "/assets/foods/starbucks-682.webp",
+        "card": {
+          "width": 555,
+          "height": 459
+        },
+        "image": {
+          "width": 553,
+          "height": 188
+        }
+      },
+      {
+        "keyword": "星巴克 蓝莓麦芬",
+        "title": "星巴克 蓝莓麦芬",
+        "imageKey": "starbucks-629",
+        "src": "/assets/foods/starbucks-629.webp",
+        "card": {
+          "width": 555,
+          "height": 459
+        },
+        "image": {
+          "width": 553,
+          "height": 188
+        }
+      },
+      {
+        "keyword": "霸王茶姬",
+        "title": "霸王茶姬 伯牙绝弦",
+        "imageKey": "chagee-639",
+        "src": "/assets/foods/chagee-639.webp",
+        "card": {
+          "width": 555,
+          "height": 459
+        },
+        "image": {
+          "width": 553,
+          "height": 188
+        }
+      },
+      {
+        "keyword": "霸王茶姬",
+        "title": "霸王茶姬 万里木兰",
+        "imageKey": "chagee-640",
+        "src": "/assets/foods/chagee-640.webp",
+        "card": {
+          "width": 555,
+          "height": 459
+        },
+        "image": {
+          "width": 553,
+          "height": 188
+        }
+      },
+      {
+        "keyword": "霸王茶姬",
+        "title": "霸王茶姬 桂馥兰香",
+        "imageKey": "chagee-641",
+        "src": "/assets/foods/chagee-641.webp",
+        "card": {
+          "width": 555,
+          "height": 459
+        },
+        "image": {
+          "width": 553,
+          "height": 188
+        }
+      },
+      {
+        "keyword": "霸王茶姬 伯牙",
+        "title": "霸王茶姬 伯牙绝弦",
+        "imageKey": "chagee-639",
+        "src": "/assets/foods/chagee-639.webp",
+        "card": {
+          "width": 555,
+          "height": 459
+        },
+        "image": {
+          "width": 553,
+          "height": 188
+        }
+      },
+      {
+        "keyword": "全家 饭团",
+        "title": "全家 韩式泡菜饭团",
+        "imageKey": "familymart-693",
+        "src": "/assets/foods/familymart-693.webp",
+        "card": {
+          "width": 555,
+          "height": 459
+        },
+        "image": {
+          "width": 553,
+          "height": 188
+        }
+      },
+      {
+        "keyword": "全家 饭团",
+        "title": "全家 烤鸡胸饭团",
+        "imageKey": "familymart-227",
+        "src": "/assets/foods/familymart-227.webp",
+        "card": {
+          "width": 555,
+          "height": 459
+        },
+        "image": {
+          "width": 553,
+          "height": 188
+        }
+      },
+      {
+        "keyword": "全家 饭团",
+        "title": "全家 溏心蛋饭团",
+        "imageKey": "familymart-418",
+        "src": "/assets/foods/familymart-418.webp",
+        "card": {
+          "width": 555,
+          "height": 459
+        },
+        "image": {
+          "width": 553,
+          "height": 188
+        }
+      },
+      {
+        "keyword": "全家 三明治",
+        "title": "全家 金枪鱼三明治",
+        "imageKey": "familymart-519",
+        "src": "/assets/foods/familymart-519.webp",
+        "card": {
+          "width": 555,
+          "height": 459
+        },
+        "image": {
+          "width": 553,
+          "height": 188
+        }
+      },
+      {
+        "keyword": "全家 关东煮",
+        "title": "全家 关东煮贡丸",
+        "imageKey": "familymart-696",
+        "src": "/assets/foods/familymart-696.webp",
+        "card": {
+          "width": 555,
+          "height": 459
+        },
+        "image": {
+          "width": 553,
+          "height": 188
+        }
+      },
+      {
+        "keyword": "全家 关东煮",
+        "title": "全家 关东煮萝卜",
+        "imageKey": "familymart-228",
+        "src": "/assets/foods/familymart-228.webp",
+        "card": {
+          "width": 555,
+          "height": 459
+        },
+        "image": {
+          "width": 553,
+          "height": 188
+        }
+      },
+      {
+        "keyword": "全家 关东煮",
+        "title": "全家 关东煮鱼豆腐",
+        "imageKey": "familymart-521",
+        "src": "/assets/foods/familymart-521.webp",
+        "card": {
+          "width": 555,
+          "height": 459
+        },
+        "image": {
+          "width": 553,
+          "height": 188
+        }
+      },
+      {
+        "keyword": "全家 关东煮萝卜",
+        "title": "全家 关东煮萝卜",
+        "imageKey": "familymart-228",
+        "src": "/assets/foods/familymart-228.webp",
+        "card": {
+          "width": 555,
+          "height": 459
+        },
+        "image": {
+          "width": 553,
+          "height": 188
+        }
+      },
+      {
+        "keyword": "全家 关东煮贡丸",
+        "title": "全家 关东煮贡丸",
+        "imageKey": "familymart-696",
+        "src": "/assets/foods/familymart-696.webp",
+        "card": {
+          "width": 555,
+          "height": 459
+        },
+        "image": {
+          "width": 553,
+          "height": 188
+        }
+      },
+      {
+        "keyword": "全家 关东煮鱼豆腐",
+        "title": "全家 关东煮鱼豆腐",
+        "imageKey": "familymart-521",
+        "src": "/assets/foods/familymart-521.webp",
+        "card": {
+          "width": 555,
+          "height": 459
+        },
+        "image": {
+          "width": 553,
+          "height": 188
+        }
+      },
+      {
+        "keyword": "全家 无糖酸奶",
+        "title": "全家 无糖酸奶",
+        "imageKey": "familymart-230",
+        "src": "/assets/foods/familymart-230.webp",
+        "card": {
+          "width": 555,
+          "height": 459
+        },
+        "image": {
+          "width": 553,
+          "height": 188
+        }
+      },
+      {
+        "keyword": "全家 低糖希腊酸奶",
+        "title": "全家 低糖希腊酸奶",
+        "imageKey": "familymart-587",
+        "src": "/assets/foods/familymart-587.webp",
+        "card": {
+          "width": 555,
+          "height": 459
+        },
+        "image": {
+          "width": 553,
+          "height": 188
+        }
+      },
+      {
+        "keyword": "全家 冰拿铁",
+        "title": "全家 冰拿铁",
+        "imageKey": "familymart-591",
+        "src": "/assets/foods/familymart-591.webp",
+        "card": {
+          "width": 555,
+          "height": 459
+        },
+        "image": {
+          "width": 553,
+          "height": 188
+        }
+      },
+      {
+        "keyword": "全家 沙拉鸡胸肉",
+        "title": "全家 沙拉鸡胸肉",
+        "imageKey": "familymart-226",
+        "src": "/assets/foods/familymart-226.webp",
+        "card": {
+          "width": 555,
+          "height": 459
+        },
+        "image": {
+          "width": 553,
+          "height": 188
+        }
+      },
+      {
+        "keyword": "全家 低糖鸡胸肉沙拉",
+        "title": "全家 低糖鸡胸肉沙拉",
+        "imageKey": "familymart-417",
+        "src": "/assets/foods/familymart-417.webp",
+        "card": {
+          "width": 555,
+          "height": 459
+        },
+        "image": {
+          "width": 553,
+          "height": 188
+        }
+      },
+      {
+        "keyword": "711 饭团",
+        "title": "7-11 泡菜肥牛饭团",
+        "imageKey": "711-611",
+        "src": "/assets/foods/711-611.webp",
+        "card": {
+          "width": 555,
+          "height": 485
+        },
+        "image": {
+          "width": 553,
+          "height": 188
+        }
+      },
+      {
+        "keyword": "711 饭团",
+        "title": "7-11 烤肠芝士饭团",
+        "imageKey": "711-685",
+        "src": "/assets/foods/711-685.webp",
+        "card": {
+          "width": 555,
+          "height": 485
+        },
+        "image": {
+          "width": 553,
+          "height": 188
+        }
+      },
+      {
+        "keyword": "711 饭团",
+        "title": "7-11 奥尔良鸡腿饭团",
+        "imageKey": "711-610",
+        "src": "/assets/foods/711-610.webp",
+        "card": {
+          "width": 555,
+          "height": 459
+        },
+        "image": {
+          "width": 553,
+          "height": 188
+        }
+      },
+      {
+        "keyword": "711 三明治",
+        "title": "7-11 金枪鱼三明治",
+        "imageKey": "711-612",
+        "src": "/assets/foods/711-612.webp",
+        "card": {
+          "width": 555,
+          "height": 459
+        },
+        "image": {
+          "width": 553,
+          "height": 188
+        }
+      },
+      {
+        "keyword": "7-11 金枪鱼饭团",
+        "title": "7-11 金枪鱼饭团",
+        "imageKey": "711-222",
+        "src": "/assets/foods/711-222.webp",
+        "card": {
+          "width": 555,
+          "height": 459
+        },
+        "image": {
+          "width": 553,
+          "height": 188
+        }
+      },
+      {
+        "keyword": "7-11 茶叶蛋",
+        "title": "7-11 茶叶蛋",
+        "imageKey": "711-223",
+        "src": "/assets/foods/711-223.webp",
+        "card": {
+          "width": 555,
+          "height": 459
+        },
+        "image": {
+          "width": 553,
+          "height": 188
+        }
+      },
+      {
+        "keyword": "7-11 茶叶蛋",
+        "title": "7-11 卤蛋",
+        "imageKey": "boiled-egg-plate",
+        "src": "/assets/foods/boiled-egg-plate.svg",
+        "card": {
+          "width": 555,
+          "height": 459
+        },
+        "image": {
+          "width": 553,
+          "height": 188
+        }
+      },
+      {
+        "keyword": "7-11 照烧鸡腿便当",
+        "title": "7-11 照烧鸡腿便当",
+        "imageKey": "711-411",
+        "src": "/assets/foods/711-411.webp",
+        "card": {
+          "width": 555,
+          "height": 459
+        },
+        "image": {
+          "width": 553,
+          "height": 188
+        }
+      },
+      {
+        "keyword": "7-11 鸡胸肉沙拉",
+        "title": "7-11 鸡胸肉沙拉",
+        "imageKey": "711-412",
+        "src": "/assets/foods/711-412.webp",
+        "card": {
+          "width": 555,
+          "height": 459
+        },
+        "image": {
+          "width": 553,
+          "height": 188
+        }
+      },
+      {
+        "keyword": "7-11 即食鸡胸肉",
+        "title": "7-11 即食鸡胸肉",
+        "imageKey": "711-221",
+        "src": "/assets/foods/711-221.webp",
+        "card": {
+          "width": 555,
+          "height": 459
+        },
+        "image": {
+          "width": 553,
+          "height": 188
+        }
+      },
+      {
+        "keyword": "7-11 厚切火腿三明治",
+        "title": "7-11 厚切火腿三明治",
+        "imageKey": "711-518",
+        "src": "/assets/foods/711-518.webp",
+        "card": {
+          "width": 555,
+          "height": 459
+        },
+        "image": {
+          "width": 553,
+          "height": 188
+        }
+      },
+      {
+        "keyword": "7-11 黑椒牛肉意面",
+        "title": "7-11 黑椒牛肉意面",
+        "imageKey": "711-613",
+        "src": "/assets/foods/711-613.webp",
+        "card": {
+          "width": 555,
+          "height": 459
+        },
+        "image": {
+          "width": 553,
+          "height": 188
+        }
+      },
+      {
+        "keyword": "7-11 无糖乌龙茶",
+        "title": "7-11 无糖乌龙茶",
+        "imageKey": "711-615",
+        "src": "/assets/foods/711-615.webp",
+        "card": {
+          "width": 555,
+          "height": 459
+        },
+        "image": {
+          "width": 553,
+          "height": 188
+        }
+      },
+      {
+        "keyword": "7-11 海苔肉松饭团",
+        "title": "7-11 海苔肉松饭团",
+        "imageKey": "711-585",
+        "src": "/assets/foods/711-585.webp",
+        "card": {
+          "width": 555,
+          "height": 459
+        },
+        "image": {
+          "width": 553,
+          "height": 188
+        }
+      },
+      {
+        "keyword": "7-11 全麦火腿蛋三明治",
+        "title": "7-11 全麦火腿蛋三明治",
+        "imageKey": "711-225",
+        "src": "/assets/foods/711-225.webp",
+        "card": {
+          "width": 555,
+          "height": 459
+        },
+        "image": {
+          "width": 553,
+          "height": 188
+        }
+      },
+      {
+        "keyword": "7-11 全麦鸡胸三明治",
+        "title": "7-11 全麦鸡胸三明治",
+        "imageKey": "711-584",
+        "src": "/assets/foods/711-584.webp",
+        "card": {
+          "width": 555,
+          "height": 459
+        },
+        "image": {
+          "width": 553,
+          "height": 188
+        }
+      },
+      {
+        "keyword": "711 鸡胸肉",
+        "title": "7-11 鸡胸肉凯撒卷",
+        "imageKey": "711-686",
+        "src": "/assets/foods/711-686.webp",
+        "card": {
+          "width": 555,
+          "height": 459
+        },
+        "image": {
+          "width": 553,
+          "height": 188
+        }
+      },
+      {
+        "keyword": "7-11 冰美式咖啡",
+        "title": "7-11 冰美式咖啡",
+        "imageKey": "711-592",
+        "src": "/assets/foods/711-592.webp",
+        "card": {
+          "width": 555,
+          "height": 459
+        },
+        "image": {
+          "width": 553,
+          "height": 188
+        }
+      },
+      {
+        "keyword": "7-11 低糖豆浆",
+        "title": "7-11 低糖豆浆",
+        "imageKey": "711-224",
+        "src": "/assets/foods/711-224.webp",
+        "card": {
+          "width": 555,
+          "height": 459
+        },
+        "image": {
+          "width": 553,
+          "height": 188
+        }
+      },
+      {
+        "keyword": "7-11 低糖希腊酸奶",
+        "title": "7-11 低糖希腊酸奶",
+        "imageKey": "711-586",
+        "src": "/assets/foods/711-586.webp",
+        "card": {
+          "width": 555,
+          "height": 459
+        },
+        "image": {
+          "width": 553,
+          "height": 188
+        }
+      },
+      {
+        "keyword": "7-11 低脂希腊酸奶杯",
+        "title": "7-11 低脂希腊酸奶杯",
+        "imageKey": "711-688",
+        "src": "/assets/foods/711-688.webp",
+        "card": {
+          "width": 555,
+          "height": 459
+        },
+        "image": {
+          "width": 553,
+          "height": 188
+        }
+      },
+      {
+        "keyword": "7-11 关东煮海带结",
+        "title": "7-11 关东煮海带结",
+        "imageKey": "711-413",
+        "src": "/assets/foods/711-413.webp",
+        "card": {
+          "width": 555,
+          "height": 459
+        },
+        "image": {
+          "width": 553,
+          "height": 188
+        }
+      },
+      {
+        "keyword": "7-11 关东煮魔芋结",
+        "title": "7-11 关东煮魔芋结",
+        "imageKey": "711-414",
+        "src": "/assets/foods/711-414.webp",
+        "card": {
+          "width": 555,
+          "height": 459
+        },
+        "image": {
+          "width": 553,
+          "height": 188
+        }
+      },
+      {
+        "keyword": "7-11 关东煮鱼豆腐",
+        "title": "7-11 关东煮鱼豆腐",
+        "imageKey": "711-415",
+        "src": "/assets/foods/711-415.webp",
+        "card": {
+          "width": 555,
+          "height": 459
+        },
+        "image": {
+          "width": 553,
+          "height": 188
+        }
+      },
+      {
+        "keyword": "7-11 金枪鱼三明治",
+        "title": "7-11 金枪鱼三明治",
+        "imageKey": "711-612",
+        "src": "/assets/foods/711-612.webp",
+        "card": {
+          "width": 555,
+          "height": 459
+        },
+        "image": {
+          "width": 553,
+          "height": 188
+        }
+      },
+      {
+        "keyword": "7-11 鸡胸肉凯撒卷",
+        "title": "7-11 鸡胸肉凯撒卷",
+        "imageKey": "711-686",
+        "src": "/assets/foods/711-686.webp",
+        "card": {
+          "width": 555,
+          "height": 459
+        },
+        "image": {
+          "width": 553,
+          "height": 188
+        }
+      },
+      {
+        "keyword": "罗森 饭团",
+        "title": "罗森 烤肠饭团",
+        "imageKey": "lawson-689",
+        "src": "/assets/foods/lawson-689.webp",
+        "card": {
+          "width": 555,
+          "height": 459
+        },
+        "image": {
+          "width": 553,
+          "height": 188
+        }
+      },
+      {
+        "keyword": "罗森 饭团",
+        "title": "罗森 照烧鸡排饭团",
+        "imageKey": "lawson-617",
+        "src": "/assets/foods/lawson-617.webp",
+        "card": {
+          "width": 555,
+          "height": 459
+        },
+        "image": {
+          "width": 553,
+          "height": 188
+        }
+      },
+      {
+        "keyword": "罗森 饭团",
+        "title": "罗森 金枪鱼饭团",
+        "imageKey": "lawson-232",
+        "src": "/assets/foods/lawson-232.webp",
+        "card": {
+          "width": 555,
+          "height": 459
+        },
+        "image": {
+          "width": 553,
+          "height": 188
+        }
+      },
+      {
+        "keyword": "罗森 火腿鸡蛋三明治",
+        "title": "罗森 火腿鸡蛋三明治",
+        "imageKey": "lawson-419",
+        "src": "/assets/foods/lawson-419.webp",
+        "card": {
+          "width": 555,
+          "height": 459
+        },
+        "image": {
+          "width": 553,
+          "height": 188
+        }
+      },
+      {
+        "keyword": "罗森 关东煮萝卜",
+        "title": "罗森 关东煮萝卜",
+        "imageKey": "lawson-619",
+        "src": "/assets/foods/lawson-619.webp",
+        "card": {
+          "width": 555,
+          "height": 459
+        },
+        "image": {
+          "width": 553,
+          "height": 188
+        }
+      },
+      {
+        "keyword": "罗森 关东煮海带结",
+        "title": "罗森 关东煮海带结",
+        "imageKey": "lawson-421",
+        "src": "/assets/foods/lawson-421.webp",
+        "card": {
+          "width": 555,
+          "height": 459
+        },
+        "image": {
+          "width": 553,
+          "height": 188
+        }
+      },
+      {
+        "keyword": "罗森 关东煮魔芋结",
+        "title": "罗森 关东煮魔芋结",
+        "imageKey": "lawson-524",
+        "src": "/assets/foods/lawson-524.webp",
+        "card": {
+          "width": 555,
+          "height": 459
+        },
+        "image": {
+          "width": 553,
+          "height": 188
+        }
+      },
+      {
+        "keyword": "罗森 关东煮鱼豆腐",
+        "title": "罗森 关东煮鱼豆腐",
+        "imageKey": "lawson-525",
+        "src": "/assets/foods/lawson-525.webp",
+        "card": {
+          "width": 555,
+          "height": 459
+        },
+        "image": {
+          "width": 553,
+          "height": 188
+        }
+      },
+      {
+        "keyword": "罗森 双蛋火腿三明治",
+        "title": "罗森 双蛋火腿三明治",
+        "imageKey": "lawson-690",
+        "src": "/assets/foods/lawson-690.webp",
+        "card": {
+          "width": 555,
+          "height": 459
+        },
+        "image": {
+          "width": 553,
+          "height": 188
+        }
+      },
+      {
+        "keyword": "罗森 全麦鸡蛋三明治",
+        "title": "罗森 全麦鸡蛋三明治",
+        "imageKey": "lawson-233",
+        "src": "/assets/foods/lawson-233.webp",
+        "card": {
+          "width": 555,
+          "height": 459
+        },
+        "image": {
+          "width": 553,
+          "height": 188
+        }
+      },
+      {
+        "keyword": "罗森 鸡胸肉沙拉",
+        "title": "罗森 鸡胸肉沙拉",
+        "imageKey": "lawson-522",
+        "src": "/assets/foods/lawson-522.webp",
+        "card": {
+          "width": 555,
+          "height": 459
+        },
+        "image": {
+          "width": 553,
+          "height": 188
+        }
+      },
+      {
+        "keyword": "罗森 海苔肉松饭团",
+        "title": "罗森 海苔肉松饭团",
+        "imageKey": "lawson-523",
+        "src": "/assets/foods/lawson-523.webp",
+        "card": {
+          "width": 555,
+          "height": 459
+        },
+        "image": {
+          "width": 553,
+          "height": 188
+        }
+      },
+      {
+        "keyword": "罗森 奥尔良鸡肉卷",
+        "title": "罗森 奥尔良鸡肉卷",
+        "imageKey": "lawson-616",
+        "src": "/assets/foods/lawson-616.webp",
+        "card": {
+          "width": 555,
+          "height": 459
+        },
+        "image": {
+          "width": 553,
+          "height": 188
+        }
+      },
+      {
+        "keyword": "罗森 沙拉鸡胸肉",
+        "title": "罗森 沙拉鸡胸肉",
+        "imageKey": "lawson-231",
+        "src": "/assets/foods/lawson-231.webp",
+        "card": {
+          "width": 555,
+          "height": 459
+        },
+        "image": {
+          "width": 553,
+          "height": 188
+        }
+      },
+      {
+        "keyword": "必胜客 披萨",
+        "title": "必胜客 榴莲多多披萨 普通装",
+        "imageKey": "pizzahut-648",
+        "src": "/assets/foods/pizzahut-648.webp",
+        "card": {
+          "width": 555,
+          "height": 485
+        },
+        "image": {
+          "width": 553,
+          "height": 188
+        }
+      },
+      {
+        "keyword": "必胜客 披萨",
+        "title": "必胜客 超级至尊披萨 普通装",
+        "imageKey": "pizzahut-649",
+        "src": "/assets/foods/pizzahut-649.webp",
+        "card": {
+          "width": 555,
+          "height": 485
+        },
+        "image": {
+          "width": 553,
+          "height": 188
+        }
+      },
+      {
+        "keyword": "必胜客 披萨",
+        "title": "必胜客 夏威夷风情披萨 普通装",
+        "imageKey": "pizzahut-674",
+        "src": "/assets/foods/pizzahut-674.svg",
+        "card": {
+          "width": 555,
+          "height": 459
+        },
+        "image": {
+          "width": 553,
+          "height": 188
+        }
+      },
+      {
+        "keyword": "必胜客 超级至尊",
+        "title": "必胜客 超级至尊披萨 普通装",
+        "imageKey": "pizzahut-649",
+        "src": "/assets/foods/pizzahut-649.webp",
+        "card": {
+          "width": 555,
+          "height": 485
+        },
+        "image": {
+          "width": 553,
+          "height": 188
+        }
+      },
+      {
+        "keyword": "必胜客 榴莲披萨",
+        "title": "必胜客 榴莲多多披萨 普通装",
+        "imageKey": "pizzahut-648",
+        "src": "/assets/foods/pizzahut-648.webp",
+        "card": {
+          "width": 555,
+          "height": 459
+        },
+        "image": {
+          "width": 553,
+          "height": 188
+        }
+      },
+      {
+        "keyword": "肯德基 蛋挞",
+        "title": "肯德基 葡式蛋挞",
+        "imageKey": "kfc-154",
+        "src": "/assets/foods/kfc-154.webp",
+        "card": {
+          "width": 555,
+          "height": 459
+        },
+        "image": {
+          "width": 553,
+          "height": 188
+        }
+      },
+      {
+        "keyword": "麦当劳 麦乐鸡块 4块",
+        "title": "麦当劳 麦乐鸡块 4块",
+        "imageKey": "mcd-143",
+        "src": "/assets/foods/mcd-143.webp",
+        "card": {
+          "width": 555,
+          "height": 459
+        },
+        "image": {
+          "width": 553,
+          "height": 188
+        }
+      },
+      {
+        "keyword": "麦当劳 麦乐鸡块 10块",
+        "title": "麦当劳 麦乐鸡块 10块",
+        "imageKey": "mcd-144",
+        "src": "/assets/foods/mcd-144.webp",
+        "card": {
+          "width": 555,
+          "height": 485
+        },
+        "image": {
+          "width": 553,
+          "height": 188
+        }
+      },
+      {
+        "keyword": "麦当劳 麦香鸡",
+        "title": "麦当劳 麦香鸡",
+        "imageKey": "mcd-145",
+        "src": "/assets/foods/mcd-145.webp",
+        "card": {
+          "width": 555,
+          "height": 485
+        },
+        "image": {
+          "width": 553,
+          "height": 188
+        }
+      },
+      {
+        "keyword": "麦当劳 麦香鸡",
+        "title": "麦当劳 双层麦香鸡",
+        "imageKey": "mcd-237",
+        "src": "/assets/foods/mcd-237.svg",
+        "card": {
+          "width": 555,
+          "height": 485
+        },
+        "image": {
+          "width": 553,
+          "height": 188
+        }
+      },
+      {
+        "keyword": "麦当劳 麦辣鸡翅",
+        "title": "麦当劳 麦辣鸡翅",
+        "imageKey": "mcd-142",
+        "src": "/assets/foods/mcd-142.webp",
+        "card": {
+          "width": 555,
+          "height": 459
+        },
+        "image": {
+          "width": 553,
+          "height": 188
+        }
+      },
+      {
+        "keyword": "麦当劳 苹果派",
+        "title": "麦当劳 苹果派",
+        "imageKey": "mcd-146",
+        "src": "/assets/foods/mcd-146.webp",
+        "card": {
+          "width": 555,
+          "height": 459
+        },
+        "image": {
+          "width": 553,
+          "height": 188
+        }
+      },
+      {
+        "keyword": "麦当劳 奥利奥麦旋风",
+        "title": "麦当劳 奥利奥麦旋风",
+        "imageKey": "mcd-150",
+        "src": "/assets/foods/mcd-150.webp",
+        "card": {
+          "width": 555,
+          "height": 485
+        },
+        "image": {
+          "width": 553,
+          "height": 188
+        }
+      },
+      {
+        "keyword": "麦当劳 热巧克力新地",
+        "title": "麦当劳 热巧克力新地",
+        "imageKey": "mcd-151",
+        "src": "/assets/foods/mcd-151.webp",
+        "card": {
+          "width": 555,
+          "height": 485
+        },
+        "image": {
+          "width": 553,
+          "height": 188
+        }
+      },
+      {
+        "keyword": "麦当劳 猪柳蛋麦满分",
+        "title": "麦当劳 猪柳蛋麦满分",
+        "imageKey": "mcd-152",
+        "src": "/assets/foods/mcd-152.webp",
+        "card": {
+          "width": 555,
+          "height": 459
+        },
+        "image": {
+          "width": 553,
+          "height": 188
+        }
+      },
+      {
+        "keyword": "麦当劳 脆薯饼",
+        "title": "麦当劳 脆薯饼",
+        "imageKey": "mcd-149",
+        "src": "/assets/foods/mcd-149.webp",
+        "card": {
+          "width": 555,
+          "height": 485
+        },
+        "image": {
+          "width": 553,
+          "height": 188
+        }
+      },
+      {
+        "keyword": "味千拉面 冰绿茶",
+        "title": "味千拉面 冰绿茶",
+        "imageKey": "ajisen-186",
+        "src": "/assets/foods/ajisen-186.svg",
+        "card": {
+          "width": 555,
+          "height": 459
+        },
+        "image": {
+          "width": 553,
+          "height": 188
+        }
+      },
+      {
+        "keyword": "北冰洋橙汽水",
+        "title": "北冰洋橙汽水",
+        "imageKey": "orange-soda",
+        "src": "/assets/foods/orange-soda.svg",
+        "card": {
+          "width": 555,
+          "height": 459
+        },
+        "image": {
+          "width": 553,
+          "height": 188
+        }
+      },
+      {
+        "keyword": "麻辣烫",
+        "title": "麻辣烫 宽粉",
+        "imageKey": "dish-731",
+        "src": "/assets/foods/dish-731.svg",
+        "card": {
+          "width": 555,
+          "height": 459
+        },
+        "image": {
+          "width": 553,
+          "height": 188
+        }
+      },
+      {
+        "keyword": "麻辣烫",
+        "title": "麻辣烫 鱼豆腐",
+        "imageKey": "dish-732",
+        "src": "/assets/foods/dish-732.svg",
+        "card": {
+          "width": 555,
+          "height": 459
+        },
+        "image": {
+          "width": 553,
+          "height": 188
+        }
+      },
+      {
+        "keyword": "麻辣烫",
+        "title": "麻辣烫 午餐肉",
+        "imageKey": "dish-733",
+        "src": "/assets/foods/dish-733.svg",
+        "card": {
+          "width": 555,
+          "height": 459
+        },
+        "image": {
+          "width": 553,
+          "height": 188
+        }
+      },
+      {
+        "keyword": "鱼豆腐",
+        "title": "麻辣烫 鱼豆腐",
+        "imageKey": "dish-732",
+        "src": "/assets/foods/dish-732.svg",
+        "card": {
+          "width": 555,
+          "height": 459
+        },
+        "image": {
+          "width": 553,
+          "height": 188
+        }
+      },
+      {
+        "keyword": "鱼豆腐",
+        "title": "鱼豆腐",
+        "imageKey": "dish-538",
+        "src": "/assets/foods/dish-538.svg",
+        "card": {
+          "width": 555,
+          "height": 459
+        },
+        "image": {
+          "width": 553,
+          "height": 188
+        }
+      },
+      {
+        "keyword": "鱼豆腐",
+        "title": "7-11 关东煮鱼豆腐",
+        "imageKey": "711-415",
+        "src": "/assets/foods/711-415.webp",
+        "card": {
+          "width": 555,
+          "height": 459
+        },
+        "image": {
+          "width": 553,
+          "height": 188
+        }
+      },
+      {
+        "keyword": "红烧肉",
+        "title": "家常 红烧肉",
+        "imageKey": "dish-712",
+        "src": "/assets/foods/dish-712.svg",
+        "card": {
+          "width": 555,
+          "height": 459
+        },
+        "image": {
+          "width": 553,
+          "height": 188
+        }
+      },
+      {
+        "keyword": "红烧肉",
+        "title": "红烧肉",
+        "imageKey": "dish-342",
+        "src": "/assets/foods/dish-342.svg",
+        "card": {
+          "width": 555,
+          "height": 459
+        },
+        "image": {
+          "width": 553,
+          "height": 188
+        }
+      },
+      {
+        "keyword": "锅包肉",
+        "title": "锅包肉",
+        "imageKey": "dish-212",
+        "src": "/assets/foods/dish-212.svg",
+        "card": {
+          "width": 555,
+          "height": 459
+        },
+        "image": {
+          "width": 553,
+          "height": 188
+        }
+      },
+      {
+        "keyword": "基础水果 榴莲",
+        "title": "基础水果 榴莲",
+        "imageKey": "durian-fruit",
+        "src": "/assets/foods/durian-fruit.svg",
+        "card": {
+          "width": 555,
+          "height": 459
+        },
+        "image": {
+          "width": 553,
+          "height": 188
+        }
+      },
+      {
+        "keyword": "青岛啤酒",
+        "title": "青岛啤酒 经典10度",
+        "imageKey": "tsingtao-321",
+        "src": "/assets/foods/tsingtao-321.svg",
+        "card": {
+          "width": 555,
+          "height": 459
+        },
+        "image": {
+          "width": 553,
+          "height": 188
+        }
+      },
+      {
+        "keyword": "茅台",
+        "title": "茅台 53度飞天",
+        "imageKey": "maotai-333",
+        "src": "/assets/foods/maotai-333.svg",
+        "card": {
+          "width": 555,
+          "height": 459
+        },
+        "image": {
+          "width": 553,
+          "height": 188
+        }
+      },
+      {
+        "keyword": "重庆小面",
+        "title": "重庆小面",
+        "imageKey": "spicy-noodle-bowl",
+        "src": "/assets/foods/spicy-noodle-bowl.svg",
+        "card": {
+          "width": 555,
+          "height": 459
+        },
+        "image": {
+          "width": 553,
+          "height": 188
+        }
+      },
+      {
+        "keyword": "桂林米粉",
+        "title": "桂林米粉",
+        "imageKey": "rice-noodle-bowl",
+        "src": "/assets/foods/rice-noodle-bowl.svg",
+        "card": {
+          "width": 555,
+          "height": 459
+        },
+        "image": {
+          "width": 553,
+          "height": 188
+        }
+      },
+      {
+        "keyword": "热干面",
+        "title": "热干面",
+        "imageKey": "dry-noodle-plate",
+        "src": "/assets/foods/dry-noodle-plate.svg",
+        "card": {
+          "width": 555,
+          "height": 459
+        },
+        "image": {
+          "width": 553,
+          "height": 188
+        }
+      },
+      {
+        "keyword": "鱼香肉丝",
+        "title": "鱼香肉丝饭",
+        "imageKey": "takeaway-248",
+        "src": "/assets/foods/takeaway-248.svg",
+        "card": {
+          "width": 555,
+          "height": 485
+        },
+        "image": {
+          "width": 553,
+          "height": 188
+        }
+      },
+      {
+        "keyword": "鱼香肉丝",
+        "title": "南城香 鱼香肉丝饭",
+        "imageKey": "nanchengxiang-295",
+        "src": "/assets/foods/nanchengxiang-295.svg",
+        "card": {
+          "width": 555,
+          "height": 459
+        },
+        "image": {
+          "width": 553,
+          "height": 188
+        }
+      },
+      {
+        "keyword": "鱼香肉丝",
+        "title": "留学生餐厅 鱼香肉丝饭",
+        "imageKey": "intl-cafe-300",
+        "src": "/assets/foods/intl-cafe-300.svg",
+        "card": {
+          "width": 555,
+          "height": 485
+        },
+        "image": {
+          "width": 553,
+          "height": 188
+        }
+      },
+      {
+        "keyword": "回锅肉",
+        "title": "回锅肉饭",
+        "imageKey": "takeaway-263",
+        "src": "/assets/foods/takeaway-263.svg",
+        "card": {
+          "width": 555,
+          "height": 485
+        },
+        "image": {
+          "width": 553,
+          "height": 188
+        }
+      },
+      {
+        "keyword": "回锅肉",
+        "title": "南城香 回锅肉饭",
+        "imageKey": "nanchengxiang-268",
+        "src": "/assets/foods/nanchengxiang-268.svg",
+        "card": {
+          "width": 555,
+          "height": 485
+        },
+        "image": {
+          "width": 553,
+          "height": 188
+        }
+      },
+      {
+        "keyword": "回锅肉",
+        "title": "回锅肉",
+        "imageKey": "dish-343",
+        "src": "/assets/foods/dish-343.svg",
+        "card": {
+          "width": 555,
+          "height": 459
+        },
+        "image": {
+          "width": 553,
+          "height": 188
+        }
+      },
+      {
+        "keyword": "毛血旺",
+        "title": "毛血旺",
+        "imageKey": "dish-348",
+        "src": "/assets/foods/dish-348.svg",
+        "card": {
+          "width": 555,
+          "height": 459
+        },
+        "image": {
+          "width": 553,
+          "height": 188
+        }
+      },
+      {
+        "keyword": "红烧狮子头",
+        "title": "红烧狮子头",
+        "imageKey": "dish-500",
+        "src": "/assets/foods/dish-500.svg",
+        "card": {
+          "width": 555,
+          "height": 459
+        },
+        "image": {
+          "width": 553,
+          "height": 188
+        }
+      },
+      {
+        "keyword": "哈密瓜",
+        "title": "哈密瓜",
+        "imageKey": "melon-fruit",
+        "src": "/assets/foods/melon-fruit.svg",
+        "card": {
+          "width": 555,
+          "height": 459
+        },
+        "image": {
+          "width": 553,
+          "height": 188
+        }
+      },
+      {
+        "keyword": "椰子水",
+        "title": "椰子水",
+        "imageKey": "coconut-water",
+        "src": "/assets/foods/coconut-water.svg",
+        "card": {
+          "width": 555,
+          "height": 459
+        },
+        "image": {
+          "width": 553,
+          "height": 188
+        }
+      },
+      {
+        "keyword": "红牛",
+        "title": "红牛 维生素牛磺酸饮料",
+        "imageKey": "redbull-406",
+        "src": "/assets/foods/redbull-406.webp",
+        "card": {
+          "width": 555,
+          "height": 459
+        },
+        "image": {
+          "width": 553,
+          "height": 188
+        }
+      },
+      {
+        "keyword": "东鹏特饮",
+        "title": "东鹏特饮",
+        "imageKey": "dongpeng-407",
+        "src": "/assets/foods/dongpeng-407.webp",
+        "card": {
+          "width": 555,
+          "height": 459
+        },
+        "image": {
+          "width": 553,
+          "height": 188
+        }
+      },
+      {
+        "keyword": "米村 炸鸡",
+        "title": "米村拌饭 韩式炸鸡",
+        "imageKey": "micun-656",
+        "src": "/assets/foods/micun-656.svg",
+        "card": {
+          "width": 555,
+          "height": 485
+        },
+        "image": {
+          "width": 553,
+          "height": 188
+        }
+      },
+      {
+        "keyword": "米村 炸鸡",
+        "title": "米村拌饭 照烧鸡排拌饭",
+        "imageKey": "micun-266",
+        "src": "/assets/foods/micun-266.svg",
+        "card": {
+          "width": 555,
+          "height": 485
+        },
+        "image": {
+          "width": 553,
+          "height": 188
+        }
+      }
+    ]
+  },
+  "mobile": {
+    "name": "mobile",
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "screenshot": "reports\\visual_mobile_food_images.png",
+    "results": [
+      {
+        "keyword": "鸡排",
+        "title": "咖喱鸡排饭",
+        "imageKey": "takeaway-252",
+        "src": "/assets/foods/takeaway-252.svg",
+        "card": {
+          "width": 159,
+          "height": 381
+        },
+        "image": {
+          "width": 157,
+          "height": 150
+        }
+      },
+      {
+        "keyword": "鸡排",
+        "title": "米村拌饭 照烧鸡排拌饭",
+        "imageKey": "micun-266",
+        "src": "/assets/foods/micun-266.svg",
+        "card": {
+          "width": 159,
+          "height": 400
+        },
+        "image": {
+          "width": 157,
+          "height": 150
+        }
+      },
+      {
+        "keyword": "鸡排",
+        "title": "吉野家 照烧鸡排饭",
+        "imageKey": "yoshinoya-270",
+        "src": "/assets/foods/yoshinoya-270.svg",
+        "card": {
+          "width": 159,
+          "height": 381
+        },
+        "image": {
+          "width": 157,
+          "height": 150
+        }
+      },
+      {
+        "keyword": "麦当劳 巨无霸",
+        "title": "麦当劳 巨无霸",
+        "imageKey": "mcd-138",
+        "src": "/assets/foods/mcd-138.webp",
+        "card": {
+          "width": 159,
+          "height": 381
+        },
+        "image": {
+          "width": 157,
+          "height": 150
+        }
+      },
+      {
+        "keyword": "麦当劳 中薯条",
+        "title": "麦当劳 中薯条",
+        "imageKey": "mcd-140",
+        "src": "/assets/foods/mcd-140.webp",
+        "card": {
+          "width": 159,
+          "height": 381
+        },
+        "image": {
+          "width": 157,
+          "height": 150
+        }
+      },
+      {
+        "keyword": "麦当劳 麦辣鸡腿堡",
+        "title": "麦当劳 麦辣鸡腿堡",
+        "imageKey": "mcd-141",
+        "src": "/assets/foods/mcd-141.webp",
+        "card": {
+          "width": 159,
+          "height": 381
+        },
+        "image": {
+          "width": 157,
+          "height": 150
+        }
+      },
+      {
+        "keyword": "麦当劳 双吉",
+        "title": "麦当劳 双层吉士汉堡",
+        "imageKey": "mcd-139",
+        "src": "/assets/foods/mcd-139.webp",
+        "card": {
+          "width": 159,
+          "height": 400
+        },
+        "image": {
+          "width": 157,
+          "height": 150
+        }
+      },
+      {
+        "keyword": "KFC 鸡翅",
+        "title": "肯德基 新奥尔良烤翅 2块",
+        "imageKey": "kfc-156",
+        "src": "/assets/foods/kfc-156.webp",
+        "card": {
+          "width": 159,
+          "height": 400
+        },
+        "image": {
+          "width": 157,
+          "height": 150
+        }
+      },
+      {
+        "keyword": "KFC 鸡翅",
+        "title": "肯德基 香辣鸡翅 2块",
+        "imageKey": "kfc-157",
+        "src": "/assets/foods/kfc-157.webp",
+        "card": {
+          "width": 159,
+          "height": 400
+        },
+        "image": {
+          "width": 157,
+          "height": 150
+        }
+      },
+      {
+        "keyword": "KFC 原味鸡",
+        "title": "肯德基 吮指原味鸡 2块",
+        "imageKey": "kfc-155",
+        "src": "/assets/foods/kfc-155.webp",
+        "card": {
+          "width": 159,
+          "height": 400
+        },
+        "image": {
+          "width": 157,
+          "height": 150
+        }
+      },
+      {
+        "keyword": "KFC 原味鸡",
+        "title": "肯德基 吮指原味鸡 1块",
+        "imageKey": "kfc-669",
+        "src": "/assets/foods/kfc-669.webp",
+        "card": {
+          "width": 159,
+          "height": 400
+        },
+        "image": {
+          "width": 157,
+          "height": 150
+        }
+      },
+      {
+        "keyword": "KFC 原味鸡",
+        "title": "肯德基 原味鸡",
+        "imageKey": "kfc-142",
+        "src": "/assets/foods/kfc-142.webp",
+        "card": {
+          "width": 159,
+          "height": 381
+        },
+        "image": {
+          "width": 157,
+          "height": 150
+        }
+      },
+      {
+        "keyword": "炸鸡",
+        "title": "味千拉面 炸鸡块",
+        "imageKey": "ajisen-175",
+        "src": "/assets/foods/ajisen-175.svg",
+        "card": {
+          "width": 159,
+          "height": 381
+        },
+        "image": {
+          "width": 157,
+          "height": 150
+        }
+      },
+      {
+        "keyword": "炸鸡",
+        "title": "米村拌饭 韩式炸鸡",
+        "imageKey": "micun-656",
+        "src": "/assets/foods/micun-656.svg",
+        "card": {
+          "width": 159,
+          "height": 400
+        },
+        "image": {
+          "width": 157,
+          "height": 150
+        }
+      },
+      {
+        "keyword": "炸鸡",
+        "title": "米村拌饭 照烧鸡排拌饭",
+        "imageKey": "micun-266",
+        "src": "/assets/foods/micun-266.svg",
+        "card": {
+          "width": 159,
+          "height": 400
+        },
+        "image": {
+          "width": 157,
+          "height": 150
+        }
+      },
+      {
+        "keyword": "玉米油",
+        "title": "玉米油",
+        "imageKey": "corn-oil-bottle",
+        "src": "/assets/foods/corn-oil-bottle.svg",
+        "card": {
+          "width": 159,
+          "height": 334
+        },
+        "image": {
+          "width": 157,
+          "height": 150
+        }
+      },
+      {
+        "keyword": "烤玉米",
+        "title": "夜宵 烤玉米",
+        "imageKey": "dish-726",
+        "src": "/assets/foods/dish-726.svg",
+        "card": {
+          "width": 159,
+          "height": 363
+        },
+        "image": {
+          "width": 157,
+          "height": 150
+        }
+      },
+      {
+        "keyword": "烤玉米",
+        "title": "烤玉米",
+        "imageKey": "dish-553",
+        "src": "/assets/foods/dish-553.svg",
+        "card": {
+          "width": 159,
+          "height": 363
+        },
+        "image": {
+          "width": 157,
+          "height": 150
+        }
+      },
+      {
+        "keyword": "瑞幸 生椰",
+        "title": "瑞幸 生椰拿铁 标准杯",
+        "imageKey": "luckin-622",
+        "src": "/assets/foods/luckin-622.webp",
+        "card": {
+          "width": 159,
+          "height": 383
+        },
+        "image": {
+          "width": 157,
+          "height": 150
+        }
+      },
+      {
+        "keyword": "瑞幸 生椰",
+        "title": "瑞幸 椰云拿铁 标准杯",
+        "imageKey": "luckin-678",
+        "src": "/assets/foods/luckin-678.webp",
+        "card": {
+          "width": 159,
+          "height": 383
+        },
+        "image": {
+          "width": 157,
+          "height": 150
+        }
+      },
+      {
+        "keyword": "瑞幸 厚乳",
+        "title": "瑞幸 厚乳拿铁 标准杯",
+        "imageKey": "luckin-623",
+        "src": "/assets/foods/luckin-623.webp",
+        "card": {
+          "width": 159,
+          "height": 383
+        },
+        "image": {
+          "width": 157,
+          "height": 150
+        }
+      },
+      {
+        "keyword": "瑞幸 椰云",
+        "title": "瑞幸 椰云拿铁 标准杯",
+        "imageKey": "luckin-678",
+        "src": "/assets/foods/luckin-678.webp",
+        "card": {
+          "width": 159,
+          "height": 383
+        },
+        "image": {
+          "width": 157,
+          "height": 150
+        }
+      },
+      {
+        "keyword": "星巴克 星冰乐",
+        "title": "星巴克 星冰乐 摩卡风味中杯",
+        "imageKey": "starbucks-628",
+        "src": "/assets/foods/starbucks-628.webp",
+        "card": {
+          "width": 159,
+          "height": 383
+        },
+        "image": {
+          "width": 157,
+          "height": 150
+        }
+      },
+      {
+        "keyword": "星巴克 星冰乐",
+        "title": "星巴克 抹茶星冰乐 中杯",
+        "imageKey": "starbucks-681",
+        "src": "/assets/foods/starbucks-681.webp",
+        "card": {
+          "width": 159,
+          "height": 383
+        },
+        "image": {
+          "width": 157,
+          "height": 150
+        }
+      },
+      {
+        "keyword": "星巴克 拿铁",
+        "title": "星巴克 拿铁 中杯",
+        "imageKey": "starbucks-626",
+        "src": "/assets/foods/starbucks-626.webp",
+        "card": {
+          "width": 159,
+          "height": 383
+        },
+        "image": {
+          "width": 157,
+          "height": 150
+        }
+      },
+      {
+        "keyword": "星巴克 拿铁",
+        "title": "星巴克 香草拿铁 中杯",
+        "imageKey": "starbucks-680",
+        "src": "/assets/foods/starbucks-680.webp",
+        "card": {
+          "width": 159,
+          "height": 383
+        },
+        "image": {
+          "width": 157,
+          "height": 150
+        }
+      },
+      {
+        "keyword": "星巴克 香草拿铁",
+        "title": "星巴克 香草拿铁 中杯",
+        "imageKey": "starbucks-680",
+        "src": "/assets/foods/starbucks-680.webp",
+        "card": {
+          "width": 159,
+          "height": 383
+        },
+        "image": {
+          "width": 157,
+          "height": 150
+        }
+      },
+      {
+        "keyword": "星巴克 冷萃",
+        "title": "星巴克 冷萃咖啡 中杯",
+        "imageKey": "starbucks-682",
+        "src": "/assets/foods/starbucks-682.webp",
+        "card": {
+          "width": 159,
+          "height": 383
+        },
+        "image": {
+          "width": 157,
+          "height": 150
+        }
+      },
+      {
+        "keyword": "星巴克 美式",
+        "title": "星巴克 美式咖啡 中杯",
+        "imageKey": "starbucks-627",
+        "src": "/assets/foods/starbucks-627.webp",
+        "card": {
+          "width": 159,
+          "height": 383
+        },
+        "image": {
+          "width": 157,
+          "height": 150
+        }
+      },
+      {
+        "keyword": "星巴克 美式",
+        "title": "星巴克 冷萃咖啡 中杯",
+        "imageKey": "starbucks-682",
+        "src": "/assets/foods/starbucks-682.webp",
+        "card": {
+          "width": 159,
+          "height": 383
+        },
+        "image": {
+          "width": 157,
+          "height": 150
+        }
+      },
+      {
+        "keyword": "星巴克 蓝莓麦芬",
+        "title": "星巴克 蓝莓麦芬",
+        "imageKey": "starbucks-629",
+        "src": "/assets/foods/starbucks-629.webp",
+        "card": {
+          "width": 159,
+          "height": 381
+        },
+        "image": {
+          "width": 157,
+          "height": 150
+        }
+      },
+      {
+        "keyword": "霸王茶姬",
+        "title": "霸王茶姬 伯牙绝弦",
+        "imageKey": "chagee-639",
+        "src": "/assets/foods/chagee-639.webp",
+        "card": {
+          "width": 159,
+          "height": 410
+        },
+        "image": {
+          "width": 157,
+          "height": 150
+        }
+      },
+      {
+        "keyword": "霸王茶姬",
+        "title": "霸王茶姬 万里木兰",
+        "imageKey": "chagee-640",
+        "src": "/assets/foods/chagee-640.webp",
+        "card": {
+          "width": 159,
+          "height": 410
+        },
+        "image": {
+          "width": 157,
+          "height": 150
+        }
+      },
+      {
+        "keyword": "霸王茶姬",
+        "title": "霸王茶姬 桂馥兰香",
+        "imageKey": "chagee-641",
+        "src": "/assets/foods/chagee-641.webp",
+        "card": {
+          "width": 159,
+          "height": 381
+        },
+        "image": {
+          "width": 157,
+          "height": 150
+        }
+      },
+      {
+        "keyword": "霸王茶姬 伯牙",
+        "title": "霸王茶姬 伯牙绝弦",
+        "imageKey": "chagee-639",
+        "src": "/assets/foods/chagee-639.webp",
+        "card": {
+          "width": 159,
+          "height": 381
+        },
+        "image": {
+          "width": 157,
+          "height": 150
+        }
+      },
+      {
+        "keyword": "全家 饭团",
+        "title": "全家 韩式泡菜饭团",
+        "imageKey": "familymart-693",
+        "src": "/assets/foods/familymart-693.webp",
+        "card": {
+          "width": 159,
+          "height": 381
+        },
+        "image": {
+          "width": 157,
+          "height": 150
+        }
+      },
+      {
+        "keyword": "全家 饭团",
+        "title": "全家 烤鸡胸饭团",
+        "imageKey": "familymart-227",
+        "src": "/assets/foods/familymart-227.webp",
+        "card": {
+          "width": 159,
+          "height": 381
+        },
+        "image": {
+          "width": 157,
+          "height": 150
+        }
+      },
+      {
+        "keyword": "全家 饭团",
+        "title": "全家 溏心蛋饭团",
+        "imageKey": "familymart-418",
+        "src": "/assets/foods/familymart-418.webp",
+        "card": {
+          "width": 159,
+          "height": 381
+        },
+        "image": {
+          "width": 157,
+          "height": 150
+        }
+      },
+      {
+        "keyword": "全家 三明治",
+        "title": "全家 金枪鱼三明治",
+        "imageKey": "familymart-519",
+        "src": "/assets/foods/familymart-519.webp",
+        "card": {
+          "width": 159,
+          "height": 352
+        },
+        "image": {
+          "width": 157,
+          "height": 150
+        }
+      },
+      {
+        "keyword": "全家 关东煮",
+        "title": "全家 关东煮贡丸",
+        "imageKey": "familymart-696",
+        "src": "/assets/foods/familymart-696.webp",
+        "card": {
+          "width": 159,
+          "height": 363
+        },
+        "image": {
+          "width": 157,
+          "height": 150
+        }
+      },
+      {
+        "keyword": "全家 关东煮",
+        "title": "全家 关东煮萝卜",
+        "imageKey": "familymart-228",
+        "src": "/assets/foods/familymart-228.webp",
+        "card": {
+          "width": 159,
+          "height": 363
+        },
+        "image": {
+          "width": 157,
+          "height": 150
+        }
+      },
+      {
+        "keyword": "全家 关东煮",
+        "title": "全家 关东煮鱼豆腐",
+        "imageKey": "familymart-521",
+        "src": "/assets/foods/familymart-521.webp",
+        "card": {
+          "width": 159,
+          "height": 334
+        },
+        "image": {
+          "width": 157,
+          "height": 150
+        }
+      },
+      {
+        "keyword": "全家 关东煮萝卜",
+        "title": "全家 关东煮萝卜",
+        "imageKey": "familymart-228",
+        "src": "/assets/foods/familymart-228.webp",
+        "card": {
+          "width": 159,
+          "height": 352
+        },
+        "image": {
+          "width": 157,
+          "height": 150
+        }
+      },
+      {
+        "keyword": "全家 关东煮贡丸",
+        "title": "全家 关东煮贡丸",
+        "imageKey": "familymart-696",
+        "src": "/assets/foods/familymart-696.webp",
+        "card": {
+          "width": 159,
+          "height": 363
+        },
+        "image": {
+          "width": 157,
+          "height": 150
+        }
+      },
+      {
+        "keyword": "全家 关东煮鱼豆腐",
+        "title": "全家 关东煮鱼豆腐",
+        "imageKey": "familymart-521",
+        "src": "/assets/foods/familymart-521.webp",
+        "card": {
+          "width": 159,
+          "height": 334
+        },
+        "image": {
+          "width": 157,
+          "height": 150
+        }
+      },
+      {
+        "keyword": "全家 无糖酸奶",
+        "title": "全家 无糖酸奶",
+        "imageKey": "familymart-230",
+        "src": "/assets/foods/familymart-230.webp",
+        "card": {
+          "width": 159,
+          "height": 352
+        },
+        "image": {
+          "width": 157,
+          "height": 150
+        }
+      },
+      {
+        "keyword": "全家 低糖希腊酸奶",
+        "title": "全家 低糖希腊酸奶",
+        "imageKey": "familymart-587",
+        "src": "/assets/foods/familymart-587.webp",
+        "card": {
+          "width": 159,
+          "height": 334
+        },
+        "image": {
+          "width": 157,
+          "height": 150
+        }
+      },
+      {
+        "keyword": "全家 冰拿铁",
+        "title": "全家 冰拿铁",
+        "imageKey": "familymart-591",
+        "src": "/assets/foods/familymart-591.webp",
+        "card": {
+          "width": 159,
+          "height": 334
+        },
+        "image": {
+          "width": 157,
+          "height": 150
+        }
+      },
+      {
+        "keyword": "全家 沙拉鸡胸肉",
+        "title": "全家 沙拉鸡胸肉",
+        "imageKey": "familymart-226",
+        "src": "/assets/foods/familymart-226.webp",
+        "card": {
+          "width": 159,
+          "height": 352
+        },
+        "image": {
+          "width": 157,
+          "height": 150
+        }
+      },
+      {
+        "keyword": "全家 低糖鸡胸肉沙拉",
+        "title": "全家 低糖鸡胸肉沙拉",
+        "imageKey": "familymart-417",
+        "src": "/assets/foods/familymart-417.webp",
+        "card": {
+          "width": 159,
+          "height": 354
+        },
+        "image": {
+          "width": 157,
+          "height": 150
+        }
+      },
+      {
+        "keyword": "711 饭团",
+        "title": "7-11 泡菜肥牛饭团",
+        "imageKey": "711-611",
+        "src": "/assets/foods/711-611.webp",
+        "card": {
+          "width": 159,
+          "height": 410
+        },
+        "image": {
+          "width": 157,
+          "height": 150
+        }
+      },
+      {
+        "keyword": "711 饭团",
+        "title": "7-11 烤肠芝士饭团",
+        "imageKey": "711-685",
+        "src": "/assets/foods/711-685.webp",
+        "card": {
+          "width": 159,
+          "height": 410
+        },
+        "image": {
+          "width": 157,
+          "height": 150
+        }
+      },
+      {
+        "keyword": "711 饭团",
+        "title": "7-11 奥尔良鸡腿饭团",
+        "imageKey": "711-610",
+        "src": "/assets/foods/711-610.webp",
+        "card": {
+          "width": 159,
+          "height": 400
+        },
+        "image": {
+          "width": 157,
+          "height": 150
+        }
+      },
+      {
+        "keyword": "711 三明治",
+        "title": "7-11 金枪鱼三明治",
+        "imageKey": "711-612",
+        "src": "/assets/foods/711-612.webp",
+        "card": {
+          "width": 159,
+          "height": 381
+        },
+        "image": {
+          "width": 157,
+          "height": 150
+        }
+      },
+      {
+        "keyword": "7-11 金枪鱼饭团",
+        "title": "7-11 金枪鱼饭团",
+        "imageKey": "711-222",
+        "src": "/assets/foods/711-222.webp",
+        "card": {
+          "width": 159,
+          "height": 352
+        },
+        "image": {
+          "width": 157,
+          "height": 150
+        }
+      },
+      {
+        "keyword": "7-11 茶叶蛋",
+        "title": "7-11 茶叶蛋",
+        "imageKey": "711-223",
+        "src": "/assets/foods/711-223.webp",
+        "card": {
+          "width": 159,
+          "height": 381
+        },
+        "image": {
+          "width": 157,
+          "height": 150
+        }
+      },
+      {
+        "keyword": "7-11 茶叶蛋",
+        "title": "7-11 卤蛋",
+        "imageKey": "boiled-egg-plate",
+        "src": "/assets/foods/boiled-egg-plate.svg",
+        "card": {
+          "width": 159,
+          "height": 381
+        },
+        "image": {
+          "width": 157,
+          "height": 150
+        }
+      },
+      {
+        "keyword": "7-11 照烧鸡腿便当",
+        "title": "7-11 照烧鸡腿便当",
+        "imageKey": "711-411",
+        "src": "/assets/foods/711-411.webp",
+        "card": {
+          "width": 159,
+          "height": 352
+        },
+        "image": {
+          "width": 157,
+          "height": 150
+        }
+      },
+      {
+        "keyword": "7-11 鸡胸肉沙拉",
+        "title": "7-11 鸡胸肉沙拉",
+        "imageKey": "711-412",
+        "src": "/assets/foods/711-412.webp",
+        "card": {
+          "width": 159,
+          "height": 334
+        },
+        "image": {
+          "width": 157,
+          "height": 150
+        }
+      },
+      {
+        "keyword": "7-11 即食鸡胸肉",
+        "title": "7-11 即食鸡胸肉",
+        "imageKey": "711-221",
+        "src": "/assets/foods/711-221.webp",
+        "card": {
+          "width": 159,
+          "height": 352
+        },
+        "image": {
+          "width": 157,
+          "height": 150
+        }
+      },
+      {
+        "keyword": "7-11 厚切火腿三明治",
+        "title": "7-11 厚切火腿三明治",
+        "imageKey": "711-518",
+        "src": "/assets/foods/711-518.webp",
+        "card": {
+          "width": 159,
+          "height": 371
+        },
+        "image": {
+          "width": 157,
+          "height": 150
+        }
+      },
+      {
+        "keyword": "7-11 黑椒牛肉意面",
+        "title": "7-11 黑椒牛肉意面",
+        "imageKey": "711-613",
+        "src": "/assets/foods/711-613.webp",
+        "card": {
+          "width": 159,
+          "height": 381
+        },
+        "image": {
+          "width": 157,
+          "height": 150
+        }
+      },
+      {
+        "keyword": "7-11 无糖乌龙茶",
+        "title": "7-11 无糖乌龙茶",
+        "imageKey": "711-615",
+        "src": "/assets/foods/711-615.webp",
+        "card": {
+          "width": 159,
+          "height": 363
+        },
+        "image": {
+          "width": 157,
+          "height": 150
+        }
+      },
+      {
+        "keyword": "7-11 海苔肉松饭团",
+        "title": "7-11 海苔肉松饭团",
+        "imageKey": "711-585",
+        "src": "/assets/foods/711-585.webp",
+        "card": {
+          "width": 159,
+          "height": 352
+        },
+        "image": {
+          "width": 157,
+          "height": 150
+        }
+      },
+      {
+        "keyword": "7-11 全麦火腿蛋三明治",
+        "title": "7-11 全麦火腿蛋三明治",
+        "imageKey": "711-225",
+        "src": "/assets/foods/711-225.webp",
+        "card": {
+          "width": 159,
+          "height": 400
+        },
+        "image": {
+          "width": 157,
+          "height": 150
+        }
+      },
+      {
+        "keyword": "7-11 全麦鸡胸三明治",
+        "title": "7-11 全麦鸡胸三明治",
+        "imageKey": "711-584",
+        "src": "/assets/foods/711-584.webp",
+        "card": {
+          "width": 159,
+          "height": 371
+        },
+        "image": {
+          "width": 157,
+          "height": 150
+        }
+      },
+      {
+        "keyword": "711 鸡胸肉",
+        "title": "7-11 鸡胸肉凯撒卷",
+        "imageKey": "711-686",
+        "src": "/assets/foods/711-686.webp",
+        "card": {
+          "width": 159,
+          "height": 392
+        },
+        "image": {
+          "width": 157,
+          "height": 150
+        }
+      },
+      {
+        "keyword": "7-11 冰美式咖啡",
+        "title": "7-11 冰美式咖啡",
+        "imageKey": "711-592",
+        "src": "/assets/foods/711-592.webp",
+        "card": {
+          "width": 159,
+          "height": 334
+        },
+        "image": {
+          "width": 157,
+          "height": 150
+        }
+      },
+      {
+        "keyword": "7-11 低糖豆浆",
+        "title": "7-11 低糖豆浆",
+        "imageKey": "711-224",
+        "src": "/assets/foods/711-224.webp",
+        "card": {
+          "width": 159,
+          "height": 334
+        },
+        "image": {
+          "width": 157,
+          "height": 150
+        }
+      },
+      {
+        "keyword": "7-11 低糖希腊酸奶",
+        "title": "7-11 低糖希腊酸奶",
+        "imageKey": "711-586",
+        "src": "/assets/foods/711-586.webp",
+        "card": {
+          "width": 159,
+          "height": 334
+        },
+        "image": {
+          "width": 157,
+          "height": 150
+        }
+      },
+      {
+        "keyword": "7-11 低脂希腊酸奶杯",
+        "title": "7-11 低脂希腊酸奶杯",
+        "imageKey": "711-688",
+        "src": "/assets/foods/711-688.webp",
+        "card": {
+          "width": 159,
+          "height": 412
+        },
+        "image": {
+          "width": 157,
+          "height": 150
+        }
+      },
+      {
+        "keyword": "7-11 关东煮海带结",
+        "title": "7-11 关东煮海带结",
+        "imageKey": "711-413",
+        "src": "/assets/foods/711-413.webp",
+        "card": {
+          "width": 159,
+          "height": 352
+        },
+        "image": {
+          "width": 157,
+          "height": 150
+        }
+      },
+      {
+        "keyword": "7-11 关东煮魔芋结",
+        "title": "7-11 关东煮魔芋结",
+        "imageKey": "711-414",
+        "src": "/assets/foods/711-414.webp",
+        "card": {
+          "width": 159,
+          "height": 352
+        },
+        "image": {
+          "width": 157,
+          "height": 150
+        }
+      },
+      {
+        "keyword": "7-11 关东煮鱼豆腐",
+        "title": "7-11 关东煮鱼豆腐",
+        "imageKey": "711-415",
+        "src": "/assets/foods/711-415.webp",
+        "card": {
+          "width": 159,
+          "height": 352
+        },
+        "image": {
+          "width": 157,
+          "height": 150
+        }
+      },
+      {
+        "keyword": "7-11 金枪鱼三明治",
+        "title": "7-11 金枪鱼三明治",
+        "imageKey": "711-612",
+        "src": "/assets/foods/711-612.webp",
+        "card": {
+          "width": 159,
+          "height": 381
+        },
+        "image": {
+          "width": 157,
+          "height": 150
+        }
+      },
+      {
+        "keyword": "7-11 鸡胸肉凯撒卷",
+        "title": "7-11 鸡胸肉凯撒卷",
+        "imageKey": "711-686",
+        "src": "/assets/foods/711-686.webp",
+        "card": {
+          "width": 159,
+          "height": 392
+        },
+        "image": {
+          "width": 157,
+          "height": 150
+        }
+      },
+      {
+        "keyword": "罗森 饭团",
+        "title": "罗森 烤肠饭团",
+        "imageKey": "lawson-689",
+        "src": "/assets/foods/lawson-689.webp",
+        "card": {
+          "width": 159,
+          "height": 381
+        },
+        "image": {
+          "width": 157,
+          "height": 150
+        }
+      },
+      {
+        "keyword": "罗森 饭团",
+        "title": "罗森 照烧鸡排饭团",
+        "imageKey": "lawson-617",
+        "src": "/assets/foods/lawson-617.webp",
+        "card": {
+          "width": 159,
+          "height": 381
+        },
+        "image": {
+          "width": 157,
+          "height": 150
+        }
+      },
+      {
+        "keyword": "罗森 饭团",
+        "title": "罗森 金枪鱼饭团",
+        "imageKey": "lawson-232",
+        "src": "/assets/foods/lawson-232.webp",
+        "card": {
+          "width": 159,
+          "height": 352
+        },
+        "image": {
+          "width": 157,
+          "height": 150
+        }
+      },
+      {
+        "keyword": "罗森 火腿鸡蛋三明治",
+        "title": "罗森 火腿鸡蛋三明治",
+        "imageKey": "lawson-419",
+        "src": "/assets/foods/lawson-419.webp",
+        "card": {
+          "width": 159,
+          "height": 400
+        },
+        "image": {
+          "width": 157,
+          "height": 150
+        }
+      },
+      {
+        "keyword": "罗森 关东煮萝卜",
+        "title": "罗森 关东煮萝卜",
+        "imageKey": "lawson-619",
+        "src": "/assets/foods/lawson-619.webp",
+        "card": {
+          "width": 159,
+          "height": 381
+        },
+        "image": {
+          "width": 157,
+          "height": 150
+        }
+      },
+      {
+        "keyword": "罗森 关东煮海带结",
+        "title": "罗森 关东煮海带结",
+        "imageKey": "lawson-421",
+        "src": "/assets/foods/lawson-421.webp",
+        "card": {
+          "width": 159,
+          "height": 352
+        },
+        "image": {
+          "width": 157,
+          "height": 150
+        }
+      },
+      {
+        "keyword": "罗森 关东煮魔芋结",
+        "title": "罗森 关东煮魔芋结",
+        "imageKey": "lawson-524",
+        "src": "/assets/foods/lawson-524.webp",
+        "card": {
+          "width": 159,
+          "height": 352
+        },
+        "image": {
+          "width": 157,
+          "height": 150
+        }
+      },
+      {
+        "keyword": "罗森 关东煮鱼豆腐",
+        "title": "罗森 关东煮鱼豆腐",
+        "imageKey": "lawson-525",
+        "src": "/assets/foods/lawson-525.webp",
+        "card": {
+          "width": 159,
+          "height": 352
+        },
+        "image": {
+          "width": 157,
+          "height": 150
+        }
+      },
+      {
+        "keyword": "罗森 双蛋火腿三明治",
+        "title": "罗森 双蛋火腿三明治",
+        "imageKey": "lawson-690",
+        "src": "/assets/foods/lawson-690.webp",
+        "card": {
+          "width": 159,
+          "height": 400
+        },
+        "image": {
+          "width": 157,
+          "height": 150
+        }
+      },
+      {
+        "keyword": "罗森 全麦鸡蛋三明治",
+        "title": "罗森 全麦鸡蛋三明治",
+        "imageKey": "lawson-233",
+        "src": "/assets/foods/lawson-233.webp",
+        "card": {
+          "width": 159,
+          "height": 400
+        },
+        "image": {
+          "width": 157,
+          "height": 150
+        }
+      },
+      {
+        "keyword": "罗森 鸡胸肉沙拉",
+        "title": "罗森 鸡胸肉沙拉",
+        "imageKey": "lawson-522",
+        "src": "/assets/foods/lawson-522.webp",
+        "card": {
+          "width": 159,
+          "height": 334
+        },
+        "image": {
+          "width": 157,
+          "height": 150
+        }
+      },
+      {
+        "keyword": "罗森 海苔肉松饭团",
+        "title": "罗森 海苔肉松饭团",
+        "imageKey": "lawson-523",
+        "src": "/assets/foods/lawson-523.webp",
+        "card": {
+          "width": 159,
+          "height": 352
+        },
+        "image": {
+          "width": 157,
+          "height": 150
+        }
+      },
+      {
+        "keyword": "罗森 奥尔良鸡肉卷",
+        "title": "罗森 奥尔良鸡肉卷",
+        "imageKey": "lawson-616",
+        "src": "/assets/foods/lawson-616.webp",
+        "card": {
+          "width": 159,
+          "height": 381
+        },
+        "image": {
+          "width": 157,
+          "height": 150
+        }
+      },
+      {
+        "keyword": "罗森 沙拉鸡胸肉",
+        "title": "罗森 沙拉鸡胸肉",
+        "imageKey": "lawson-231",
+        "src": "/assets/foods/lawson-231.webp",
+        "card": {
+          "width": 159,
+          "height": 352
+        },
+        "image": {
+          "width": 157,
+          "height": 150
+        }
+      },
+      {
+        "keyword": "必胜客 披萨",
+        "title": "必胜客 榴莲多多披萨 普通装",
+        "imageKey": "pizzahut-648",
+        "src": "/assets/foods/pizzahut-648.webp",
+        "card": {
+          "width": 159,
+          "height": 400
+        },
+        "image": {
+          "width": 157,
+          "height": 150
+        }
+      },
+      {
+        "keyword": "必胜客 披萨",
+        "title": "必胜客 超级至尊披萨 普通装",
+        "imageKey": "pizzahut-649",
+        "src": "/assets/foods/pizzahut-649.webp",
+        "card": {
+          "width": 159,
+          "height": 400
+        },
+        "image": {
+          "width": 157,
+          "height": 150
+        }
+      },
+      {
+        "keyword": "必胜客 披萨",
+        "title": "必胜客 夏威夷风情披萨 普通装",
+        "imageKey": "pizzahut-674",
+        "src": "/assets/foods/pizzahut-674.svg",
+        "card": {
+          "width": 159,
+          "height": 400
+        },
+        "image": {
+          "width": 157,
+          "height": 150
+        }
+      },
+      {
+        "keyword": "必胜客 超级至尊",
+        "title": "必胜客 超级至尊披萨 普通装",
+        "imageKey": "pizzahut-649",
+        "src": "/assets/foods/pizzahut-649.webp",
+        "card": {
+          "width": 159,
+          "height": 400
+        },
+        "image": {
+          "width": 157,
+          "height": 150
+        }
+      },
+      {
+        "keyword": "必胜客 榴莲披萨",
+        "title": "必胜客 榴莲多多披萨 普通装",
+        "imageKey": "pizzahut-648",
+        "src": "/assets/foods/pizzahut-648.webp",
+        "card": {
+          "width": 159,
+          "height": 400
+        },
+        "image": {
+          "width": 157,
+          "height": 150
+        }
+      },
+      {
+        "keyword": "肯德基 蛋挞",
+        "title": "肯德基 葡式蛋挞",
+        "imageKey": "kfc-154",
+        "src": "/assets/foods/kfc-154.webp",
+        "card": {
+          "width": 159,
+          "height": 381
+        },
+        "image": {
+          "width": 157,
+          "height": 150
+        }
+      },
+      {
+        "keyword": "麦当劳 麦乐鸡块 4块",
+        "title": "麦当劳 麦乐鸡块 4块",
+        "imageKey": "mcd-143",
+        "src": "/assets/foods/mcd-143.webp",
+        "card": {
+          "width": 159,
+          "height": 400
+        },
+        "image": {
+          "width": 157,
+          "height": 150
+        }
+      },
+      {
+        "keyword": "麦当劳 麦乐鸡块 10块",
+        "title": "麦当劳 麦乐鸡块 10块",
+        "imageKey": "mcd-144",
+        "src": "/assets/foods/mcd-144.webp",
+        "card": {
+          "width": 159,
+          "height": 400
+        },
+        "image": {
+          "width": 157,
+          "height": 150
+        }
+      },
+      {
+        "keyword": "麦当劳 麦香鸡",
+        "title": "麦当劳 麦香鸡",
+        "imageKey": "mcd-145",
+        "src": "/assets/foods/mcd-145.webp",
+        "card": {
+          "width": 159,
+          "height": 381
+        },
+        "image": {
+          "width": 157,
+          "height": 150
+        }
+      },
+      {
+        "keyword": "麦当劳 麦香鸡",
+        "title": "麦当劳 双层麦香鸡",
+        "imageKey": "mcd-237",
+        "src": "/assets/foods/mcd-237.svg",
+        "card": {
+          "width": 159,
+          "height": 381
+        },
+        "image": {
+          "width": 157,
+          "height": 150
+        }
+      },
+      {
+        "keyword": "麦当劳 麦辣鸡翅",
+        "title": "麦当劳 麦辣鸡翅",
+        "imageKey": "mcd-142",
+        "src": "/assets/foods/mcd-142.webp",
+        "card": {
+          "width": 159,
+          "height": 381
+        },
+        "image": {
+          "width": 157,
+          "height": 150
+        }
+      },
+      {
+        "keyword": "麦当劳 苹果派",
+        "title": "麦当劳 苹果派",
+        "imageKey": "mcd-146",
+        "src": "/assets/foods/mcd-146.webp",
+        "card": {
+          "width": 159,
+          "height": 381
+        },
+        "image": {
+          "width": 157,
+          "height": 150
+        }
+      },
+      {
+        "keyword": "麦当劳 奥利奥麦旋风",
+        "title": "麦当劳 奥利奥麦旋风",
+        "imageKey": "mcd-150",
+        "src": "/assets/foods/mcd-150.webp",
+        "card": {
+          "width": 159,
+          "height": 400
+        },
+        "image": {
+          "width": 157,
+          "height": 150
+        }
+      },
+      {
+        "keyword": "麦当劳 热巧克力新地",
+        "title": "麦当劳 热巧克力新地",
+        "imageKey": "mcd-151",
+        "src": "/assets/foods/mcd-151.webp",
+        "card": {
+          "width": 159,
+          "height": 400
+        },
+        "image": {
+          "width": 157,
+          "height": 150
+        }
+      },
+      {
+        "keyword": "麦当劳 猪柳蛋麦满分",
+        "title": "麦当劳 猪柳蛋麦满分",
+        "imageKey": "mcd-152",
+        "src": "/assets/foods/mcd-152.webp",
+        "card": {
+          "width": 159,
+          "height": 400
+        },
+        "image": {
+          "width": 157,
+          "height": 150
+        }
+      },
+      {
+        "keyword": "麦当劳 脆薯饼",
+        "title": "麦当劳 脆薯饼",
+        "imageKey": "mcd-149",
+        "src": "/assets/foods/mcd-149.webp",
+        "card": {
+          "width": 159,
+          "height": 381
+        },
+        "image": {
+          "width": 157,
+          "height": 150
+        }
+      },
+      {
+        "keyword": "味千拉面 冰绿茶",
+        "title": "味千拉面 冰绿茶",
+        "imageKey": "ajisen-186",
+        "src": "/assets/foods/ajisen-186.svg",
+        "card": {
+          "width": 159,
+          "height": 363
+        },
+        "image": {
+          "width": 157,
+          "height": 150
+        }
+      },
+      {
+        "keyword": "北冰洋橙汽水",
+        "title": "北冰洋橙汽水",
+        "imageKey": "orange-soda",
+        "src": "/assets/foods/orange-soda.svg",
+        "card": {
+          "width": 159,
+          "height": 334
+        },
+        "image": {
+          "width": 157,
+          "height": 150
+        }
+      },
+      {
+        "keyword": "麻辣烫",
+        "title": "麻辣烫 宽粉",
+        "imageKey": "dish-731",
+        "src": "/assets/foods/dish-731.svg",
+        "card": {
+          "width": 159,
+          "height": 363
+        },
+        "image": {
+          "width": 157,
+          "height": 150
+        }
+      },
+      {
+        "keyword": "麻辣烫",
+        "title": "麻辣烫 鱼豆腐",
+        "imageKey": "dish-732",
+        "src": "/assets/foods/dish-732.svg",
+        "card": {
+          "width": 159,
+          "height": 363
+        },
+        "image": {
+          "width": 157,
+          "height": 150
+        }
+      },
+      {
+        "keyword": "麻辣烫",
+        "title": "麻辣烫 午餐肉",
+        "imageKey": "dish-733",
+        "src": "/assets/foods/dish-733.svg",
+        "card": {
+          "width": 159,
+          "height": 363
+        },
+        "image": {
+          "width": 157,
+          "height": 150
+        }
+      },
+      {
+        "keyword": "鱼豆腐",
+        "title": "麻辣烫 鱼豆腐",
+        "imageKey": "dish-732",
+        "src": "/assets/foods/dish-732.svg",
+        "card": {
+          "width": 159,
+          "height": 363
+        },
+        "image": {
+          "width": 157,
+          "height": 150
+        }
+      },
+      {
+        "keyword": "鱼豆腐",
+        "title": "鱼豆腐",
+        "imageKey": "dish-538",
+        "src": "/assets/foods/dish-538.svg",
+        "card": {
+          "width": 159,
+          "height": 363
+        },
+        "image": {
+          "width": 157,
+          "height": 150
+        }
+      },
+      {
+        "keyword": "鱼豆腐",
+        "title": "7-11 关东煮鱼豆腐",
+        "imageKey": "711-415",
+        "src": "/assets/foods/711-415.webp",
+        "card": {
+          "width": 159,
+          "height": 352
+        },
+        "image": {
+          "width": 157,
+          "height": 150
+        }
+      },
+      {
+        "keyword": "红烧肉",
+        "title": "家常 红烧肉",
+        "imageKey": "dish-712",
+        "src": "/assets/foods/dish-712.svg",
+        "card": {
+          "width": 159,
+          "height": 363
+        },
+        "image": {
+          "width": 157,
+          "height": 150
+        }
+      },
+      {
+        "keyword": "红烧肉",
+        "title": "红烧肉",
+        "imageKey": "dish-342",
+        "src": "/assets/foods/dish-342.svg",
+        "card": {
+          "width": 159,
+          "height": 363
+        },
+        "image": {
+          "width": 157,
+          "height": 150
+        }
+      },
+      {
+        "keyword": "锅包肉",
+        "title": "锅包肉",
+        "imageKey": "dish-212",
+        "src": "/assets/foods/dish-212.svg",
+        "card": {
+          "width": 159,
+          "height": 363
+        },
+        "image": {
+          "width": 157,
+          "height": 150
+        }
+      },
+      {
+        "keyword": "基础水果 榴莲",
+        "title": "基础水果 榴莲",
+        "imageKey": "durian-fruit",
+        "src": "/assets/foods/durian-fruit.svg",
+        "card": {
+          "width": 159,
+          "height": 363
+        },
+        "image": {
+          "width": 157,
+          "height": 150
+        }
+      },
+      {
+        "keyword": "青岛啤酒",
+        "title": "青岛啤酒 经典10度",
+        "imageKey": "tsingtao-321",
+        "src": "/assets/foods/tsingtao-321.svg",
+        "card": {
+          "width": 159,
+          "height": 381
+        },
+        "image": {
+          "width": 157,
+          "height": 150
+        }
+      },
+      {
+        "keyword": "茅台",
+        "title": "茅台 53度飞天",
+        "imageKey": "maotai-333",
+        "src": "/assets/foods/maotai-333.svg",
+        "card": {
+          "width": 159,
+          "height": 363
+        },
+        "image": {
+          "width": 157,
+          "height": 150
+        }
+      },
+      {
+        "keyword": "重庆小面",
+        "title": "重庆小面",
+        "imageKey": "spicy-noodle-bowl",
+        "src": "/assets/foods/spicy-noodle-bowl.svg",
+        "card": {
+          "width": 159,
+          "height": 334
+        },
+        "image": {
+          "width": 157,
+          "height": 150
+        }
+      },
+      {
+        "keyword": "桂林米粉",
+        "title": "桂林米粉",
+        "imageKey": "rice-noodle-bowl",
+        "src": "/assets/foods/rice-noodle-bowl.svg",
+        "card": {
+          "width": 159,
+          "height": 334
+        },
+        "image": {
+          "width": 157,
+          "height": 150
+        }
+      },
+      {
+        "keyword": "热干面",
+        "title": "热干面",
+        "imageKey": "dry-noodle-plate",
+        "src": "/assets/foods/dry-noodle-plate.svg",
+        "card": {
+          "width": 159,
+          "height": 334
+        },
+        "image": {
+          "width": 157,
+          "height": 150
+        }
+      },
+      {
+        "keyword": "鱼香肉丝",
+        "title": "鱼香肉丝饭",
+        "imageKey": "takeaway-248",
+        "src": "/assets/foods/takeaway-248.svg",
+        "card": {
+          "width": 159,
+          "height": 381
+        },
+        "image": {
+          "width": 157,
+          "height": 150
+        }
+      },
+      {
+        "keyword": "鱼香肉丝",
+        "title": "南城香 鱼香肉丝饭",
+        "imageKey": "nanchengxiang-295",
+        "src": "/assets/foods/nanchengxiang-295.svg",
+        "card": {
+          "width": 159,
+          "height": 363
+        },
+        "image": {
+          "width": 157,
+          "height": 150
+        }
+      },
+      {
+        "keyword": "鱼香肉丝",
+        "title": "留学生餐厅 鱼香肉丝饭",
+        "imageKey": "intl-cafe-300",
+        "src": "/assets/foods/intl-cafe-300.svg",
+        "card": {
+          "width": 159,
+          "height": 400
+        },
+        "image": {
+          "width": 157,
+          "height": 150
+        }
+      },
+      {
+        "keyword": "回锅肉",
+        "title": "回锅肉饭",
+        "imageKey": "takeaway-263",
+        "src": "/assets/foods/takeaway-263.svg",
+        "card": {
+          "width": 159,
+          "height": 363
+        },
+        "image": {
+          "width": 157,
+          "height": 150
+        }
+      },
+      {
+        "keyword": "回锅肉",
+        "title": "南城香 回锅肉饭",
+        "imageKey": "nanchengxiang-268",
+        "src": "/assets/foods/nanchengxiang-268.svg",
+        "card": {
+          "width": 159,
+          "height": 381
+        },
+        "image": {
+          "width": 157,
+          "height": 150
+        }
+      },
+      {
+        "keyword": "回锅肉",
+        "title": "回锅肉",
+        "imageKey": "dish-343",
+        "src": "/assets/foods/dish-343.svg",
+        "card": {
+          "width": 159,
+          "height": 363
+        },
+        "image": {
+          "width": 157,
+          "height": 150
+        }
+      },
+      {
+        "keyword": "毛血旺",
+        "title": "毛血旺",
+        "imageKey": "dish-348",
+        "src": "/assets/foods/dish-348.svg",
+        "card": {
+          "width": 159,
+          "height": 363
+        },
+        "image": {
+          "width": 157,
+          "height": 150
+        }
+      },
+      {
+        "keyword": "红烧狮子头",
+        "title": "红烧狮子头",
+        "imageKey": "dish-500",
+        "src": "/assets/foods/dish-500.svg",
+        "card": {
+          "width": 159,
+          "height": 363
+        },
+        "image": {
+          "width": 157,
+          "height": 150
+        }
+      },
+      {
+        "keyword": "哈密瓜",
+        "title": "哈密瓜",
+        "imageKey": "melon-fruit",
+        "src": "/assets/foods/melon-fruit.svg",
+        "card": {
+          "width": 159,
+          "height": 334
+        },
+        "image": {
+          "width": 157,
+          "height": 150
+        }
+      },
+      {
+        "keyword": "椰子水",
+        "title": "椰子水",
+        "imageKey": "coconut-water",
+        "src": "/assets/foods/coconut-water.svg",
+        "card": {
+          "width": 159,
+          "height": 334
+        },
+        "image": {
+          "width": 157,
+          "height": 150
+        }
+      },
+      {
+        "keyword": "红牛",
+        "title": "红牛 维生素牛磺酸饮料",
+        "imageKey": "redbull-406",
+        "src": "/assets/foods/redbull-406.webp",
+        "card": {
+          "width": 159,
+          "height": 354
+        },
+        "image": {
+          "width": 157,
+          "height": 150
+        }
+      },
+      {
+        "keyword": "东鹏特饮",
+        "title": "东鹏特饮",
+        "imageKey": "dongpeng-407",
+        "src": "/assets/foods/dongpeng-407.webp",
+        "card": {
+          "width": 159,
+          "height": 334
+        },
+        "image": {
+          "width": 157,
+          "height": 150
+        }
+      },
+      {
+        "keyword": "米村 炸鸡",
+        "title": "米村拌饭 韩式炸鸡",
+        "imageKey": "micun-656",
+        "src": "/assets/foods/micun-656.svg",
+        "card": {
+          "width": 159,
+          "height": 400
+        },
+        "image": {
+          "width": 157,
+          "height": 150
+        }
+      },
+      {
+        "keyword": "米村 炸鸡",
+        "title": "米村拌饭 照烧鸡排拌饭",
+        "imageKey": "micun-266",
+        "src": "/assets/foods/micun-266.svg",
+        "card": {
+          "width": 159,
+          "height": 400
+        },
+        "image": {
+          "width": 157,
+          "height": 150
+        }
+      }
+    ]
+  }
+}

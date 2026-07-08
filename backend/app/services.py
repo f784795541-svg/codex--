@@ -1,6 +1,5 @@
 from __future__ import annotations
 
-import hashlib
 import json
 import re
 from datetime import date, datetime, time, timedelta, timezone
@@ -9,7 +8,8 @@ from sqlalchemy import nulls_last
 from sqlalchemy.orm import Session, joinedload
 
 from . import models, schemas
-from .food_metadata import get_food_aliases, get_food_image_key
+from .food_metadata import get_food_aliases, get_food_image_key_for_food, split_aliases_text
+from .security import TOKEN_TTL_SECONDS, create_access_token, hash_password, needs_password_rehash, verify_password
 from .workout_metadata import get_workout_option
 
 
@@ -196,16 +196,6 @@ def compute_bmr(user: models.User) -> float:
     return 10 * user.weight_kg + 6.25 * user.height_cm - 5 * user.age + gender_adjustment
 
 
-def hash_password(password: str) -> str:
-    return hashlib.sha256(password.encode("utf-8")).hexdigest()
-
-
-def verify_password(password: str, password_hash: str | None) -> bool:
-    if not password_hash:
-        return False
-    return hash_password(password) == password_hash
-
-
 PORTION_RANGE_PATTERN = re.compile(r"(\d+(?:\.\d+)?)\s*[-~至]\s*(\d+(?:\.\d+)?)\s*(?:g|克)", re.IGNORECASE)
 PORTION_SINGLE_PATTERN = re.compile(r"(\d+(?:\.\d+)?)\s*(?:g|克)", re.IGNORECASE)
 
@@ -292,6 +282,8 @@ def resolve_serving_size_g(food: models.FoodDatabase) -> float:
 
 
 def serialize_food(food: models.FoodDatabase) -> dict:
+    aliases = set(get_food_aliases(food.name, food.category))
+    aliases.update(split_aliases_text(getattr(food, "aliases_text", None)))
     return {
         "food_id": food.food_id,
         "name": food.name,
@@ -301,8 +293,8 @@ def serialize_food(food: models.FoodDatabase) -> dict:
         "fat": food.fat,
         "carbs": food.carbs,
         "is_custom": food.is_custom,
-        "aliases": get_food_aliases(food.name, food.category),
-        "image_key": get_food_image_key(food.name, food.category),
+        "aliases": sorted(aliases),
+        "image_key": get_food_image_key_for_food(food.name, food.category, food.brand, food.food_id),
         "brand": food.brand,
         "serving_size_g": resolve_serving_size_g(food),
         "portion_hint": food.portion_hint,

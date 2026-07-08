@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 180" role="img" aria-labelledby="title desc">
+  <title id="title">7-11 厚切火腿三明治 [711-518]</title>
+  <desc id="desc">Generated local illustration fallback for 711-518</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#f6f8fb"/>
+      <stop offset="100%" stop-color="#ffffff"/>
+    </linearGradient>
+  </defs>
+  <rect width="180" height="180" rx="28" fill="url(#bg)"/>
+  <rect x="18" y="18" width="144" height="24" rx="12" fill="#e67e22" opacity="0.14"/>
+  <text x="28" y="34" font-family="Arial, sans-serif" font-size="12" fill="#e67e22" font-weight="700">711</text>
+  
+        <polygon points="42,102 90,58 138,102" fill="#f1d39a"/>
+        <polygon points="50,96 90,64 130,96" fill="#f9e79f"/>
+        <rect x="56" y="88" width="68" height="8" rx="4" fill="#e67e22"/>
+        
+  <rect x="18" y="144" width="144" height="18" rx="9" fill="#ffffff" opacity="0.86"/>
+  <text x="28" y="157" font-family="Arial, sans-serif" font-size="10" fill="#5d6d7e">711-518</text>
+</svg>

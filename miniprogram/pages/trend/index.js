@@ -1,4 +1,4 @@
-const { get } = require("../../utils/request");
+const { get, isUnauthorizedRedirectError } = require("../../utils/request");
 const { ensureUser } = require("../../utils/session");
 
 function formatDateRange(startDate, endDate) {
@@ -315,6 +315,9 @@ Page({
       });
     } catch (error) {
       if (requestId !== this.trendRequestId) {
+        return;
+      }
+      if (isUnauthorizedRedirectError(error)) {
         return;
       }
       wx.showToast({

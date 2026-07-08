@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 180" role="img" aria-labelledby="title desc">
+  <title id="title">麦当劳 板烧鸡腿堡套餐玉米杯 [mcd-600]</title>
+  <desc id="desc">Generated local illustration fallback for mcd-600</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#f6f8fb"/>
+      <stop offset="100%" stop-color="#ffffff"/>
+    </linearGradient>
+  </defs>
+  <rect width="180" height="180" rx="28" fill="url(#bg)"/>
+  <rect x="18" y="18" width="144" height="24" rx="12" fill="#c0392b" opacity="0.14"/>
+  <text x="28" y="34" font-family="Arial, sans-serif" font-size="12" fill="#c0392b" font-weight="700">MCD</text>
+  
+        <rect x="79" y="54" width="16" height="70" rx="8" fill="#f4d03f"/>
+        <circle cx="63" cy="68" r="8" fill="#f7dc6f"/>
+        <circle cx="85" cy="64" r="8" fill="#f4d03f"/>
+        <circle cx="99" cy="68" r="8" fill="#f7dc6f"/>
+        <circle cx="63" cy="86" r="8" fill="#f4d03f"/>
+        <circle cx="85" cy="82" r="8" fill="#f7dc6f"/>
+        <circle cx="99" cy="86" r="8" fill="#f4d03f"/>
+        <circle cx="63" cy="104" r="8" fill="#f7dc6f"/>
+        <circle cx="85" cy="100" r="8" fill="#f4d03f"/>
+        <circle cx="99" cy="104" r="8" fill="#f7dc6f"/>
+        <path d="M79 118 Q61 130 53 144" stroke="#f8c471" stroke-width="6" fill="none" stroke-linecap="round"/>
+        <path d="M95 118 Q101 130 109 144" stroke="#f8c471" stroke-width="6" fill="none" stroke-linecap="round"/>
+        
+  <rect x="18" y="144" width="144" height="18" rx="9" fill="#ffffff" opacity="0.86"/>
+  <text x="28" y="157" font-family="Arial, sans-serif" font-size="10" fill="#5d6d7e">mcd-600</text>
+</svg>

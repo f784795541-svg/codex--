@@ -1,0 +1,48 @@
+{
+  "desktop": {
+    "shot": "reports\\batch24_desktop_check.png",
+    "results": [
+      {
+        "keyword": "全家 奥尔良鸡排便当",
+        "title": "全家 奥尔良鸡排便当",
+        "imageKey": "familymart-694",
+        "src": "/assets/foods/familymart-694.webp"
+      },
+      {
+        "keyword": "全家 抹茶红豆卷",
+        "title": "全家 抹茶红豆卷",
+        "imageKey": "familymart-695",
+        "src": "/assets/foods/familymart-695.webp"
+      },
+      {
+        "keyword": "全家 香葱肉松面包",
+        "title": "全家 香葱肉松面包",
+        "imageKey": "familymart-588",
+        "src": "/assets/foods/familymart-588.webp"
+      }
+    ]
+  },
+  "mobile": {
+    "shot": "reports\\batch24_mobile_check.png",
+    "results": [
+      {
+        "keyword": "全家 奥尔良鸡排便当",
+        "title": "全家 奥尔良鸡排便当",
+        "imageKey": "familymart-694",
+        "src": "/assets/foods/familymart-694.webp"
+      },
+      {
+        "keyword": "全家 抹茶红豆卷",
+        "title": "全家 抹茶红豆卷",
+        "imageKey": "familymart-695",
+        "src": "/assets/foods/familymart-695.webp"
+      },
+      {
+        "keyword": "全家 香葱肉松面包",
+        "title": "全家 香葱肉松面包",
+        "imageKey": "familymart-588",
+        "src": "/assets/foods/familymart-588.webp"
+      }
+    ]
+  }
+}

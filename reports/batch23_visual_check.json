@@ -1,0 +1,48 @@
+{
+  "desktop": {
+    "shot": "reports\\batch23_desktop_check.png",
+    "results": [
+      {
+        "keyword": "全家 关东煮萝卜",
+        "title": "全家 关东煮萝卜",
+        "imageKey": "familymart-228",
+        "src": "/assets/foods/familymart-228.webp"
+      },
+      {
+        "keyword": "全家 关东煮贡丸",
+        "title": "全家 关东煮贡丸",
+        "imageKey": "familymart-696",
+        "src": "/assets/foods/familymart-696.webp"
+      },
+      {
+        "keyword": "全家 关东煮鱼豆腐",
+        "title": "全家 关东煮鱼豆腐",
+        "imageKey": "familymart-521",
+        "src": "/assets/foods/familymart-521.webp"
+      }
+    ]
+  },
+  "mobile": {
+    "shot": "reports\\batch23_mobile_check.png",
+    "results": [
+      {
+        "keyword": "全家 关东煮萝卜",
+        "title": "全家 关东煮萝卜",
+        "imageKey": "familymart-228",
+        "src": "/assets/foods/familymart-228.webp"
+      },
+      {
+        "keyword": "全家 关东煮贡丸",
+        "title": "全家 关东煮贡丸",
+        "imageKey": "familymart-696",
+        "src": "/assets/foods/familymart-696.webp"
+      },
+      {
+        "keyword": "全家 关东煮鱼豆腐",
+        "title": "全家 关东煮鱼豆腐",
+        "imageKey": "familymart-521",
+        "src": "/assets/foods/familymart-521.webp"
+      }
+    ]
+  }
+}

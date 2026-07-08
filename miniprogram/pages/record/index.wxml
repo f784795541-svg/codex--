@@ -59,6 +59,7 @@
 
     <view class="food-selected" wx:if="{{selectedFood}}">
       <view class="food-selected-head">
+        <image class="food-thumb food-selected-thumb" src="{{selectedFood.imagePath}}" mode="aspectFit" />
         <view>
           <view class="food-selected-name">{{selectedFood.name}}</view>
           <view class="food-selected-meta">{{selectedFood.category}} · {{selectedFood.calories_per_100g}} kcal / 100g</view>
@@ -77,6 +78,7 @@
         data-index="{{index}}"
         bindtap="selectFood"
       >
+        <image class="food-thumb" src="{{item.imagePath}}" mode="aspectFit" />
         <view class="item-title">{{item.name}}</view>
         <view class="item-meta">{{item.category}} · {{item.calories_per_100g}} kcal / 100g</view>
       </view>

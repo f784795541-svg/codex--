@@ -1,0 +1,17 @@
+<svg width="640" height="420" viewBox="0 0 640 420" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="640" height="420" rx="36" fill="#FFF1E8"/>
+  <circle cx="512" cy="94" r="72" fill="#FFD7BE"/>
+  <ellipse cx="320" cy="306" rx="192" ry="35" fill="#E6D2C1"/>
+  <path d="M194 262C194 192.412 250.412 136 320 136H350C439.47 136 512 208.53 512 298V298C512 310.15 502.15 320 490 320H260C223.549 320 194 290.451 194 254V262Z" fill="#A2473D"/>
+  <path d="M230 252C230 206.161 267.161 169 313 169H346C408.408 169 459 219.592 459 282V282C459 287.523 454.523 292 449 292H283C253.729 292 230 268.271 230 239V252Z" fill="#E47B69"/>
+  <path d="M320 180C331.598 180 341 189.402 341 201V264C341 275.598 331.598 285 320 285C308.402 285 299 275.598 299 264V201C299 189.402 308.402 180 320 180Z" fill="#FFF5ED"/>
+  <path d="M277 213C290 193 351 192 364 213C353 233 288 233 277 213Z" fill="#FFD6C9"/>
+  <circle cx="308" cy="226" r="7" fill="#2F231E"/>
+  <circle cx="344" cy="226" r="7" fill="#2F231E"/>
+  <path d="M309 247C318 256 334 256 343 247" stroke="#2F231E" stroke-width="5" stroke-linecap="round"/>
+  <circle cx="274" cy="248" r="8" fill="#F2B29A"/>
+  <circle cx="378" cy="248" r="8" fill="#F2B29A"/>
+  <path d="M58 92C58 75.4315 71.4315 62 88 62H188C204.569 62 218 75.4315 218 92V110C218 126.569 204.569 140 188 140H88C71.4315 140 58 126.569 58 110V92Z" fill="#FFFEFA"/>
+  <path d="M218 102L236 92L218 82V102Z" fill="#FFFEFA"/>
+  <text x="138" y="105" fill="#9A4C35" font-size="22" font-family="Arial, sans-serif" text-anchor="middle">T-bone</text>
+</svg>

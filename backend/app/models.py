@@ -12,7 +12,7 @@ class User(Base):
     id: Mapped[int] = mapped_column(Integer, primary_key=True, index=True)
     name: Mapped[str] = mapped_column(String(100), nullable=False)
     username: Mapped[str | None] = mapped_column(String(50), nullable=True, index=True)
-    password_hash: Mapped[str | None] = mapped_column(String(64), nullable=True)
+    password_hash: Mapped[str | None] = mapped_column(String(255), nullable=True)
     age: Mapped[int] = mapped_column(Integer, nullable=False)
     gender: Mapped[str] = mapped_column(String(20), nullable=False)
     height_cm: Mapped[float] = mapped_column(Float, nullable=False)
@@ -46,9 +46,27 @@ class FoodDatabase(Base):
     serving_size_g: Mapped[float | None] = mapped_column(Float, nullable=True)
     portion_hint: Mapped[str | None] = mapped_column(String(255), nullable=True)
     cooking_options_json: Mapped[str | None] = mapped_column(String(4000), nullable=True)
+    aliases_text: Mapped[str | None] = mapped_column(String(1000), nullable=True)
+    search_text: Mapped[str | None] = mapped_column(String(2000), nullable=True)
+    source: Mapped[str | None] = mapped_column(String(120), nullable=True)
+    source_updated_at: Mapped[str | None] = mapped_column(String(20), nullable=True)
+    status: Mapped[str] = mapped_column(String(20), default="active", nullable=False)
     is_custom: Mapped[bool] = mapped_column(Boolean, default=False, nullable=False)
 
     food_logs: Mapped[list["FoodLog"]] = relationship(back_populates="food")
+
+
+class FoodSearchLog(Base):
+    __tablename__ = "food_search_logs"
+
+    id: Mapped[int] = mapped_column(Integer, primary_key=True, index=True)
+    query: Mapped[str] = mapped_column(String(200), nullable=False)
+    normalized_query: Mapped[str] = mapped_column(String(200), nullable=False, index=True)
+    platform: Mapped[str | None] = mapped_column(String(30), nullable=True, index=True)
+    user_id: Mapped[int | None] = mapped_column(Integer, nullable=True, index=True)
+    hit_count: Mapped[int] = mapped_column(Integer, default=0, nullable=False)
+    chosen_food_id: Mapped[int | None] = mapped_column(Integer, nullable=True)
+    created_at: Mapped[datetime] = mapped_column(DateTime, default=datetime.utcnow, nullable=False, index=True)
 
 
 class FoodLog(Base):

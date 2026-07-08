@@ -1,0 +1,718 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0">
+<meta http-equiv="Expires" content="-1">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+<meta http-equiv="Pragma" content="no-cache">
+<meta content="telephone=no" name="format-detection" />
+<meta name="Author" content="万户网络" />
+<link rel="shortcut icon" href="/ego/res/images/favicon.ico" />
+<title>上海逸刻新零售网络科技有限公司</title>
+<script src="/ego/res/scripts/jquery-3.6.1.min.js"></script>
+<script src="/ego/res/scripts/whir.search.js"></script>
+<script src="/ego/res/scripts/jquery.SuperSlide.2.1.1.js"></script>
+
+
+<link rel="stylesheet" type="text/css" href="/ego/res/scripts/wow/animate.css"/>
+<script src="/ego/res/scripts/wow/wow.js"></script>
+
+
+<link rel="stylesheet" type="text/css" href="/ego/res/scripts/swiper/swiper.min.css"/>
+<script src="/ego/res/scripts/swiper/swiper.min.js"></script>
+<script src="/ego/res/scripts/swiper/swiper_video.js"></script>
+
+
+<link rel="stylesheet" type="text/css" href="/ego/res/scripts/slick/slick.css"/>
+<script src="/ego/res/scripts/slick/slick.js"></script>
+
+
+
+<link rel="stylesheet" type="text/css" href="/ego/res/css/common.css"/>
+<link rel="stylesheet" type="text/css" href="/ego/res/css/css_whir.css"/>
+<link rel="stylesheet" type="text/css" href="/ego/res/css/details.css"/>
+<script src="/ego/res/scripts/whirCommon.js"></script>
+<script src="/ego/res/scripts/common.js"></script>
+    <script type="text/javascript">
+        var navID = "0";
+    </script>
+</head>
+
+<body>
+<header class="Top on">
+    <div class="w1600 TopCon">
+        <div class="Logo fl">
+            <a href="/ego/index.html">
+                <img src="/upload/image/2026-01/col380/1768380454578.png" alt="">
+            </a>
+        </div>
+        <div class="m-btn fr">
+            <span></span>
+        </div>
+
+
+        <div class="fr d-flex a-center searchBox">
+            <div class="searchBoxTop d-flex a-center">
+                <div class="searchIco" id="TopBtn">
+                    <img src="/ego/res/images/search.png" class="img1" alt="">
+                    <img src="/ego/res/images/search.png" class="img2" alt="">
+                </div>
+                <input type="text" id="TopKey" placeholder="搜索">
+            </div>
+        </div>
+
+        <div class="MainNav fr">
+            <ul>
+                <li id="nav0">
+                    <em><a href="/ego/index.html">首页</a><b></b></em>
+                </li>
+                <li id="nav342">
+                    <em><a href="/ego/col343/list.html">关于我们</a><b></b></em>
+                    <div class="NavPull">
+                        <dl>
+                            <dd><div class="erji"><a href="/ego/col343/list.html">品牌故事</a><i></i></div></dd>
+                            <dd><div class="erji"><a href="/ego/col352/list.html">最新资讯</a><i></i></div></dd>
+                            <dd><div class="erji"><a href="/ego/col347/list.html">荣誉奖项</a><i></i></div></dd>
+                        </dl>
+                    </div>
+                </li>
+                <li id="nav351">
+                    <em><a href="/ego/col353/list.html">逸刻优选</a><b></b></em>
+                    <div class="NavPull">
+                        <dl>
+                            <dd><div class="erji"><a href="/ego/col353/list.html">新品推荐</a><i></i></div></dd>
+                            <dd><div class="erji"><a href="/ego/col354/list.html">促销优惠</a><i></i></div></dd>
+                            <dd><div class="erji"><a href="/ego/col355/list.html">人气爆品</a><i></i></div></dd>
+                        </dl>
+                    </div>
+                </li>
+                <li id="nav358">
+                    <em><a href="/ego/col990/list.html">逸刻会员</a><b></b></em>
+                    <div class="NavPull">
+                        <dl>
+                            <dd><div class="erji"><a href="/ego/col990/list.html">咖啡券包</a><i></i></div></dd>
+                            <dd><div class="erji"><a href="/ego/col991/list.html">便当券包</a><i></i></div></dd>
+                            <dd><div class="erji"><a href="/ego/col992/list.html">会员福利</a><i></i></div></dd>
+                        </dl>
+                    </div>
+                </li>
+                <li id="nav366">
+                    <em><a href="/ego/col367/list.html">加盟逸刻</a><b></b></em>
+                    <div class="NavPull">
+                        <dl>
+                            <dd><div class="erji"><a href="/ego/col367/list.html">品牌优势</a><i></i></div></dd>
+                            <dd><div class="erji"><a href="/ego/col368/list.html">加盟支持</a><i></i></div></dd>
+                            <dd><div class="erji"><a href="/ego/col369/list.html">加盟模式</a><i></i></div></dd>
+                            <dd><div class="erji"><a href="/ego/col370/list.html">加盟申请</a><i></i></div></dd>
+                        </dl>
+                    </div>
+                </li>
+                <li id="nav359">
+                    <em><a href="/ego/col360/list.html">更多逸刻</a><b></b></em>
+                    <div class="NavPull">
+                        <dl>
+                            <dd><div class="erji"><a href="/ego/col360/list.html">门店信息</a><i></i></div></dd>
+                            <dd><div class="erji"><a href="/ego/col361/list.html">社群</a><i></i></div></dd>
+                        </dl>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div class="clear"></div>
+    </div>
+</header>
+<script>
+    $(function() {
+
+        $('.searchBoxTop input').on({
+
+            focus: function() {
+                $(this).parent('.searchBoxTop').addClass('on');
+            },
+
+            blur: function() {
+                $(this).parent('.searchBoxTop').removeClass('on');
+            }
+        });
+    });
+</script>
+<script type="text/javascript">
+
+    $("#nav" + navID).addClass("onnav");
+</script>
+<script type="text/javascript">
+    new WOW().init();
+</script>
+
+
+<script>
+	var searchinput = document.getElementById("TopKey");
+	$("#TopBtn").click(function () {
+		if (searchinput.value == "" || searchinput.value == "输入关键词...") {
+			alert("请填写需要搜索的内容！");
+			searchinput.focus();
+			return false;
+		}
+
+
+		if (searchinput.value.length > 50) {
+			alert("输入的关键词字数不要过多！");
+			searchinput.focus();
+			return false;
+		}
+		var pattern = new RegExp("[`~!@#$^&*()=|{}':;',\\[\\].<>/?~！@#￥……&*（）—|{}【】‘；：”“'。，、？]");
+		if(pattern.test(searchinput.value))
+		{
+			alert("您输入的内容存在特殊字符!");
+			searchinput.focus();
+			return false;
+		}
+		window.location = "/ego/search?page=1&con=" + encodeURI(encodeURI(searchinput.value));
+		return true;
+	});
+	$('ytable-cell top-search').click(function () {
+		$(window).keyup(function (event) {
+			if (event.keyCode == 13) {
+				window.location.href = "/ego/search?page=1&con=" + $.trim($("#TopKey").val());
+			}
+		});
+	})
+
+
+	$(document).ready(function() {
+		$('#TopKey').keypress(function(event) {
+			if (event.which == 13) { 
+				if (searchinput.value == "" || searchinput.value == "输入关键词...") {
+					alert("请填写需要搜索的内容！");
+					searchinput.focus();
+					return false;
+				}
+
+				if (searchinput.value.length > 50) {
+					alert("输入的关键词字数不要过多！");
+					searchinput.focus();
+					return false;
+				}
+				var pattern = new RegExp("[`~!@#$^&*()=|{}':;',\\[\\].<>/?~！@#￥……&*（）—|{}【】‘；：”“'。，、？]");
+				if(pattern.test(searchinput.value))
+				{
+					alert("您输入的内容存在特殊字符!");
+					searchinput.focus();
+					return false;
+				}
+				window.location = "/ego/search?page=1&con=" + encodeURI(encodeURI(searchinput.value));
+				return true;
+				event.preventDefault(); 
+			}
+		});
+	});
+
+
+</script>
+
+<div class="HomeBan">
+    <div class="swiper swiper-video root-swiperVideo">
+        <div class="swiper-wrapper">
+
+            <div class="swiper-slide">
+                <div class="imgbox">
+                        <span><img src="/upload/image/2026-01/col338/1768554263768.jpg" alt=""></span>
+                </div>
+            </div>
+        </div>
+        <div class="swiper-pagination"></div>
+        <div class="swiper-button-next swiper_button next"></div>
+        <div class="swiper-button-prev swiper_button prev"></div>
+    </div>
+
+    <div class="controls-area">
+        <div class="w1440">
+            <div class="swiper-pagination-info line1">
+                <span class="current f36"></span> <span class="mrTop">/</span> <span class="total f24 mrTop"></span>
+            </div>
+        </div>
+    </div>
+
+</div>
+<script>
+    whirRootVideo.banner('.HomeBan');
+    function updatePagination(swiper) {
+        var current = swiper.activeIndex + 1;
+        var slidesLength = swiper.slides.length;
+
+        var formattedCurrent = current < 10 ? '0' + current : current;
+        var formattedCurrent2 = slidesLength < 10 ? '0' + slidesLength : slidesLength;
+        $('.HomeBan .swiper-pagination-info .current').text(formattedCurrent);
+        $('.HomeBan .swiper-pagination-info .total').text(formattedCurrent2);
+    };
+
+</script>
+
+
+
+<div class="HomeOne pt80 pb80" style="background-image: url(/ego/res/uploadfiles/image/homeOne_bg.jpg);">
+    <div class="w1440 d-flex ul f-wrap a-center">
+        <div class="LeftBox wow fadeInLeftSmall">
+            <div class="img imgbox">
+                    <span>
+                        <video class="hlife-video" loop="" src="/upload/video/2026-01/col339/1768381110215.mp4" poster="/upload/image/2026-01/col339/1768381059627.jpg"></video>
+                    </span>
+                    <div class="hlife-play"><img class='hlife-img' src="/ego/res/images/hlife-play.png" alt=""></div>
+            </div>
+        </div>
+        <div class="RightBox  wow fadeInRightSmall">
+            <div class="PublicTitle">
+                <div class="FontBox line1">
+                    <div class="f32 title">
+                        简单 品质 悦己生活
+                    </div>
+                    <div class="f24 corbbb EnTitle mt20">
+                        
+                    </div>
+                </div>
+            </div>
+            <div class="HomeOneCon">
+                <div class="line mt40"></div>
+                <div class="f16 mt30">
+                    <p>依托百联集团和互联网领先企业，逸刻EGO以数字化驱动探索新零售小业态，为消费者提供从早到晚的新鲜美味，推动城市美好生活。</p>
+                </div>
+                <a href="/ego/col343/list.html" class="f16 corRed more mt40">
+                    了解更多
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(function () {
+  $('.hlife-img').click(function () {
+    $('.hlife-video').trigger('play');
+    $('.hlife-play').hide();
+  });
+  $('.hlife-video').click(function () {
+    $('.hlife-video').trigger('pause');
+    $('.hlife-play').show();
+  })
+})
+</script>
+
+
+
+    <div class="HomeThree  pt80 pb80">
+        <div class="w1440">
+            <div class="PublicTitle wow fadeInUpSmall">
+                <div class="FontBox line1 d-flex f-colu a-center j-center w100">
+                    <div class="f32 title">
+                        新品推荐
+                    </div>
+                    <div class="f24 corbbb EnTitle mt20">
+                       NEW ARRIVALS
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="swiper mySwiper mt10 wow fadeInUpSmall">
+                <div class="swiper-wrapper slider">
+                    <div class="swiper-slide wow fadeInUpSmall">
+                        <div class="Item ">
+                            <div class="ItemCon">
+                                <div class="img imgbox">
+                                        <span>
+                                            <img src="/upload/image/2026-06/col353/1782715104695.jpg" alt="">
+                                        </span>
+                                    
+                                </div>
+                            </div>
+                            <div class="FontBox">
+                                        <div class="f20 corfff f20 line1">洛神乌梅草本饮</div>
+                                    </div>
+                        </div>
+                    </div>
+                    <div class="swiper-slide wow fadeInUpSmall">
+                        <div class="Item ">
+                            <div class="ItemCon">
+                                <div class="img imgbox">
+                                        <span>
+                                            <img src="/upload/image/2026-06/col353/1782715085924.jpg" alt="">
+                                        </span>
+                                    
+                                </div>
+                            </div>
+                            <div class="FontBox">
+                                        <div class="f20 corfff f20 line1">话梅气泡美式</div>
+                                    </div>
+                        </div>
+                    </div>
+                    <div class="swiper-slide wow fadeInUpSmall">
+                        <div class="Item ">
+                            <div class="ItemCon">
+                                <div class="img imgbox">
+                                        <span>
+                                            <img src="/upload/image/2026-06/col353/1782715075346.jpg" alt="">
+                                        </span>
+                                    
+                                </div>
+                            </div>
+                            <div class="FontBox">
+                                        <div class="f20 corfff f20 line1">话梅气泡冰茶</div>
+                                    </div>
+                        </div>
+                    </div>
+                    <div class="swiper-slide wow fadeInUpSmall">
+                        <div class="Item ">
+                            <div class="ItemCon">
+                                <div class="img imgbox">
+                                        <span>
+                                            <img src="/upload/image/2026-06/col353/1782715053243.jpg" alt="">
+                                        </span>
+                                    
+                                </div>
+                            </div>
+                            <div class="FontBox">
+                                        <div class="f20 corfff f20 line1">逸焙爆浆冰麻薯糕点(柠檬乳酪味)</div>
+                                    </div>
+                        </div>
+                    </div>
+                    <div class="swiper-slide wow fadeInUpSmall">
+                        <div class="Item ">
+                            <div class="ItemCon">
+                                <div class="img imgbox">
+                                        <span>
+                                            <img src="/upload/image/2026-06/col353/1782715034525.jpg" alt="">
+                                        </span>
+                                    
+                                </div>
+                            </div>
+                            <div class="FontBox">
+                                        <div class="f20 corfff f20 line1">逸焙爆浆冰麻薯糕点(海盐芝士味)</div>
+                                    </div>
+                        </div>
+                    </div>
+                    <div class="swiper-slide wow fadeInUpSmall">
+                        <div class="Item ">
+                            <div class="ItemCon">
+                                <div class="img imgbox">
+                                        <span>
+                                            <img src="/upload/image/2026-06/col353/1782715010264.jpg" alt="">
+                                        </span>
+                                    
+                                </div>
+                            </div>
+                            <div class="FontBox">
+                                        <div class="f20 corfff f20 line1">逸焙美式辣酱风味牛肉软法棍三明治</div>
+                                    </div>
+                        </div>
+                    </div>
+        </div>
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-button-next"></div>
+    </div>
+    </div>
+</div>
+    <script>
+        $(function () {
+           const newsSwiper = new Swiper('.HomeThree .swiper', {
+            loop: true,
+            slidesPerView: 3,
+            spaceBetween: 20,
+            centeredSlides: true,
+            pagination: {
+                el: '.HomeThree .swiper-pagination',
+             },
+            navigation: {
+              nextEl: '.HomeThree .swiper-button-next',
+              prevEl: '.HomeThree .swiper-button-prev',
+            },
+            breakpoints: {
+              768: { slidesPerView: 2,}
+            }
+ });
+            $('.mySwiper .wow').each(function (i) {
+                $(this).attr({ 'data-wow-delay': 0.1 * i + 's' })
+            })
+        })
+    </script>
+
+
+
+<div class="HomeCx  pt80 pb80 wow zoomInSmall">
+    <div class="w1440">
+    <div class="PublicTitle">
+        <div class="FontBox line1 d-flex f-colu a-center j-center w100">
+            <div class="f32 title">
+                促销优惠
+            </div>
+            <div class="f24 corbbb EnTitle mt20">
+                PROMOTION
+            </div>
+        </div>
+    </div>
+
+    <div class="Ul mt35">
+
+
+        <dl class="Dl line1">
+            <dd class="mt30">
+                <a href="javascript:void(0);" class="d-flex j-sb a-center">
+                    <div class="img imgbox"><img src="/upload/image/2026-06/col340/1782715272828.jpg" alt=""></div>
+                    <div class="f18 title">
+                        <div class="dot1"></div>
+                    </div>
+                </a>
+            </dd>
+            <dd class="mt30">
+                <a href="javascript:void(0);" class="d-flex j-sb a-center">
+                    <div class="img imgbox"><img src="/upload/image/2026-06/col340/1782715330703.jpg" alt=""></div>
+                    <div class="f18 title">
+                        <div class="dot1"></div>
+                    </div>
+                </a>
+            </dd>
+
+        </dl>
+
+    </div>
+    </div>
+</div>
+
+
+<div class="HomeJm jmzc pt80 pb80">
+<div class="w1440">
+    <div class="PublicTitle">
+                    <div class="FontBox line1 d-flex f-colu a-center j-center w100">
+                        <div class="f32 title">
+                            加盟支持
+                        </div>
+                        <div class="f24 corbbb EnTitle mt20">
+                            SUPPORT
+                        </div>
+                    </div>
+                </div>
+                <ul class="ul">
+            <li class="item wow fadeInUp">
+                <div class="img imgbox"><img src="/upload/image/2026-01/col341/1768436797318.jpg" alt=""></div>
+                <div class="info">
+                <div class="ti">选址建店</div>
+                <p>专业开发团队<br/>提供选址评估<br/>店铺设计、证照办理等支持</p>
+                </div>
+            </li>
+            <li class="item wow fadeInUp">
+                <div class="img imgbox"><img src="/upload/image/2026-01/col341/1768436846778.jpg" alt=""></div>
+                <div class="info">
+                <div class="ti">供应链</div>
+                <p>自建鲜食工厂</p><p>引进亚洲顶尖炊饭线</p><p>支持8大品类生产</p><p></p>
+                </div>
+            </li>
+            <li class="item wow fadeInUp">
+                <div class="img imgbox"><img src="/upload/image/2026-01/col341/1768436867775.jpg" alt=""></div>
+                <div class="info">
+                <div class="ti">数据驱动</div>
+                <p>提供先进商业操作系统赋能</p><p>大数据全链路驱动</p><p></p>
+                </div>
+            </li>
+            <li class="item wow fadeInUp">
+                <div class="img imgbox"><img src="/upload/image/2026-01/col341/1768436891496.jpg" alt=""></div>
+                <div class="info">
+                <div class="ti">精细管理</div>
+                <p>提供数字化系统管理前后端</p><p>精进管理降本提效</p><p></p>
+                </div>
+            </li>
+            <li class="item wow fadeInUp">
+                <div class="img imgbox"><img src="/upload/image/2026-01/col341/1768436914955.jpg" alt=""></div>
+                <div class="info">
+                <div class="ti">物流配送</div>
+                <p>自有物流体系</p><p>提供高效多次配送支持</p><p></p>
+                </div>
+            </li>
+            <li class="item wow fadeInUp">
+                <div class="img imgbox"><img src="/upload/image/2026-01/col341/1768436940978.jpg" alt=""></div>
+                <div class="info">
+                <div class="ti">营销推广</div>
+                <p>提供主题活动规划执行</p><p>CRM精准营销</p><p>品牌传播等支持</p><p></p>
+                </div>
+            </li>
+            <li class="item wow fadeInUp">
+                <div class="img imgbox"><img src="/upload/image/2026-01/col341/1768436960108.jpg" alt=""></div>
+                <div class="info">
+                <div class="ti">培训赋能</div>
+                <p>提供专业技能培训 人员储备培养</p><p>激励发展体系等支持</p><p></p>
+                </div>
+            </li>
+            <li class="item wow fadeInUp">
+                <div class="img imgbox"><img src="/upload/image/2026-01/col341/1768436989131.jpg" alt=""></div>
+                <div class="info">
+                <div class="ti">财务系统</div>
+                <p>提供店铺账目结算</p><p>成本核算等支持</p><p><br/></p>
+                </div>
+            </li>
+        </ul>
+</div>
+</div>
+
+
+<div class="HomeImg">
+
+    <div class="HomeTwo pt80 pb80">
+        <div class="w1440">
+
+            <div class="HomeTwoCon wow zoomInSmall">
+                <div class="PublicTitle">
+                    <div class="FontBox line1">
+                        <div class="f32 title">
+                            逸刻资讯
+                        </div>
+                        <div class="f24 corbbb EnTitle mt20">
+                            LATEST INFORMATION
+                        </div>
+                    </div>
+                    <a href="/ego/col352/list.html" class="PublicMore f16">
+                        <span>了解更多</span>
+                        <i></i>
+                    </a>
+                </div>
+                <div class="Ul mt35">
+
+                    <div class="TopItem">
+                        <a href="/ego/col352/13403.html" class="ItemCon d-flex a-center">
+                            <div class="LeftBox">
+                                <div class="img imgbox">
+                                        <span>
+                                            <img src="/upload/image/2026-06/1782715447604.jpg" alt="">
+                                        </span>
+                                </div>
+                            </div>
+                            <div class="RightBox">
+                                <div class="f20 line18 title dot2">百联逸刻携手浩海星空：落地具身智能新场景 重构实体零售进化范式</div>
+                                <div class="cor666 intro dot2 mt10">5月28日，百联集团旗下新零售标杆品牌百联逸刻与上海浩海星空机器人有限公司正式达成战略合作，推出“逸刻×...<span
+                                        class="corRed">【详细】</span></div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="line mt40"></div>
+
+
+
+                    <dl class="Dl line1 mt40">
+                        <dd class="mt30">
+                            <a href="/ego/col352/13404.html" class="d-flex j-sb a-center">
+                                <div class="f18 title">
+                                    <div class="dot1">百联逸刻亮相上海体育市集，“一车一营”激发文商旅体展新活力 </div>
+                                </div>
+                                <div class="f18 cor999 time">2026-05-30</div>
+                            </a>
+                        </dd>
+                        <dd class="mt30">
+                            <a href="/ego/col352/13369.html" class="d-flex j-sb a-center">
+                                <div class="f18 title">
+                                    <div class="dot1">百联逸刻：首发PB苏打气泡水，迪士尼店开门迎客 </div>
+                                </div>
+                                <div class="f18 cor999 time">2026-05-11</div>
+                            </a>
+                        </dd>
+                        <dd class="mt30">
+                            <a href="/ego/col352/13368.html" class="d-flex j-sb a-center">
+                                <div class="f18 title">
+                                    <div class="dot1">“一店一车一展位”亮相上海咖啡文化节，百联逸刻奏响“五五购物节”新乐章 </div>
+                                </div>
+                                <div class="f18 cor999 time">2026-05-02</div>
+                            </a>
+                        </dd>
+                        <dd class="mt30">
+                            <a href="/ego/col352/13367.html" class="d-flex j-sb a-center">
+                                <div class="f18 title">
+                                    <div class="dot1">百联逸刻入选“2026年中国便利店TOP100” 坚守健康、悦己定位 </div>
+                                </div>
+                                <div class="f18 cor999 time">2026-04-29</div>
+                            </a>
+                        </dd>
+                        <dd class="mt30">
+                            <a href="/ego/col352/13180.html" class="d-flex j-sb a-center">
+                                <div class="f18 title">
+                                    <div class="dot1">以“健康”“悦己”破局 百联逸刻走出差异化新零售发展之路 </div>
+                                </div>
+                                <div class="f18 cor999 time">2026-04-14</div>
+                            </a>
+                        </dd>
+                    </dl>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+        </div>
+    </div>
+
+
+    <div class="after"></div>
+
+</div>
+
+
+<footer class="Bottom d-flex j-center a-center">
+    <div class="w1600 line1 light">
+        <div class="d-flex a-center j-center ul">
+            <p>上海市静安区广中西路699号大宁商务中心</p><p><a href="mailto: ego-media@egocvs.com">媒体联系邮箱： &nbsp;ego-media@egocvs.com</a></p><p><a href="tel:400-826-5757">客服电话：400-826-5757</a></p><p></p>
+        </div>
+        <div class="CopyRight mt20 d-flex j-center">
+           <p><a href="https://beian.miit.gov.cn" class="ba">沪公网安备 31010602005691号</a><a href="https://beian.miit.gov.cn" class="">沪ICP备19025787号-1</a></p>
+        </div>
+    </div>
+</footer>
+<div class="FloatBox">
+    <ul>
+        <li class="gotop">
+            <a href="javascript:void(0);">
+                <div class="icon"><img src="/ego/res/images/gotop.svg" alt=""></div>
+                <p>TOP</p>
+            </a>
+        </li>
+    </ul>
+</div>
+
+    <section class='pagefloat d-none d-xl-block'>
+        <ul class='pagefloat-ulst'>
+            <li>
+                <a href="/ego/col370/list.html"><img src="/upload/image/2026-01/col996/1768438435321.jpg" alt=""></a>
+            </li>
+            <li>
+                <a href="/ego/col997/index.html"><img src="/upload/image/2026-01/col996/1768438476499.jpg" alt=""></a>
+            </li>
+            <li>
+                <a href="/ego/col1001/index.html"><img src="/upload/image/2026-01/col996/1768438498431.jpg" alt=""></a>
+            </li>
+
+            <li>
+                <img src="/upload/image/2026-01/col380/1768438645759.jpg" alt="">
+                <div class='lifloat animated rotateInDownRight'>
+                    <img src="/upload/image/2026-01/col380/1768438645759.jpg" alt="">
+                </div>
+            </li>
+        </ul>
+    </section>
+
+
+<script>
+    let select = (e) => document.querySelector(e);
+    let selectAll = (e) => document.querySelectorAll(e);
+
+   
+    let homedongtai = gsap.timeline({ ease: 'none' })
+        .to(select('.HomeImg .after'), { y: 300 })
+    ScrollTrigger.create({
+        trigger: ".HomeImg ",
+        start: 'top top',
+        end: '+=600px',
+        scrub: 1.2,
+        animation: homedongtai
+    })
+</script>
+
+</body>
+
+</html>

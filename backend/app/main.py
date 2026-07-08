@@ -1,13 +1,13 @@
-from datetime import date
-
-from sqlalchemy import nulls_last, or_
+from sqlalchemy import nulls_last
 from fastapi import Depends, FastAPI, HTTPException, Query
 from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.orm import Session
 
-from . import models, schemas, services
+from . import dependencies, models, schemas, services
 from .database import get_db
-from .food_metadata import food_matches_query
+from .food_metadata import build_aliases_text, build_food_search_text
+from .error_tracking import record_api_error
+from .routers import auth, food_search, maintenance, reports
 from .seed import init_database
 from .workout_metadata import get_workout_option, get_workout_option_list
 
@@ -27,6 +27,14 @@ app.add_middleware(
 )
 
 
+@app.middleware("http")
+async def record_recent_api_errors(request, call_next):
+    response = await call_next(request)
+    if response.status_code >= 500:
+        record_api_error(request.method, request.url.path, response.status_code)
+    return response
+
+
 @app.on_event("startup")
 def on_startup() -> None:
     init_database()
@@ -37,57 +45,10 @@ def health_check():
     return {"status": "ok"}
 
 
-@app.post("/auth/register", response_model=schemas.AuthResponse)
-def register_user(payload: schemas.AuthRegister, db: Session = Depends(get_db)):
-    username = services.normalize_username(payload.username)
-    if not username or len(username) < 3:
-        raise HTTPException(status_code=400, detail="用户名至少 3 位，且不能只包含空格")
-
-    existing = db.query(models.User).filter(models.User.username == username).first()
-    if existing:
-        raise HTTPException(status_code=400, detail="用户名已存在")
-
-    user = models.User(
-        username=username,
-        password_hash=services.hash_password(payload.password),
-        name=payload.name,
-        age=payload.age,
-        gender=payload.gender,
-        height_cm=payload.height_cm,
-        weight_kg=payload.weight_kg,
-        target_weight_kg=payload.target_weight_kg,
-        target_sleep_hours=payload.target_sleep_hours,
-        goal=payload.goal,
-        activity_level=payload.activity_level,
-        recommendation_mode=payload.recommendation_mode,
-        body_type=payload.body_type,
-        target_algorithm=payload.target_algorithm,
-    )
-    db.add(user)
-    db.commit()
-    db.refresh(user)
-
-    weight_log = models.WeightLog(
-        user_id=user.id,
-        weight_kg=user.weight_kg,
-        record_date=services.local_today(),
-    )
-    db.add(weight_log)
-    db.commit()
-
-    return {"message": "注册成功", "user": user}
-
-
-@app.post("/auth/login", response_model=schemas.AuthResponse)
-def login_user(payload: schemas.AuthLogin, db: Session = Depends(get_db)):
-    username = services.normalize_username(payload.username)
-    if not username:
-        raise HTTPException(status_code=401, detail="用户名或密码错误")
-
-    user = db.query(models.User).filter(models.User.username == username).first()
-    if not user or not services.verify_password(payload.password, user.password_hash):
-        raise HTTPException(status_code=401, detail="用户名或密码错误")
-    return {"message": "登录成功", "user": user}
+app.include_router(auth.router)
+app.include_router(food_search.router)
+app.include_router(reports.router)
+app.include_router(maintenance.router)
 
 
 @app.post("/user/create", response_model=schemas.UserResponse)
@@ -100,18 +61,22 @@ def create_user(payload: schemas.UserCreate, db: Session = Depends(get_db)):
 
 
 @app.get("/user/info", response_model=schemas.UserResponse)
-def get_user_info(user_id: int = Query(...), db: Session = Depends(get_db)):
-    user = db.get(models.User, user_id)
-    if not user:
-        raise HTTPException(status_code=404, detail="用户不存在")
+def get_user_info(
+    user_id: int | None = Query(None),
+    db: Session = Depends(get_db),
+    current_user: models.User | None = Depends(dependencies.get_optional_current_user),
+):
+    user = dependencies.resolve_user(db, user_id, current_user)
     return user
 
 
 @app.post("/user/update", response_model=schemas.UserUpdateResponse)
-def update_user_info(payload: schemas.UserUpdateRequest, db: Session = Depends(get_db)):
-    user = db.get(models.User, payload.user_id)
-    if not user:
-        raise HTTPException(status_code=404, detail="用户不存在")
+def update_user_info(
+    payload: schemas.UserUpdateRequest,
+    db: Session = Depends(get_db),
+    current_user: models.User | None = Depends(dependencies.get_optional_current_user),
+):
+    user = dependencies.resolve_user(db, payload.user_id, current_user)
 
     if payload.username and payload.username != user.username:
         normalized_username = services.normalize_username(payload.username)
@@ -148,29 +113,6 @@ def update_user_info(payload: schemas.UserUpdateRequest, db: Session = Depends(g
     return {"message": "设置已更新", "user": user}
 
 
-@app.get("/food/database", response_model=list[schemas.FoodResponse])
-def get_food_database(
-    limit: int = Query(200, ge=1, le=500),
-    offset: int = Query(0, ge=0),
-    db: Session = Depends(get_db),
-):
-    foods = db.query(models.FoodDatabase).order_by(models.FoodDatabase.food_id).offset(offset).limit(limit).all()
-    return [services.serialize_food(food) for food in foods]
-
-
-@app.get("/food/search", response_model=list[schemas.FoodResponse])
-def search_food(q: str = Query(..., min_length=1), limit: int = Query(20, ge=1, le=50), db: Session = Depends(get_db)):
-    foods = db.query(models.FoodDatabase).all()
-    matched: list[tuple[int, models.FoodDatabase]] = []
-    for food in foods:
-        is_match, score = food_matches_query(food.name, food.category, q, food.brand)
-        if is_match:
-            matched.append((score, food))
-
-    matched.sort(key=lambda item: (-item[0], item[1].food_id))
-    return [services.serialize_food(food) for _, food in matched[:limit]]
-
-
 @app.get("/workout/options", response_model=list[schemas.WorkoutOptionResponse])
 def get_workout_options():
     return get_workout_option_list()
@@ -178,14 +120,13 @@ def get_workout_options():
 
 @app.get("/workout/estimate", response_model=schemas.WorkoutEstimateResponse)
 def estimate_workout(
-    user_id: int = Query(...),
+    user_id: int | None = Query(None),
     type: str = Query(...),
     duration_min: int = Query(..., ge=1, le=600),
     db: Session = Depends(get_db),
+    current_user: models.User | None = Depends(dependencies.get_optional_current_user),
 ):
-    user = db.get(models.User, user_id)
-    if not user:
-        raise HTTPException(status_code=404, detail="用户不存在")
+    user = dependencies.resolve_user(db, user_id, current_user)
 
     option = get_workout_option(type)
     if not option:
@@ -206,7 +147,17 @@ def create_food(payload: schemas.FoodCreate, db: Session = Depends(get_db)):
     if existing:
         raise HTTPException(status_code=400, detail="食物已存在")
 
-    food = models.FoodDatabase(**payload.model_dump(), is_custom=True)
+    food_payload = payload.model_dump()
+    aliases_text = build_aliases_text(food_payload["name"], food_payload["category"])
+    food = models.FoodDatabase(
+        **food_payload,
+        aliases_text=aliases_text,
+        search_text=build_food_search_text(food_payload["name"], food_payload["category"], None, aliases_text),
+        source="user_custom",
+        source_updated_at=services.local_today().isoformat(),
+        status="active",
+        is_custom=True,
+    )
     db.add(food)
     db.commit()
     db.refresh(food)
@@ -214,17 +165,19 @@ def create_food(payload: schemas.FoodCreate, db: Session = Depends(get_db)):
 
 
 @app.post("/food/log")
-def create_food_log(payload: schemas.FoodLogCreate, db: Session = Depends(get_db)):
-    user = db.get(models.User, payload.user_id)
-    if not user:
-        raise HTTPException(status_code=404, detail="用户不存在")
+def create_food_log(
+    payload: schemas.FoodLogCreate,
+    db: Session = Depends(get_db),
+    current_user: models.User | None = Depends(dependencies.get_optional_current_user),
+):
+    user = dependencies.resolve_user(db, payload.user_id, current_user)
 
     food = db.get(models.FoodDatabase, payload.food_id)
     if not food:
         raise HTTPException(status_code=404, detail="食物不存在")
 
     log = models.FoodLog(
-        user_id=payload.user_id,
+        user_id=user.id,
         food_id=payload.food_id,
         weight_g=payload.weight_g,
         cooking_method=payload.cooking_method,
@@ -255,16 +208,18 @@ def create_food_log(payload: schemas.FoodLogCreate, db: Session = Depends(get_db
 
 
 @app.post("/workout/log")
-def create_workout_log(payload: schemas.WorkoutLogCreate, db: Session = Depends(get_db)):
-    user = db.get(models.User, payload.user_id)
-    if not user:
-        raise HTTPException(status_code=404, detail="用户不存在")
+def create_workout_log(
+    payload: schemas.WorkoutLogCreate,
+    db: Session = Depends(get_db),
+    current_user: models.User | None = Depends(dependencies.get_optional_current_user),
+):
+    user = dependencies.resolve_user(db, payload.user_id, current_user)
 
     if not get_workout_option(payload.type):
         raise HTTPException(status_code=404, detail="运动类型不存在")
 
     log = models.WorkoutLog(
-        user_id=payload.user_id,
+        user_id=user.id,
         type=payload.type,
         duration_min=payload.duration_min,
         calories_burned=payload.calories_burned,
@@ -285,13 +240,15 @@ def create_workout_log(payload: schemas.WorkoutLogCreate, db: Session = Depends(
 
 
 @app.post("/sleep/log")
-def create_sleep_log(payload: schemas.SleepLogCreate, db: Session = Depends(get_db)):
-    user = db.get(models.User, payload.user_id)
-    if not user:
-        raise HTTPException(status_code=404, detail="用户不存在")
+def create_sleep_log(
+    payload: schemas.SleepLogCreate,
+    db: Session = Depends(get_db),
+    current_user: models.User | None = Depends(dependencies.get_optional_current_user),
+):
+    user = dependencies.resolve_user(db, payload.user_id, current_user)
 
     log = models.SleepLog(
-        user_id=payload.user_id,
+        user_id=user.id,
         sleep_start=payload.sleep_start,
         sleep_end=payload.sleep_end,
         log_date=payload.log_date or services.local_today(),
@@ -309,13 +266,15 @@ def create_sleep_log(payload: schemas.SleepLogCreate, db: Session = Depends(get_
 
 
 @app.post("/weight/log", response_model=schemas.WeightLogResponse)
-def create_weight_log(payload: schemas.WeightLogCreate, db: Session = Depends(get_db)):
-    user = db.get(models.User, payload.user_id)
-    if not user:
-        raise HTTPException(status_code=404, detail="用户不存在")
+def create_weight_log(
+    payload: schemas.WeightLogCreate,
+    db: Session = Depends(get_db),
+    current_user: models.User | None = Depends(dependencies.get_optional_current_user),
+):
+    user = dependencies.resolve_user(db, payload.user_id, current_user)
 
     log = models.WeightLog(
-        user_id=payload.user_id,
+        user_id=user.id,
         weight_kg=payload.weight_kg,
         record_date=payload.record_date or services.local_today(),
         record_time=payload.record_time,
@@ -329,55 +288,18 @@ def create_weight_log(payload: schemas.WeightLogCreate, db: Session = Depends(ge
 
 @app.get("/weight/history", response_model=list[schemas.WeightLogResponse])
 def get_weight_history(
-    user_id: int = Query(...),
+    user_id: int | None = Query(None),
     limit: int = Query(30, ge=1, le=180),
     db: Session = Depends(get_db),
+    current_user: models.User | None = Depends(dependencies.get_optional_current_user),
 ):
-    user = db.get(models.User, user_id)
-    if not user:
-        raise HTTPException(status_code=404, detail="用户不存在")
+    user = dependencies.resolve_user(db, user_id, current_user)
 
     logs = (
         db.query(models.WeightLog)
-        .filter(models.WeightLog.user_id == user_id)
+        .filter(models.WeightLog.user_id == user.id)
         .order_by(models.WeightLog.record_date.desc(), nulls_last(models.WeightLog.record_time.desc()))
         .limit(limit)
         .all()
     )
     return logs
-
-
-@app.get("/dashboard/summary", response_model=schemas.DashboardSummaryResponse)
-def get_dashboard_summary(
-    user_id: int = Query(...),
-    report_date: date | None = Query(None),
-    db: Session = Depends(get_db),
-):
-    user = db.get(models.User, user_id)
-    if not user:
-        raise HTTPException(status_code=404, detail="用户不存在")
-    return services.build_dashboard_summary(db, user, report_date or services.local_today())
-
-
-@app.get("/report/daily", response_model=schemas.DailyReportResponse)
-def get_daily_report(
-    user_id: int = Query(...),
-    report_date: date | None = Query(None),
-    db: Session = Depends(get_db),
-):
-    user = db.get(models.User, user_id)
-    if not user:
-        raise HTTPException(status_code=404, detail="用户不存在")
-    return services.compute_daily_report(db, user, report_date or services.local_today())
-
-
-@app.get("/report/weekly", response_model=schemas.WeeklyReportResponse)
-def get_weekly_report(
-    user_id: int = Query(...),
-    start_date: date | None = Query(None),
-    db: Session = Depends(get_db),
-):
-    user = db.get(models.User, user_id)
-    if not user:
-        raise HTTPException(status_code=404, detail="用户不存在")
-    return services.compute_weekly_report(db, user, start_date or services.local_today())

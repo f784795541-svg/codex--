@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 180" role="img" aria-labelledby="title desc">
+  <title id="title">肯德基 原味鸡 [kfc-156]</title>
+  <desc id="desc">Generated local illustration fallback for kfc-156</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#fff4e6"/>
+      <stop offset="100%" stop-color="#ffffff"/>
+    </linearGradient>
+  </defs>
+  <rect width="180" height="180" rx="28" fill="url(#bg)"/>
+  <rect x="18" y="18" width="144" height="24" rx="12" fill="#b03a2e" opacity="0.14"/>
+  <text x="28" y="34" font-family="Arial, sans-serif" font-size="12" fill="#b03a2e" font-weight="700">KFC</text>
+  
+        <ellipse cx="90" cy="118" rx="46" ry="10" fill="#d5dbdb"/>
+        <ellipse cx="69" cy="89" rx="18" ry="24" fill="#d68910"/>
+        <ellipse cx="102" cy="93" rx="20" ry="26" fill="#ca6f1e"/>
+        <ellipse cx="113" cy="77" rx="12" ry="16" fill="#e59866"/>
+        <circle cx="82" cy="86" r="4" fill="#7dcea0" opacity="0.6"/>
+        
+  <rect x="18" y="144" width="144" height="18" rx="9" fill="#ffffff" opacity="0.86"/>
+  <text x="28" y="157" font-family="Arial, sans-serif" font-size="10" fill="#5d6d7e">kfc-156</text>
+</svg>

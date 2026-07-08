@@ -1,4 +1,4 @@
-const { get } = require("../../utils/request");
+const { get, isUnauthorizedRedirectError } = require("../../utils/request");
 const { ensureUser } = require("../../utils/session");
 
 const FOOD_LIBRARY_LIMIT = 500;
@@ -577,6 +577,9 @@ Page({
       });
     } catch (error) {
       if (requestId !== this.summaryRequestId) {
+        return;
+      }
+      if (isUnauthorizedRedirectError(error)) {
         return;
       }
       wx.showToast({

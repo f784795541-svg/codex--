@@ -1,0 +1,88 @@
+{
+  "desktop": {
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "screenshotPath": "reports\\batch27_desktop_check.png",
+    "results": [
+      {
+        "keyword": "罗森 无糖豆浆",
+        "expectedKey": "lawson-235",
+        "expectedFile": "lawson-235.webp",
+        "matched": {
+          "title": "罗森 无糖豆浆",
+          "imageKey": "lawson-235",
+          "src": "/assets/foods/lawson-235.webp"
+        },
+        "cards": [
+          {
+            "title": "罗森 无糖豆浆",
+            "imageKey": "lawson-235",
+            "src": "/assets/foods/lawson-235.webp"
+          }
+        ]
+      },
+      {
+        "keyword": "罗森 冰皮月亮蛋糕",
+        "expectedKey": "lawson-620",
+        "expectedFile": "lawson-620.webp",
+        "matched": {
+          "title": "罗森 冰皮月亮蛋糕",
+          "imageKey": "lawson-620",
+          "src": "/assets/foods/lawson-620.webp"
+        },
+        "cards": [
+          {
+            "title": "罗森 冰皮月亮蛋糕",
+            "imageKey": "lawson-620",
+            "src": "/assets/foods/lawson-620.webp"
+          }
+        ]
+      }
+    ]
+  },
+  "mobile": {
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "screenshotPath": "reports\\batch27_mobile_check.png",
+    "results": [
+      {
+        "keyword": "罗森 无糖豆浆",
+        "expectedKey": "lawson-235",
+        "expectedFile": "lawson-235.webp",
+        "matched": {
+          "title": "罗森 无糖豆浆",
+          "imageKey": "lawson-235",
+          "src": "/assets/foods/lawson-235.webp"
+        },
+        "cards": [
+          {
+            "title": "罗森 无糖豆浆",
+            "imageKey": "lawson-235",
+            "src": "/assets/foods/lawson-235.webp"
+          }
+        ]
+      },
+      {
+        "keyword": "罗森 冰皮月亮蛋糕",
+        "expectedKey": "lawson-620",
+        "expectedFile": "lawson-620.webp",
+        "matched": {
+          "title": "罗森 冰皮月亮蛋糕",
+          "imageKey": "lawson-620",
+          "src": "/assets/foods/lawson-620.webp"
+        },
+        "cards": [
+          {
+            "title": "罗森 冰皮月亮蛋糕",
+            "imageKey": "lawson-620",
+            "src": "/assets/foods/lawson-620.webp"
+          }
+        ]
+      }
+    ]
+  }
+}

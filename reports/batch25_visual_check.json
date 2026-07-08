@@ -1,0 +1,122 @@
+{
+  "desktop": {
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "screenshotPath": "reports\\batch25_desktop_check.png",
+    "results": [
+      {
+        "keyword": "罗森 冰美式咖啡",
+        "expectedKey": "lawson-590",
+        "expectedFile": "lawson-590.webp",
+        "matched": {
+          "title": "罗森 冰美式咖啡",
+          "imageKey": "lawson-590",
+          "src": "/assets/foods/lawson-590.webp"
+        },
+        "cards": [
+          {
+            "title": "罗森 冰美式咖啡",
+            "imageKey": "lawson-590",
+            "src": "/assets/foods/lawson-590.webp"
+          }
+        ]
+      },
+      {
+        "keyword": "罗森 无糖茉莉花茶",
+        "expectedKey": "lawson-621",
+        "expectedFile": "lawson-621.webp",
+        "matched": {
+          "title": "罗森 无糖茉莉花茶",
+          "imageKey": "lawson-621",
+          "src": "/assets/foods/lawson-621.webp"
+        },
+        "cards": [
+          {
+            "title": "罗森 无糖茉莉花茶",
+            "imageKey": "lawson-621",
+            "src": "/assets/foods/lawson-621.webp"
+          }
+        ]
+      },
+      {
+        "keyword": "罗森 茶叶蛋",
+        "expectedKey": "lawson-234",
+        "expectedFile": "lawson-234.webp",
+        "matched": {
+          "title": "罗森 茶叶蛋",
+          "imageKey": "lawson-234",
+          "src": "/assets/foods/lawson-234.webp"
+        },
+        "cards": [
+          {
+            "title": "罗森 茶叶蛋",
+            "imageKey": "lawson-234",
+            "src": "/assets/foods/lawson-234.webp"
+          }
+        ]
+      }
+    ]
+  },
+  "mobile": {
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "screenshotPath": "reports\\batch25_mobile_check.png",
+    "results": [
+      {
+        "keyword": "罗森 冰美式咖啡",
+        "expectedKey": "lawson-590",
+        "expectedFile": "lawson-590.webp",
+        "matched": {
+          "title": "罗森 冰美式咖啡",
+          "imageKey": "lawson-590",
+          "src": "/assets/foods/lawson-590.webp"
+        },
+        "cards": [
+          {
+            "title": "罗森 冰美式咖啡",
+            "imageKey": "lawson-590",
+            "src": "/assets/foods/lawson-590.webp"
+          }
+        ]
+      },
+      {
+        "keyword": "罗森 无糖茉莉花茶",
+        "expectedKey": "lawson-621",
+        "expectedFile": "lawson-621.webp",
+        "matched": {
+          "title": "罗森 无糖茉莉花茶",
+          "imageKey": "lawson-621",
+          "src": "/assets/foods/lawson-621.webp"
+        },
+        "cards": [
+          {
+            "title": "罗森 无糖茉莉花茶",
+            "imageKey": "lawson-621",
+            "src": "/assets/foods/lawson-621.webp"
+          }
+        ]
+      },
+      {
+        "keyword": "罗森 茶叶蛋",
+        "expectedKey": "lawson-234",
+        "expectedFile": "lawson-234.webp",
+        "matched": {
+          "title": "罗森 茶叶蛋",
+          "imageKey": "lawson-234",
+          "src": "/assets/foods/lawson-234.webp"
+        },
+        "cards": [
+          {
+            "title": "罗森 茶叶蛋",
+            "imageKey": "lawson-234",
+            "src": "/assets/foods/lawson-234.webp"
+          }
+        ]
+      }
+    ]
+  }
+}

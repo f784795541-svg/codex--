@@ -150,7 +150,7 @@ Page({
         goal: GOALS[this.data.goalIndex].value,
         activity_level: ACTIVITY_LEVELS[this.data.activityIndex].value,
       });
-      getApp().setCurrentUser(result.user);
+      getApp().setCurrentUser(result.user, result.access_token);
       wx.showToast({
         title: "注册成功",
         icon: "success",

@@ -1,7 +1,9 @@
 const API_BASE = window.__HEALTH_API_BASE__ || "/api";
 const STORAGE_KEY = "health_manager_current_user";
+const AUTH_TOKEN_KEY = "health_manager_auth_token";
 const PREFERENCES_KEY = "health_manager_preferences";
 const DEFAULT_FOOD_IMAGE = "/assets/foods/meal.svg";
+const FOOD_IMAGE_ASSET_MAP = window.FOOD_IMAGE_ASSET_MAP || {};
 const REALISTIC_FOOD_IMAGE_BASE = "/assets/foods/realistic";
 const REALISTIC_FOOD_IMAGE_MAP = {
   rice: "rice-photo.webp",
@@ -13,6 +15,12 @@ const REALISTIC_FOOD_IMAGE_MAP = {
   tofu: "tofu-photo.webp",
   vegetable: "vegetable-photo.webp",
 };
+
+function foodAssetPath(imageKey) {
+  const key = String(imageKey || "meal").trim() || "meal";
+  const filename = FOOD_IMAGE_ASSET_MAP[key] || `${key}.svg`;
+  return `/assets/foods/${filename}`;
+}
 const REALISTIC_CATEGORY_IMAGE_MAP = {
   主食: "rice",
   蛋类: "egg",
@@ -179,7 +187,7 @@ const FOOD_IMAGE_RULES = [
   { keywords: ["可口可乐", "零度可口可乐", "元气森林", "东方树叶", "三得利", "冰红茶", "奶茶", "柠檬茶", "红牛", "东鹏", "果粒橙"], asset: "beijing-soda" },
   { keywords: ["烧鹅", "烧鸭", "叉烧", "白切鸡", "卤鸡腿", "卤牛肉", "卤鸭脖", "卤鸡爪", "卤蛋"], asset: "meal" },
   { keywords: ["回锅肉", "夫妻肺片", "水煮牛肉", "辣子鸡", "酸菜鱼", "毛血旺", "麻辣香锅"], asset: "meal" },
-  { keywords: ["麻辣烫", "冒菜", "串串香", "毛肚", "黄喉", "鸭肠"], asset: "meal" },
+  { keywords: ["麻辣烫", "冒菜", "串串香", "毛肚", "黄喉", "鸭肠"], asset: "steak" },
   { keywords: ["虾滑", "小龙虾"], asset: "shrimp-bowl" },
   { keywords: ["鱼豆腐", "烤豆腐"], asset: "tofu-block" },
   { keywords: ["午餐肉"], asset: "ham-slices" },
@@ -188,9 +196,12 @@ const FOOD_IMAGE_RULES = [
   { keywords: ["红烧排骨", "可乐鸡翅", "糖醋排骨", "蒜苔炒肉", "肉末茄子", "干煸豆角", "韭菜炒鸡蛋", "木须肉", "醋溜土豆丝", "手撕包菜", "香干炒肉"], asset: "meal" },
   { keywords: ["小炒肉", "辣椒炒肉", "剁椒鱼头", "外婆菜炒蛋", "擂椒皮蛋", "腊肉炒蒜苔", "农家一碗香", "干锅花菜"], asset: "meal" },
   { keywords: ["卤豆干", "卤海带结", "卤鸡胗", "卤猪耳朵", "卤鸭翅", "卤鸭掌"], asset: "meal" },
-  { keywords: ["便当", "饭团", "三明治", "关东煮", "鸡肉卷", "沙拉"], asset: "meal" },
-  { keywords: ["羊肉串", "牛肉串", "烤鸡皮", "烤五花肉", "烤韭菜"], asset: "meal" },
-  { keywords: ["鸡翅中 烧烤"], asset: "chicken-wings-real" },
+  { keywords: ["便当", "饭团"], asset: "rice-bowl" },
+  { keywords: ["三明治", "鸡肉卷"], asset: "bread-toast" },
+  { keywords: ["沙拉"], asset: "chicken-salad-bowl" },
+  { keywords: ["羊肉串", "牛肉串", "烤五花肉"], asset: "steak" },
+  { keywords: ["烤鸡皮", "烤鸡翅", "鸡翅中 烧烤"], asset: "chicken-wings-real" },
+  { keywords: ["烤韭菜"], asset: "greens-bowl" },
   { keywords: ["烤茄子"], asset: "eggplant-real" },
   { keywords: ["烤金针菇"], asset: "button-mushroom" },
   { keywords: ["烤玉米"], asset: "grilled-corn" },
@@ -675,6 +686,98 @@ const HIGH_RECOGNITION_IMAGE_MAP = {
   "盒马 三文鱼寿司": "rice-bowl",
   "盒马 鸡胸肉沙拉": "chicken-salad-bowl",
   "元气森林 冰茶": "beijing-soda",
+  "麦当劳 不素之霸双层牛堡": "steak",
+  "麦当劳 原味板烧鸡腿堡": "chicken",
+  "麦当劳 麦麦脆汁鸡 鸡翅": "chicken-wings-real",
+  "麦当劳 开心乐园餐麦乐鸡块": "chicken",
+  "麦当劳 香芋派": "snack",
+  "肯德基 黄金鸡块": "chicken",
+  "肯德基 吮指原味鸡 1块": "chicken",
+  "肯德基 香辣鸡排饭": "rice-bowl",
+  "汉堡王 经典皇堡": "steak",
+  "汉堡王 双层芝士皇堡": "steak",
+  "汉堡王 天椒皇堡": "steak",
+  "汉堡王 薯霸王": "potato-chips-bag",
+  "华莱士 香辣鸡腿堡": "chicken",
+  "华莱士 蜜汁手扒鸡": "chicken",
+  "华莱士 脆皮全鸡": "chicken",
+  "必胜客 夏威夷风情披萨 普通装": "bread-toast",
+  "必胜客 黑椒牛肉意面": "pasta-plate",
+  "必胜客 香草凤尾虾": "shrimp-bowl",
+  "必胜客 奥尔良烤翅": "chicken-wings-real",
+  "瑞幸 厚乳拿铁 标准杯": "latte-cup",
+  "瑞幸 椰云拿铁 标准杯": "latte-cup",
+  "瑞幸 橙C美式 标准杯": "coffee-cup",
+  "瑞幸 茉莉轻乳茶 标准杯": "yogurt-drink-bottle",
+  "星巴克 香草拿铁 中杯": "latte-cup",
+  "星巴克 抹茶星冰乐 中杯": "yogurt-drink-bottle",
+  "星巴克 冷萃咖啡 中杯": "coffee-cup",
+  "星巴克 蓝莓麦芬": "bread-toast",
+  "蜜雪冰城 冰鲜柠檬水": "orange-juice-glass",
+  "蜜雪冰城 珍珠奶茶": "yogurt-drink-bottle",
+  "蜜雪冰城 棒打鲜橙": "orange-juice-glass",
+  "蜜雪冰城 摩天脆脆": "snack",
+  "茶百道 豆乳玉麒麟": "yogurt-drink-bottle",
+  "茶百道 杨枝甘露": "orange-juice-glass",
+  "茶百道 超级杯水果茶": "orange-juice-glass",
+  "古茗 芝士葡萄": "yogurt-drink-bottle",
+  "古茗 云岭茉莉白": "yogurt-drink-bottle",
+  "霸王茶姬 万里木兰": "yogurt-drink-bottle",
+  "霸王茶姬 桂馥兰香": "yogurt-drink-bottle",
+  "7-11 烤肠芝士饭团": "rice-bowl",
+  "7-11 鸡胸肉凯撒卷": "bread-toast",
+  "7-11 黑椒鸡扒便当": "rice-bowl",
+  "7-11 低脂希腊酸奶杯": "yogurt-cup",
+  "罗森 烤肠饭团": "rice-bowl",
+  "罗森 双蛋火腿三明治": "bread-toast",
+  "罗森 咖喱鸡排便当": "rice-bowl",
+  "罗森 提拉米苏杯": "snack",
+  "全家 韩式泡菜饭团": "rice-bowl",
+  "全家 奥尔良鸡排便当": "rice-bowl",
+  "全家 抹茶红豆卷": "snack",
+  "全家 关东煮贡丸": "ham-slices",
+  "盒马 香煎鸡胸便当": "rice-bowl",
+  "盒马 牛肉寿司组合": "rice-bowl",
+  "盒马 藜麦虾仁沙拉": "shrimp-bowl",
+  "山姆 麻薯面包": "bread-toast",
+  "山姆 牛肉卷": "bread-toast",
+  "山姆 烤鸡腿": "chicken-thigh-real",
+  "山姆 提拉米苏杯": "snack",
+  "早餐摊 鲜肉包": "baozi-real",
+  "早餐摊 青菜包": "baozi-real",
+  "早餐摊 花卷": "mantou-real",
+  "早餐摊 油条": "bread-toast",
+  "早餐摊 无糖豆浆": "soy-milk-cup",
+  "早餐摊 煎饼果子 鸡蛋版": "bread-toast",
+  "早餐摊 手抓饼 培根鸡蛋": "bread-toast",
+  "早餐摊 鸡蛋灌饼 火腿版": "bread-toast",
+  "早餐摊 皮蛋瘦肉粥 小碗": "millet-porridge",
+  "早餐摊 八宝粥": "millet-porridge",
+  "夜宵 烤鸡翅中": "chicken-wings-real",
+  "夜宵 烤五花肉串": "steak",
+  "夜宵 烤羊肉串": "steak",
+  "夜宵 烤牛肉串": "steak",
+  "夜宵 烤韭菜": "greens-bowl",
+  "夜宵 烤茄子": "eggplant-real",
+  "夜宵 烤玉米": "grilled-corn",
+  "夜宵 烤金针菇": "button-mushroom",
+  "火锅 肥牛卷": "beef-brisket",
+  "火锅 毛肚": "steak",
+  "火锅 鸭血": "ham-slices",
+  "麻辣烫 宽粉": "noodle-bowl",
+  "麻辣烫 鱼豆腐": "tofu-block",
+  "麻辣烫 午餐肉": "ham-slices",
+  "基础水果 榴莲": "fruit",
+  "基础水果 荔枝": "fruit",
+  "基础水果 山竹": "fruit",
+  "基础水果 百香果": "fruit",
+  "基础调味 酱油": "oil-bottle",
+  "基础调味 蚝油": "oil-bottle",
+  "基础调味 沙拉酱": "oil-bottle",
+  "基础肉类 鸡爪": "chicken-wings-real",
+  "基础肉类 猪肝": "ham-slices",
+  "基础肉类 牛杂": "steak",
+  "基础火锅 鱼丸": "fish",
   小麦当劳: "meal",
   西红柿炒鸡蛋: "tomato-egg-stirfry",
   宫保鸡丁: "kung-pao-chicken",
@@ -684,6 +787,7 @@ const HIGH_RECOGNITION_IMAGE_MAP = {
 
 const state = {
   currentUser: null,
+  authToken: null,
   selectedFood: null,
   foodDatabase: [],
   dashboardDate: new Date().toISOString().slice(0, 10),
@@ -1106,12 +1210,19 @@ function formatApiValidationDetail(detail) {
 
 async function apiRequest(path, options = {}) {
   let response;
+  const requestHeaders = {
+    "Content-Type": "application/json",
+    ...(options.headers || {}),
+  };
+  if (state.authToken && !requestHeaders.Authorization) {
+    requestHeaders.Authorization = `Bearer ${state.authToken}`;
+  }
   try {
     response = await fetch(`${API_BASE}${path}`, {
-      headers: {
-        "Content-Type": "application/json",
-      },
       ...options,
+      headers: {
+        ...requestHeaders,
+      },
     });
   } catch (error) {
     if (error?.name === "AbortError") {
@@ -1175,9 +1286,13 @@ function runSafeRenderStep(label, renderFn, fallbackFn = () => {}) {
   }
 }
 
-function saveCurrentUser(user) {
+function saveCurrentUser(user, accessToken = "") {
   state.currentUser = user;
   storageSet(STORAGE_KEY, JSON.stringify(user));
+  if (accessToken) {
+    state.authToken = accessToken;
+    storageSet(AUTH_TOKEN_KEY, accessToken);
+  }
 }
 
 function loadCurrentUser() {
@@ -1195,8 +1310,10 @@ function loadCurrentUser() {
 
 function clearCurrentUser() {
   state.currentUser = null;
+  state.authToken = null;
   state.selectedFood = null;
   storageRemove(STORAGE_KEY);
+  storageRemove(AUTH_TOKEN_KEY);
 }
 
 function loadPreferences() {
@@ -1249,6 +1366,10 @@ function isMobileAppLayout() {
   return window.matchMedia("(max-width: 860px)").matches;
 }
 
+function foodSearchPlatformParam() {
+  return isMobileAppLayout() ? "web_mobile" : "web_desktop";
+}
+
 function updateMobileTopbar() {
   const meta = MOBILE_SCREEN_META[state.mobileScreen] || MOBILE_SCREEN_META.home;
   const recordTitle = `${MOBILE_RECORD_LABELS[state.mobileRecordTab] || "记录"}记录`;
@@ -1286,6 +1407,9 @@ function showMobileRecordTab(tab = "food", options = {}) {
   if (state.mobileScreen === "record") {
     state.activePanel = inferPanelFromMobileState();
     syncPanelHash(state.activePanel);
+  }
+  if (safeTab === "workout") {
+    refreshWorkoutEstimate();
   }
   updateMobileTopbar();
   if (alignPane && state.mobileScreen === "record") {
@@ -2920,27 +3044,31 @@ function renderOverviewSuggestionSection(summary, recommendation = safeBuildDyna
 }
 
 function resolveRegularFoodImagePath(food) {
+  if (food.image_key && food.image_key !== "meal") {
+    return foodAssetPath(food.image_key);
+  }
+
   if (food.category === "酒类") {
     const alcoholHighRecognitionAsset = findBestImageKeywordMatch(HIGH_RECOGNITION_IMAGE_MAP, food.name);
     if (alcoholHighRecognitionAsset) {
-      return `/assets/foods/${HIGH_RECOGNITION_IMAGE_MAP[alcoholHighRecognitionAsset]}.svg`;
+      return foodAssetPath(HIGH_RECOGNITION_IMAGE_MAP[alcoholHighRecognitionAsset]);
     }
     const exactAlcoholAsset = findBestImageKeywordMatch(EXACT_FOOD_IMAGE_MAP, food.name);
     if (exactAlcoholAsset) {
-      return `/assets/foods/${EXACT_FOOD_IMAGE_MAP[exactAlcoholAsset]}.svg`;
+      return foodAssetPath(EXACT_FOOD_IMAGE_MAP[exactAlcoholAsset]);
     }
     const alcoholCategoryAsset = CATEGORY_FOOD_IMAGE_MAP[food.category];
-    return alcoholCategoryAsset ? `/assets/foods/${alcoholCategoryAsset}.svg` : DEFAULT_FOOD_IMAGE;
+    return alcoholCategoryAsset ? foodAssetPath(alcoholCategoryAsset) : DEFAULT_FOOD_IMAGE;
   }
 
   const exactRenderAsset = findBestImageKeywordMatch(HIGH_RECOGNITION_IMAGE_MAP, food.name);
   if (exactRenderAsset) {
-    return `/assets/foods/${HIGH_RECOGNITION_IMAGE_MAP[exactRenderAsset]}.svg`;
+    return foodAssetPath(HIGH_RECOGNITION_IMAGE_MAP[exactRenderAsset]);
   }
 
   const exactFoodName = findBestImageKeywordMatch(EXACT_FOOD_IMAGE_MAP, food.name);
   if (exactFoodName) {
-    return `/assets/foods/${EXACT_FOOD_IMAGE_MAP[exactFoodName]}.svg`;
+    return foodAssetPath(EXACT_FOOD_IMAGE_MAP[exactFoodName]);
   }
 
   const realisticRule = REALISTIC_FOOD_IMAGE_RULES.find((rule) => {
@@ -2958,7 +3086,7 @@ function resolveRegularFoodImagePath(food) {
     return hit && !excluded;
   });
   if (matchedRule) {
-    return `/assets/foods/${matchedRule.asset}.svg`;
+    return foodAssetPath(matchedRule.asset);
   }
 
   const realisticCategory = REALISTIC_CATEGORY_IMAGE_MAP[food.category];
@@ -2966,16 +3094,15 @@ function resolveRegularFoodImagePath(food) {
     return `${REALISTIC_FOOD_IMAGE_BASE}/${REALISTIC_FOOD_IMAGE_MAP[realisticCategory]}`;
   }
 
-  if (food.image_key && food.image_key !== "meal") {
-    return `/assets/foods/${food.image_key}.svg`;
-  }
-
   const categoryAsset = CATEGORY_FOOD_IMAGE_MAP[food.category];
-  return categoryAsset ? `/assets/foods/${categoryAsset}.svg` : DEFAULT_FOOD_IMAGE;
+  return categoryAsset ? foodAssetPath(categoryAsset) : DEFAULT_FOOD_IMAGE;
 }
 
 function foodImagePath(foodOrKey) {
   if (typeof foodOrKey === "object" && foodOrKey?.name) {
+    if (foodOrKey.image_key && foodOrKey.image_key !== "meal") {
+      return foodAssetPath(foodOrKey.image_key);
+    }
     if (foodOrKey.brand) {
       const brandImageMap = {
         "麦当劳 巨无霸": "/assets/restaurants/mcd-bigmac.svg",
@@ -2988,6 +3115,11 @@ function foodImagePath(foodOrKey) {
         "麦当劳 麦香鸡": "/assets/restaurants/mcd-mcchicken.svg",
         "麦当劳 双层麦香鸡": "/assets/restaurants/mcd-mcchicken.svg",
         "麦当劳 苹果派": "/assets/restaurants/mcd-apple-pie.svg",
+        "麦当劳 不素之霸双层牛堡": "/assets/restaurants/mcd-double-cheeseburger.svg",
+        "麦当劳 原味板烧鸡腿堡": "/assets/restaurants/mcd-grilled-chicken-burger.svg",
+        "麦当劳 麦麦脆汁鸡 鸡翅": "/assets/restaurants/mcd-spicy-wings.svg",
+        "麦当劳 开心乐园餐麦乐鸡块": "/assets/restaurants/mcd-mcnuggets-4.svg",
+        "麦当劳 香芋派": "/assets/restaurants/mcd-apple-pie.svg",
         "麦当劳 双层深海鳕鱼堡": "/assets/restaurants/mcd-fish-burger.svg",
         "麦当劳 板烧鸡腿堡": "/assets/restaurants/mcd-grilled-chicken-burger.svg",
         "麦当劳 脆薯饼": "/assets/restaurants/mcd-hash-brown.svg",
@@ -3001,6 +3133,9 @@ function foodImagePath(foodOrKey) {
         "肯德基 薯条": "/assets/restaurants/kfc-fries.svg",
         "肯德基 香辣鸡腿堡": "/assets/restaurants/kfc-zinger-burger.svg",
         "肯德基 新奥尔良烤鸡腿堡": "/assets/restaurants/kfc-zinger-burger.svg",
+        "肯德基 黄金鸡块": "/assets/restaurants/kfc-popcorn-chicken.svg",
+        "肯德基 吮指原味鸡 1块": "/assets/restaurants/kfc-original-chicken.svg",
+        "肯德基 香辣鸡排饭": "/assets/restaurants/takeaway-teriyaki-cutlet-rice.svg",
         "肯德基 老北京鸡肉卷": "/assets/restaurants/kfc-wrap.svg",
         "肯德基 葡式蛋挞": "/assets/restaurants/kfc-egg-tart.svg",
         "肯德基 吮指原味鸡 2块": "/assets/restaurants/kfc-original-chicken-bucket.svg",
@@ -4604,6 +4739,9 @@ function showPanel(panelName, options = {}) {
     if ($("settings-btn")) {
       $("settings-btn").classList.toggle("active", safePanel === "settings");
     }
+    if (safePanel === "activity") {
+      refreshWorkoutEstimate();
+    }
     syncPanelHash(safePanel);
     if (isMobileAppLayout()) {
       routeMobilePanel(safePanel);
@@ -5334,7 +5472,7 @@ async function handleRestaurantBrandFilter(brand) {
       foods = allFoods.filter((food) => food.brand);
       setMessage("food-search-state", `当前展示 ${foods.length} 条餐厅与外卖单品`);
     } else {
-      foods = await apiRequest(`/food/search?q=${encodeURIComponent(keyword)}&limit=40`);
+      foods = await apiRequest(`/food/search?q=${encodeURIComponent(keyword)}&limit=40&platform=${foodSearchPlatformParam()}`);
       foods = foods.filter((food) => food.brand === brand);
       setMessage("food-search-state", `当前展示 ${brand} ${foods.length} 条单品`);
     }
@@ -5493,7 +5631,7 @@ async function handleRegister(event) {
       recommendation_mode: data.user.recommendation_mode || payload.recommendation_mode || "home",
       pantry_items: pantryItems.length ? pantryItems : DEFAULT_PREFERENCES.pantry_items,
     });
-    saveCurrentUser(data.user);
+    saveCurrentUser(data.user, data.access_token);
     setMessage("register-result", `${data.message}，正在进入系统。`);
     showApp();
     showPanel("overview");
@@ -5525,7 +5663,7 @@ async function handleLogin(event) {
       method: "POST",
       body: JSON.stringify(payload),
     });
-    saveCurrentUser(data.user);
+    saveCurrentUser(data.user, data.access_token);
     savePreferences({
       ...loadPreferences(),
       recommendation_mode: data.user.recommendation_mode || loadPreferences().recommendation_mode || "home",
@@ -5555,7 +5693,7 @@ async function handleFoodSearch() {
   }
 
   try {
-    const foods = await apiRequest(`/food/search?q=${encodeURIComponent(keyword)}`);
+    const foods = await apiRequest(`/food/search?q=${encodeURIComponent(keyword)}&platform=${foodSearchPlatformParam()}`);
     setMessage("food-search-state", `找到 ${foods.length} 条匹配数据`);
     renderFoodResults(foods);
     scrollToFoodSearchSummary(120);
@@ -6049,6 +6187,7 @@ function initialize() {
   );
   const user = loadCurrentUser();
   if (user) {
+    state.authToken = storageGet(AUTH_TOKEN_KEY);
     saveCurrentUser(user);
     showApp();
     loadDashboard().catch((error) => {

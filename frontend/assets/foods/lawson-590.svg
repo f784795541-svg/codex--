@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 180" role="img" aria-labelledby="title desc">
+  <title id="title">罗森 冰美式咖啡 [lawson-590]</title>
+  <desc id="desc">Generated local illustration fallback for lawson-590</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#eef6ff"/>
+      <stop offset="100%" stop-color="#ffffff"/>
+    </linearGradient>
+  </defs>
+  <rect width="180" height="180" rx="28" fill="url(#bg)"/>
+  <rect x="18" y="18" width="144" height="24" rx="12" fill="#2e86c1" opacity="0.14"/>
+  <text x="28" y="34" font-family="Arial, sans-serif" font-size="12" fill="#2e86c1" font-weight="700">LAWSON</text>
+  
+        
+        
+        <rect x="58" y="66" width="64" height="58" rx="18" fill="#ffffff" stroke="#2e86c1" stroke-width="4"/>
+        <rect x="65" y="81" width="44" height="22" rx="10" fill="#d4e6f1"/>
+        <rect x="69" y="88" width="36" height="6" rx="3" fill="#cb4335" opacity="0.7"/>
+        <circle cx="126" cy="94" r="10" fill="none" stroke="#2e86c1" stroke-width="4"/>
+        
+  <rect x="18" y="144" width="144" height="18" rx="9" fill="#ffffff" opacity="0.86"/>
+  <text x="28" y="157" font-family="Arial, sans-serif" font-size="10" fill="#5d6d7e">lawson-590</text>
+</svg>

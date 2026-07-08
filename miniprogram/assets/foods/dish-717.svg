@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 180" role="img" aria-labelledby="title desc">
+  <title id="title">家常 麻婆豆腐 [dish-717]</title>
+  <desc id="desc">Generated local illustration fallback for dish-717</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#f6f3ef"/>
+      <stop offset="100%" stop-color="#ffffff"/>
+    </linearGradient>
+  </defs>
+  <rect width="180" height="180" rx="28" fill="url(#bg)"/>
+  <rect x="18" y="18" width="144" height="24" rx="12" fill="#566573" opacity="0.14"/>
+  <text x="28" y="34" font-family="Arial, sans-serif" font-size="12" fill="#566573" font-weight="700">PRODUCT</text>
+  
+        <ellipse cx="90" cy="120" rx="48" ry="12" fill="#d5dbdb"/>
+        <ellipse cx="90" cy="96" rx="44" ry="24" fill="#ffffff" stroke="#566573" stroke-width="4"/>
+        <circle cx="75" cy="88" r="9" fill="#cb4335"/>
+        <circle cx="92" cy="78" r="10" fill="#f5b041"/>
+        <circle cx="113" cy="92" r="9" fill="#58d68d"/>
+        <circle cx="85" cy="102" r="8" fill="#a04000"/>
+        <circle cx="119" cy="78" r="7" fill="#f7dc6f"/>
+        
+  <rect x="18" y="144" width="144" height="18" rx="9" fill="#ffffff" opacity="0.86"/>
+  <text x="28" y="157" font-family="Arial, sans-serif" font-size="10" fill="#5d6d7e">dish-717</text>
+</svg>

@@ -4,6 +4,11 @@ import json
 from collections.abc import Iterable
 from pathlib import Path
 
+try:
+    from .food_metadata import build_aliases_text, build_food_search_text
+except ImportError:
+    from food_metadata import build_aliases_text, build_food_search_text
+
 
 BASE_DIR = Path(__file__).resolve().parent
 SOURCE_DIR = BASE_DIR / "food_catalog_sources"
@@ -23,6 +28,11 @@ SOURCE_FILES = [
     "barbecue_and_late_night.json",
     "desserts_and_bakery.json",
     "retail_ready_foods_batch_three.json",
+    "brand_chains_batch_one_two.json",
+    "brand_chains_batch_three.json",
+    "drinks_and_cafes_batch_three.json",
+    "convenience_retail_batch_three.json",
+    "home_breakfast_late_night_batch_three.json",
 ]
 
 
@@ -41,6 +51,22 @@ def normalize_item(item: dict, next_food_id: int) -> dict:
         value = item.get(optional_key)
         if value not in (None, ""):
             normalized[optional_key] = value
+
+    aliases_text = build_aliases_text(
+        normalized["name"],
+        normalized["category"],
+        item.get("aliases_text"),
+    )
+    normalized["aliases_text"] = aliases_text
+    normalized["search_text"] = build_food_search_text(
+        normalized["name"],
+        normalized["category"],
+        normalized.get("brand"),
+        aliases_text,
+    )
+    normalized["source"] = item.get("source") or "local_static_catalog"
+    normalized["source_updated_at"] = item.get("source_updated_at") or "2026-07-06"
+    normalized["status"] = item.get("status") or "active"
 
     serving_size_g = item.get("serving_size_g")
     if serving_size_g not in (None, ""):

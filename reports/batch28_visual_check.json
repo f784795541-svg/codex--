@@ -1,0 +1,40 @@
+{
+  "batch": 28,
+  "verifiedAt": "2026-07-08T10:33:16.151Z",
+  "desktop": [
+    {
+      "found": true,
+      "keyword": "全家 奥尔良鸡肉卷",
+      "src": "/assets/foods/familymart-416.webp",
+      "state": "找到 1 条匹配数据",
+      "title": "全家 奥尔良鸡肉卷",
+      "totalCards": 1
+    },
+    {
+      "found": true,
+      "keyword": "罗森 日式照烧鸡腿便当",
+      "src": "/assets/foods/lawson-420.webp",
+      "state": "找到 1 条匹配数据",
+      "title": "罗森 日式照烧鸡腿便当",
+      "totalCards": 1
+    }
+  ],
+  "mobile": [
+    {
+      "found": true,
+      "keyword": "全家 奥尔良鸡肉卷",
+      "src": "/assets/foods/familymart-416.webp",
+      "state": "找到 1 条匹配数据",
+      "title": "全家 奥尔良鸡肉卷",
+      "totalCards": 1
+    },
+    {
+      "found": true,
+      "keyword": "罗森 日式照烧鸡腿便当",
+      "src": "/assets/foods/lawson-420.webp",
+      "state": "找到 1 条匹配数据",
+      "title": "罗森 日式照烧鸡腿便当",
+      "totalCards": 1
+    }
+  ]
+}

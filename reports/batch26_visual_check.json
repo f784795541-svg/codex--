@@ -1,0 +1,122 @@
+{
+  "desktop": {
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "screenshotPath": "reports\\batch26_desktop_check.png",
+    "results": [
+      {
+        "keyword": "罗森 巧克力可颂",
+        "expectedKey": "lawson-589",
+        "expectedFile": "lawson-589.webp",
+        "matched": {
+          "title": "罗森 巧克力可颂",
+          "imageKey": "lawson-589",
+          "src": "/assets/foods/lawson-589.webp"
+        },
+        "cards": [
+          {
+            "title": "罗森 巧克力可颂",
+            "imageKey": "lawson-589",
+            "src": "/assets/foods/lawson-589.webp"
+          }
+        ]
+      },
+      {
+        "keyword": "罗森 抹茶蛋糕卷",
+        "expectedKey": "lawson-593",
+        "expectedFile": "lawson-593.webp",
+        "matched": {
+          "title": "罗森 抹茶蛋糕卷",
+          "imageKey": "lawson-593",
+          "src": "/assets/foods/lawson-593.webp"
+        },
+        "cards": [
+          {
+            "title": "罗森 抹茶蛋糕卷",
+            "imageKey": "lawson-593",
+            "src": "/assets/foods/lawson-593.webp"
+          }
+        ]
+      },
+      {
+        "keyword": "罗森 提拉米苏杯",
+        "expectedKey": "lawson-692",
+        "expectedFile": "lawson-692.webp",
+        "matched": {
+          "title": "罗森 提拉米苏杯",
+          "imageKey": "lawson-692",
+          "src": "/assets/foods/lawson-692.webp"
+        },
+        "cards": [
+          {
+            "title": "罗森 提拉米苏杯",
+            "imageKey": "lawson-692",
+            "src": "/assets/foods/lawson-692.webp"
+          }
+        ]
+      }
+    ]
+  },
+  "mobile": {
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "screenshotPath": "reports\\batch26_mobile_check.png",
+    "results": [
+      {
+        "keyword": "罗森 巧克力可颂",
+        "expectedKey": "lawson-589",
+        "expectedFile": "lawson-589.webp",
+        "matched": {
+          "title": "罗森 巧克力可颂",
+          "imageKey": "lawson-589",
+          "src": "/assets/foods/lawson-589.webp"
+        },
+        "cards": [
+          {
+            "title": "罗森 巧克力可颂",
+            "imageKey": "lawson-589",
+            "src": "/assets/foods/lawson-589.webp"
+          }
+        ]
+      },
+      {
+        "keyword": "罗森 抹茶蛋糕卷",
+        "expectedKey": "lawson-593",
+        "expectedFile": "lawson-593.webp",
+        "matched": {
+          "title": "罗森 抹茶蛋糕卷",
+          "imageKey": "lawson-593",
+          "src": "/assets/foods/lawson-593.webp"
+        },
+        "cards": [
+          {
+            "title": "罗森 抹茶蛋糕卷",
+            "imageKey": "lawson-593",
+            "src": "/assets/foods/lawson-593.webp"
+          }
+        ]
+      },
+      {
+        "keyword": "罗森 提拉米苏杯",
+        "expectedKey": "lawson-692",
+        "expectedFile": "lawson-692.webp",
+        "matched": {
+          "title": "罗森 提拉米苏杯",
+          "imageKey": "lawson-692",
+          "src": "/assets/foods/lawson-692.webp"
+        },
+        "cards": [
+          {
+            "title": "罗森 提拉米苏杯",
+            "imageKey": "lawson-692",
+            "src": "/assets/foods/lawson-692.webp"
+          }
+        ]
+      }
+    ]
+  }
+}

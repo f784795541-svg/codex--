@@ -44,7 +44,7 @@ Page({
         username: username.trim(),
         password,
       });
-      getApp().setCurrentUser(result.user);
+      getApp().setCurrentUser(result.user, result.access_token);
       wx.showToast({
         title: "登录成功",
         icon: "success",

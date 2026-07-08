@@ -1,0 +1,17 @@
+<svg width="640" height="420" viewBox="0 0 640 420" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="640" height="420" rx="36" fill="#FFF2E6"/>
+  <circle cx="520" cy="90" r="72" fill="#FFD6A8"/>
+  <ellipse cx="320" cy="310" rx="192" ry="35" fill="#E5D0BC"/>
+  <path d="M196 260C196 191.516 251.516 136 320 136H346C433.261 136 504 206.739 504 294V294C504 308.359 492.359 320 478 320H257C223.311 320 196 292.689 196 259V260Z" fill="#9A4239"/>
+  <path d="M232 252C232 206.712 268.712 170 314 170H342C400.542 170 448 217.458 448 276V276C448 284.837 440.837 292 432 292H285C255.729 292 232 268.271 232 239V252Z" fill="#E37664"/>
+  <path d="M280 206C310 190 372 194 400 225C372 242 308 244 280 206Z" fill="#FFD1C4"/>
+  <path d="M273 248C301 236 375 240 405 268" stroke="#FFD1C4" stroke-width="10" stroke-linecap="round"/>
+  <circle cx="308" cy="224" r="7" fill="#2F231E"/>
+  <circle cx="344" cy="224" r="7" fill="#2F231E"/>
+  <path d="M309 245C318 254 334 254 343 245" stroke="#2F231E" stroke-width="5" stroke-linecap="round"/>
+  <circle cx="272" cy="246" r="8" fill="#F2B29A"/>
+  <circle cx="385" cy="246" r="8" fill="#F2B29A"/>
+  <path d="M56 88C56 71.4315 69.4315 58 86 58H184C200.569 58 214 71.4315 214 88V106C214 122.569 200.569 136 184 136H86C69.4315 136 56 122.569 56 106V88Z" fill="#FFFDF8"/>
+  <path d="M214 96L232 86V106L214 96Z" fill="#FFFDF8"/>
+  <text x="135" y="101" fill="#9A4C35" font-size="22" font-family="Arial, sans-serif" text-anchor="middle">Sirloin</text>
+</svg>

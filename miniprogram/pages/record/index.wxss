@@ -86,6 +86,19 @@
   gap: 14rpx;
 }
 
+.food-thumb {
+  width: 72rpx;
+  height: 72rpx;
+  flex-shrink: 0;
+  border-radius: 18rpx;
+  background: #f7fbfb;
+}
+
+.food-selected-thumb {
+  width: 86rpx;
+  height: 86rpx;
+}
+
 .food-selected-name {
   font-size: 30rpx;
   font-weight: 700;
@@ -122,8 +135,20 @@
 }
 
 .food-result-item {
+  display: grid;
+  grid-template-columns: 72rpx minmax(0, 1fr);
+  column-gap: 16rpx;
   padding: 20rpx 0;
   border-bottom: 1rpx solid rgba(229, 237, 238, 0.92);
+}
+
+.food-result-item .food-thumb {
+  grid-row: 1 / span 2;
+}
+
+.food-result-item .item-title,
+.food-result-item .item-meta {
+  grid-column: 2;
 }
 
 .food-result-item:last-child {

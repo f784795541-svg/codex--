@@ -1,4 +1,4 @@
-const { get, post } = require("../../utils/request");
+const { get, post, isUnauthorizedRedirectError } = require("../../utils/request");
 const { ensureUser } = require("../../utils/session");
 const { asPositiveNumber, asNumberInRange, isFilled } = require("../../utils/validators");
 const { buildNumberOptions, getOptionIndex, getOptionValue } = require("../../utils/picker");
@@ -164,6 +164,9 @@ Page({
       if (requestId !== this.profileRequestId) {
         return;
       }
+      if (isUnauthorizedRedirectError(error)) {
+        return;
+      }
       wx.showToast({
         title: error.message,
         icon: "none",
@@ -291,6 +294,9 @@ Page({
       });
       this.goHomeAfterSuccess();
     } catch (error) {
+      if (isUnauthorizedRedirectError(error)) {
+        return;
+      }
       wx.showToast({
         title: error.message,
         icon: "none",

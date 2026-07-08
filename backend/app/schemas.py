@@ -55,8 +55,15 @@ class FoodCreate(BaseModel):
     carbs: float = Field(ge=0)
 
 
+class FoodSearchSelectionCreate(BaseModel):
+    query: str = Field(min_length=1, max_length=200)
+    food_id: int
+    platform: str | None = Field(default=None, max_length=30)
+    user_id: int | None = None
+
+
 class FoodLogCreate(BaseModel):
-    user_id: int
+    user_id: int | None = None
     food_id: int
     weight_g: float = Field(gt=0)
     cooking_method: str | None = None
@@ -65,7 +72,7 @@ class FoodLogCreate(BaseModel):
 
 
 class WorkoutLogCreate(BaseModel):
-    user_id: int
+    user_id: int | None = None
     type: str
     duration_min: int = Field(gt=0)
     calories_burned: float = Field(ge=0)
@@ -74,7 +81,7 @@ class WorkoutLogCreate(BaseModel):
 
 
 class SleepLogCreate(BaseModel):
-    user_id: int
+    user_id: int | None = None
     sleep_start: time
     sleep_end: time
     log_date: date | None = None
@@ -111,10 +118,13 @@ class AuthLogin(BaseModel):
 class AuthResponse(BaseModel):
     message: str
     user: UserResponse
+    access_token: str | None = None
+    token_type: str = "bearer"
+    expires_in: int | None = None
 
 
 class UserUpdateRequest(BaseModel):
-    user_id: int
+    user_id: int | None = None
     username: str | None = Field(default=None, min_length=3, max_length=50)
     name: str | None = None
     age: int | None = Field(default=None, ge=1, le=120)
@@ -140,7 +150,7 @@ class WorkoutOptionResponse(BaseModel):
 
 
 class WorkoutEstimateRequest(BaseModel):
-    user_id: int
+    user_id: int | None = None
     type: str
     duration_min: int = Field(gt=0)
 
@@ -200,7 +210,7 @@ class WeeklyReportResponse(BaseModel):
 
 
 class WeightLogCreate(BaseModel):
-    user_id: int
+    user_id: int | None = None
     weight_kg: float = Field(gt=0)
     record_date: date | None = None
     record_time: time | None = None

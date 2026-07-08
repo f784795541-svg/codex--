@@ -1,0 +1,40 @@
+{
+  "batch": 29,
+  "verifiedAt": "2026-07-08T10:51:02.043Z",
+  "desktop": [
+    {
+      "found": true,
+      "keyword": "全家 黑椒牛肉便当",
+      "src": "/assets/foods/familymart-520.webp",
+      "state": "找到 1 条匹配数据",
+      "title": "全家 黑椒牛肉便当",
+      "totalCards": 1
+    },
+    {
+      "found": true,
+      "keyword": "罗森 咖喱鸡排便当",
+      "src": "/assets/foods/lawson-691.webp",
+      "state": "找到 1 条匹配数据",
+      "title": "罗森 咖喱鸡排便当",
+      "totalCards": 1
+    }
+  ],
+  "mobile": [
+    {
+      "found": true,
+      "keyword": "全家 黑椒牛肉便当",
+      "src": "/assets/foods/familymart-520.webp",
+      "state": "找到 1 条匹配数据",
+      "title": "全家 黑椒牛肉便当",
+      "totalCards": 1
+    },
+    {
+      "found": true,
+      "keyword": "罗森 咖喱鸡排便当",
+      "src": "/assets/foods/lawson-691.webp",
+      "state": "找到 1 条匹配数据",
+      "title": "罗森 咖喱鸡排便当",
+      "totalCards": 1
+    }
+  ]
+}

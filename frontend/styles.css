@@ -682,6 +682,10 @@ select:focus {
   position: relative;
 }
 
+.picker-trigger input:not([type="hidden"]) {
+  padding-right: 92px;
+}
+
 .picker-trigger.picker-trigger-locked input {
   pointer-events: none;
 }

@@ -1,8 +1,9 @@
-const { get, post } = require("../../utils/request");
+const { get, post, isUnauthorizedRedirectError } = require("../../utils/request");
 const { ensureUser } = require("../../utils/session");
 const { getCurrentDate, getCurrentTime } = require("../../utils/date");
 const { asPositiveNumber } = require("../../utils/validators");
 const { buildNumberOptions, getOptionIndex, getOptionValue } = require("../../utils/picker");
+const foodImageAssets = require("../../utils/foodImageAssets");
 
 const TAB_META = {
   food: {
@@ -209,6 +210,12 @@ function buildFoodWeightState(food) {
   };
 }
 
+function buildFoodImagePath(food) {
+  const imageKey = String(food?.image_key || "meal").trim();
+  const key = imageKey || "meal";
+  return `/assets/foods/${foodImageAssets[key] || `${key}.svg`}`;
+}
+
 function enrichFoodSearchResult(food) {
   if (!food) {
     return food;
@@ -222,6 +229,7 @@ function enrichFoodSearchResult(food) {
     ...food,
     serving_size_g: nextServingSize,
     portion_hint: nextPortionHint,
+    imagePath: buildFoodImagePath(food),
   };
 }
 
@@ -282,6 +290,11 @@ Page({
     foodTimeAuto: true,
     workoutTimeAuto: true,
     weightTimeAuto: true,
+    submittingFood: false,
+    estimatingWorkout: false,
+    submittingWorkout: false,
+    submittingSleep: false,
+    submittingWeight: false,
   },
 
   onLoad() {
@@ -401,6 +414,7 @@ Page({
     }
 
     this.loadingWorkoutOptions = true;
+
     try {
       const workoutOptions = await get("/workout/options");
       this.setData(
@@ -412,6 +426,9 @@ Page({
         }
       );
     } catch (error) {
+      if (isUnauthorizedRedirectError(error)) {
+        return;
+      }
       wx.showToast({
         title: error.message,
         icon: "none",
@@ -613,6 +630,7 @@ Page({
       const rawFoodResults = await get("/food/search", {
         q: requestQuery,
         limit: 12,
+        platform: "miniprogram",
       }, {
         cacheMs: 0,
       });
@@ -639,6 +657,9 @@ Page({
         }
       );
     } catch (error) {
+      if (isUnauthorizedRedirectError(error)) {
+        return;
+      }
       wx.showToast({
         title: error.message,
         icon: "none",
@@ -671,6 +692,9 @@ Page({
     if (!user) {
       return;
     }
+    if (this.data.submittingFood) {
+      return;
+    }
 
     const selectedFood = this.data.foodResults[this.data.selectedFoodIndex];
     const weight = asPositiveNumber(this.data.foodWeight);
@@ -689,6 +713,10 @@ Page({
       });
       return;
     }
+
+    this.setData({
+      submittingFood: true,
+    });
 
     try {
       const submitTime = this.data.foodTime;
@@ -721,9 +749,16 @@ Page({
         icon: "success",
       });
     } catch (error) {
+      if (isUnauthorizedRedirectError(error)) {
+        return;
+      }
       wx.showToast({
         title: error.message,
         icon: "none",
+      });
+    } finally {
+      this.setData({
+        submittingFood: false,
       });
     }
   },
@@ -731,6 +766,9 @@ Page({
   async estimateWorkout() {
     const user = ensureUser();
     if (!user) {
+      return;
+    }
+    if (this.data.estimatingWorkout || this.data.submittingWorkout) {
       return;
     }
 
@@ -747,6 +785,10 @@ Page({
       });
       return;
     }
+
+    this.setData({
+      estimatingWorkout: true,
+    });
 
     try {
       const result = await get("/workout/estimate", {
@@ -769,9 +811,16 @@ Page({
         icon: "success",
       });
     } catch (error) {
+      if (isUnauthorizedRedirectError(error)) {
+        return;
+      }
       wx.showToast({
         title: error.message,
         icon: "none",
+      });
+    } finally {
+      this.setData({
+        estimatingWorkout: false,
       });
     }
   },
@@ -779,6 +828,9 @@ Page({
   async submitWorkout() {
     const user = ensureUser();
     if (!user) {
+      return;
+    }
+    if (this.data.submittingWorkout || this.data.estimatingWorkout) {
       return;
     }
 
@@ -809,6 +861,10 @@ Page({
       return;
     }
 
+    this.setData({
+      submittingWorkout: true,
+    });
+
     try {
       await post("/workout/log", {
         user_id: user.id,
@@ -828,9 +884,16 @@ Page({
       });
       this.goHomeAfterSuccess();
     } catch (error) {
+      if (isUnauthorizedRedirectError(error)) {
+        return;
+      }
       wx.showToast({
         title: error.message,
         icon: "none",
+      });
+    } finally {
+      this.setData({
+        submittingWorkout: false,
       });
     }
   },
@@ -840,6 +903,14 @@ Page({
     if (!user) {
       return;
     }
+
+    if (this.data.submittingSleep) {
+      return;
+    }
+
+    this.setData({
+      submittingSleep: true,
+    });
 
     try {
       await post("/sleep/log", {
@@ -854,9 +925,16 @@ Page({
       });
       this.goHomeAfterSuccess();
     } catch (error) {
+      if (isUnauthorizedRedirectError(error)) {
+        return;
+      }
       wx.showToast({
         title: error.message,
         icon: "none",
+      });
+    } finally {
+      this.setData({
+        submittingSleep: false,
       });
     }
   },
@@ -864,6 +942,9 @@ Page({
   async submitWeight() {
     const user = ensureUser();
     if (!user) {
+      return;
+    }
+    if (this.data.submittingWeight) {
       return;
     }
 
@@ -875,6 +956,10 @@ Page({
       });
       return;
     }
+
+    this.setData({
+      submittingWeight: true,
+    });
 
     try {
       await post("/weight/log", {
@@ -909,9 +994,16 @@ Page({
       });
       this.goHomeAfterSuccess();
     } catch (error) {
+      if (isUnauthorizedRedirectError(error)) {
+        return;
+      }
       wx.showToast({
         title: error.message,
         icon: "none",
+      });
+    } finally {
+      this.setData({
+        submittingWeight: false,
       });
     }
   },

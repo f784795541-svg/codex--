@@ -1,6 +1,7 @@
 .agents/
 .codex/
 .env
+backups/
 __pycache__/
 *.pyc
 ._*

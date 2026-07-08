@@ -2,12 +2,13 @@ import json
 import time
 from pathlib import Path
 
-from sqlalchemy import inspect, or_, text
+from sqlalchemy import inspect, text
 from sqlalchemy.exc import OperationalError
 from sqlalchemy.orm import Session
 
 from .build_food_catalog import build_food_catalog, write_food_catalog
 from .database import Base, engine
+from .food_metadata import build_aliases_text, build_food_search_text
 from .models import FoodDatabase
 from .services import hash_password
 
@@ -20,6 +21,13 @@ def seed_food_database(db: Session) -> None:
     write_food_catalog(foods)
     next_food_id = (db.query(FoodDatabase.food_id).order_by(FoodDatabase.food_id.desc()).first() or [0])[0] + 1
     for item in foods:
+        aliases_text = item.get("aliases_text") or build_aliases_text(item["name"], item["category"])
+        search_text = item.get("search_text") or build_food_search_text(
+            item["name"],
+            item["category"],
+            item.get("brand"),
+            aliases_text,
+        )
         with db.no_autoflush:
             existing = db.query(FoodDatabase).filter(FoodDatabase.name == item["name"]).first()
         if existing:
@@ -33,8 +41,15 @@ def seed_food_database(db: Session) -> None:
             existing.serving_size_g = item.get("serving_size_g")
             existing.portion_hint = item.get("portion_hint")
             existing.cooking_options_json = item.get("cooking_options_json")
+            existing.aliases_text = aliases_text
+            existing.search_text = search_text
+            existing.source = item.get("source")
+            existing.source_updated_at = item.get("source_updated_at")
+            existing.status = item.get("status") or "active"
             continue
         payload = dict(item)
+        payload["aliases_text"] = aliases_text
+        payload["search_text"] = search_text
         payload["food_id"] = next_food_id
         next_food_id += 1
         db.add(FoodDatabase(**payload))
@@ -49,7 +64,7 @@ def run_schema_migrations() -> None:
             if "username" not in user_columns:
                 connection.execute(text("ALTER TABLE users ADD COLUMN username VARCHAR(50)"))
             if "password_hash" not in user_columns:
-                connection.execute(text("ALTER TABLE users ADD COLUMN password_hash VARCHAR(64)"))
+                connection.execute(text("ALTER TABLE users ADD COLUMN password_hash VARCHAR(255)"))
             if "target_weight_kg" not in user_columns:
                 connection.execute(text("ALTER TABLE users ADD COLUMN target_weight_kg FLOAT"))
             if "target_sleep_hours" not in user_columns:
@@ -63,6 +78,8 @@ def run_schema_migrations() -> None:
             if "created_at" not in user_columns:
                 connection.execute(text("ALTER TABLE users ADD COLUMN created_at TIMESTAMP"))
                 connection.execute(text("UPDATE users SET created_at = CURRENT_TIMESTAMP WHERE created_at IS NULL"))
+            if connection.dialect.name == "postgresql":
+                connection.execute(text("ALTER TABLE users ALTER COLUMN password_hash TYPE VARCHAR(255)"))
 
             connection.execute(
                 text(
@@ -103,6 +120,28 @@ def run_schema_migrations() -> None:
                 connection.execute(text("ALTER TABLE food_database ADD COLUMN portion_hint VARCHAR(255)"))
             if "cooking_options_json" not in food_columns:
                 connection.execute(text("ALTER TABLE food_database ADD COLUMN cooking_options_json VARCHAR(4000)"))
+            if "aliases_text" not in food_columns:
+                connection.execute(text("ALTER TABLE food_database ADD COLUMN aliases_text VARCHAR(1000)"))
+            if "search_text" not in food_columns:
+                connection.execute(text("ALTER TABLE food_database ADD COLUMN search_text VARCHAR(2000)"))
+            if "source" not in food_columns:
+                connection.execute(text("ALTER TABLE food_database ADD COLUMN source VARCHAR(120)"))
+            if "source_updated_at" not in food_columns:
+                connection.execute(text("ALTER TABLE food_database ADD COLUMN source_updated_at VARCHAR(20)"))
+            if "status" not in food_columns:
+                connection.execute(text("ALTER TABLE food_database ADD COLUMN status VARCHAR(20) DEFAULT 'active'"))
+                connection.execute(text("UPDATE food_database SET status = 'active' WHERE status IS NULL"))
+            connection.execute(text("CREATE INDEX IF NOT EXISTS idx_food_database_brand ON food_database (brand)"))
+            connection.execute(text("CREATE INDEX IF NOT EXISTS idx_food_database_category ON food_database (category)"))
+            connection.execute(text("CREATE INDEX IF NOT EXISTS idx_food_database_status ON food_database (status)"))
+            if connection.dialect.name == "postgresql":
+                connection.execute(text("CREATE EXTENSION IF NOT EXISTS pg_trgm"))
+                connection.execute(
+                    text(
+                        "CREATE INDEX IF NOT EXISTS idx_food_database_search_text_trgm "
+                        "ON food_database USING gin (search_text gin_trgm_ops)"
+                    )
+                )
         if inspector.has_table("food_logs"):
             food_log_columns = {column["name"] for column in inspector.get_columns("food_logs")}
             if "cooking_method" not in food_log_columns:

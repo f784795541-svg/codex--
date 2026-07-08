@@ -1,0 +1,17 @@
+<svg width="640" height="420" viewBox="0 0 640 420" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="640" height="420" rx="36" fill="#FFF5EC"/>
+  <circle cx="120" cy="90" r="72" fill="#FFE2B7"/>
+  <ellipse cx="320" cy="306" rx="188" ry="34" fill="#E6D4C6"/>
+  <path d="M214 258C214 193.935 265.935 142 330 142H338C418.634 142 484 207.366 484 288V288C484 305.673 469.673 320 452 320H266C237.281 320 214 296.719 214 268V258Z" fill="#A65043"/>
+  <path d="M250 250C250 208.026 284.026 174 326 174H332C385.019 174 428 216.981 428 270V270C428 282.15 418.15 292 406 292H291C268.356 292 250 273.644 250 251V250Z" fill="#E58A77"/>
+  <path d="M274 205C292 193 350 194 377 222" stroke="#FFD4C4" stroke-width="11" stroke-linecap="round"/>
+  <path d="M280 252C305 235 351 237 377 260" stroke="#FFD4C4" stroke-width="9" stroke-linecap="round"/>
+  <circle cx="308" cy="224" r="7" fill="#2F231E"/>
+  <circle cx="340" cy="224" r="7" fill="#2F231E"/>
+  <path d="M308 245C318 253 330 253 340 245" stroke="#2F231E" stroke-width="5" stroke-linecap="round"/>
+  <circle cx="272" cy="246" r="8" fill="#F2B29A"/>
+  <circle cx="374" cy="246" r="8" fill="#F2B29A"/>
+  <path d="M430 88C430 71.4315 443.431 58 460 58H578C594.569 58 608 71.4315 608 88V106C608 122.569 594.569 136 578 136H460C443.431 136 430 122.569 430 106V88Z" fill="#FFFDF9"/>
+  <path d="M430 98L412 88L430 78V98Z" fill="#FFFDF9"/>
+  <text x="519" y="101" fill="#9A4C35" font-size="22" font-family="Arial, sans-serif" text-anchor="middle">Chuck Roll</text>
+</svg>
