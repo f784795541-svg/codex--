@@ -1,0 +1,217 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1880" viewBox="0 0 1600 1880">
+  <defs>
+    <style>
+      .bg { fill: #f3f6f8; }
+      .frame { fill: #fbfcfd; stroke: #16222c; stroke-width: 3; rx: 36; }
+      .title { fill: #10202b; font: 700 26px "PingFang SC", "Microsoft YaHei", sans-serif; }
+      .subtitle { fill: #5d717f; font: 500 15px "PingFang SC", "Microsoft YaHei", sans-serif; }
+      .label { fill: #10202b; font: 700 18px "PingFang SC", "Microsoft YaHei", sans-serif; }
+      .text { fill: #5d717f; font: 500 13px "PingFang SC", "Microsoft YaHei", sans-serif; }
+      .tiny { fill: #768996; font: 500 11px "PingFang SC", "Microsoft YaHei", sans-serif; }
+      .card { fill: #ffffff; stroke: #c9d6df; stroke-width: 2; rx: 22; }
+      .soft { fill: #e8f0f4; stroke: #c9d6df; stroke-width: 1.5; rx: 18; }
+      .pill { fill: #d9e8ee; rx: 14; }
+      .nav { fill: #eef4f7; stroke: #c9d6df; stroke-width: 2; rx: 24; }
+      .accent { fill: #bdd5de; }
+      .dash { fill: none; stroke: #8aa1af; stroke-width: 2; stroke-dasharray: 8 8; rx: 20; }
+    </style>
+  </defs>
+
+  <rect class="bg" x="0" y="0" width="1600" height="1880"/>
+
+  <text class="title" x="64" y="74">小程序 Figma 起步骨架</text>
+  <text class="subtitle" x="64" y="106">直接导入 Figma，解组后拖拽微调。先调结构，再调细节。</text>
+
+  <g transform="translate(64 150)">
+    <rect class="frame" x="0" y="0" width="340" height="760" rx="36"/>
+    <text class="title" x="28" y="46">首页</text>
+    <text class="tiny" x="248" y="46">首屏优先级</text>
+
+    <rect class="soft" x="20" y="66" width="300" height="118" rx="22"/>
+    <text class="label" x="38" y="98">今日状态 Hero</text>
+    <text class="text" x="38" y="124">当前体重 / 目标体重 / 到达日期 / 坚持天数</text>
+    <text class="tiny" x="38" y="148">先决定这里到底保留几项，不要重复展示</text>
+
+    <rect class="card" x="20" y="202" width="144" height="92" rx="20"/>
+    <rect class="card" x="176" y="202" width="144" height="92" rx="20"/>
+    <text class="text" x="42" y="236">运动消耗</text>
+    <text class="text" x="198" y="236">目标总热量</text>
+    <text class="tiny" x="42" y="262">双指标卡</text>
+    <text class="tiny" x="198" y="262">双指标卡</text>
+
+    <rect class="card" x="20" y="310" width="300" height="106" rx="20"/>
+    <text class="label" x="38" y="342">目标完成度</text>
+    <text class="text" x="38" y="368">热量 / 蛋白 / 脂肪 / 碳水</text>
+    <text class="tiny" x="38" y="392">这里适合压高度，不要做成过长卡片</text>
+
+    <rect class="card" x="20" y="432" width="300" height="132" rx="20"/>
+    <text class="label" x="38" y="464">今日建议</text>
+    <text class="text" x="38" y="490">保留 2 到 3 条最能指导行动的建议</text>
+    <text class="tiny" x="38" y="516">你可以把这里改成更像原生摘要卡</text>
+
+    <rect class="card" x="20" y="580" width="300" height="104" rx="20"/>
+    <text class="label" x="38" y="612">饮食推荐 / 今日安排</text>
+    <text class="tiny" x="38" y="638">也可以直接删掉，或者合并到建议卡</text>
+
+    <rect class="nav" x="20" y="700" width="300" height="40" rx="20"/>
+    <text class="text" x="46" y="724">首页</text>
+    <text class="text" x="118" y="724">记录</text>
+    <text class="text" x="190" y="724">趋势</text>
+    <text class="text" x="262" y="724">我的</text>
+    <rect class="pill accent" x="36" y="708" width="44" height="24" rx="12"/>
+  </g>
+
+  <g transform="translate(446 150)">
+    <rect class="frame" x="0" y="0" width="340" height="760" rx="36"/>
+    <text class="title" x="28" y="46">记录</text>
+    <text class="tiny" x="246" y="46">重点压密度</text>
+
+    <rect class="soft" x="20" y="66" width="300" height="72" rx="22"/>
+    <text class="label" x="38" y="98">四分栏吸顶 tab</text>
+    <text class="text" x="38" y="122">饮食 / 运动 / 睡眠 / 体重</text>
+
+    <rect class="nav" x="20" y="154" width="300" height="42" rx="20"/>
+    <rect class="pill accent" x="30" y="163" width="56" height="24" rx="12"/>
+    <text class="text" x="40" y="180">饮食</text>
+    <text class="text" x="110" y="180">运动</text>
+    <text class="text" x="180" y="180">睡眠</text>
+    <text class="text" x="250" y="180">体重</text>
+
+    <rect class="card" x="20" y="214" width="300" height="136" rx="20"/>
+    <text class="label" x="38" y="246">饮食搜索卡</text>
+    <text class="text" x="38" y="272">搜索框 / 结果列表 / 已选食物 / 克数 / 时间</text>
+    <text class="tiny" x="38" y="296">这里是记录页最重要的交互，优先精修</text>
+
+    <rect class="card" x="20" y="366" width="300" height="96" rx="20"/>
+    <text class="label" x="38" y="398">运动记录卡</text>
+    <text class="text" x="38" y="424">类型 / 时长 / 估算热量 / 提交</text>
+
+    <rect class="card" x="20" y="478" width="300" height="88" rx="20"/>
+    <text class="label" x="38" y="510">睡眠记录卡</text>
+    <text class="text" x="38" y="536">入睡 / 起床 / 时长提示</text>
+
+    <rect class="card" x="20" y="582" width="300" height="94" rx="20"/>
+    <text class="label" x="38" y="614">体重记录卡</text>
+    <text class="text" x="38" y="640">体重 / 日期 / 时间 / 提交</text>
+
+    <rect class="soft" x="20" y="690" width="300" height="28" rx="14"/>
+    <text class="tiny" x="34" y="709">这里是 toast / 成功反馈占位，可改成更原生样式</text>
+
+    <rect class="nav" x="20" y="722" width="300" height="18" rx="9"/>
+  </g>
+
+  <g transform="translate(828 150)">
+    <rect class="frame" x="0" y="0" width="340" height="760" rx="36"/>
+    <text class="title" x="28" y="46">趋势</text>
+    <text class="tiny" x="246" y="46">先压纵向高度</text>
+
+    <rect class="soft" x="20" y="66" width="300" height="82" rx="22"/>
+    <text class="label" x="38" y="98">顶部摘要</text>
+    <text class="text" x="38" y="124">本周体重 / 平均睡眠 / 净热量</text>
+
+    <rect class="card" x="20" y="164" width="144" height="86" rx="20"/>
+    <rect class="card" x="176" y="164" width="144" height="86" rx="20"/>
+    <rect class="card" x="20" y="264" width="300" height="78" rx="20"/>
+    <text class="tiny" x="38" y="196">2</text>
+    <text class="tiny" x="194" y="196">2</text>
+    <text class="tiny" x="38" y="294">+1</text>
+    <text class="text" x="58" y="294">体重曲线统计建议做成 2 + 1</text>
+
+    <rect class="card" x="20" y="358" width="300" height="126" rx="20"/>
+    <text class="label" x="38" y="390">体重曲线</text>
+    <path class="dash" d="M40 452 L110 424 L180 430 L250 396 L300 410"/>
+    <text class="tiny" x="38" y="470">这里只是占位，你可以在 Figma 里拖成想要的图表比例</text>
+
+    <rect class="card" x="20" y="500" width="300" height="92" rx="20"/>
+    <text class="label" x="38" y="532">日报 / 周报摘要</text>
+    <text class="text" x="38" y="558">把长说明压掉，只保留关键结果</text>
+
+    <rect class="card" x="20" y="608" width="300" height="76" rx="20"/>
+    <text class="label" x="38" y="640">身体评估结果</text>
+    <text class="tiny" x="38" y="664">移动端只保留结果，不放完整输入表单</text>
+
+    <rect class="nav" x="20" y="700" width="300" height="40" rx="20"/>
+    <text class="text" x="46" y="724">首页</text>
+    <text class="text" x="118" y="724">记录</text>
+    <text class="text" x="190" y="724">趋势</text>
+    <text class="text" x="262" y="724">我的</text>
+    <rect class="pill accent" x="180" y="708" width="44" height="24" rx="12"/>
+  </g>
+
+  <g transform="translate(1210 150)">
+    <rect class="frame" x="0" y="0" width="340" height="760" rx="36"/>
+    <text class="title" x="28" y="46">我的</text>
+    <text class="tiny" x="250" y="46">更像设置中心</text>
+
+    <rect class="soft" x="20" y="66" width="300" height="70" rx="22"/>
+    <text class="label" x="38" y="98">账户信息 + 退出登录</text>
+    <text class="tiny" x="38" y="122">这里建议尽量做成单行结构</text>
+
+    <rect class="card" x="20" y="152" width="300" height="106" rx="20"/>
+    <text class="label" x="38" y="184">个人资料</text>
+    <text class="text" x="38" y="210">昵称 / 年龄 / 身高 / 体重 / 目标体重</text>
+    <text class="tiny" x="38" y="234">这里可以做成两列或分组表单</text>
+
+    <rect class="card" x="20" y="274" width="300" height="88" rx="20"/>
+    <text class="label" x="38" y="306">目标设置</text>
+    <text class="text" x="38" y="332">目标模式 / 睡眠 / 活动水平</text>
+
+    <rect class="card" x="20" y="378" width="300" height="88" rx="20"/>
+    <text class="label" x="38" y="410">推荐偏好</text>
+    <text class="text" x="38" y="436">家常 / 健身 / 外食 / 常备食材</text>
+
+    <rect class="card" x="20" y="482" width="300" height="92" rx="20"/>
+    <text class="label" x="38" y="514">快捷入口</text>
+    <text class="text" x="38" y="540">隐私说明 / 帮助 / 关于 / 反馈</text>
+
+    <rect class="soft" x="20" y="590" width="300" height="76" rx="20"/>
+    <text class="label" x="38" y="622">说明</text>
+    <text class="tiny" x="38" y="648">这里可以完全删掉，或者压成 1 行辅助信息</text>
+
+    <rect class="nav" x="20" y="700" width="300" height="40" rx="20"/>
+    <text class="text" x="46" y="724">首页</text>
+    <text class="text" x="118" y="724">记录</text>
+    <text class="text" x="190" y="724">趋势</text>
+    <text class="text" x="262" y="724">我的</text>
+    <rect class="pill accent" x="252" y="708" width="44" height="24" rx="12"/>
+  </g>
+
+  <g transform="translate(64 980)">
+    <text class="title" x="0" y="0">组件起步区</text>
+    <text class="subtitle" x="0" y="30">你在 Figma 里可以把这些组件复制到各页面里，避免来回重画。</text>
+
+    <rect class="card" x="0" y="60" width="220" height="100" rx="20"/>
+    <text class="label" x="20" y="92">数据卡</text>
+    <text class="text" x="20" y="120">标题 / 数值 / 辅助说明</text>
+
+    <rect class="card" x="244" y="60" width="220" height="100" rx="20"/>
+    <text class="label" x="264" y="92">列表卡</text>
+    <text class="text" x="264" y="120">标题 / 简述 / 右侧状态</text>
+
+    <rect class="card" x="488" y="60" width="220" height="100" rx="20"/>
+    <text class="label" x="508" y="92">图表卡</text>
+    <text class="text" x="508" y="120">标题 / 图表区 / 底部说明</text>
+
+    <rect class="soft" x="732" y="60" width="220" height="100" rx="20"/>
+    <text class="label" x="752" y="92">toast 占位</text>
+    <text class="text" x="752" y="120">成功提示 / 自动消失</text>
+
+    <rect class="nav" x="976" y="60" width="220" height="100" rx="20"/>
+    <text class="label" x="996" y="92">底部导航</text>
+    <text class="text" x="996" y="120">4 主入口</text>
+
+    <rect class="card" x="1220" y="60" width="220" height="100" rx="20"/>
+    <text class="label" x="1240" y="92">picker / 弹层</text>
+    <text class="text" x="1240" y="120">滚轮 / 选择器 / 覆盖层</text>
+  </g>
+
+  <g transform="translate(64 1160)">
+    <text class="title" x="0" y="0">你在 Figma 里先改这 6 件事</text>
+    <text class="text" x="0" y="42">1. 首页首屏到底保留哪些指标</text>
+    <text class="text" x="0" y="74">2. 记录页四分栏切换后的信息密度</text>
+    <text class="text" x="0" y="106">3. 趋势页图表和统计卡的上下比例</text>
+    <text class="text" x="0" y="138">4. 我的页是更偏个人主页还是更偏设置中心</text>
+    <text class="text" x="0" y="170">5. 哪些模块完全删除，哪些合并</text>
+    <text class="text" x="0" y="202">6. 留白到底要高级克制，还是信息更满一点</text>
+  </g>
+</svg>
