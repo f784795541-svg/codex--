@@ -216,8 +216,10 @@ textarea {
 }
 
 .picker {
-  display: flex;
-  align-items: center;
+  display: block;
+  padding: 0;
+  border: 0;
+  background: transparent;
 }
 
 .picker-display {
@@ -226,6 +228,10 @@ textarea {
   justify-content: space-between;
   width: 100%;
   min-height: 88rpx;
+  padding: 0 20rpx;
+  border: 1rpx solid rgba(182, 204, 207, 0.72);
+  border-radius: 22rpx;
+  background: rgba(239, 246, 247, 0.95);
   color: #163138;
   font-size: 28rpx;
   line-height: 1.4;

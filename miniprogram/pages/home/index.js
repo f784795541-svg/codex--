@@ -149,6 +149,10 @@ function asNumber(value) {
   return Number.isFinite(number) ? number : 0;
 }
 
+function roundValue(value) {
+  return Math.round(asNumber(value) * 100) / 100;
+}
+
 function remainingMacroKey(summary) {
   const entries = [
     {
@@ -393,14 +397,22 @@ function buildSummaryView(summary) {
         : "今天节奏相对平稳，继续按当前状态执行。";
   const calorieTarget = asNumber(summary.targets?.calorie_target || summary.daily_report.calorie_target_kcal);
   const goalTotalCalories = asNumber(summary.targets?.goal_total_calories);
+  const remainingCalories = roundValue(calorieTarget - asNumber(summary.daily_report.total_intake_kcal));
+  const caloriePill =
+    remainingCalories >= 0
+      ? {
+          label: "还能吃",
+          value: `${remainingCalories} kcal`,
+        }
+      : {
+          label: "吃多了",
+          value: `${Math.abs(remainingCalories)} kcal`,
+        };
 
   return {
     heroSummary: `${goalLabel(summary.user.goal)} · ${recommendationMode} · ${balanceCopy}`,
     heroPills: [
-      {
-        label: "净差",
-        value: `${summary.daily_report.net_calorie_balance} kcal`,
-      },
+      caloriePill,
       {
         label: "睡眠",
         value: `${summary.daily_report.sleep_hours} h`,

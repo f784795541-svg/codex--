@@ -39,16 +39,20 @@ function buildAssessment(user) {
   const bmi = heightM > 0 ? weight / (heightM * heightM) : 0;
   let status = "正常";
   let description = "当前 BMI 处于常见成人参考区间，继续保持当前节奏即可。";
+  let statusClass = "status-normal";
 
   if (bmi < 18.5) {
     status = "偏轻";
     description = "当前 BMI 偏低，建议优先保证规律进食、蛋白质摄入和睡眠恢复。";
+    statusClass = "status-under";
   } else if (bmi >= 24 && bmi < 28) {
     status = "偏高";
     description = "当前 BMI 已高于常见参考区间，建议继续控制热量并维持活动量。";
+    statusClass = "status-over";
   } else if (bmi >= 28) {
     status = "肥胖";
     description = "当前 BMI 明显偏高，需要更系统地控制饮食结构并持续记录趋势。";
+    statusClass = "status-obese";
   }
 
   let bmr = 0;
@@ -63,6 +67,7 @@ function buildAssessment(user) {
   return {
     bmi: bmi ? Number(bmi.toFixed(1)) : 0,
     status,
+    statusClass,
     description,
     bmr: Math.round(Math.max(bmr, 0)),
     markerPercent: Number.isFinite(markerPercent) ? markerPercent.toFixed(1) : "8.0",

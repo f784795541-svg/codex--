@@ -3,7 +3,6 @@
     <view class="hero-panel hero-panel-home">
       <view class="hero-kicker">TODAY FOCUS</view>
       <view class="hero-title">你好，{{summary.user.name}}</view>
-      <view class="hero-subtitle">把今天最关键的状态放在最前面。先看重要数字，再决定今天是补记录、补睡眠，还是把热量节奏拉回正轨。</view>
       <view class="hero-summary-card">{{heroSummary}}</view>
       <view class="hero-pill-row">
         <view class="hero-pill" wx:for="{{heroPills}}" wx:key="label">
@@ -16,12 +15,9 @@
     <view class="card">
       <view class="card-head">
         <view>
-          <text class="card-kicker">核心指标</text>
-          <view class="section-title">先看体重、时间线和目标热量</view>
+          <view class="home-card-title home-card-title-strong">核心指标</view>
         </view>
-        <view class="card-badge">首屏重点</view>
       </view>
-      <view class="support-inline-copy">把最影响当天判断的 6 个数字压到同一屏，先看结果，再决定去补哪一条记录。</view>
       <view class="metric-grid metric-grid-dense">
         <view class="metric-card" wx:for="{{homeMetrics}}" wx:key="label">
           <view class="metric-label">{{item.label}}</view>
@@ -34,12 +30,9 @@
     <view class="card">
       <view class="card-head">
         <view>
-          <text class="card-kicker">目标完成度</text>
-          <view class="section-title">不用进详情，也能先判断今天差在哪</view>
+          <view class="home-card-title home-card-title-strong">目标完成度</view>
         </view>
-        <view class="card-badge">{{summary.daily_report.sleep_status}}</view>
       </view>
-      <view class="support-inline-copy">这里保留行动价值最高的四项完成度，避免和上面的核心指标重复。</view>
       <view class="macro-row {{index === goalItems.length - 1 ? 'macro-row-last' : ''}}" wx:for="{{goalItems}}" wx:key="label">
         <view class="macro-row-head">
           <view class="item-title">{{item.label}}</view>
@@ -55,8 +48,7 @@
     <view class="card" wx:if="{{mealRecommendation}}">
       <view class="card-head">
         <view>
-          <text class="card-kicker">今日推荐饮食</text>
-          <view class="section-title">按当前模式给你一版更容易执行的三餐</view>
+          <view class="home-card-title home-card-title-strong">今日推荐饮食</view>
         </view>
         <view class="card-badge">{{mealRecommendation.modeLabel}}</view>
       </view>

@@ -2,8 +2,18 @@
   margin-top: 4rpx;
 }
 
+.screen-trend .hero-subtitle {
+  max-width: 620rpx;
+}
+
 .trend-compact-grid .metric-card {
   min-height: 140rpx;
+}
+
+.trend-card-kicker-strong {
+  color: #000000;
+  font-size: 35rpx;
+  line-height: 1.2;
 }
 
 .screen-trend .support-inline-copy {
@@ -70,6 +80,17 @@
   padding: 18rpx 18rpx;
   border-radius: 24rpx;
   background: linear-gradient(180deg, #eef6f7 0%, #e7f0f1 100%);
+}
+
+.trend-assessment-status {
+  font-size: 31rpx;
+  line-height: 1.24;
+  font-weight: 700;
+}
+
+.trend-assessment-copy {
+  font-size: 24rpx;
+  line-height: 1.6;
 }
 
 .suggestion-list {
@@ -324,6 +345,22 @@
 
 .bmi-obese {
   background: #c06a58;
+}
+
+.status-under {
+  color: #81aeb0;
+}
+
+.status-normal {
+  color: #5f8f86;
+}
+
+.status-over {
+  color: #ca945c;
+}
+
+.status-obese {
+  color: #c06a58;
 }
 
 .bmi-marker {

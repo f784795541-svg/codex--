@@ -2,7 +2,6 @@
   <view class="hero-panel">
     <view class="hero-kicker">DAILY LOG</view>
     <view class="hero-title">记录</view>
-    <view class="hero-subtitle">把今天的饮食、运动、睡眠和体重按最顺手的方式补齐。先保证能提交、能继续下一条，再把节奏慢慢收回来。</view>
     <view class="hero-pill-row">
       <view class="hero-pill hero-pill-wide">
         <text class="hero-pill-label">当前分栏</text>
@@ -38,7 +37,6 @@
   <view class="card" id="record-food-card" wx:if="{{activeTab === 'food'}}">
     <view class="card-head">
       <view>
-        <text class="card-kicker">饮食录入</text>
         <view class="section-title">饮食记录</view>
       </view>
       <view class="card-badge">{{selectedFood ? '待提交' : '第 1 步'}}</view>

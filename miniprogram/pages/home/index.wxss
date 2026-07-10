@@ -6,6 +6,20 @@
   max-width: 620rpx;
 }
 
+.screen-home .hero-summary-card {
+  margin-top: 20rpx;
+}
+
+.home-card-title {
+  color: #000000;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.home-card-title-strong {
+  font-size: 35rpx;
+}
+
 .hero-summary-card {
   position: relative;
   z-index: 1;
