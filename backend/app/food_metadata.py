@@ -237,6 +237,16 @@ BRAND_IMAGE_PREFIXES = {
 # Keep the product image key anchored to the exact product name so clients render
 # the canonical asset even before the underlying rows are resynced.
 CANONICAL_PRODUCT_IMAGE_KEYS = {
+    "和路雪 可爱多榛子牛奶巧克力口味冰淇淋": "walls-cornetto-hazelnut-milk-chocolate",
+    "和路雪 可爱多柿柿如意甜筒冰淇淋": "walls-cornetto-persimmon-cone",
+    "和路雪 梦龙松露巧克力口味冰淇淋": "walls-magnum-truffle-chocolate",
+    "和路雪 迷你可爱多缤纷口味甜筒冰淇淋": "walls-mini-cornetto-variety",
+    "和路雪 梦龙巴旦木黑巧克力冰淇淋": "walls-magnum-almond-dark-chocolate",
+    "和路雪 千层雪香草白桃口味冰淇淋": "walls-layersnow-vanilla-peach",
+    "和路雪 可爱多椰子布朗尼甜筒冰淇淋": "walls-cornetto-coconut-brownie",
+    "和路雪 迷你梦龙缤纷口味冰淇淋": "walls-mini-magnum-variety",
+    "和路雪 可爱多巧克力甜筒冰淇淋": "walls-cornetto-chocolate-cone",
+    "哈根达斯 夏威夷果仁杯装冰淇淋": "haagen-dazs-macadamia-pint",
     "哈根达斯 香草杯装冰淇淋": "haagen-dazs-vanilla-pint",
     "哈根达斯 草莓杯装冰淇淋": "haagen-dazs-strawberry-pint",
     "哈根达斯 巧克力杯装冰淇淋": "haagen-dazs-chocolate-pint",
