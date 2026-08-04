@@ -237,6 +237,16 @@ BRAND_IMAGE_PREFIXES = {
 # Keep the product image key anchored to the exact product name so clients render
 # the canonical asset even before the underlying rows are resynced.
 CANONICAL_PRODUCT_IMAGE_KEYS = {
+    "哈根达斯 香草杯装冰淇淋": "haagen-dazs-vanilla-pint",
+    "哈根达斯 草莓杯装冰淇淋": "haagen-dazs-strawberry-pint",
+    "哈根达斯 巧克力杯装冰淇淋": "haagen-dazs-chocolate-pint",
+    "哈根达斯 曲奇香奶杯装冰淇淋": "haagen-dazs-cookies-cream-pint",
+    "伊利 巧乐兹经典巧脆棒": "yili-qiaolezi-classic",
+    "伊利 巧乐兹草莓脆皮雪糕": "yili-qiaolezi-strawberry",
+    "伊利 须尽欢香草巧克力冰淇淋": "yili-xujinhuan-vanilla-chocolate",
+    "伊利 甄稀生巧冰淇淋": "yili-zhenxi-chocolate",
+    "蒙牛 随变香草三层巧克力冰淇淋": "mengniu-suibian-chocolate",
+    "蒙牛 绿色心情绿莎莎绿豆雪糕": "mengniu-greenmood-mungbean",
     "麦当劳 麦辣鸡翅": "mcd-142",
     "麦当劳 麦乐鸡块 4块": "mcd-143",
     "麦当劳 麦乐鸡块 10块": "mcd-144",

@@ -8367,6 +8367,176 @@
   },
   {
     "food_id": 527,
+    "name": "伊利 巧乐兹经典巧脆棒",
+    "category": "甜品烘焙",
+    "calories_per_100g": 310.0,
+    "protein": 4.2,
+    "fat": 18.0,
+    "carbs": 34.0,
+    "brand": "伊利",
+    "portion_hint": "按一支巧乐兹经典巧脆棒约 75g 记录",
+    "aliases_text": "下午茶,伊利,巧乐兹,巧克力冰淇淋,巧脆棒,烘焙,甜点,雪糕",
+    "search_text": "伊利巧乐兹经典巧脆棒甜品烘焙伊利下午茶,伊利,巧乐兹,巧克力冰淇淋,巧脆棒,烘焙,甜点,雪糕",
+    "source": "fixed_rule_estimate",
+    "source_updated_at": "2026-08-01",
+    "status": "active",
+    "serving_size_g": 75.0
+  },
+  {
+    "food_id": 528,
+    "name": "伊利 巧乐兹草莓脆皮雪糕",
+    "category": "甜品烘焙",
+    "calories_per_100g": 285.0,
+    "protein": 3.2,
+    "fat": 14.0,
+    "carbs": 36.0,
+    "brand": "伊利",
+    "portion_hint": "按一支巧乐兹草莓脆皮雪糕约 70g 记录",
+    "aliases_text": "下午茶,伊利,冰淇淋,巧乐兹,烘焙,甜点,脆皮,草莓,雪糕",
+    "search_text": "伊利巧乐兹草莓脆皮雪糕甜品烘焙伊利下午茶,伊利,冰淇淋,巧乐兹,烘焙,甜点,脆皮,草莓,雪糕",
+    "source": "fixed_rule_estimate",
+    "source_updated_at": "2026-08-01",
+    "status": "active",
+    "serving_size_g": 70.0
+  },
+  {
+    "food_id": 529,
+    "name": "伊利 须尽欢香草巧克力冰淇淋",
+    "category": "甜品烘焙",
+    "calories_per_100g": 245.0,
+    "protein": 3.8,
+    "fat": 15.0,
+    "carbs": 24.0,
+    "brand": "伊利",
+    "portion_hint": "按一支须尽欢香草巧克力冰淇淋约 75g 记录",
+    "aliases_text": "下午茶,伊利,冰淇淋,巧克力,烘焙,甜点,雪糕,须尽欢,香草",
+    "search_text": "伊利须尽欢香草巧克力冰淇淋甜品烘焙伊利下午茶,伊利,冰淇淋,巧克力,烘焙,甜点,雪糕,须尽欢,香草",
+    "source": "fixed_rule_estimate",
+    "source_updated_at": "2026-08-01",
+    "status": "active",
+    "serving_size_g": 75.0
+  },
+  {
+    "food_id": 530,
+    "name": "伊利 甄稀生巧冰淇淋",
+    "category": "甜品烘焙",
+    "calories_per_100g": 220.0,
+    "protein": 3.5,
+    "fat": 13.0,
+    "carbs": 22.0,
+    "brand": "伊利",
+    "portion_hint": "按一支甄稀生巧冰淇淋约 75g 记录",
+    "aliases_text": "下午茶,伊利,冰淇淋,巧克力,烘焙,甄稀,甜点,生巧,雪糕",
+    "search_text": "伊利甄稀生巧冰淇淋甜品烘焙伊利下午茶,伊利,冰淇淋,巧克力,烘焙,甄稀,甜点,生巧,雪糕",
+    "source": "fixed_rule_estimate",
+    "source_updated_at": "2026-08-01",
+    "status": "active",
+    "serving_size_g": 75.0
+  },
+  {
+    "food_id": 531,
+    "name": "蒙牛 随变香草三层巧克力冰淇淋",
+    "category": "甜品烘焙",
+    "calories_per_100g": 305.0,
+    "protein": 4.0,
+    "fat": 17.0,
+    "carbs": 35.0,
+    "brand": "蒙牛",
+    "portion_hint": "按一支蒙牛随变香草三层巧克力冰淇淋约 70g 记录",
+    "aliases_text": "三层巧克力,下午茶,冰淇淋,巧克力,烘焙,甜点,蒙牛,随变,雪糕,香草",
+    "search_text": "蒙牛随变香草三层巧克力冰淇淋甜品烘焙蒙牛三层巧克力,下午茶,冰淇淋,巧克力,烘焙,甜点,蒙牛,随变,雪糕,香草",
+    "source": "fixed_rule_estimate",
+    "source_updated_at": "2026-08-01",
+    "status": "active",
+    "serving_size_g": 70.0
+  },
+  {
+    "food_id": 532,
+    "name": "蒙牛 绿色心情绿莎莎绿豆雪糕",
+    "category": "甜品烘焙",
+    "calories_per_100g": 170.0,
+    "protein": 2.2,
+    "fat": 4.5,
+    "carbs": 31.0,
+    "brand": "蒙牛",
+    "portion_hint": "按一支蒙牛绿色心情绿莎莎绿豆雪糕约 75g 记录",
+    "aliases_text": "下午茶,植物冰淇淋,烘焙,甜点,绿色心情,绿莎莎,绿豆,蒙牛,雪糕",
+    "search_text": "蒙牛绿色心情绿莎莎绿豆雪糕甜品烘焙蒙牛下午茶,植物冰淇淋,烘焙,甜点,绿色心情,绿莎莎,绿豆,蒙牛,雪糕",
+    "source": "fixed_rule_estimate",
+    "source_updated_at": "2026-08-01",
+    "status": "active",
+    "serving_size_g": 75.0
+  },
+  {
+    "food_id": 533,
+    "name": "哈根达斯 香草杯装冰淇淋",
+    "category": "甜品烘焙",
+    "calories_per_100g": 250.0,
+    "protein": 4.0,
+    "fat": 15.0,
+    "carbs": 25.0,
+    "brand": "哈根达斯",
+    "portion_hint": "按一杯哈根达斯迷你杯约 81g 记录",
+    "aliases_text": "Haagen-Dazs,下午茶,哈根达斯,杯装,烘焙,甜点,迷你杯,香草,香草冰淇淋",
+    "search_text": "哈根达斯香草杯装冰淇淋甜品烘焙哈根达斯haagen-dazs,下午茶,哈根达斯,杯装,烘焙,甜点,迷你杯,香草,香草冰淇淋",
+    "source": "fixed_rule_estimate",
+    "source_updated_at": "2026-08-05",
+    "status": "active",
+    "serving_size_g": 81.0
+  },
+  {
+    "food_id": 534,
+    "name": "哈根达斯 草莓杯装冰淇淋",
+    "category": "甜品烘焙",
+    "calories_per_100g": 235.0,
+    "protein": 4.0,
+    "fat": 13.5,
+    "carbs": 25.0,
+    "brand": "哈根达斯",
+    "portion_hint": "按一杯哈根达斯迷你杯约 81g 记录",
+    "aliases_text": "Haagen-Dazs,下午茶,哈根达斯,杯装,烘焙,甜点,草莓,草莓冰淇淋,迷你杯",
+    "search_text": "哈根达斯草莓杯装冰淇淋甜品烘焙哈根达斯haagen-dazs,下午茶,哈根达斯,杯装,烘焙,甜点,草莓,草莓冰淇淋,迷你杯",
+    "source": "fixed_rule_estimate",
+    "source_updated_at": "2026-08-05",
+    "status": "active",
+    "serving_size_g": 81.0
+  },
+  {
+    "food_id": 535,
+    "name": "哈根达斯 巧克力杯装冰淇淋",
+    "category": "甜品烘焙",
+    "calories_per_100g": 270.0,
+    "protein": 4.5,
+    "fat": 16.0,
+    "carbs": 27.0,
+    "brand": "哈根达斯",
+    "portion_hint": "按一杯哈根达斯迷你杯约 81g 记录",
+    "aliases_text": "Haagen-Dazs,下午茶,哈根达斯,巧克力,巧克力冰淇淋,杯装,比利时巧克力,烘焙,甜点,迷你杯",
+    "search_text": "哈根达斯巧克力杯装冰淇淋甜品烘焙哈根达斯haagen-dazs,下午茶,哈根达斯,巧克力,巧克力冰淇淋,杯装,比利时巧克力,烘焙,甜点,迷你杯",
+    "source": "fixed_rule_estimate",
+    "source_updated_at": "2026-08-05",
+    "status": "active",
+    "serving_size_g": 81.0
+  },
+  {
+    "food_id": 536,
+    "name": "哈根达斯 曲奇香奶杯装冰淇淋",
+    "category": "甜品烘焙",
+    "calories_per_100g": 255.0,
+    "protein": 4.0,
+    "fat": 15.0,
+    "carbs": 26.0,
+    "brand": "哈根达斯",
+    "portion_hint": "按一杯哈根达斯迷你杯约 81g 记录",
+    "aliases_text": "Haagen-Dazs,下午茶,哈根达斯,曲奇,曲奇冰淇淋,曲奇香奶,杯装,烘焙,甜点,迷你杯,香奶",
+    "search_text": "哈根达斯曲奇香奶杯装冰淇淋甜品烘焙哈根达斯haagen-dazs,下午茶,哈根达斯,曲奇,曲奇冰淇淋,曲奇香奶,杯装,烘焙,甜点,迷你杯,香奶",
+    "source": "fixed_rule_estimate",
+    "source_updated_at": "2026-08-05",
+    "status": "active",
+    "serving_size_g": 81.0
+  },
+  {
+    "food_id": 537,
     "name": "麻辣烫",
     "category": "火锅类",
     "calories_per_100g": 132.0,
@@ -8382,7 +8552,7 @@
     "serving_size_g": 350.0
   },
   {
-    "food_id": 528,
+    "food_id": 538,
     "name": "清汤麻辣烫",
     "category": "火锅类",
     "calories_per_100g": 98.0,
@@ -8398,7 +8568,7 @@
     "serving_size_g": 350.0
   },
   {
-    "food_id": 529,
+    "food_id": 539,
     "name": "冒菜",
     "category": "火锅类",
     "calories_per_100g": 146.0,
@@ -8414,7 +8584,7 @@
     "serving_size_g": 360.0
   },
   {
-    "food_id": 530,
+    "food_id": 540,
     "name": "串串香",
     "category": "火锅类",
     "calories_per_100g": 171.0,
@@ -8430,7 +8600,7 @@
     "serving_size_g": 320.0
   },
   {
-    "food_id": 531,
+    "food_id": 541,
     "name": "麻辣香锅 双人份",
     "category": "火锅类",
     "calories_per_100g": 182.0,
@@ -8446,7 +8616,7 @@
     "serving_size_g": 500.0
   },
   {
-    "food_id": 532,
+    "food_id": 542,
     "name": "火锅肥牛卷",
     "category": "火锅类",
     "calories_per_100g": 287.0,
@@ -8462,7 +8632,7 @@
     "serving_size_g": 120.0
   },
   {
-    "food_id": 533,
+    "food_id": 543,
     "name": "火锅羊肉卷",
     "category": "火锅类",
     "calories_per_100g": 301.0,
@@ -8478,7 +8648,7 @@
     "serving_size_g": 120.0
   },
   {
-    "food_id": 534,
+    "food_id": 544,
     "name": "毛肚",
     "category": "火锅类",
     "calories_per_100g": 72.0,
@@ -8494,7 +8664,7 @@
     "serving_size_g": 120.0
   },
   {
-    "food_id": 535,
+    "food_id": 545,
     "name": "黄喉",
     "category": "火锅类",
     "calories_per_100g": 96.0,
@@ -8510,7 +8680,7 @@
     "serving_size_g": 120.0
   },
   {
-    "food_id": 536,
+    "food_id": 546,
     "name": "鸭肠",
     "category": "火锅类",
     "calories_per_100g": 127.0,
@@ -8526,7 +8696,7 @@
     "serving_size_g": 100.0
   },
   {
-    "food_id": 537,
+    "food_id": 547,
     "name": "虾滑",
     "category": "火锅类",
     "calories_per_100g": 103.0,
@@ -8542,7 +8712,7 @@
     "serving_size_g": 120.0
   },
   {
-    "food_id": 538,
+    "food_id": 548,
     "name": "鱼豆腐",
     "category": "火锅类",
     "calories_per_100g": 146.0,
@@ -8558,7 +8728,7 @@
     "serving_size_g": 120.0
   },
   {
-    "food_id": 539,
+    "food_id": 549,
     "name": "午餐肉",
     "category": "火锅类",
     "calories_per_100g": 262.0,
@@ -8574,7 +8744,7 @@
     "serving_size_g": 100.0
   },
   {
-    "food_id": 540,
+    "food_id": 550,
     "name": "蟹柳",
     "category": "火锅类",
     "calories_per_100g": 101.0,
@@ -8590,7 +8760,7 @@
     "serving_size_g": 100.0
   },
   {
-    "food_id": 541,
+    "food_id": 551,
     "name": "娃娃菜",
     "category": "火锅类",
     "calories_per_100g": 18.0,
@@ -8606,7 +8776,7 @@
     "serving_size_g": 150.0
   },
   {
-    "food_id": 542,
+    "food_id": 552,
     "name": "金针菇",
     "category": "火锅类",
     "calories_per_100g": 29.0,
@@ -8622,7 +8792,7 @@
     "serving_size_g": 150.0
   },
   {
-    "food_id": 543,
+    "food_id": 553,
     "name": "宽粉",
     "category": "火锅类",
     "calories_per_100g": 119.0,
@@ -8638,7 +8808,7 @@
     "serving_size_g": 120.0
   },
   {
-    "food_id": 544,
+    "food_id": 554,
     "name": "魔芋丝",
     "category": "火锅类",
     "calories_per_100g": 17.0,
@@ -8654,7 +8824,7 @@
     "serving_size_g": 120.0
   },
   {
-    "food_id": 545,
+    "food_id": 555,
     "name": "羊肉串",
     "category": "烧烤夜宵",
     "calories_per_100g": 252.0,
@@ -8670,7 +8840,7 @@
     "serving_size_g": 90.0
   },
   {
-    "food_id": 546,
+    "food_id": 556,
     "name": "牛肉串",
     "category": "烧烤夜宵",
     "calories_per_100g": 228.0,
@@ -8686,7 +8856,7 @@
     "serving_size_g": 90.0
   },
   {
-    "food_id": 547,
+    "food_id": 557,
     "name": "鸡翅中 烧烤",
     "category": "烧烤夜宵",
     "calories_per_100g": 242.0,
@@ -8702,7 +8872,7 @@
     "serving_size_g": 120.0
   },
   {
-    "food_id": 548,
+    "food_id": 558,
     "name": "烤鸡皮",
     "category": "烧烤夜宵",
     "calories_per_100g": 394.0,
@@ -8718,7 +8888,7 @@
     "serving_size_g": 80.0
   },
   {
-    "food_id": 549,
+    "food_id": 559,
     "name": "烤五花肉",
     "category": "烧烤夜宵",
     "calories_per_100g": 378.0,
@@ -8734,7 +8904,7 @@
     "serving_size_g": 120.0
   },
   {
-    "food_id": 550,
+    "food_id": 560,
     "name": "烤茄子",
     "category": "烧烤夜宵",
     "calories_per_100g": 112.0,
@@ -8750,7 +8920,7 @@
     "serving_size_g": 200.0
   },
   {
-    "food_id": 551,
+    "food_id": 561,
     "name": "烤韭菜",
     "category": "烧烤夜宵",
     "calories_per_100g": 96.0,
@@ -8766,7 +8936,7 @@
     "serving_size_g": 120.0
   },
   {
-    "food_id": 552,
+    "food_id": 562,
     "name": "烤金针菇",
     "category": "烧烤夜宵",
     "calories_per_100g": 88.0,
@@ -8782,7 +8952,7 @@
     "serving_size_g": 150.0
   },
   {
-    "food_id": 553,
+    "food_id": 563,
     "name": "烤玉米",
     "category": "烧烤夜宵",
     "calories_per_100g": 135.0,
@@ -8798,7 +8968,7 @@
     "serving_size_g": 180.0
   },
   {
-    "food_id": 554,
+    "food_id": 564,
     "name": "烤冷吃豆腐",
     "category": "烧烤夜宵",
     "calories_per_100g": 139.0,
@@ -8814,7 +8984,7 @@
     "serving_size_g": 120.0
   },
   {
-    "food_id": 555,
+    "food_id": 565,
     "name": "生蚝",
     "category": "烧烤夜宵",
     "calories_per_100g": 68.0,
@@ -8830,7 +9000,7 @@
     "serving_size_g": 120.0
   },
   {
-    "food_id": 556,
+    "food_id": 566,
     "name": "烤鱿鱼",
     "category": "烧烤夜宵",
     "calories_per_100g": 129.0,
@@ -8846,7 +9016,7 @@
     "serving_size_g": 120.0
   },
   {
-    "food_id": 557,
+    "food_id": 567,
     "name": "炒河粉 夜宵版",
     "category": "烧烤夜宵",
     "calories_per_100g": 187.0,
@@ -8862,7 +9032,7 @@
     "serving_size_g": 300.0
   },
   {
-    "food_id": 558,
+    "food_id": 568,
     "name": "炒粉",
     "category": "烧烤夜宵",
     "calories_per_100g": 181.0,
@@ -8878,7 +9048,7 @@
     "serving_size_g": 300.0
   },
   {
-    "food_id": 559,
+    "food_id": 569,
     "name": "炒饭 夜宵版",
     "category": "烧烤夜宵",
     "calories_per_100g": 194.0,
@@ -8894,7 +9064,7 @@
     "serving_size_g": 300.0
   },
   {
-    "food_id": 560,
+    "food_id": 570,
     "name": "蛋炒饭",
     "category": "烧烤夜宵",
     "calories_per_100g": 188.0,
@@ -8910,7 +9080,7 @@
     "serving_size_g": 300.0
   },
   {
-    "food_id": 561,
+    "food_id": 571,
     "name": "扬州炒面",
     "category": "烧烤夜宵",
     "calories_per_100g": 182.0,
@@ -8926,7 +9096,7 @@
     "serving_size_g": 300.0
   },
   {
-    "food_id": 562,
+    "food_id": 572,
     "name": "小龙虾 蒜蓉",
     "category": "烧烤夜宵",
     "calories_per_100g": 122.0,
@@ -8942,7 +9112,7 @@
     "serving_size_g": 220.0
   },
   {
-    "food_id": 563,
+    "food_id": 573,
     "name": "小龙虾 麻辣",
     "category": "烧烤夜宵",
     "calories_per_100g": 138.0,
@@ -8958,7 +9128,7 @@
     "serving_size_g": 220.0
   },
   {
-    "food_id": 564,
+    "food_id": 574,
     "name": "珍珠奶茶",
     "category": "甜品烘焙",
     "calories_per_100g": 87.0,
@@ -8974,7 +9144,7 @@
     "serving_size_g": 500.0
   },
   {
-    "food_id": 565,
+    "food_id": 575,
     "name": "杨枝甘露",
     "category": "甜品烘焙",
     "calories_per_100g": 112.0,
@@ -8990,7 +9160,7 @@
     "serving_size_g": 300.0
   },
   {
-    "food_id": 566,
+    "food_id": 576,
     "name": "双皮奶",
     "category": "甜品烘焙",
     "calories_per_100g": 132.0,
@@ -9006,7 +9176,7 @@
     "serving_size_g": 180.0
   },
   {
-    "food_id": 567,
+    "food_id": 577,
     "name": "芋圆",
     "category": "甜品烘焙",
     "calories_per_100g": 156.0,
@@ -9022,7 +9192,7 @@
     "serving_size_g": 220.0
   },
   {
-    "food_id": 568,
+    "food_id": 578,
     "name": "仙草冻",
     "category": "甜品烘焙",
     "calories_per_100g": 58.0,
@@ -9038,7 +9208,7 @@
     "serving_size_g": 220.0
   },
   {
-    "food_id": 569,
+    "food_id": 579,
     "name": "绿豆沙",
     "category": "甜品烘焙",
     "calories_per_100g": 96.0,
@@ -9054,7 +9224,7 @@
     "serving_size_g": 300.0
   },
   {
-    "food_id": 570,
+    "food_id": 580,
     "name": "红豆沙",
     "category": "甜品烘焙",
     "calories_per_100g": 103.0,
@@ -9070,7 +9240,7 @@
     "serving_size_g": 300.0
   },
   {
-    "food_id": 571,
+    "food_id": 581,
     "name": "蛋挞",
     "category": "甜品烘焙",
     "calories_per_100g": 305.0,
@@ -9086,7 +9256,7 @@
     "serving_size_g": 60.0
   },
   {
-    "food_id": 572,
+    "food_id": 582,
     "name": "泡芙",
     "category": "甜品烘焙",
     "calories_per_100g": 282.0,
@@ -9102,7 +9272,7 @@
     "serving_size_g": 70.0
   },
   {
-    "food_id": 573,
+    "food_id": 583,
     "name": "瑞士卷",
     "category": "甜品烘焙",
     "calories_per_100g": 323.0,
@@ -9118,7 +9288,7 @@
     "serving_size_g": 80.0
   },
   {
-    "food_id": 574,
+    "food_id": 584,
     "name": "奶油蛋糕",
     "category": "甜品烘焙",
     "calories_per_100g": 344.0,
@@ -9134,7 +9304,7 @@
     "serving_size_g": 100.0
   },
   {
-    "food_id": 575,
+    "food_id": 585,
     "name": "芝士蛋糕",
     "category": "甜品烘焙",
     "calories_per_100g": 358.0,
@@ -9150,7 +9320,7 @@
     "serving_size_g": 100.0
   },
   {
-    "food_id": 576,
+    "food_id": 586,
     "name": "可颂",
     "category": "甜品烘焙",
     "calories_per_100g": 411.0,
@@ -9166,7 +9336,7 @@
     "serving_size_g": 60.0
   },
   {
-    "food_id": 577,
+    "food_id": 587,
     "name": "肉松面包",
     "category": "甜品烘焙",
     "calories_per_100g": 356.0,
@@ -9182,7 +9352,7 @@
     "serving_size_g": 90.0
   },
   {
-    "food_id": 578,
+    "food_id": 588,
     "name": "豆沙面包",
     "category": "甜品烘焙",
     "calories_per_100g": 318.0,
@@ -9198,7 +9368,7 @@
     "serving_size_g": 90.0
   },
   {
-    "food_id": 579,
+    "food_id": 589,
     "name": "奶黄面包",
     "category": "甜品烘焙",
     "calories_per_100g": 331.0,
@@ -9214,7 +9384,7 @@
     "serving_size_g": 90.0
   },
   {
-    "food_id": 580,
+    "food_id": 590,
     "name": "拿破仑蛋糕",
     "category": "甜品烘焙",
     "calories_per_100g": 376.0,
@@ -9230,7 +9400,7 @@
     "serving_size_g": 100.0
   },
   {
-    "food_id": 581,
+    "food_id": 591,
     "name": "提拉米苏",
     "category": "甜品烘焙",
     "calories_per_100g": 304.0,
@@ -9246,7 +9416,7 @@
     "serving_size_g": 100.0
   },
   {
-    "food_id": 582,
+    "food_id": 592,
     "name": "美式咖啡",
     "category": "饮品",
     "calories_per_100g": 2.0,
@@ -9262,7 +9432,7 @@
     "serving_size_g": 350.0
   },
   {
-    "food_id": 583,
+    "food_id": 593,
     "name": "生椰拿铁",
     "category": "饮品",
     "calories_per_100g": 63.0,
@@ -9278,7 +9448,7 @@
     "serving_size_g": 350.0
   },
   {
-    "food_id": 584,
+    "food_id": 594,
     "name": "7-11 全麦鸡胸三明治",
     "category": "连锁餐厅",
     "calories_per_100g": 214.0,
@@ -9295,7 +9465,7 @@
     "serving_size_g": 165.0
   },
   {
-    "food_id": 585,
+    "food_id": 595,
     "name": "7-11 海苔肉松饭团",
     "category": "连锁餐厅",
     "calories_per_100g": 206.0,
@@ -9312,7 +9482,7 @@
     "serving_size_g": 115.0
   },
   {
-    "food_id": 586,
+    "food_id": 596,
     "name": "7-11 低糖希腊酸奶",
     "category": "乳制品",
     "calories_per_100g": 78.0,
@@ -9329,7 +9499,7 @@
     "serving_size_g": 180.0
   },
   {
-    "food_id": 587,
+    "food_id": 597,
     "name": "全家 低糖希腊酸奶",
     "category": "乳制品",
     "calories_per_100g": 79.0,
@@ -9346,7 +9516,7 @@
     "serving_size_g": 180.0
   },
   {
-    "food_id": 588,
+    "food_id": 598,
     "name": "全家 香葱肉松面包",
     "category": "甜品烘焙",
     "calories_per_100g": 342.0,
@@ -9363,7 +9533,7 @@
     "serving_size_g": 95.0
   },
   {
-    "food_id": 589,
+    "food_id": 599,
     "name": "罗森 巧克力可颂",
     "category": "甜品烘焙",
     "calories_per_100g": 419.0,
@@ -9380,7 +9550,7 @@
     "serving_size_g": 70.0
   },
   {
-    "food_id": 590,
+    "food_id": 600,
     "name": "罗森 冰美式咖啡",
     "category": "饮品",
     "calories_per_100g": 2.0,
@@ -9397,7 +9567,7 @@
     "serving_size_g": 360.0
   },
   {
-    "food_id": 591,
+    "food_id": 601,
     "name": "全家 冰拿铁",
     "category": "饮品",
     "calories_per_100g": 47.0,
@@ -9414,7 +9584,7 @@
     "serving_size_g": 360.0
   },
   {
-    "food_id": 592,
+    "food_id": 602,
     "name": "7-11 冰美式咖啡",
     "category": "饮品",
     "calories_per_100g": 2.0,
@@ -9431,7 +9601,7 @@
     "serving_size_g": 360.0
   },
   {
-    "food_id": 593,
+    "food_id": 603,
     "name": "罗森 抹茶蛋糕卷",
     "category": "甜品烘焙",
     "calories_per_100g": 327.0,
@@ -9448,7 +9618,7 @@
     "serving_size_g": 90.0
   },
   {
-    "food_id": 594,
+    "food_id": 604,
     "name": "山姆 烤鸡",
     "category": "加工食品",
     "calories_per_100g": 214.0,
@@ -9465,7 +9635,7 @@
     "serving_size_g": 180.0
   },
   {
-    "food_id": 595,
+    "food_id": 605,
     "name": "山姆 凯撒鸡肉沙拉",
     "category": "轻食",
     "calories_per_100g": 126.0,
@@ -9482,7 +9652,7 @@
     "serving_size_g": 220.0
   },
   {
-    "food_id": 596,
+    "food_id": 606,
     "name": "盒马 三文鱼寿司",
     "category": "加工食品",
     "calories_per_100g": 168.0,
@@ -9499,7 +9669,7 @@
     "serving_size_g": 180.0
   },
   {
-    "food_id": 597,
+    "food_id": 607,
     "name": "盒马 鸡胸肉沙拉",
     "category": "轻食",
     "calories_per_100g": 88.0,
@@ -9516,7 +9686,7 @@
     "serving_size_g": 200.0
   },
   {
-    "food_id": 598,
+    "food_id": 608,
     "name": "麦当劳 麦香鱼",
     "category": "连锁餐厅",
     "calories_per_100g": 242.0,
@@ -9533,7 +9703,7 @@
     "serving_size_g": 143.0
   },
   {
-    "food_id": 599,
+    "food_id": 609,
     "name": "麦当劳 培根蔬萃双层牛堡",
     "category": "连锁餐厅",
     "calories_per_100g": 256.0,
@@ -9550,7 +9720,7 @@
     "serving_size_g": 205.0
   },
   {
-    "food_id": 600,
+    "food_id": 610,
     "name": "麦当劳 板烧鸡腿堡套餐玉米杯",
     "category": "连锁餐厅",
     "calories_per_100g": 96.0,
@@ -9567,7 +9737,7 @@
     "serving_size_g": 95.0
   },
   {
-    "food_id": 601,
+    "food_id": 611,
     "name": "麦当劳 麦麦脆汁鸡 鸡腿",
     "category": "连锁餐厅",
     "calories_per_100g": 265.0,
@@ -9584,7 +9754,7 @@
     "serving_size_g": 120.0
   },
   {
-    "food_id": 602,
+    "food_id": 612,
     "name": "麦当劳 冰拿铁 中杯",
     "category": "饮品",
     "calories_per_100g": 45.0,
@@ -9601,7 +9771,7 @@
     "serving_size_g": 360.0
   },
   {
-    "food_id": 603,
+    "food_id": 613,
     "name": "麦当劳 圆筒冰淇淋",
     "category": "甜品烘焙",
     "calories_per_100g": 210.0,
@@ -9618,7 +9788,7 @@
     "serving_size_g": 95.0
   },
   {
-    "food_id": 604,
+    "food_id": 614,
     "name": "肯德基 老北京鸡肉卷套餐玉米杯",
     "category": "连锁餐厅",
     "calories_per_100g": 96.0,
@@ -9635,7 +9805,7 @@
     "serving_size_g": 95.0
   },
   {
-    "food_id": 605,
+    "food_id": 615,
     "name": "肯德基 劲脆鸡腿堡",
     "category": "连锁餐厅",
     "calories_per_100g": 260.0,
@@ -9652,7 +9822,7 @@
     "serving_size_g": 185.0
   },
   {
-    "food_id": 606,
+    "food_id": 616,
     "name": "肯德基 香辣鸡腿堡套餐土豆泥",
     "category": "连锁餐厅",
     "calories_per_100g": 110.0,
@@ -9669,7 +9839,7 @@
     "serving_size_g": 90.0
   },
   {
-    "food_id": 607,
+    "food_id": 617,
     "name": "肯德基 藤椒肯大大鸡排",
     "category": "连锁餐厅",
     "calories_per_100g": 285.0,
@@ -9686,7 +9856,7 @@
     "serving_size_g": 145.0
   },
   {
-    "food_id": 608,
+    "food_id": 618,
     "name": "肯德基 冰美式 中杯",
     "category": "饮品",
     "calories_per_100g": 2.0,
@@ -9703,7 +9873,7 @@
     "serving_size_g": 360.0
   },
   {
-    "food_id": 609,
+    "food_id": 619,
     "name": "肯德基 草莓圣代",
     "category": "甜品烘焙",
     "calories_per_100g": 185.0,
@@ -9720,7 +9890,7 @@
     "serving_size_g": 150.0
   },
   {
-    "food_id": 610,
+    "food_id": 620,
     "name": "7-11 奥尔良鸡腿饭团",
     "category": "连锁餐厅",
     "calories_per_100g": 198.0,
@@ -9737,7 +9907,7 @@
     "serving_size_g": 115.0
   },
   {
-    "food_id": 611,
+    "food_id": 621,
     "name": "7-11 泡菜肥牛饭团",
     "category": "连锁餐厅",
     "calories_per_100g": 205.0,
@@ -9754,7 +9924,7 @@
     "serving_size_g": 115.0
   },
   {
-    "food_id": 612,
+    "food_id": 622,
     "name": "7-11 金枪鱼三明治",
     "category": "连锁餐厅",
     "calories_per_100g": 218.0,
@@ -9771,7 +9941,7 @@
     "serving_size_g": 160.0
   },
   {
-    "food_id": 613,
+    "food_id": 623,
     "name": "7-11 黑椒牛肉意面",
     "category": "连锁餐厅",
     "calories_per_100g": 174.0,
@@ -9788,7 +9958,7 @@
     "serving_size_g": 330.0
   },
   {
-    "food_id": 614,
+    "food_id": 624,
     "name": "7-11 卤蛋",
     "category": "蛋类",
     "calories_per_100g": 150.0,
@@ -9805,7 +9975,7 @@
     "serving_size_g": 55.0
   },
   {
-    "food_id": 615,
+    "food_id": 625,
     "name": "7-11 无糖乌龙茶",
     "category": "饮品",
     "calories_per_100g": 0.0,
@@ -9822,7 +9992,7 @@
     "serving_size_g": 500.0
   },
   {
-    "food_id": 616,
+    "food_id": 626,
     "name": "罗森 奥尔良鸡肉卷",
     "category": "连锁餐厅",
     "calories_per_100g": 226.0,
@@ -9839,7 +10009,7 @@
     "serving_size_g": 170.0
   },
   {
-    "food_id": 617,
+    "food_id": 627,
     "name": "罗森 照烧鸡排饭团",
     "category": "连锁餐厅",
     "calories_per_100g": 202.0,
@@ -9856,7 +10026,7 @@
     "serving_size_g": 115.0
   },
   {
-    "food_id": 618,
+    "food_id": 628,
     "name": "罗森 烤肠",
     "category": "零食",
     "calories_per_100g": 285.0,
@@ -9873,7 +10043,7 @@
     "serving_size_g": 70.0
   },
   {
-    "food_id": 619,
+    "food_id": 629,
     "name": "罗森 关东煮萝卜",
     "category": "连锁餐厅",
     "calories_per_100g": 22.0,
@@ -9890,7 +10060,7 @@
     "serving_size_g": 110.0
   },
   {
-    "food_id": 620,
+    "food_id": 630,
     "name": "罗森 冰皮月亮蛋糕",
     "category": "甜品烘焙",
     "calories_per_100g": 268.0,
@@ -9907,7 +10077,7 @@
     "serving_size_g": 90.0
   },
   {
-    "food_id": 621,
+    "food_id": 631,
     "name": "罗森 无糖茉莉花茶",
     "category": "饮品",
     "calories_per_100g": 0.0,
@@ -9924,7 +10094,7 @@
     "serving_size_g": 500.0
   },
   {
-    "food_id": 622,
+    "food_id": 632,
     "name": "瑞幸 生椰拿铁 标准杯",
     "category": "饮品",
     "calories_per_100g": 68.0,
@@ -9941,7 +10111,7 @@
     "serving_size_g": 420.0
   },
   {
-    "food_id": 623,
+    "food_id": 633,
     "name": "瑞幸 厚乳拿铁 标准杯",
     "category": "饮品",
     "calories_per_100g": 62.0,
@@ -9958,7 +10128,7 @@
     "serving_size_g": 420.0
   },
   {
-    "food_id": 624,
+    "food_id": 634,
     "name": "瑞幸 冰美式 标准杯",
     "category": "饮品",
     "calories_per_100g": 2.0,
@@ -9975,7 +10145,7 @@
     "serving_size_g": 420.0
   },
   {
-    "food_id": 625,
+    "food_id": 635,
     "name": "瑞幸 橙C美式 标准杯",
     "category": "饮品",
     "calories_per_100g": 28.0,
@@ -9992,7 +10162,7 @@
     "serving_size_g": 430.0
   },
   {
-    "food_id": 626,
+    "food_id": 636,
     "name": "星巴克 拿铁 中杯",
     "category": "饮品",
     "calories_per_100g": 54.0,
@@ -10009,7 +10179,7 @@
     "serving_size_g": 355.0
   },
   {
-    "food_id": 627,
+    "food_id": 637,
     "name": "星巴克 美式咖啡 中杯",
     "category": "饮品",
     "calories_per_100g": 2.0,
@@ -10026,7 +10196,7 @@
     "serving_size_g": 355.0
   },
   {
-    "food_id": 628,
+    "food_id": 638,
     "name": "星巴克 星冰乐 摩卡风味中杯",
     "category": "饮品",
     "calories_per_100g": 86.0,
@@ -10043,7 +10213,7 @@
     "serving_size_g": 355.0
   },
   {
-    "food_id": 629,
+    "food_id": 639,
     "name": "星巴克 蓝莓麦芬",
     "category": "甜品烘焙",
     "calories_per_100g": 340.0,
@@ -10060,7 +10230,7 @@
     "serving_size_g": 110.0
   },
   {
-    "food_id": 630,
+    "food_id": 640,
     "name": "蜜雪冰城 冰鲜柠檬水",
     "category": "饮品",
     "calories_per_100g": 30.0,
@@ -10077,7 +10247,7 @@
     "serving_size_g": 500.0
   },
   {
-    "food_id": 631,
+    "food_id": 641,
     "name": "蜜雪冰城 珍珠奶茶",
     "category": "饮品",
     "calories_per_100g": 72.0,
@@ -10094,7 +10264,7 @@
     "serving_size_g": 500.0
   },
   {
-    "food_id": 632,
+    "food_id": 642,
     "name": "蜜雪冰城 草莓摇摇奶昔",
     "category": "饮品",
     "calories_per_100g": 88.0,
@@ -10111,7 +10281,7 @@
     "serving_size_g": 500.0
   },
   {
-    "food_id": 633,
+    "food_id": 643,
     "name": "茶百道 豆乳玉麒麟",
     "category": "饮品",
     "calories_per_100g": 76.0,
@@ -10128,7 +10298,7 @@
     "serving_size_g": 500.0
   },
   {
-    "food_id": 634,
+    "food_id": 644,
     "name": "茶百道 杨枝甘露",
     "category": "饮品",
     "calories_per_100g": 82.0,
@@ -10145,7 +10315,7 @@
     "serving_size_g": 500.0
   },
   {
-    "food_id": 635,
+    "food_id": 645,
     "name": "茶百道 超级杯水果茶",
     "category": "饮品",
     "calories_per_100g": 44.0,
@@ -10162,7 +10332,7 @@
     "serving_size_g": 650.0
   },
   {
-    "food_id": 636,
+    "food_id": 646,
     "name": "古茗 云岭茉莉白",
     "category": "饮品",
     "calories_per_100g": 58.0,
@@ -10179,7 +10349,7 @@
     "serving_size_g": 500.0
   },
   {
-    "food_id": 637,
+    "food_id": 647,
     "name": "古茗 芝士葡萄",
     "category": "饮品",
     "calories_per_100g": 88.0,
@@ -10196,7 +10366,7 @@
     "serving_size_g": 500.0
   },
   {
-    "food_id": 638,
+    "food_id": 648,
     "name": "古茗 百香双重奏",
     "category": "饮品",
     "calories_per_100g": 52.0,
@@ -10213,7 +10383,7 @@
     "serving_size_g": 500.0
   },
   {
-    "food_id": 639,
+    "food_id": 649,
     "name": "霸王茶姬 伯牙绝弦",
     "category": "饮品",
     "calories_per_100g": 62.0,
@@ -10230,7 +10400,7 @@
     "serving_size_g": 500.0
   },
   {
-    "food_id": 640,
+    "food_id": 650,
     "name": "霸王茶姬 万里木兰",
     "category": "饮品",
     "calories_per_100g": 56.0,
@@ -10247,7 +10417,7 @@
     "serving_size_g": 500.0
   },
   {
-    "food_id": 641,
+    "food_id": 651,
     "name": "霸王茶姬 桂馥兰香",
     "category": "饮品",
     "calories_per_100g": 58.0,
@@ -10264,7 +10434,7 @@
     "serving_size_g": 500.0
   },
   {
-    "food_id": 642,
+    "food_id": 652,
     "name": "汉堡王 皇堡",
     "category": "连锁餐厅",
     "calories_per_100g": 240.0,
@@ -10281,7 +10451,7 @@
     "serving_size_g": 270.0
   },
   {
-    "food_id": 643,
+    "food_id": 653,
     "name": "汉堡王 天椒皇堡",
     "category": "连锁餐厅",
     "calories_per_100g": 260.0,
@@ -10298,7 +10468,7 @@
     "serving_size_g": 300.0
   },
   {
-    "food_id": 644,
+    "food_id": 654,
     "name": "汉堡王 薯霸王 中份",
     "category": "连锁餐厅",
     "calories_per_100g": 305.0,
@@ -10315,7 +10485,7 @@
     "serving_size_g": 115.0
   },
   {
-    "food_id": 645,
+    "food_id": 655,
     "name": "华莱士 香辣鸡腿堡",
     "category": "连锁餐厅",
     "calories_per_100g": 245.0,
@@ -10332,7 +10502,7 @@
     "serving_size_g": 180.0
   },
   {
-    "food_id": 646,
+    "food_id": 656,
     "name": "华莱士 蜜汁手扒鸡",
     "category": "连锁餐厅",
     "calories_per_100g": 215.0,
@@ -10349,7 +10519,7 @@
     "serving_size_g": 450.0
   },
   {
-    "food_id": 647,
+    "food_id": 657,
     "name": "华莱士 脆皮全鸡",
     "category": "连锁餐厅",
     "calories_per_100g": 260.0,
@@ -10366,7 +10536,7 @@
     "serving_size_g": 520.0
   },
   {
-    "food_id": 648,
+    "food_id": 658,
     "name": "必胜客 榴莲多多披萨 普通装",
     "category": "连锁餐厅",
     "calories_per_100g": 275.0,
@@ -10383,7 +10553,7 @@
     "serving_size_g": 520.0
   },
   {
-    "food_id": 649,
+    "food_id": 659,
     "name": "必胜客 超级至尊披萨 普通装",
     "category": "连锁餐厅",
     "calories_per_100g": 252.0,
@@ -10400,7 +10570,7 @@
     "serving_size_g": 520.0
   },
   {
-    "food_id": 650,
+    "food_id": 660,
     "name": "必胜客 鸡茸蘑菇汤",
     "category": "连锁餐厅",
     "calories_per_100g": 72.0,
@@ -10417,7 +10587,7 @@
     "serving_size_g": 220.0
   },
   {
-    "food_id": 651,
+    "food_id": 661,
     "name": "吉野家 牛肉乌冬面",
     "category": "连锁餐厅",
     "calories_per_100g": 118.0,
@@ -10434,7 +10604,7 @@
     "serving_size_g": 430.0
   },
   {
-    "food_id": 652,
+    "food_id": 662,
     "name": "吉野家 魔芋丝",
     "category": "连锁餐厅",
     "calories_per_100g": 18.0,
@@ -10451,7 +10621,7 @@
     "serving_size_g": 120.0
   },
   {
-    "food_id": 653,
+    "food_id": 663,
     "name": "南城香 小酥肉",
     "category": "连锁餐厅",
     "calories_per_100g": 310.0,
@@ -10468,7 +10638,7 @@
     "serving_size_g": 150.0
   },
   {
-    "food_id": 654,
+    "food_id": 664,
     "name": "南城香 鸡蛋灌饼",
     "category": "连锁餐厅",
     "calories_per_100g": 245.0,
@@ -10485,7 +10655,7 @@
     "serving_size_g": 210.0
   },
   {
-    "food_id": 655,
+    "food_id": 665,
     "name": "米村拌饭 石锅泡菜汤",
     "category": "连锁餐厅",
     "calories_per_100g": 66.0,
@@ -10502,7 +10672,7 @@
     "serving_size_g": 380.0
   },
   {
-    "food_id": 656,
+    "food_id": 666,
     "name": "米村拌饭 韩式炸鸡",
     "category": "连锁餐厅",
     "calories_per_100g": 286.0,
@@ -10519,7 +10689,7 @@
     "serving_size_g": 180.0
   },
   {
-    "food_id": 657,
+    "food_id": 667,
     "name": "盒马 低脂鸡胸肉沙拉",
     "category": "轻食",
     "calories_per_100g": 82.0,
@@ -10536,7 +10706,7 @@
     "serving_size_g": 220.0
   },
   {
-    "food_id": 658,
+    "food_id": 668,
     "name": "盒马 奥尔良烤鸡腿",
     "category": "连锁餐厅",
     "calories_per_100g": 205.0,
@@ -10553,7 +10723,7 @@
     "serving_size_g": 180.0
   },
   {
-    "food_id": 659,
+    "food_id": 669,
     "name": "盒马 鲜虾云吞面",
     "category": "连锁餐厅",
     "calories_per_100g": 126.0,
@@ -10570,7 +10740,7 @@
     "serving_size_g": 420.0
   },
   {
-    "food_id": 660,
+    "food_id": 670,
     "name": "山姆 瑞士卷",
     "category": "甜品烘焙",
     "calories_per_100g": 318.0,
@@ -10587,7 +10757,7 @@
     "serving_size_g": 85.0
   },
   {
-    "food_id": 661,
+    "food_id": 671,
     "name": "山姆 麻薯面包",
     "category": "甜品烘焙",
     "calories_per_100g": 330.0,
@@ -10604,7 +10774,7 @@
     "serving_size_g": 55.0
   },
   {
-    "food_id": 662,
+    "food_id": 672,
     "name": "山姆 牛肉卷",
     "category": "便利店即食",
     "calories_per_100g": 245.0,
@@ -10621,7 +10791,7 @@
     "serving_size_g": 300.0
   },
   {
-    "food_id": 663,
+    "food_id": 673,
     "name": "麦当劳 不素之霸双层牛堡",
     "category": "连锁餐厅",
     "calories_per_100g": 268.0,
@@ -10638,7 +10808,7 @@
     "serving_size_g": 218.0
   },
   {
-    "food_id": 664,
+    "food_id": 674,
     "name": "麦当劳 原味板烧鸡腿堡",
     "category": "连锁餐厅",
     "calories_per_100g": 224.0,
@@ -10655,7 +10825,7 @@
     "serving_size_g": 190.0
   },
   {
-    "food_id": 665,
+    "food_id": 675,
     "name": "麦当劳 麦麦脆汁鸡 鸡翅",
     "category": "连锁餐厅",
     "calories_per_100g": 285.0,
@@ -10672,7 +10842,7 @@
     "serving_size_g": 95.0
   },
   {
-    "food_id": 666,
+    "food_id": 676,
     "name": "麦当劳 开心乐园餐麦乐鸡块",
     "category": "连锁餐厅",
     "calories_per_100g": 255.0,
@@ -10689,7 +10859,7 @@
     "serving_size_g": 80.0
   },
   {
-    "food_id": 667,
+    "food_id": 677,
     "name": "麦当劳 香芋派",
     "category": "甜品烘焙",
     "calories_per_100g": 285.0,
@@ -10706,7 +10876,7 @@
     "serving_size_g": 75.0
   },
   {
-    "food_id": 668,
+    "food_id": 678,
     "name": "肯德基 黄金鸡块",
     "category": "连锁餐厅",
     "calories_per_100g": 260.0,
@@ -10723,7 +10893,7 @@
     "serving_size_g": 105.0
   },
   {
-    "food_id": 669,
+    "food_id": 679,
     "name": "肯德基 吮指原味鸡 1块",
     "category": "连锁餐厅",
     "calories_per_100g": 252.0,
@@ -10740,7 +10910,7 @@
     "serving_size_g": 95.0
   },
   {
-    "food_id": 670,
+    "food_id": 680,
     "name": "肯德基 香辣鸡排饭",
     "category": "连锁餐厅",
     "calories_per_100g": 178.0,
@@ -10757,7 +10927,7 @@
     "serving_size_g": 420.0
   },
   {
-    "food_id": 671,
+    "food_id": 681,
     "name": "汉堡王 经典皇堡",
     "category": "连锁餐厅",
     "calories_per_100g": 250.0,
@@ -10774,7 +10944,7 @@
     "serving_size_g": 285.0
   },
   {
-    "food_id": 672,
+    "food_id": 682,
     "name": "汉堡王 双层芝士皇堡",
     "category": "连锁餐厅",
     "calories_per_100g": 275.0,
@@ -10791,7 +10961,7 @@
     "serving_size_g": 330.0
   },
   {
-    "food_id": 673,
+    "food_id": 683,
     "name": "汉堡王 薯霸王",
     "category": "连锁餐厅",
     "calories_per_100g": 305.0,
@@ -10808,7 +10978,7 @@
     "serving_size_g": 150.0
   },
   {
-    "food_id": 674,
+    "food_id": 684,
     "name": "必胜客 夏威夷风情披萨 普通装",
     "category": "连锁餐厅",
     "calories_per_100g": 245.0,
@@ -10825,7 +10995,7 @@
     "serving_size_g": 520.0
   },
   {
-    "food_id": 675,
+    "food_id": 685,
     "name": "必胜客 黑椒牛肉意面",
     "category": "连锁餐厅",
     "calories_per_100g": 168.0,
@@ -10842,7 +11012,7 @@
     "serving_size_g": 360.0
   },
   {
-    "food_id": 676,
+    "food_id": 686,
     "name": "必胜客 香草凤尾虾",
     "category": "连锁餐厅",
     "calories_per_100g": 230.0,
@@ -10859,7 +11029,7 @@
     "serving_size_g": 120.0
   },
   {
-    "food_id": 677,
+    "food_id": 687,
     "name": "必胜客 奥尔良烤翅",
     "category": "连锁餐厅",
     "calories_per_100g": 238.0,
@@ -10876,7 +11046,7 @@
     "serving_size_g": 150.0
   },
   {
-    "food_id": 678,
+    "food_id": 688,
     "name": "瑞幸 椰云拿铁 标准杯",
     "category": "饮品",
     "calories_per_100g": 68.0,
@@ -10893,7 +11063,7 @@
     "serving_size_g": 420.0
   },
   {
-    "food_id": 679,
+    "food_id": 689,
     "name": "瑞幸 茉莉轻乳茶 标准杯",
     "category": "饮品",
     "calories_per_100g": 55.0,
@@ -10910,7 +11080,7 @@
     "serving_size_g": 430.0
   },
   {
-    "food_id": 680,
+    "food_id": 690,
     "name": "星巴克 香草拿铁 中杯",
     "category": "饮品",
     "calories_per_100g": 64.0,
@@ -10927,7 +11097,7 @@
     "serving_size_g": 355.0
   },
   {
-    "food_id": 681,
+    "food_id": 691,
     "name": "星巴克 抹茶星冰乐 中杯",
     "category": "饮品",
     "calories_per_100g": 88.0,
@@ -10944,7 +11114,7 @@
     "serving_size_g": 355.0
   },
   {
-    "food_id": 682,
+    "food_id": 692,
     "name": "星巴克 冷萃咖啡 中杯",
     "category": "饮品",
     "calories_per_100g": 2.0,
@@ -10961,7 +11131,7 @@
     "serving_size_g": 355.0
   },
   {
-    "food_id": 683,
+    "food_id": 693,
     "name": "蜜雪冰城 棒打鲜橙",
     "category": "饮品",
     "calories_per_100g": 42.0,
@@ -10978,7 +11148,7 @@
     "serving_size_g": 500.0
   },
   {
-    "food_id": 684,
+    "food_id": 694,
     "name": "蜜雪冰城 摩天脆脆",
     "category": "甜品烘焙",
     "calories_per_100g": 218.0,
@@ -10995,7 +11165,7 @@
     "serving_size_g": 95.0
   },
   {
-    "food_id": 685,
+    "food_id": 695,
     "name": "7-11 烤肠芝士饭团",
     "category": "便利店即食",
     "calories_per_100g": 205.0,
@@ -11012,7 +11182,7 @@
     "serving_size_g": 115.0
   },
   {
-    "food_id": 686,
+    "food_id": 696,
     "name": "7-11 鸡胸肉凯撒卷",
     "category": "轻食",
     "calories_per_100g": 178.0,
@@ -11029,7 +11199,7 @@
     "serving_size_g": 180.0
   },
   {
-    "food_id": 687,
+    "food_id": 697,
     "name": "7-11 黑椒鸡扒便当",
     "category": "便利店即食",
     "calories_per_100g": 168.0,
@@ -11046,7 +11216,7 @@
     "serving_size_g": 420.0
   },
   {
-    "food_id": 688,
+    "food_id": 698,
     "name": "7-11 低脂希腊酸奶杯",
     "category": "乳制品",
     "calories_per_100g": 72.0,
@@ -11063,7 +11233,7 @@
     "serving_size_g": 135.0
   },
   {
-    "food_id": 689,
+    "food_id": 699,
     "name": "罗森 烤肠饭团",
     "category": "便利店即食",
     "calories_per_100g": 210.0,
@@ -11080,7 +11250,7 @@
     "serving_size_g": 115.0
   },
   {
-    "food_id": 690,
+    "food_id": 700,
     "name": "罗森 双蛋火腿三明治",
     "category": "便利店即食",
     "calories_per_100g": 196.0,
@@ -11097,7 +11267,7 @@
     "serving_size_g": 165.0
   },
   {
-    "food_id": 691,
+    "food_id": 701,
     "name": "罗森 咖喱鸡排便当",
     "category": "便利店即食",
     "calories_per_100g": 185.0,
@@ -11114,7 +11284,7 @@
     "serving_size_g": 430.0
   },
   {
-    "food_id": 692,
+    "food_id": 702,
     "name": "罗森 提拉米苏杯",
     "category": "甜品烘焙",
     "calories_per_100g": 275.0,
@@ -11131,7 +11301,7 @@
     "serving_size_g": 120.0
   },
   {
-    "food_id": 693,
+    "food_id": 703,
     "name": "全家 韩式泡菜饭团",
     "category": "便利店即食",
     "calories_per_100g": 198.0,
@@ -11148,7 +11318,7 @@
     "serving_size_g": 115.0
   },
   {
-    "food_id": 694,
+    "food_id": 704,
     "name": "全家 奥尔良鸡排便当",
     "category": "便利店即食",
     "calories_per_100g": 176.0,
@@ -11165,7 +11335,7 @@
     "serving_size_g": 420.0
   },
   {
-    "food_id": 695,
+    "food_id": 705,
     "name": "全家 抹茶红豆卷",
     "category": "甜品烘焙",
     "calories_per_100g": 285.0,
@@ -11182,7 +11352,7 @@
     "serving_size_g": 95.0
   },
   {
-    "food_id": 696,
+    "food_id": 706,
     "name": "全家 关东煮贡丸",
     "category": "便利店即食",
     "calories_per_100g": 155.0,
@@ -11199,7 +11369,7 @@
     "serving_size_g": 60.0
   },
   {
-    "food_id": 697,
+    "food_id": 707,
     "name": "盒马 香煎鸡胸便当",
     "category": "便利店即食",
     "calories_per_100g": 145.0,
@@ -11216,7 +11386,7 @@
     "serving_size_g": 380.0
   },
   {
-    "food_id": 698,
+    "food_id": 708,
     "name": "盒马 牛肉寿司组合",
     "category": "便利店即食",
     "calories_per_100g": 172.0,
@@ -11233,7 +11403,7 @@
     "serving_size_g": 220.0
   },
   {
-    "food_id": 699,
+    "food_id": 709,
     "name": "盒马 藜麦虾仁沙拉",
     "category": "轻食",
     "calories_per_100g": 118.0,
@@ -11250,7 +11420,7 @@
     "serving_size_g": 250.0
   },
   {
-    "food_id": 700,
+    "food_id": 710,
     "name": "山姆 烤鸡腿",
     "category": "便利店即食",
     "calories_per_100g": 210.0,
@@ -11267,7 +11437,7 @@
     "serving_size_g": 160.0
   },
   {
-    "food_id": 701,
+    "food_id": 711,
     "name": "山姆 提拉米苏杯",
     "category": "甜品烘焙",
     "calories_per_100g": 285.0,
@@ -11284,7 +11454,7 @@
     "serving_size_g": 130.0
   },
   {
-    "food_id": 702,
+    "food_id": 712,
     "name": "早餐摊 鲜肉包",
     "category": "主食",
     "calories_per_100g": 230.0,
@@ -11300,7 +11470,7 @@
     "serving_size_g": 90.0
   },
   {
-    "food_id": 703,
+    "food_id": 713,
     "name": "早餐摊 青菜包",
     "category": "主食",
     "calories_per_100g": 185.0,
@@ -11316,7 +11486,7 @@
     "serving_size_g": 85.0
   },
   {
-    "food_id": 704,
+    "food_id": 714,
     "name": "早餐摊 花卷",
     "category": "主食",
     "calories_per_100g": 220.0,
@@ -11332,7 +11502,7 @@
     "serving_size_g": 80.0
   },
   {
-    "food_id": 705,
+    "food_id": 715,
     "name": "早餐摊 油条",
     "category": "主食",
     "calories_per_100g": 388.0,
@@ -11348,7 +11518,7 @@
     "serving_size_g": 70.0
   },
   {
-    "food_id": 706,
+    "food_id": 716,
     "name": "早餐摊 无糖豆浆",
     "category": "饮品",
     "calories_per_100g": 32.0,
@@ -11364,7 +11534,7 @@
     "serving_size_g": 300.0
   },
   {
-    "food_id": 707,
+    "food_id": 717,
     "name": "早餐摊 煎饼果子 鸡蛋版",
     "category": "主食",
     "calories_per_100g": 235.0,
@@ -11380,7 +11550,7 @@
     "serving_size_g": 230.0
   },
   {
-    "food_id": 708,
+    "food_id": 718,
     "name": "早餐摊 手抓饼 培根鸡蛋",
     "category": "主食",
     "calories_per_100g": 285.0,
@@ -11396,7 +11566,7 @@
     "serving_size_g": 220.0
   },
   {
-    "food_id": 709,
+    "food_id": 719,
     "name": "早餐摊 鸡蛋灌饼 火腿版",
     "category": "主食",
     "calories_per_100g": 278.0,
@@ -11412,7 +11582,7 @@
     "serving_size_g": 230.0
   },
   {
-    "food_id": 710,
+    "food_id": 720,
     "name": "早餐摊 皮蛋瘦肉粥 小碗",
     "category": "主食",
     "calories_per_100g": 62.0,
@@ -11428,7 +11598,7 @@
     "serving_size_g": 300.0
   },
   {
-    "food_id": 711,
+    "food_id": 721,
     "name": "早餐摊 八宝粥",
     "category": "主食",
     "calories_per_100g": 78.0,
@@ -11444,7 +11614,7 @@
     "serving_size_g": 320.0
   },
   {
-    "food_id": 712,
+    "food_id": 722,
     "name": "家常 红烧肉",
     "category": "家常炒菜",
     "calories_per_100g": 395.0,
@@ -11460,7 +11630,7 @@
     "serving_size_g": 180.0
   },
   {
-    "food_id": 713,
+    "food_id": 723,
     "name": "家常 红烧排骨",
     "category": "家常炒菜",
     "calories_per_100g": 285.0,
@@ -11476,7 +11646,7 @@
     "serving_size_g": 180.0
   },
   {
-    "food_id": 714,
+    "food_id": 724,
     "name": "家常 鱼香肉丝",
     "category": "家常炒菜",
     "calories_per_100g": 185.0,
@@ -11492,7 +11662,7 @@
     "serving_size_g": 200.0
   },
   {
-    "food_id": 715,
+    "food_id": 725,
     "name": "家常 青椒肉丝",
     "category": "家常炒菜",
     "calories_per_100g": 158.0,
@@ -11508,7 +11678,7 @@
     "serving_size_g": 200.0
   },
   {
-    "food_id": 716,
+    "food_id": 726,
     "name": "家常 宫保鸡丁",
     "category": "家常炒菜",
     "calories_per_100g": 198.0,
@@ -11524,7 +11694,7 @@
     "serving_size_g": 220.0
   },
   {
-    "food_id": 717,
+    "food_id": 727,
     "name": "家常 麻婆豆腐",
     "category": "家常炒菜",
     "calories_per_100g": 142.0,
@@ -11540,7 +11710,7 @@
     "serving_size_g": 220.0
   },
   {
-    "food_id": 718,
+    "food_id": 728,
     "name": "家常 地三鲜",
     "category": "家常炒菜",
     "calories_per_100g": 165.0,
@@ -11556,7 +11726,7 @@
     "serving_size_g": 220.0
   },
   {
-    "food_id": 719,
+    "food_id": 729,
     "name": "家常 番茄炒蛋",
     "category": "家常炒菜",
     "calories_per_100g": 118.0,
@@ -11572,7 +11742,7 @@
     "serving_size_g": 220.0
   },
   {
-    "food_id": 720,
+    "food_id": 730,
     "name": "夜宵 烤鸡翅中",
     "category": "烧烤夜宵",
     "calories_per_100g": 235.0,
@@ -11588,7 +11758,7 @@
     "serving_size_g": 90.0
   },
   {
-    "food_id": 721,
+    "food_id": 731,
     "name": "夜宵 烤五花肉串",
     "category": "烧烤夜宵",
     "calories_per_100g": 380.0,
@@ -11604,7 +11774,7 @@
     "serving_size_g": 80.0
   },
   {
-    "food_id": 722,
+    "food_id": 732,
     "name": "夜宵 烤羊肉串",
     "category": "烧烤夜宵",
     "calories_per_100g": 260.0,
@@ -11620,7 +11790,7 @@
     "serving_size_g": 60.0
   },
   {
-    "food_id": 723,
+    "food_id": 733,
     "name": "夜宵 烤牛肉串",
     "category": "烧烤夜宵",
     "calories_per_100g": 235.0,
@@ -11636,7 +11806,7 @@
     "serving_size_g": 60.0
   },
   {
-    "food_id": 724,
+    "food_id": 734,
     "name": "夜宵 烤韭菜",
     "category": "烧烤夜宵",
     "calories_per_100g": 95.0,
@@ -11652,7 +11822,7 @@
     "serving_size_g": 80.0
   },
   {
-    "food_id": 725,
+    "food_id": 735,
     "name": "夜宵 烤茄子",
     "category": "烧烤夜宵",
     "calories_per_100g": 105.0,
@@ -11668,7 +11838,7 @@
     "serving_size_g": 220.0
   },
   {
-    "food_id": 726,
+    "food_id": 736,
     "name": "夜宵 烤玉米",
     "category": "烧烤夜宵",
     "calories_per_100g": 138.0,
@@ -11684,7 +11854,7 @@
     "serving_size_g": 180.0
   },
   {
-    "food_id": 727,
+    "food_id": 737,
     "name": "夜宵 烤金针菇",
     "category": "烧烤夜宵",
     "calories_per_100g": 88.0,
@@ -11700,7 +11870,7 @@
     "serving_size_g": 120.0
   },
   {
-    "food_id": 728,
+    "food_id": 738,
     "name": "火锅 肥牛卷",
     "category": "火锅类",
     "calories_per_100g": 250.0,
@@ -11716,7 +11886,7 @@
     "serving_size_g": 150.0
   },
   {
-    "food_id": 729,
+    "food_id": 739,
     "name": "火锅 毛肚",
     "category": "火锅类",
     "calories_per_100g": 85.0,
@@ -11732,7 +11902,7 @@
     "serving_size_g": 120.0
   },
   {
-    "food_id": 730,
+    "food_id": 740,
     "name": "火锅 鸭血",
     "category": "火锅类",
     "calories_per_100g": 55.0,
@@ -11748,7 +11918,7 @@
     "serving_size_g": 150.0
   },
   {
-    "food_id": 731,
+    "food_id": 741,
     "name": "麻辣烫 宽粉",
     "category": "火锅类",
     "calories_per_100g": 130.0,
@@ -11764,7 +11934,7 @@
     "serving_size_g": 120.0
   },
   {
-    "food_id": 732,
+    "food_id": 742,
     "name": "麻辣烫 鱼豆腐",
     "category": "火锅类",
     "calories_per_100g": 145.0,
@@ -11780,7 +11950,7 @@
     "serving_size_g": 100.0
   },
   {
-    "food_id": 733,
+    "food_id": 743,
     "name": "麻辣烫 午餐肉",
     "category": "火锅类",
     "calories_per_100g": 230.0,
@@ -11796,7 +11966,7 @@
     "serving_size_g": 100.0
   },
   {
-    "food_id": 734,
+    "food_id": 744,
     "name": "基础水果 榴莲",
     "category": "水果",
     "calories_per_100g": 150.0,
@@ -11812,7 +11982,7 @@
     "serving_size_g": 150.0
   },
   {
-    "food_id": 735,
+    "food_id": 745,
     "name": "基础水果 荔枝",
     "category": "水果",
     "calories_per_100g": 70.0,
@@ -11828,7 +11998,7 @@
     "serving_size_g": 120.0
   },
   {
-    "food_id": 736,
+    "food_id": 746,
     "name": "基础水果 山竹",
     "category": "水果",
     "calories_per_100g": 72.0,
@@ -11844,7 +12014,7 @@
     "serving_size_g": 120.0
   },
   {
-    "food_id": 737,
+    "food_id": 747,
     "name": "基础水果 百香果",
     "category": "水果",
     "calories_per_100g": 97.0,
@@ -11860,7 +12030,7 @@
     "serving_size_g": 80.0
   },
   {
-    "food_id": 738,
+    "food_id": 748,
     "name": "基础调味 酱油",
     "category": "调味",
     "calories_per_100g": 65.0,
@@ -11876,7 +12046,7 @@
     "serving_size_g": 10.0
   },
   {
-    "food_id": 739,
+    "food_id": 749,
     "name": "基础调味 蚝油",
     "category": "调味",
     "calories_per_100g": 115.0,
@@ -11892,7 +12062,7 @@
     "serving_size_g": 10.0
   },
   {
-    "food_id": 740,
+    "food_id": 750,
     "name": "基础调味 沙拉酱",
     "category": "调味",
     "calories_per_100g": 620.0,
@@ -11908,7 +12078,7 @@
     "serving_size_g": 15.0
   },
   {
-    "food_id": 741,
+    "food_id": 751,
     "name": "基础肉类 鸡爪",
     "category": "肉类",
     "calories_per_100g": 215.0,
@@ -11924,7 +12094,7 @@
     "serving_size_g": 100.0
   },
   {
-    "food_id": 742,
+    "food_id": 752,
     "name": "基础肉类 猪肝",
     "category": "肉类",
     "calories_per_100g": 130.0,
@@ -11940,7 +12110,7 @@
     "serving_size_g": 120.0
   },
   {
-    "food_id": 743,
+    "food_id": 753,
     "name": "基础肉类 牛杂",
     "category": "肉类",
     "calories_per_100g": 165.0,
@@ -11956,7 +12126,7 @@
     "serving_size_g": 150.0
   },
   {
-    "food_id": 744,
+    "food_id": 754,
     "name": "基础火锅 鱼丸",
     "category": "火锅类",
     "calories_per_100g": 135.0,
