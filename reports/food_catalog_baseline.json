@@ -1,0 +1,52 @@
+{
+  "generated_at": "2026-09-02T17:47:42.699Z",
+  "source_file": "backend\\app\\foods.json",
+  "total_foods": 846,
+  "categories": {
+    "便利店即食": 12,
+    "补剂": 2,
+    "川菜": 9,
+    "蛋类": 6,
+    "调味": 5,
+    "东北菜": 12,
+    "豆制品": 10,
+    "广东菜": 9,
+    "海鲜": 6,
+    "火锅类": 25,
+    "加工食品": 5,
+    "家常炒菜": 38,
+    "坚果": 9,
+    "江浙菜": 18,
+    "酒类": 21,
+    "连锁餐厅": 205,
+    "零食": 58,
+    "卤味": 8,
+    "轻食": 14,
+    "肉类": 29,
+    "乳制品": 15,
+    "烧烤夜宵": 27,
+    "蔬菜": 26,
+    "水果": 38,
+    "甜品烘焙": 70,
+    "湘菜": 8,
+    "饮品": 69,
+    "油脂": 4,
+    "主食": 88
+  },
+  "sources": {
+    "brand_nutrition_label_reference": 15,
+    "fixed_rule_estimate": 173,
+    "fixed_rule_portion_v1": 125,
+    "local_reference_estimate": 65,
+    "local_static_catalog": 468
+  },
+  "missing_fields": {
+    "brand": 464,
+    "serving_size_g": 0,
+    "portion_hint": 0,
+    "aliases_text": 0,
+    "search_text": 0
+  },
+  "duplicate_names": [],
+  "invalid_nutrition": []
+}

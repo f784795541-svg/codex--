@@ -1525,6 +1525,9 @@ function renderMobileDashboard(summary) {
   const mealRecommendation = safeBuildDynamicMealRecommendations(summary);
   const recommendationMode = recommendationModeLabel(resolveRecommendationMode(summary.user));
   const netBalance = Number(summary.daily_report.net_calorie_balance || 0);
+  const recommendedCalories = Number(summary.daily_report.recommended_calorie_target_kcal || summary.targets.calorie_target || 0);
+  const baseCalories = Number(summary.daily_report.base_calorie_target_kcal || summary.targets.calorie_target || 0);
+  const workoutFlexCalories = Number(summary.daily_report.workout_flex_calories_kcal || 0);
   const balanceCopy =
     netBalance > 200 ? "今天整体摄入略高，优先收一收热量。" : netBalance < -450 ? "今天缺口偏大，注意别吃得过少。" : "今天状态相对平稳，继续按当前节奏执行。";
   const heroPills = [
@@ -1555,21 +1558,24 @@ function renderMobileDashboard(summary) {
     {
       label: "运动消耗",
       value: `${summary.daily_report.total_burned_kcal} kcal`,
-      note: `总消耗 ${summary.daily_report.total_expenditure_kcal} kcal`,
+      note: `已释放 ${Math.round(workoutFlexCalories)} kcal（40%）`,
     },
     {
-      label: "目标总热量",
-      value: summary.targets.goal_total_calories ? `${Math.round(summary.targets.goal_total_calories)} kcal` : "无需累计",
-      note: summary.targets.goal_total_calories
-        ? "按当前体重与目标体重差估算"
-        : "维持模式不单独计算总热量差",
+      label: "基础代谢",
+      value: `${Math.round(summary.daily_report.bmr_kcal || summary.targets.bmr || 0)} kcal`,
+      note: `基础预算 ${Math.round(baseCalories)} kcal`,
+    },
+    {
+      label: "建议可摄入量",
+      value: `${Math.round(recommendedCalories)} kcal`,
+      note: `基础预算 + 运动消耗的 40%`,
     },
   ];
   const goalRows = [
     {
       label: "热量",
       actual: summary.daily_report.total_intake_kcal,
-      target: summary.targets.calorie_target,
+      target: recommendedCalories,
       unit: "kcal",
     },
     {
@@ -2461,7 +2467,7 @@ function buildMacroContext(summary) {
   const proteinTarget = Number(summary.targets.protein_target || 0);
   const fatTarget = Number(summary.targets.fat_target || 0);
   const carbTarget = Number(summary.targets.carb_target || 0);
-  const calorieTarget = Number(summary.targets.calorie_target || 0);
+  const calorieTarget = Number(summary.daily_report.recommended_calorie_target_kcal || summary.targets.calorie_target || 0);
   const proteinActual = Number(summary.daily_report.protein.actual || 0);
   const fatActual = Number(summary.daily_report.fat.actual || 0);
   const carbActual = Number(summary.daily_report.carbs.actual || 0);
@@ -4826,6 +4832,9 @@ function renderOverview(summary) {
   const modeAdjustment = Number(summary.targets.mode_adjustment || 0);
   const isBodyTypeMode = (summary.user.target_algorithm || "classic") === "body_type_adjusted";
   const recommendationMode = resolveRecommendationMode(summary.user);
+  const baseCalories = Number(summary.daily_report.base_calorie_target_kcal || summary.targets.calorie_target || 0);
+  const workoutFlexCalories = Number(summary.daily_report.workout_flex_calories_kcal || 0);
+  const recommendedCalories = Number(summary.daily_report.recommended_calorie_target_kcal || baseCalories);
 
   $("hero-status-grid").innerHTML = `
     ${renderOverviewRecommendation(summary, recommendation)}
@@ -4834,9 +4843,9 @@ function renderOverview(summary) {
 
   $("overview-grid").innerHTML = `
     <div class="metric-card metric-card-action metric-card--accent" role="button" tabindex="0" data-switch-panel="report" data-scroll-target="panel-report">
-      <span>今日目标热量</span>
-      <strong>${summary.targets.calorie_target} kcal</strong>
-      <span>BMR / TDEE 规则计算后的今日控制范围</span>
+      <span>建议可摄入量</span>
+      <strong>${Math.round(recommendedCalories)} kcal</strong>
+      <span>基础预算 ${Math.round(baseCalories)} + 运动释放 ${Math.round(workoutFlexCalories)}</span>
     </div>
     <div class="metric-card metric-card-action metric-card--neutral" role="button" tabindex="0" data-switch-panel="settings" data-scroll-target="panel-settings">
       <span>目标体重</span>
@@ -4856,7 +4865,12 @@ function renderOverview(summary) {
     <div class="metric-card metric-card-action metric-card--sport" role="button" tabindex="0" data-switch-panel="food" data-scroll-target="panel-food">
       <span>今日运动消耗</span>
       <strong>${summary.daily_report.total_burned_kcal} kcal</strong>
-      <span>记录运动后会同步更新，帮助判断当天净热量差</span>
+      <span>已按 40% 释放 ${Math.round(workoutFlexCalories)} kcal 到今日建议</span>
+    </div>
+    <div class="metric-card metric-card-action metric-card--neutral" role="button" tabindex="0" data-switch-panel="report" data-scroll-target="panel-report">
+      <span>基础代谢</span>
+      <strong>${Math.round(summary.daily_report.bmr_kcal || summary.targets.bmr || 0)} kcal</strong>
+      <span>基础预算 ${Math.round(baseCalories)} kcal，按目标模式计算</span>
     </div>
     <div class="metric-card metric-card-action metric-card--trend" role="button" tabindex="0" data-switch-panel="trend" data-scroll-target="panel-trend">
       <span>最新体重</span>
@@ -4972,9 +4986,9 @@ function renderGoalTargets(summary) {
     {
       label: "热量目标",
       actual: summary.daily_report.total_intake_kcal,
-      target: summary.targets.calorie_target,
+      target: summary.daily_report.recommended_calorie_target_kcal || summary.targets.calorie_target,
       unit: "kcal",
-      note: "当前摄入 / 今日目标",
+      note: "当前摄入 / 建议可摄入量（含运动消耗的 40%）",
     },
     {
       label: "蛋白目标",
@@ -5038,7 +5052,7 @@ function renderGoalTargets(summary) {
 
 function renderCompletionCurve(summary) {
   const metrics = [
-    { label: "热量", percent: completionPercent(summary.daily_report.total_intake_kcal, summary.targets.calorie_target) },
+    { label: "热量", percent: completionPercent(summary.daily_report.total_intake_kcal, summary.daily_report.recommended_calorie_target_kcal || summary.targets.calorie_target) },
     { label: "蛋白", percent: completionPercent(summary.daily_report.protein.actual, summary.targets.protein_target) },
     { label: "脂肪", percent: completionPercent(summary.daily_report.fat.actual, summary.targets.fat_target) },
     { label: "碳水", percent: completionPercent(summary.daily_report.carbs.actual, summary.targets.carb_target) },
@@ -5110,6 +5124,9 @@ function renderDailyReport(report) {
     <div class="report-stat-grid">
       <article class="report-stat-card report-stat-card--intake"><span>总摄入</span><strong>${report.total_intake_kcal} kcal</strong></article>
       <article class="report-stat-card report-stat-card--burn"><span>总消耗</span><strong>${report.total_expenditure_kcal} kcal</strong></article>
+      <article class="report-stat-card report-stat-card--burn"><span>基础代谢</span><strong>${Math.round(report.bmr_kcal)} kcal</strong></article>
+      <article class="report-stat-card report-stat-card--intake"><span>运动消耗</span><strong>${Math.round(report.total_burned_kcal)} kcal</strong><small>释放 ${Math.round(report.workout_flex_calories_kcal)} kcal</small></article>
+      <article class="report-stat-card report-stat-card--balance"><span>建议可摄入量</span><strong>${Math.round(report.recommended_calorie_target_kcal)} kcal</strong><small>基础预算 ${Math.round(report.base_calorie_target_kcal)} + 40% 运动消耗</small></article>
       <article class="report-stat-card report-stat-card--balance"><span>净热量差</span><strong>${report.net_calorie_balance} kcal</strong></article>
       <article class="report-stat-card report-stat-card--sleep"><span>睡眠状态</span><strong>${report.sleep_hours} h</strong><small>${report.sleep_status}</small></article>
     </div>

@@ -55,6 +55,90 @@
   margin-top: 18rpx;
 }
 
+.food-history-entry {
+  margin-top: 18rpx;
+  padding: 16rpx 18rpx 14rpx;
+  border-radius: 24rpx;
+  background: linear-gradient(180deg, rgba(239, 247, 247, 0.96) 0%, rgba(228, 239, 240, 0.94) 100%);
+  box-shadow: inset 0 0 0 1rpx rgba(215, 228, 230, 0.92);
+}
+
+.food-history-entry-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16rpx;
+}
+
+.food-history-entry-title {
+  color: #18353c;
+  font-size: 29rpx;
+  line-height: 1.3;
+  font-weight: 700;
+}
+
+.food-history-entry-copy {
+  margin-top: 8rpx;
+  color: #6f888d;
+  font-size: 22rpx;
+  line-height: 1.6;
+}
+
+.food-history-entry-badge {
+  flex-shrink: 0;
+  padding: 10rpx 16rpx;
+  border-radius: 999rpx;
+  background: rgba(255, 255, 255, 0.92);
+  color: #3f666d;
+  font-size: 22rpx;
+}
+
+.food-history-entry-preview {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10rpx;
+  margin-top: 12rpx;
+}
+
+.food-history-entry-chip {
+  padding: 10rpx 16rpx;
+  border-radius: 999rpx;
+  background: rgba(255, 255, 255, 0.9);
+  color: #476b72;
+  font-size: 21rpx;
+  line-height: 1.4;
+}
+
+.food-history-entry-button {
+  margin-top: 12rpx;
+  min-height: 72rpx;
+  line-height: 72rpx;
+  font-size: 24rpx;
+  padding: 0 22rpx;
+}
+
+.food-history-entry-actions {
+  display: flex;
+  gap: 14rpx;
+  margin-top: 18rpx;
+}
+
+.food-history-entry-actions .food-history-entry-button {
+  flex: 1;
+  min-width: 0;
+  margin-top: 0;
+  padding-left: 12rpx;
+  padding-right: 12rpx;
+  font-size: 22rpx;
+}
+
+.food-history-entry-button-accent {
+  border-color: #24565d;
+  background: linear-gradient(135deg, #285e66 0%, #54a1a3 100%);
+  color: #ffffff;
+  box-shadow: 0 8rpx 18rpx rgba(38, 91, 98, 0.2);
+}
+
 .food-default-note {
   margin-top: 16rpx;
   color: #34575f;
@@ -118,6 +202,20 @@
   background: rgba(255, 255, 255, 0.88);
   color: #40666d;
   font-size: 21rpx;
+}
+
+.food-change-action {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 16rpx;
+  min-height: 58rpx;
+  padding: 0 20rpx;
+  border-radius: 999rpx;
+  background: rgba(255, 255, 255, 0.9);
+  color: #3f666d;
+  font-size: 22rpx;
+  font-weight: 700;
 }
 
 .food-preview-chip {

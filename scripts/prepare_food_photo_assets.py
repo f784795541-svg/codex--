@@ -14,10 +14,11 @@ from PIL import Image
 ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_LEDGER = ROOT / "reports" / "food_photo_source_ledger.csv"
 DEFAULT_OUTPUT_DIR = Path(r"A:\body-food-images")
-CANVAS_SIZE = 1200
+CANVAS_SIZE = 750
 PRODUCT_OCCUPANCY = 0.82
 MIN_UPSCALED_OCCUPANCY = 0.68
 BACKGROUND = (250, 250, 248)
+MAX_OUTPUT_BYTES = 300 * 1024
 USER_AGENT = (
     "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
     "AppleWebKit/537.36 (KHTML, like Gecko) "
@@ -182,7 +183,12 @@ def process_row(row: dict[str, str], output_dir: Path) -> tuple[str, str]:
     image = normalize_image(raw_bytes) if background_mode == "remove_neutral" else normalize_image_preserve(raw_bytes)
     output_dir.mkdir(parents=True, exist_ok=True)
     output_path = output_dir / f"{image_key}.webp"
-    image.save(output_path, format="WEBP", quality=92, method=6)
+    for quality in (86, 82, 78, 74, 70, 65):
+        image.save(output_path, format="WEBP", quality=quality, method=6)
+        if output_path.stat().st_size <= MAX_OUTPUT_BYTES:
+            break
+    else:
+        raise ValueError(f"normalized asset exceeds {MAX_OUTPUT_BYTES} bytes")
     return "processed", f"{image_key}: wrote {output_path}"
 
 

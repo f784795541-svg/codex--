@@ -1,0 +1,20 @@
+[
+  {"name":"芒果","category":"水果","serving_size_g":150,"portion_hint":"一个中等芒果去皮去核后可食部分常见约 120-180g；按可食部分记录","source":"fixed_rule_portion_v1","source_updated_at":"2026-09-02"},
+  {"name":"菠萝","category":"水果","serving_size_g":150,"portion_hint":"菠萝去皮去芯后单次常见约 120-180g；按可食部分记录","source":"fixed_rule_portion_v1","source_updated_at":"2026-09-02"},
+  {"name":"木瓜","category":"水果","serving_size_g":180,"portion_hint":"木瓜去皮去籽后单次常见约 150-220g；按可食部分记录","source":"fixed_rule_portion_v1","source_updated_at":"2026-09-02"},
+  {"name":"火龙果","category":"水果","serving_size_g":200,"portion_hint":"一个中等火龙果去皮后可食部分常见约 180-250g；按可食部分记录","source":"fixed_rule_portion_v1","source_updated_at":"2026-09-02"},
+  {"name":"牛油果","category":"水果","serving_size_g":100,"portion_hint":"半个中等牛油果去皮去核后可食部分常见约 80-120g；按可食部分记录","source":"fixed_rule_portion_v1","source_updated_at":"2026-09-02"},
+  {"name":"樱桃","category":"水果","serving_size_g":150,"portion_hint":"樱桃单次常见一小碗约 120-180g；按去梗后的可食部分记录","source":"fixed_rule_portion_v1","source_updated_at":"2026-09-02"},
+  {"name":"西兰花","category":"蔬菜","serving_size_g":150,"portion_hint":"熟西兰花一份常见约 120-180g；按去梗后的可食部分记录","source":"fixed_rule_portion_v1","source_updated_at":"2026-09-02"},
+  {"name":"菠菜","category":"蔬菜","serving_size_g":150,"portion_hint":"熟菠菜一份常见约 100-180g；按清洗去根后的净重记录","source":"fixed_rule_portion_v1","source_updated_at":"2026-09-02"},
+  {"name":"生菜","category":"蔬菜","serving_size_g":100,"portion_hint":"生菜沙拉一份常见约 80-120g；按清洗后的可食部分记录","source":"fixed_rule_portion_v1","source_updated_at":"2026-09-02"},
+  {"name":"黄瓜","category":"蔬菜","serving_size_g":150,"portion_hint":"一根中等黄瓜可食部分常见约 120-180g；按实际净重记录","source":"fixed_rule_portion_v1","source_updated_at":"2026-09-02"},
+  {"name":"番茄","category":"蔬菜","serving_size_g":150,"portion_hint":"一个中等番茄可食部分常见约 120-180g；按实际净重记录","source":"fixed_rule_portion_v1","source_updated_at":"2026-09-02"},
+  {"name":"胡萝卜","category":"蔬菜","serving_size_g":100,"portion_hint":"一根中等胡萝卜去头尾后常见约 80-120g；按净重记录","source":"fixed_rule_portion_v1","source_updated_at":"2026-09-02"},
+  {"name":"洋葱","category":"蔬菜","serving_size_g":100,"portion_hint":"洋葱去皮后一份常见约 80-120g；按烹调前净重记录","source":"fixed_rule_portion_v1","source_updated_at":"2026-09-02"},
+  {"name":"青椒","category":"蔬菜","serving_size_g":100,"portion_hint":"青椒去籽后一份常见约 80-120g；按可食部分记录","source":"fixed_rule_portion_v1","source_updated_at":"2026-09-02"},
+  {"name":"蘑菇","category":"蔬菜","serving_size_g":150,"portion_hint":"鲜蘑菇一份常见约 120-180g；按清洁后的净重记录","source":"fixed_rule_portion_v1","source_updated_at":"2026-09-02"},
+  {"name":"芦笋","category":"蔬菜","serving_size_g":120,"portion_hint":"芦笋去除老根后一份常见约 100-140g；按净重记录","source":"fixed_rule_portion_v1","source_updated_at":"2026-09-02"},
+  {"name":"卷心菜","category":"蔬菜","serving_size_g":150,"portion_hint":"熟卷心菜一份常见约 120-180g；按烹调前净重记录","source":"fixed_rule_portion_v1","source_updated_at":"2026-09-02"},
+  {"name":"花椰菜","category":"蔬菜","serving_size_g":150,"portion_hint":"熟花椰菜一份常见约 120-180g；按去梗后的可食部分记录","source":"fixed_rule_portion_v1","source_updated_at":"2026-09-02"}
+]

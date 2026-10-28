@@ -728,6 +728,7 @@ def compute_daily_report(
 
         food_items.append(
             schemas.FoodItemReport(
+                id=log.id,
                 food_name=log.food.name,
                 weight_g=round(log.weight_g, 2),
                 cooking_method=log.cooking_method,
@@ -740,6 +741,9 @@ def compute_daily_report(
         )
 
     total_burned = round(sum(item.calories_burned for item in workout_logs), 2)
+    base_calorie_target = targets["calorie_target"]
+    workout_flex_calories = round(total_burned * 0.4, 2)
+    recommended_calorie_target = round(base_calorie_target + workout_flex_calories, 2)
     total_sleep = round(sum(sleep_duration_hours(item.sleep_start, item.sleep_end) for item in sleep_logs), 2)
     total_expenditure = round(targets["tdee"] + total_burned, 2)
     net_balance = round(total_intake - total_expenditure, 2)
@@ -752,7 +756,7 @@ def compute_daily_report(
     warnings, suggestions = build_rule_output(
         goal=user.goal,
         intake_kcal=round(total_intake, 2),
-        calorie_target=targets["calorie_target"],
+        calorie_target=recommended_calorie_target,
         protein=round(total_protein, 2),
         protein_target=targets["protein_target"],
         fat=round(total_fat, 2),
@@ -772,7 +776,11 @@ def compute_daily_report(
         total_burned_kcal=total_burned,
         total_expenditure_kcal=total_expenditure,
         net_calorie_balance=net_balance,
-        calorie_target_kcal=targets["calorie_target"],
+        calorie_target_kcal=base_calorie_target,
+        base_calorie_target_kcal=base_calorie_target,
+        workout_flex_calories_kcal=workout_flex_calories,
+        recommended_calorie_target_kcal=recommended_calorie_target,
+        bmr_kcal=targets["bmr"],
         protein=schemas.MacroStatus(
             actual=round(total_protein, 2),
             target=targets["protein_target"],
@@ -826,11 +834,42 @@ def compute_weekly_report(
     )
 
 
+def compute_food_history(
+    db: Session,
+    user: models.User,
+    end_date: date,
+    days: int,
+) -> schemas.FoodHistoryResponse:
+    start_date = end_date - timedelta(days=days - 1)
+    targets = compute_targets(user)
+    daily_records: list[schemas.FoodHistoryDayResponse] = []
+
+    for offset in range(days):
+        report = compute_daily_report(db, user, start_date + timedelta(days=offset), targets)
+        daily_records.append(
+            schemas.FoodHistoryDayResponse(
+                date=report.date,
+                total_intake_kcal=report.total_intake_kcal,
+                protein=report.protein.actual,
+                fat=report.fat.actual,
+                carbs=report.carbs.actual,
+                food_items=report.food_items,
+            )
+        )
+
+    return schemas.FoodHistoryResponse(
+        user_id=user.id,
+        start_date=start_date,
+        end_date=end_date,
+        daily_records=daily_records,
+    )
+
+
 def build_dashboard_summary(
     db: Session,
     user: models.User,
     target_date: date,
-    weight_limit: int = 14,
+    weight_limit: int = 180,
 ) -> schemas.DashboardSummaryResponse:
     targets = compute_targets(user)
     recent_weights = (

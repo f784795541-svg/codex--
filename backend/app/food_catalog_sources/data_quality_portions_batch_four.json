@@ -1,0 +1,22 @@
+[
+  {"name":"蓝莓","category":"水果","serving_size_g":100,"portion_hint":"蓝莓单次常见一小碗约 80-120g；按实际可食部分记录","source":"fixed_rule_portion_v1","source_updated_at":"2026-09-02"},
+  {"name":"西瓜","category":"水果","serving_size_g":200,"portion_hint":"西瓜去皮去籽后单次常见约 150-250g；按可食部分记录","source":"fixed_rule_portion_v1","source_updated_at":"2026-09-02"},
+  {"name":"猕猴桃","category":"水果","serving_size_g":150,"portion_hint":"两个小猕猴桃去皮后可食部分常见约 120-180g；按可食部分记录","source":"fixed_rule_portion_v1","source_updated_at":"2026-09-02"},
+  {"name":"茄子","category":"蔬菜","serving_size_g":200,"portion_hint":"熟茄子一份常见约 150-250g；按烹调前净重记录","source":"fixed_rule_portion_v1","source_updated_at":"2026-09-02"},
+  {"name":"苦瓜","category":"蔬菜","serving_size_g":150,"portion_hint":"苦瓜去籽后一份常见约 120-180g；按可食部分记录","source":"fixed_rule_portion_v1","source_updated_at":"2026-09-02"},
+  {"name":"冬瓜","category":"蔬菜","serving_size_g":200,"portion_hint":"冬瓜去皮去瓤后一份常见约 150-250g；按净重记录","source":"fixed_rule_portion_v1","source_updated_at":"2026-09-02"},
+  {"name":"芹菜","category":"蔬菜","serving_size_g":100,"portion_hint":"芹菜去叶去老根后一份常见约 80-120g；按净重记录","source":"fixed_rule_portion_v1","source_updated_at":"2026-09-02"},
+  {"name":"菜花","category":"蔬菜","serving_size_g":150,"portion_hint":"熟菜花一份常见约 120-180g；按去梗后的可食部分记录","source":"fixed_rule_portion_v1","source_updated_at":"2026-09-02"},
+  {"name":"莲藕","category":"蔬菜","serving_size_g":150,"portion_hint":"莲藕去皮后一份常见约 120-180g；按烹调前净重记录","source":"fixed_rule_portion_v1","source_updated_at":"2026-09-02"},
+  {"name":"紫甘蓝","category":"蔬菜","serving_size_g":100,"portion_hint":"紫甘蓝沙拉一份常见约 80-120g；按清洗后的净重记录","source":"fixed_rule_portion_v1","source_updated_at":"2026-09-02"},
+  {"name":"海带","category":"蔬菜","serving_size_g":100,"portion_hint":"泡发海带一份常见约 80-120g；按泡发后沥水净重记录","source":"fixed_rule_portion_v1","source_updated_at":"2026-09-02"},
+  {"name":"杏仁","category":"坚果","serving_size_g":30,"portion_hint":"杏仁一小把常见约 25-35g；按去壳可食部分记录","source":"fixed_rule_portion_v1","source_updated_at":"2026-09-02"},
+  {"name":"核桃","category":"坚果","serving_size_g":30,"portion_hint":"核桃仁一小把常见约 25-35g；按去壳可食部分记录","source":"fixed_rule_portion_v1","source_updated_at":"2026-09-02"},
+  {"name":"花生","category":"坚果","serving_size_g":30,"portion_hint":"花生仁一小把常见约 25-35g；按去壳可食部分记录","source":"fixed_rule_portion_v1","source_updated_at":"2026-09-02"},
+  {"name":"腰果","category":"坚果","serving_size_g":30,"portion_hint":"腰果一小把常见约 25-35g；按包装净含量记录","source":"fixed_rule_portion_v1","source_updated_at":"2026-09-02"},
+  {"name":"开心果","category":"坚果","serving_size_g":30,"portion_hint":"开心果去壳可食部分一小把常见约 25-35g；按净重记录","source":"fixed_rule_portion_v1","source_updated_at":"2026-09-02"},
+  {"name":"芝麻","category":"坚果","serving_size_g":15,"portion_hint":"芝麻作撒料或调味时单次常见约 10-15g；按实际用量记录","source":"fixed_rule_portion_v1","source_updated_at":"2026-09-02"},
+  {"name":"橄榄油","category":"油脂","serving_size_g":10,"portion_hint":"烹调油一茶匙约 5g；常见单次用量约 5-10g，按实际用量记录","source":"fixed_rule_portion_v1","source_updated_at":"2026-09-02"},
+  {"name":"花生油","category":"油脂","serving_size_g":10,"portion_hint":"烹调油一茶匙约 5g；常见单次用量约 5-10g，按实际用量记录","source":"fixed_rule_portion_v1","source_updated_at":"2026-09-02"},
+  {"name":"玉米油","category":"油脂","serving_size_g":10,"portion_hint":"烹调油一茶匙约 5g；常见单次用量约 5-10g，按实际用量记录","source":"fixed_rule_portion_v1","source_updated_at":"2026-09-02"}
+]

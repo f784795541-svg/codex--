@@ -1,17 +1,7 @@
 <view class="screen screen-record">
   <view class="hero-panel">
     <view class="hero-kicker">DAILY LOG</view>
-    <view class="hero-title">记录</view>
-    <view class="hero-pill-row">
-      <view class="hero-pill hero-pill-wide">
-        <text class="hero-pill-label">当前分栏</text>
-        <text class="hero-pill-value">{{activeTabLabel}}</text>
-      </view>
-      <view class="hero-pill hero-pill-wide">
-        <text class="hero-pill-label">执行重点</text>
-        <text class="hero-pill-value hero-pill-value-note">{{activeTabNote}}</text>
-      </view>
-    </view>
+    <view class="hero-title" id="record-top-anchor">记录</view>
   </view>
 
   <view class="record-tabs-shell">
@@ -21,6 +11,8 @@
       class="tab {{activeTab === item.key ? 'tab-active' : ''}}"
       data-tab="{{item.key}}"
       bindtap="switchTab"
+      hover-class="tap-feedback-hover"
+      hover-stay-time="70"
     >
       {{item.label}}
     </view>
@@ -31,7 +23,7 @@
       <view class="status-banner-title">{{lastSubmission.title}}</view>
       <view class="status-banner-copy">{{lastSubmission.detail}}</view>
     </view>
-    <view class="status-banner-action" bindtap="dismissSubmission">收起</view>
+    <view class="status-banner-action" bindtap="dismissSubmission" hover-class="tap-feedback-hover" hover-stay-time="70">收起</view>
   </view>
 
   <view class="card" id="record-food-card" wx:if="{{activeTab === 'food'}}">
@@ -49,13 +41,32 @@
       <view class="step-chip">3 选中并录入</view>
     </view>
 
+    <view class="food-history-entry">
+      <view class="food-history-entry-head">
+        <view>
+          <view class="food-history-entry-title">今天已经吃了什么</view>
+          <view class="food-history-entry-copy">{{dailyFoodSummary}}</view>
+        </view>
+        <view class="food-history-entry-badge">{{dailyFoodCount}} 条</view>
+      </view>
+      <view class="food-history-entry-preview" wx:if="{{dailyFoodPreview.length}}">
+        <view class="food-history-entry-chip" wx:for="{{dailyFoodPreview}}" wx:key="index">
+          {{item.food_name}} {{item.weight_g}}g
+        </view>
+      </view>
+      <view class="food-history-entry-actions">
+        <button class="button-secondary food-history-entry-button" bindtap="goFoodHistory">查看今日饮食记录</button>
+        <button class="button-secondary food-history-entry-button food-history-entry-button-accent" bindtap="goRecentFoodHistory">最近饮食记录</button>
+      </view>
+    </view>
+
     <view class="field">
       <text class="field-label">搜索食物</text>
       <input class="input" placeholder="例如：米饭、鸡胸肉、烤玉米" value="{{foodQuery}}" data-field="foodQuery" bindinput="handleInput" bindconfirm="handleFoodSearchConfirm" confirm-type="search" />
     </view>
     <view class="support-copy">{{foodResultSummary}}</view>
 
-    <view class="food-selected" wx:if="{{selectedFood}}">
+    <view class="food-selected" id="record-food-selected" wx:if="{{selectedFood}}">
       <view class="food-selected-head">
         <image class="food-thumb food-selected-thumb" src="{{selectedFood.imagePath}}" mode="aspectFit" />
         <view>
@@ -66,9 +77,10 @@
       </view>
       <view class="food-preview-chip">{{foodPreview}}</view>
       <view class="support-copy" wx:if="{{selectedFood.portion_hint}}">{{selectedFood.portion_hint}}</view>
+      <view class="food-change-action" bindtap="changeSelectedFood" hover-class="tap-feedback-hover" hover-stay-time="70">重新选择</view>
     </view>
 
-    <view class="food-results" wx:if="{{foodResults.length}}">
+    <view class="food-results" wx:if="{{foodResults.length && !selectedFood}}">
       <view
         class="food-result-item {{selectedFoodIndex === index ? 'food-result-item-active' : ''}}"
         wx:for="{{foodResults}}"
@@ -81,7 +93,7 @@
         <view class="item-meta">{{item.category}} · {{item.calories_per_100g}} kcal / 100g</view>
       </view>
     </view>
-    <view class="empty food-empty" wx:elif="{{hasSearchedFood}}">
+    <view class="empty food-empty" wx:elif="{{hasSearchedFood && !selectedFood}}">
       <text class="empty-title">没找到匹配食物</text>
       试试更短的关键词，比如把“煎鸡胸肉”改成“鸡胸肉”。
     </view>
@@ -92,7 +104,7 @@
         <picker class="picker" mode="selector" range="{{foodWeightOptions}}" range-key="label" value="{{foodWeightIndex}}" data-field="foodWeight" data-index-field="foodWeightIndex" data-options="foodWeightOptions" bindchange="handleValuePicker">
           <view class="picker-display">
             <text class="picker-display-text">{{foodWeightOptions[foodWeightIndex].label}}</text>
-            <text class="picker-display-icon">›</text>
+            <text class="picker-display-icon">⌄</text>
           </view>
         </picker>
       </view>
@@ -101,14 +113,14 @@
         <picker class="picker" mode="time" value="{{foodTime}}" data-field="foodTime" bindchange="handleInput">
           <view class="picker-display">
             <text class="picker-display-text">{{foodTime}}</text>
-            <text class="picker-display-icon">›</text>
+            <text class="picker-display-icon">⌄</text>
           </view>
         </picker>
       </view>
     </view>
 
     <view class="insight-panel">
-      <view class="insight-label">本次预估</view>
+      <view class="insight-label">本次预计</view>
       <view class="insight-value">{{foodPreview}}</view>
     </view>
     <button class="button" id="record-food-action" bindtap="submitFood">提交饮食记录</button>
@@ -130,7 +142,7 @@
       <picker class="picker" mode="selector" range="{{workoutOptions}}" range-key="label" value="{{workoutTypeIndex}}" bindchange="handleWorkoutType">
         <view class="picker-display">
           <text class="picker-display-text {{workoutOptions.length ? '' : 'picker-display-placeholder'}}">{{workoutOptions.length ? workoutOptions[workoutTypeIndex].label : '加载中...'}}</text>
-          <text class="picker-display-icon">›</text>
+          <text class="picker-display-icon">⌄</text>
         </view>
       </picker>
     </view>
@@ -146,7 +158,7 @@
         <picker class="picker" mode="selector" range="{{workoutDurationOptions}}" range-key="label" value="{{workoutDurationIndex}}" data-field="workoutDuration" data-index-field="workoutDurationIndex" data-options="workoutDurationOptions" bindchange="handleValuePicker">
           <view class="picker-display">
             <text class="picker-display-text">{{workoutDurationOptions[workoutDurationIndex].label}}</text>
-            <text class="picker-display-icon">›</text>
+            <text class="picker-display-icon">⌄</text>
           </view>
         </picker>
       </view>
@@ -155,7 +167,7 @@
         <picker class="picker" mode="time" value="{{workoutTime}}" data-field="workoutTime" bindchange="handleInput">
           <view class="picker-display">
             <text class="picker-display-text">{{workoutTime}}</text>
-            <text class="picker-display-icon">›</text>
+            <text class="picker-display-icon">⌄</text>
           </view>
         </picker>
       </view>
@@ -166,7 +178,7 @@
       <picker class="picker" mode="selector" range="{{workoutCalorieOptions}}" range-key="label" value="{{workoutCalorieIndex}}" data-field="workoutCalories" data-index-field="workoutCalorieIndex" data-options="workoutCalorieOptions" bindchange="handleValuePicker">
         <view class="picker-display">
           <text class="picker-display-text {{workoutCalories ? '' : 'picker-display-placeholder'}}">{{workoutCalories ? workoutCalories + ' kcal' : '选择或先自动估算'}}</text>
-          <text class="picker-display-icon">›</text>
+          <text class="picker-display-icon">⌄</text>
         </view>
       </picker>
     </view>
@@ -197,7 +209,7 @@
         <picker class="picker" mode="time" value="{{sleepStart}}" data-field="sleepStart" bindchange="handleInput">
           <view class="picker-display">
             <text class="picker-display-text">{{sleepStart}}</text>
-            <text class="picker-display-icon">›</text>
+            <text class="picker-display-icon">⌄</text>
           </view>
         </picker>
       </view>
@@ -206,7 +218,7 @@
         <picker class="picker" mode="time" value="{{sleepEnd}}" data-field="sleepEnd" bindchange="handleInput">
           <view class="picker-display">
             <text class="picker-display-text">{{sleepEnd}}</text>
-            <text class="picker-display-icon">›</text>
+            <text class="picker-display-icon">⌄</text>
           </view>
         </picker>
       </view>
@@ -237,7 +249,7 @@
         <picker class="picker" mode="selector" range="{{weightValueOptions}}" range-key="label" value="{{weightValueIndex}}" data-field="weightValue" data-index-field="weightValueIndex" data-options="weightValueOptions" bindchange="handleValuePicker">
           <view class="picker-display">
             <text class="picker-display-text">{{weightValueOptions[weightValueIndex].label}}</text>
-            <text class="picker-display-icon">›</text>
+            <text class="picker-display-icon">⌄</text>
           </view>
         </picker>
       </view>
@@ -246,7 +258,7 @@
         <picker class="picker" mode="date" value="{{weightDate}}" data-field="weightDate" bindchange="handleInput">
           <view class="picker-display">
             <text class="picker-display-text">{{weightDate}}</text>
-            <text class="picker-display-icon">›</text>
+            <text class="picker-display-icon">⌄</text>
           </view>
         </picker>
       </view>
@@ -256,7 +268,7 @@
       <picker class="picker" mode="time" value="{{weightTime}}" data-field="weightTime" bindchange="handleInput">
         <view class="picker-display">
           <text class="picker-display-text">{{weightTime}}</text>
-          <text class="picker-display-icon">›</text>
+          <text class="picker-display-icon">⌄</text>
         </view>
       </picker>
     </view>

@@ -395,7 +395,9 @@ function buildSummaryView(summary) {
       : netBalance < -450
         ? "今天缺口偏大，注意别吃得太少。"
         : "今天节奏相对平稳，继续按当前状态执行。";
-  const calorieTarget = asNumber(summary.targets?.calorie_target || summary.daily_report.calorie_target_kcal);
+  const baseCalorieTarget = asNumber(summary.daily_report.base_calorie_target_kcal || summary.targets?.calorie_target || summary.daily_report.calorie_target_kcal);
+  const calorieTarget = asNumber(summary.daily_report.recommended_calorie_target_kcal || baseCalorieTarget);
+  const workoutFlexCalories = asNumber(summary.daily_report.workout_flex_calories_kcal);
   const goalTotalCalories = asNumber(summary.targets?.goal_total_calories);
   const remainingCalories = roundValue(calorieTarget - asNumber(summary.daily_report.total_intake_kcal));
   const caloriePill =
@@ -446,21 +448,26 @@ function buildSummaryView(summary) {
       {
         label: "运动消耗",
         value: `${summary.daily_report.total_burned_kcal} kcal`,
-        note: `总消耗 ${summary.daily_report.total_expenditure_kcal} kcal`,
+        note: `已释放 ${Math.round(workoutFlexCalories)} kcal（40%）`,
       },
       {
-        label: "目标总热量",
-        value: goalTotalCalories ? `${Math.round(goalTotalCalories)} kcal` : "无需累计",
-        note: calorieTarget ? `今日目标 ${Math.round(calorieTarget)} kcal` : "维持模式不单独累计",
+        label: "基础代谢",
+        value: `${Math.round(asNumber(summary.daily_report.bmr_kcal || summary.targets?.bmr))} kcal`,
+        note: `基础预算 ${Math.round(baseCalorieTarget)} kcal`,
+      },
+      {
+        label: "建议可摄入量",
+        value: `${Math.round(calorieTarget)} kcal`,
+        note: "基础预算 + 运动消耗的 40%",
       },
     ],
     goalItems: [
       {
         label: "热量",
         actual: summary.daily_report.total_intake_kcal,
-        target: summary.targets?.calorie_target || summary.daily_report.calorie_target_kcal,
+        target: calorieTarget,
         unit: "kcal",
-        percent: clampPercent(summary.daily_report.total_intake_kcal, summary.targets?.calorie_target || summary.daily_report.calorie_target_kcal),
+        percent: clampPercent(summary.daily_report.total_intake_kcal, calorieTarget),
       },
       {
         label: "蛋白质",
@@ -490,6 +497,7 @@ function buildSummaryView(summary) {
     suggestionItems: (summary.daily_report.suggestions || []).slice(0, 3),
     warningItems: (summary.daily_report.warnings || []).slice(0, 2),
     recentWeightItems: summary.recent_weights || [],
+    recentFoodItems: summary.recent_food_records || [],
   };
 }
 
@@ -504,6 +512,11 @@ Page({
     suggestionItems: [],
     warningItems: [],
     recentWeightItems: [],
+    displayedRecentWeightItems: [],
+    showAllRecentWeights: false,
+    recentFoodItems: [],
+    displayedRecentFoodItems: [],
+    showAllRecentFoods: false,
     mealRecommendation: null,
   },
 
@@ -563,18 +576,38 @@ Page({
     }
 
     try {
-      const [summary, foodLibrary] = await Promise.all([
+      const [summary, foodLibrary, foodHistory] = await Promise.all([
         get("/dashboard/summary", {
           user_id: userId,
         }),
         this.ensureFoodLibrary(),
+        get(
+          "/report/food-history",
+          {
+            user_id: userId,
+            days: 30,
+          },
+          {
+            cacheMs: 0,
+          }
+        ).catch(() => ({ daily_records: [] })),
       ]);
 
       if (requestId !== this.summaryRequestId) {
         return;
       }
 
-      const view = buildSummaryView(summary);
+      const view = buildSummaryView({
+        ...summary,
+        recent_food_records: (foodHistory.daily_records || [])
+          .filter((item) => Array.isArray(item.food_items) && item.food_items.length)
+          .slice()
+          .reverse()
+          .map((item) => ({
+            date: item.date,
+            intake_kcal: Math.round(Number(item.total_intake_kcal) || 0),
+          })),
+      });
       const mealRecommendation = buildMealRecommendation(summary, foodLibrary);
       this.setData({
         summary,
@@ -585,6 +618,11 @@ Page({
         suggestionItems: view.suggestionItems,
         warningItems: view.warningItems,
         recentWeightItems: view.recentWeightItems,
+        displayedRecentWeightItems: view.recentWeightItems.slice(0, 7),
+        showAllRecentWeights: false,
+        recentFoodItems: view.recentFoodItems,
+        displayedRecentFoodItems: view.recentFoodItems.slice(0, 7),
+        showAllRecentFoods: false,
         mealRecommendation,
       });
     } catch (error) {
@@ -617,6 +655,22 @@ Page({
   goTrend() {
     wx.switchTab({
       url: "/pages/trend/index",
+    });
+  },
+
+  toggleRecentWeights() {
+    const showAll = !this.data.showAllRecentWeights;
+    this.setData({
+      showAllRecentWeights: showAll,
+      displayedRecentWeightItems: showAll ? this.data.recentWeightItems : this.data.recentWeightItems.slice(0, 7),
+    });
+  },
+
+  toggleRecentFoods() {
+    const showAll = !this.data.showAllRecentFoods;
+    this.setData({
+      showAllRecentFoods: showAll,
+      displayedRecentFoodItems: showAll ? this.data.recentFoodItems : this.data.recentFoodItems.slice(0, 7),
     });
   },
 });

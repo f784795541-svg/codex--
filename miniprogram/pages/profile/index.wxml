@@ -45,6 +45,11 @@
         <button class="profile-logout-btn" bindtap="logout">退出登录</button>
       </view>
       <view class="support-inline-copy">优先维护这里的基础资料，其他页面的数据解释会跟着同步。</view>
+      <view class="field profile-username-field">
+        <text class="field-label">账号</text>
+        <input class="input" value="{{username}}" placeholder="请输入至少 3 位账号" data-field="username" bindinput="handleInput" />
+        <view class="profile-field-note">修改后，下次登录请使用新账号。</view>
+      </view>
 
       <view class="profile-section-row">
         <view class="profile-section-title">基础资料</view>
@@ -156,6 +161,29 @@
       </view>
 
       <button class="button" loading="{{saving}}" disabled="{{saving}}" bindtap="submit">{{saveButtonText}}</button>
+    </view>
+
+    <view class="card">
+      <view class="card-head">
+        <view>
+          <text class="card-kicker">账户安全</text>
+          <view class="section-title">修改密码</view>
+        </view>
+        <view class="card-badge">已登录修改</view>
+      </view>
+      <view class="card-note">这里用于登录后的正常改密，需要先输入当前密码，再设置新的密码。</view>
+
+      <view class="field">
+        <text class="field-label">当前密码</text>
+        <input class="input" password placeholder="请输入当前密码" value="{{currentPassword}}" data-field="currentPassword" bindinput="handleInput" />
+      </view>
+
+      <view class="field">
+        <text class="field-label">新密码</text>
+        <input class="input" password placeholder="至少 6 位" value="{{newPassword}}" data-field="newPassword" bindinput="handleInput" />
+      </view>
+
+      <button class="button" loading="{{passwordSaving}}" disabled="{{passwordSaving}}" bindtap="submitPasswordChange">{{passwordSaveButtonText}}</button>
     </view>
   </block>
 

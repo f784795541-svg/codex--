@@ -4,6 +4,8 @@
     "pages/register/index",
     "pages/home/index",
     "pages/record/index",
+    "pages/food-history/index",
+    "pages/food-recent/index",
     "pages/trend/index",
     "pages/profile/index"
   ],

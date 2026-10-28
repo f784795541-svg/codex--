@@ -16,10 +16,36 @@ FRONTEND_ASSET_DIR = ROOT / "frontend" / "assets" / "foods"
 MINIPROGRAM_ASSET_DIR = ROOT / "miniprogram" / "assets" / "foods"
 REPORT_DIR = ROOT / "reports"
 ASSET_EXTENSIONS = (".webp", ".jpg", ".jpeg", ".png", ".svg")
+SVG_FALLBACK_REPORT = REPORT_DIR / "food_svg_fallback_normalization_report.json"
+SOURCE_LEDGER = REPORT_DIR / "food_photo_source_ledger.csv"
+
+
+def load_real_photo_keys() -> set[str]:
+    if not SOURCE_LEDGER.exists():
+        return set()
+    try:
+        with SOURCE_LEDGER.open("r", encoding="utf-8-sig", newline="") as handle:
+            return {row.get("image_key", "").strip() for row in csv.DictReader(handle) if row.get("image_key", "").strip()}
+    except OSError:
+        return set()
+
+
+def load_svg_fallback_keys() -> set[str]:
+    if not SVG_FALLBACK_REPORT.exists():
+        return set()
+    try:
+        payload = json.loads(SVG_FALLBACK_REPORT.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError):
+        return set()
+    return {str(item.get("image_key")) for item in payload.get("items", []) if item.get("image_key")}
+
+
+SVG_FALLBACK_KEYS = load_svg_fallback_keys()
+REAL_PHOTO_KEYS = load_real_photo_keys()
 
 sys.path.insert(0, str(BACKEND_APP))
 
-from food_metadata import get_food_image_key, get_food_image_key_for_food, get_image_refinement_tier  # noqa: E402
+from food_metadata import EXACT_IMAGE_KEYS, get_food_image_key, get_food_image_key_for_food, get_image_refinement_tier  # noqa: E402
 
 
 GENERIC_KEYS = {
@@ -236,6 +262,10 @@ def list_assets(path: Path) -> dict[str, str]:
 def asset_style(filename: str) -> str:
     if not filename:
         return "missing"
+    if Path(filename).stem in REAL_PHOTO_KEYS:
+        return "local real photo"
+    if Path(filename).stem in SVG_FALLBACK_KEYS:
+        return "local svg"
     return "local svg" if Path(filename).suffix.lower() == ".svg" else "local real photo"
 
 
@@ -303,6 +333,7 @@ def audit_foods() -> tuple[list[dict[str, Any]], dict[str, list[dict[str, Any]]]
     semantic_reuse_counts = Counter({key: len(items) for key, items in semantic_groups.items()})
 
     for food in foods:
+        name = food.get("name", "")
         image_key = food["_audit_image_key"]
         semantic_key = food["_audit_semantic_image_key"]
         refinement_tier = food["_audit_refinement_tier"]
@@ -321,7 +352,13 @@ def audit_foods() -> tuple[list[dict[str, Any]], dict[str, list[dict[str, Any]]]
         requires_unique_image = refinement_tier in {"A", "B"}
         reuse_reason = build_reuse_reason(refinement_tier, semantic_key)
         reuse_policy = "unique_required" if requires_unique_image else "family_reuse_allowed"
-        should_split_from_group = requires_unique_image and image_key == semantic_key
+        # An explicit product mapping intentionally reuses a known visual asset.
+        # It should not be reported as an unresolved product-level image split.
+        should_split_from_group = (
+            requires_unique_image
+            and image_key == semantic_key
+            and name not in EXACT_IMAGE_KEYS
+        )
         reuse_grade = "ok"
 
         if not frontend_exists:
@@ -334,7 +371,12 @@ def audit_foods() -> tuple[list[dict[str, Any]], dict[str, list[dict[str, Any]]]
             problems.append("still using semantic shared key")
             product_level_problems.append("still using semantic shared key")
             reuse_grade = "must_split"
-        if expected_group not in {"unknown", food.get("category", "")} and actual != expected_group and suggested_key:
+        if (
+            name not in EXACT_IMAGE_KEYS
+            and expected_group not in {"unknown", food.get("category", "")}
+            and actual != expected_group
+            and suggested_key
+        ):
             problems.append(f"semantic mismatch {expected_group}!={actual}")
             product_level_problems.append("semantic family mismatch")
             if reuse_grade == "ok":

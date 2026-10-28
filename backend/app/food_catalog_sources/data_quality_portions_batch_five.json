@@ -1,0 +1,22 @@
+[
+  {"name":"蜂蜜","category":"调味","serving_size_g":15,"portion_hint":"蜂蜜一汤匙约 15-20g；按实际加入量记录","source":"fixed_rule_portion_v1","source_updated_at":"2026-09-02"},
+  {"name":"白砂糖","category":"调味","serving_size_g":10,"portion_hint":"白砂糖一茶匙约 4-5g；饮品或烹调单次常见约 5-10g，按实际用量记录","source":"fixed_rule_portion_v1","source_updated_at":"2026-09-02"},
+  {"name":"黑巧克力","category":"零食","serving_size_g":30,"portion_hint":"黑巧克力单次常见 2-3 小块约 20-30g；按包装净含量记录","source":"fixed_rule_portion_v1","source_updated_at":"2026-09-02"},
+  {"name":"苏打饼干","category":"零食","serving_size_g":30,"portion_hint":"苏打饼干单次常见 3-5 片约 25-35g；按包装净含量记录","source":"fixed_rule_portion_v1","source_updated_at":"2026-09-02"},
+  {"name":"薯片","category":"零食","serving_size_g":30,"portion_hint":"薯片单次建议按小包装或一小把约 25-30g；按包装净含量记录","source":"fixed_rule_portion_v1","source_updated_at":"2026-09-02"},
+  {"name":"蛋白粉","category":"补剂","serving_size_g":30,"portion_hint":"蛋白粉常见一勺约 25-35g；按产品包装建议用量记录","source":"fixed_rule_portion_v1","source_updated_at":"2026-09-02"},
+  {"name":"乳清蛋白饮","category":"补剂","serving_size_g":300,"portion_hint":"即饮乳清蛋白饮常见一瓶约 250-350ml；按包装净含量记录","source":"fixed_rule_portion_v1","source_updated_at":"2026-09-02"},
+  {"name":"豆奶","category":"饮品","serving_size_g":250,"portion_hint":"豆奶常见一盒或一杯约 200-300ml；按包装净含量记录","source":"fixed_rule_portion_v1","source_updated_at":"2026-09-02"},
+  {"name":"橙汁","category":"饮品","serving_size_g":250,"portion_hint":"橙汁常见一杯约 200-300ml；按实际饮用量或包装净含量记录","source":"fixed_rule_portion_v1","source_updated_at":"2026-09-02"},
+  {"name":"可乐","category":"饮品","serving_size_g":330,"portion_hint":"可乐常见一罐约 330ml；按实际饮用量或包装净含量记录","source":"fixed_rule_portion_v1","source_updated_at":"2026-09-02"},
+  {"name":"咖啡","category":"饮品","serving_size_g":240,"portion_hint":"黑咖啡常见一杯约 200-300ml；按实际饮用量记录，不含额外糖奶时单独计算","source":"fixed_rule_portion_v1","source_updated_at":"2026-09-02"},
+  {"name":"拿铁","category":"饮品","serving_size_g":300,"portion_hint":"拿铁常见中杯约 250-350ml；按门店杯型或实际饮用量记录","source":"fixed_rule_portion_v1","source_updated_at":"2026-09-02"},
+  {"name":"酸奶饮品","category":"饮品","serving_size_g":250,"portion_hint":"酸奶饮品常见一瓶约 200-300ml；按包装净含量记录","source":"fixed_rule_portion_v1","source_updated_at":"2026-09-02"},
+  {"name":"牛肉干","category":"零食","serving_size_g":30,"portion_hint":"牛肉干单次常见一小包或一小把约 25-35g；按包装净含量记录","source":"fixed_rule_portion_v1","source_updated_at":"2026-09-02"},
+  {"name":"鸡肉肠","category":"加工食品","serving_size_g":50,"portion_hint":"鸡肉肠常见一根约 40-60g；按包装净含量记录","source":"fixed_rule_portion_v1","source_updated_at":"2026-09-02"},
+  {"name":"火腿","category":"加工食品","serving_size_g":50,"portion_hint":"火腿片或火腿肠单次常见约 40-60g；按包装净含量记录","source":"fixed_rule_portion_v1","source_updated_at":"2026-09-02"},
+  {"name":"培根","category":"加工食品","serving_size_g":50,"portion_hint":"培根单次常见 2-3 片约 40-60g；按烹调前净重记录","source":"fixed_rule_portion_v1","source_updated_at":"2026-09-02"},
+  {"name":"寿司饭","category":"主食","serving_size_g":150,"portion_hint":"寿司饭或醋饭一份常见约 120-180g；按熟饭净重记录","source":"fixed_rule_portion_v1","source_updated_at":"2026-09-02"},
+  {"name":"意大利面","category":"主食","serving_size_g":200,"portion_hint":"熟意大利面一份常见约 180-220g；若按干面记录请使用包装净重换算","source":"fixed_rule_portion_v1","source_updated_at":"2026-09-02"},
+  {"name":"藜麦","category":"主食","serving_size_g":150,"portion_hint":"熟藜麦一份常见约 120-180g；若按干藜麦记录请使用干重换算","source":"fixed_rule_portion_v1","source_updated_at":"2026-09-02"}
+]

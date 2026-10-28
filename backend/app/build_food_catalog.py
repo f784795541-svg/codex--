@@ -33,6 +33,15 @@ SOURCE_FILES = [
     "drinks_and_cafes_batch_three.json",
     "convenience_retail_batch_three.json",
     "home_breakfast_late_night_batch_three.json",
+    "shaxian_and_icecream_batch_four.json",
+    "snacks_and_daily_foods_batch_five.json",
+    "data_expansion_batch_six.json",
+    "data_quality_portions_batch_one.json",
+    "data_quality_portions_batch_two.json",
+    "data_quality_portions_batch_three.json",
+    "data_quality_portions_batch_four.json",
+    "data_quality_portions_batch_five.json",
+    "data_quality_portions_batch_six.json",
 ]
 
 
@@ -91,9 +100,13 @@ def load_source_items() -> list[dict]:
 def deduplicate_items(items: Iterable[dict]) -> list[dict]:
     seen_names: dict[str, dict] = {}
     ordered: list[dict] = []
+    metadata_patches: list[dict] = []
     next_food_id = 1
 
     for raw_item in items:
+        if "calories_per_100g" not in raw_item:
+            metadata_patches.append(raw_item)
+            continue
         normalized = normalize_item(raw_item, next_food_id)
         existing = seen_names.get(normalized["name"])
         if existing:
@@ -102,6 +115,23 @@ def deduplicate_items(items: Iterable[dict]) -> list[dict]:
         seen_names[normalized["name"]] = normalized
         ordered.append(normalized)
         next_food_id += 1
+
+    patch_keys = (
+        "brand",
+        "portion_hint",
+        "serving_size_g",
+        "source",
+        "source_updated_at",
+        "status",
+    )
+    for patch in metadata_patches:
+        existing = seen_names.get(str(patch.get("name", "")).strip())
+        if not existing:
+            continue
+        for key in patch_keys:
+            value = patch.get(key)
+            if value not in (None, ""):
+                existing[key] = round(float(value), 2) if key == "serving_size_g" else value
 
     for index, item in enumerate(ordered, start=1):
         item["food_id"] = index

@@ -270,10 +270,24 @@ textarea {
   line-height: 84rpx;
 }
 
+.button,
+.button-secondary,
+.tab,
+.status-banner-action,
+.food-history-back {
+  transition: transform 160ms ease, opacity 160ms ease, box-shadow 180ms ease, background-color 180ms ease;
+}
+
 .button {
   border: 0;
   background: linear-gradient(135deg, #27555d 0%, #6f9ea3 100%);
   color: #ffffff;
+}
+
+.button:active,
+.button-secondary:active {
+  transform: scale(0.985);
+  opacity: 0.96;
 }
 
 .button[disabled] {
@@ -310,6 +324,11 @@ textarea {
   background: #294f57;
   color: #ffffff;
   box-shadow: 0 8rpx 18rpx rgba(41, 79, 87, 0.15);
+}
+
+.tap-feedback-hover {
+  transform: scale(0.985);
+  opacity: 0.9;
 }
 
 .list-item {

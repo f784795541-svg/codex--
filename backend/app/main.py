@@ -207,6 +207,32 @@ def create_food_log(
     }
 
 
+@app.delete("/food/log/{log_id}")
+def delete_food_log(
+    log_id: int,
+    user_id: int | None = Query(None),
+    db: Session = Depends(get_db),
+    current_user: models.User | None = Depends(dependencies.get_optional_current_user),
+):
+    user = dependencies.resolve_user(db, user_id, current_user)
+
+    log = (
+        db.query(models.FoodLog)
+        .filter(models.FoodLog.id == log_id, models.FoodLog.user_id == user.id)
+        .first()
+    )
+    if not log:
+        raise HTTPException(status_code=404, detail="饮食记录不存在")
+
+    db.delete(log)
+    db.commit()
+    return {
+        "message": "饮食记录已删除",
+        "id": log_id,
+        "user_id": user.id,
+    }
+
+
 @app.post("/workout/log")
 def create_workout_log(
     payload: schemas.WorkoutLogCreate,

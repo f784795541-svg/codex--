@@ -8,7 +8,7 @@ from fastapi import APIRouter, Depends, Header, HTTPException, status
 from sqlalchemy import func
 from sqlalchemy.orm import Session
 
-from .. import models, services
+from .. import models, schemas, services
 from ..database import get_db
 from ..error_tracking import recent_api_errors
 
@@ -96,4 +96,24 @@ def maintenance_summary(db: Session = Depends(get_db)):
         "abnormal_foods": quality["abnormal_foods"],
         "recent_api_errors": recent_api_errors(),
         "backup_status": backup_status(),
+    }
+
+
+@router.post("/reset-password", dependencies=[Depends(require_maintenance_token)])
+def maintenance_reset_password(payload: schemas.MaintenancePasswordResetRequest, db: Session = Depends(get_db)):
+    username = services.normalize_username(payload.username)
+    if not username:
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="用户名不能为空")
+
+    user = db.query(models.User).filter(models.User.username == username).first()
+    if not user:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="用户不存在")
+
+    user.password_hash = services.hash_password(payload.new_password)
+    db.commit()
+
+    return {
+        "message": "密码已重置为临时密码，请提醒用户登录后立即修改",
+        "user_id": user.id,
+        "username": user.username,
     }

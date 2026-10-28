@@ -1,6 +1,6 @@
 from datetime import date, time
 
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, ConfigDict, Field
 
 
 class UserCreate(BaseModel):
@@ -22,8 +22,7 @@ class UserCreate(BaseModel):
 class UserResponse(UserCreate):
     id: int
 
-    class Config:
-        from_attributes = True
+    model_config = ConfigDict(from_attributes=True)
 
 
 class FoodResponse(BaseModel):
@@ -42,8 +41,7 @@ class FoodResponse(BaseModel):
     portion_hint: str | None = None
     cooking_options: list[dict[str, float | str]] = []
 
-    class Config:
-        from_attributes = True
+    model_config = ConfigDict(from_attributes=True)
 
 
 class FoodCreate(BaseModel):
@@ -115,6 +113,11 @@ class AuthLogin(BaseModel):
     password: str
 
 
+class MaintenancePasswordResetRequest(BaseModel):
+    username: str = Field(min_length=3, max_length=50)
+    new_password: str = Field(min_length=6, max_length=64)
+
+
 class AuthResponse(BaseModel):
     message: str
     user: UserResponse
@@ -168,6 +171,7 @@ class UserUpdateResponse(BaseModel):
 
 
 class FoodItemReport(BaseModel):
+    id: int
     food_name: str
     weight_g: float
     cooking_method: str | None = None
@@ -187,6 +191,10 @@ class DailyReportResponse(BaseModel):
     total_expenditure_kcal: float
     net_calorie_balance: float
     calorie_target_kcal: float
+    base_calorie_target_kcal: float
+    workout_flex_calories_kcal: float
+    recommended_calorie_target_kcal: float
+    bmr_kcal: float
     protein: MacroStatus
     fat: MacroStatus
     carbs: MacroStatus
@@ -209,6 +217,22 @@ class WeeklyReportResponse(BaseModel):
     daily_reports: list[DailyReportResponse]
 
 
+class FoodHistoryDayResponse(BaseModel):
+    date: date
+    total_intake_kcal: float
+    protein: float
+    fat: float
+    carbs: float
+    food_items: list[FoodItemReport]
+
+
+class FoodHistoryResponse(BaseModel):
+    user_id: int
+    start_date: date
+    end_date: date
+    daily_records: list[FoodHistoryDayResponse]
+
+
 class WeightLogCreate(BaseModel):
     user_id: int | None = None
     weight_kg: float = Field(gt=0)
@@ -223,8 +247,7 @@ class WeightLogResponse(BaseModel):
     record_date: date
     record_time: time | None = None
 
-    class Config:
-        from_attributes = True
+    model_config = ConfigDict(from_attributes=True)
 
 
 class DashboardSummaryResponse(BaseModel):

@@ -96,6 +96,19 @@
   margin-top: 16rpx;
 }
 
+.auth-password-row {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 14rpx;
+}
+
+.auth-password-link {
+  color: #4b7670;
+  font-size: 23rpx;
+  line-height: 1.4;
+  font-weight: 600;
+}
+
 .auth-secondary-button {
   margin-top: 12rpx;
 }

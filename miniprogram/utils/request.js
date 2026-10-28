@@ -14,6 +14,14 @@ function clearRequestCache() {
   responseCache.clear();
 }
 
+function pruneExpiredRequestCache(now = Date.now()) {
+  for (const [key, entry] of responseCache) {
+    if (!entry || entry.expiresAt <= now) {
+      responseCache.delete(key);
+    }
+  }
+}
+
 function createRequestError(message, statusCode = 0, redirectedToLogin = false) {
   const error = new Error(message);
   error.statusCode = statusCode;
@@ -74,6 +82,7 @@ function request({ url, method = "GET", data, header = {}, cacheMs = 0, redirect
   const redirectUnauthorized = shouldRedirectOnUnauthorized(url, redirectOnUnauthorized);
 
   if (normalizedMethod === "GET") {
+    pruneExpiredRequestCache();
     const cached = responseCache.get(requestKey);
     if (cached && cached.expiresAt > Date.now()) {
       return Promise.resolve(cached.value);
@@ -149,10 +158,15 @@ function post(url, data, options = {}) {
   return request({ url, method: "POST", data, ...options });
 }
 
+function del(url, data, options = {}) {
+  return request({ url, method: "DELETE", data, ...options });
+}
+
 module.exports = {
   clearRequestCache,
   request,
   get,
   post,
+  del,
   isUnauthorizedRedirectError,
 };

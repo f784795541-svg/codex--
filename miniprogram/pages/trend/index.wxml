@@ -172,11 +172,11 @@
     <view class="card-head">
       <view>
         <text class="card-kicker">近期变化</text>
-        <view class="section-title">最近体重</view>
+        <view class="section-title">体重趋势</view>
       </view>
       <view class="card-badge">{{weights.length}} 条</view>
     </view>
-    <view class="support-inline-copy">先看最新样本，再往下看列表，不在趋势页堆完整图表版本。</view>
+    <view class="support-inline-copy">用两个时间尺度查看趋势；按住或滑动曲线，可查看每次记录的具体体重。</view>
     <view class="metric-grid trend-compact-grid" wx:if="{{weightStats.length}}">
       <view class="metric-card" wx:for="{{weightStats}}" wx:key="label">
         <view class="metric-label">{{item.label}}</view>
@@ -192,29 +192,37 @@
       <view class="trend-weight-note">{{weightSummary.note}}</view>
     </view>
 
-    <view class="weight-mini-chart" wx:if="{{weightBars.length}}">
+    <view class="weight-line-chart" wx:if="{{monthWeightChart && monthWeightChart.count}}">
       <view class="weight-mini-chart-head">
-        <view class="item-title">最近 7 条体重变化</view>
-        <view class="section-caption">只看高低和节奏，不在这里堆完整折线图。</view>
+        <view>
+          <view class="item-title">最近 30 天体重变化</view>
+          <view class="section-caption">{{monthWeightChart.count}} 条记录 · {{monthWeightChart.rangeLabel}}</view>
+        </view>
+        <view class="chart-touch-hint">按住查看</view>
       </view>
-      <view class="weight-mini-bars">
-        <view class="weight-mini-bar-item" wx:for="{{weightBars}}" wx:key="id">
-          <view class="weight-mini-bar-value">{{item.value}}</view>
-          <view class="weight-mini-bar-track">
-            <view class="weight-mini-bar-fill" style="height: {{item.heightPercent}}%;"></view>
-          </view>
-          <view class="weight-mini-bar-date">{{item.date}}</view>
+      <view class="weight-line-canvas-shell">
+        <canvas id="weight-line-month" type="2d" class="weight-line-canvas" data-chart-key="month" bindtouchstart="handleWeightChartTouch" bindtouchmove="handleWeightChartTouch" bindtouchend="handleWeightChartTouchEnd" bindtouchcancel="handleWeightChartTouchEnd"></canvas>
+        <view class="weight-line-tooltip" wx:if="{{activeWeightChartKey === 'month' && activeWeightPoint}}" style="left: {{activeWeightPoint.leftPercent}}%;">
+          <text class="weight-line-tooltip-value">{{activeWeightPoint.value}}</text>
+          <text class="weight-line-tooltip-date">{{activeWeightPoint.date}}</text>
         </view>
       </view>
     </view>
 
-    <view class="weight-list">
-      <view class="weight-row" wx:for="{{weights}}" wx:key="id">
+    <view class="weight-line-chart" wx:if="{{halfYearWeightChart && halfYearWeightChart.count}}">
+      <view class="weight-mini-chart-head">
         <view>
-          <view class="weight-value">{{item.weight_kg}} kg</view>
-          <view class="weight-date">{{item.record_date}}{{item.record_time ? ' ' + item.record_time : ''}}</view>
+          <view class="item-title">近半年体重变化</view>
+          <view class="section-caption">{{halfYearWeightChart.count}} 条记录 · {{halfYearWeightChart.rangeLabel}}</view>
         </view>
-        <view class="weight-chip">趋势样本</view>
+        <view class="chart-touch-hint">按住查看</view>
+      </view>
+      <view class="weight-line-canvas-shell">
+        <canvas id="weight-line-halfYear" type="2d" class="weight-line-canvas" data-chart-key="halfYear" bindtouchstart="handleWeightChartTouch" bindtouchmove="handleWeightChartTouch" bindtouchend="handleWeightChartTouchEnd" bindtouchcancel="handleWeightChartTouchEnd"></canvas>
+        <view class="weight-line-tooltip" wx:if="{{activeWeightChartKey === 'halfYear' && activeWeightPoint}}" style="left: {{activeWeightPoint.leftPercent}}%;">
+          <text class="weight-line-tooltip-value">{{activeWeightPoint.value}}</text>
+          <text class="weight-line-tooltip-date">{{activeWeightPoint.date}}</text>
+        </view>
       </view>
     </view>
   </view>

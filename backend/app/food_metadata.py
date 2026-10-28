@@ -5,6 +5,50 @@ import re
 
 
 EXACT_IMAGE_KEYS = {
+    "乐事原味薯片": "potato-chips-bag",
+    "乐事番茄味薯片": "potato-chips-bag",
+    "乐事黄瓜味薯片": "potato-chips-bag",
+    "乐事烧烤味薯片": "potato-chips-bag",
+    "百事 原味薯片": "pepsi-lays-original",
+    "百事 黄瓜味薯片": "pepsi-lays-cucumber",
+    "百事 番茄味薯片": "pepsi-lays-tomato",
+    "品客原味薯片": "pringles-original",
+    "妙脆角原味玉米脆片": "bugles-corn-snack",
+    "旺旺仙贝": "cracker-stack",
+    "旺旺雪饼": "cracker-stack",
+    "奥利奥夹心饼干": "cracker-stack",
+    "沙县小吃 香菇鸡腿饭": "chicken-thigh-real",
+    "沙县小吃 卤鸡腿饭": "chicken-thigh-real",
+    "沙县小吃 扁肉": "wonton-bowl",
+    "沙县小吃 扁肉拌面": "dry-noodle-plate",
+    "沙县小吃 花生酱拌面": "dry-noodle-plate",
+    "沙县小吃 蒸饺": "dumpling-plate",
+    "沙县小吃 鸡腿炖罐": "soup-bowl",
+    "沙县小吃 乌鸡炖罐": "soup-bowl",
+    "沙县小吃 茶树菇炖罐": "soup-bowl",
+    "沙县小吃 卤肉饭": "rice-bowl",
+    "伊利 小布丁牛奶口味雪糕": "yili-qiaolezi-classic",
+    "伊利 老冰棍": "yili-qiaolezi-classic",
+    "伊利 苦咖啡雪糕": "yili-qiaolezi-classic",
+    "蒙牛 蒂兰圣雪香草冰淇淋": "mengniu-suibian-chocolate",
+    "蒙牛 随变白桃乌龙雪糕": "mengniu-suibian-chocolate",
+    "蒙牛 绿色心情绿豆冰棍": "mengniu-greenmood-mungbean",
+    "和路雪 梦龙经典香草冰淇淋": "walls-magnum-truffle-chocolate",
+    "和路雪 可爱多香草甜筒冰淇淋": "walls-cornetto-vanilla-cone",
+    "和路雪 千层雪巧克力冰淇淋": "walls-layersnow-vanilla-peach",
+    "天冰 奶砖雪糕": "yili-qiaolezi-classic",
+    "索菲亚 大板奶雪糕": "yili-qiaolezi-classic",
+    "红豆沙冰棍": "red-beans-bowl",
+    "绿豆沙冰棍": "mung-beans-bowl",
+    "雀巢 8次方巧克力冰淇淋": "walls-magnum-truffle-chocolate",
+    "八喜 香草冰淇淋": "baxi-vanilla-tub",
+    "八喜 巧克力冰淇淋": "baxi-chocolate-tub",
+    "八喜 草莓冰淇淋": "baxi-strawberry-tub",
+    "和路雪 可爱多草莓甜筒冰淇淋": "walls-cornetto-strawberry-cone",
+    "常见茶饮料（含糖）": "tea-drink-generic",
+    "喜茶 多肉葡萄": "heytea-grape",
+    "奈雪 芋泥宝藏茶": "nayuki-taro-tea",
+    "兰州拉面 牛肉面": "lanzhou-beef-noodle",
     "玉米油": "corn-oil-bottle",
     "宫保鸡丁": "kung-pao-chicken",
     "西红柿炒鸡蛋": "tomato-egg-stirfry",
@@ -38,7 +82,7 @@ EXACT_IMAGE_KEYS = {
     "鸭血粉丝汤": "soup-bowl",
     "清汤麻辣烫": "malatang-bowl",
     "必胜客 鸡茸蘑菇汤": "soup-bowl",
-    "麦当劳 苹果派": "pastry-puff",
+    "麦当劳 苹果派": "mcd-146",
     "北冰洋橙汽水": "orange-soda",
     "蜜雪冰城 棒打鲜橙": "orange-juice-glass",
     "基础水果 榴莲": "durian-fruit",
@@ -74,7 +118,7 @@ EXACT_IMAGE_KEYS = {
     "全家 关东煮鱼豆腐": "fish-ball",
     "罗森 关东煮鱼豆腐": "fish-ball",
     "麻辣烫 鱼豆腐": "fish-ball",
-    "麻婆豆腐": "tofu-dish",
+    "麻婆豆腐": "mapo-tofu",
     "砂锅豆腐": "tofu-dish",
     "锅塌豆腐": "tofu-dish",
     "蟹粉豆腐": "tofu-dish",
@@ -84,7 +128,7 @@ EXACT_IMAGE_KEYS = {
     "梅干菜烧肉": "braised-pork",
     "家常 红烧肉": "braised-pork",
     "南城香 梅菜扣肉饭": "braised-pork",
-    "味千拉面 辣味叉烧拉面": "ramen-bowl",
+    "味千拉面 辣味叉烧拉面": "ajisen-181",
     "重庆小面": "spicy-noodle-bowl",
     "酸辣粉": "spicy-noodle-bowl",
     "担担面": "spicy-noodle-bowl",
@@ -237,6 +281,53 @@ BRAND_IMAGE_PREFIXES = {
 # Keep the product image key anchored to the exact product name so clients render
 # the canonical asset even before the underlying rows are resynced.
 CANONICAL_PRODUCT_IMAGE_KEYS = {
+    "肯德基 薯条": "fries",
+    "肯德基 香辣鸡腿堡": "burger",
+    "肯德基 老北京鸡肉卷": "sandwich",
+    "赛百味 火鸡胸三明治 6英寸": "sandwich",
+    "赛百味 香烤鸡肉三明治 6英寸": "sandwich",
+    "赛百味 金枪鱼三明治 6英寸": "sandwich",
+    "赛百味 意式BMT三明治 6英寸": "sandwich",
+    "味千拉面 招牌豚骨拉面": "ajisen-180",
+    "味千拉面 辣味叉烧拉面": "ajisen-181",
+    "味千拉面 肥牛拉面": "ajisen-182",
+    "肯德基 劲爆鸡米花": "fried-chicken",
+    "味千拉面 日式煎饺 6只": "dumpling-plate",
+    "味千拉面 炸鸡块": "chicken-nuggets",
+    "味千拉面 咖喱猪排饭": "pork-cutlet",
+    "麦当劳 可口可乐 中杯": "cola-pepsi",
+    "麦当劳 无糖冰红茶 中杯": "iced-tea-cup",
+    "麦当劳 薯条 大份": "mcd-140",
+    "肯德基 百事可乐 中杯": "cola-pepsi",
+    "肯德基 香辣鸡腿堡套餐薯条": "fries",
+    "肯德基 早餐帕尼尼": "sandwich",
+    "赛百味 冰拿铁 中杯": "latte-cup",
+    "赛百味 双层火鸡胸三明治 12英寸": "sandwich",
+    "赛百味 海盐薯片": "potato-chips-bag",
+    "沙县小吃 香菇鸡腿饭": "chicken-thigh-real",
+    "沙县小吃 卤鸡腿饭": "chicken-thigh-real",
+    "沙县小吃 扁肉": "wonton-bowl",
+    "沙县小吃 扁肉拌面": "dry-noodle-plate",
+    "沙县小吃 花生酱拌面": "dry-noodle-plate",
+    "沙县小吃 蒸饺": "dumpling-plate",
+    "沙县小吃 鸡腿炖罐": "soup-bowl",
+    "沙县小吃 乌鸡炖罐": "soup-bowl",
+    "沙县小吃 茶树菇炖罐": "soup-bowl",
+    "沙县小吃 卤肉饭": "rice-bowl",
+    "伊利 小布丁牛奶口味雪糕": "yili-qiaolezi-classic",
+    "伊利 老冰棍": "yili-qiaolezi-classic",
+    "伊利 苦咖啡雪糕": "yili-qiaolezi-classic",
+    "蒙牛 蒂兰圣雪香草冰淇淋": "mengniu-suibian-chocolate",
+    "蒙牛 随变白桃乌龙雪糕": "mengniu-suibian-chocolate",
+    "蒙牛 绿色心情绿豆冰棍": "mengniu-greenmood-mungbean",
+    "和路雪 梦龙经典香草冰淇淋": "walls-magnum-truffle-chocolate",
+    "和路雪 可爱多香草甜筒冰淇淋": "walls-cornetto-chocolate-cone",
+    "和路雪 千层雪巧克力冰淇淋": "walls-layersnow-vanilla-peach",
+    "天冰 奶砖雪糕": "yili-qiaolezi-classic",
+    "索菲亚 大板奶雪糕": "yili-qiaolezi-classic",
+    "红豆沙冰棍": "red-beans-bowl",
+    "绿豆沙冰棍": "mung-beans-bowl",
+    "雀巢 8次方巧克力冰淇淋": "walls-magnum-truffle-chocolate",
     "和路雪 可爱多榛子牛奶巧克力口味冰淇淋": "walls-cornetto-hazelnut-milk-chocolate",
     "和路雪 可爱多柿柿如意甜筒冰淇淋": "walls-cornetto-persimmon-cone",
     "和路雪 梦龙松露巧克力口味冰淇淋": "walls-magnum-truffle-chocolate",
@@ -644,6 +735,12 @@ IMAGE_KEYWORDS: list[tuple[Iterable[str], str]] = [
     (["芬达橙味"], "fanta-orange"),
     (["芬达葡萄味"], "fanta-grape"),
     (["黑巧克力"], "dark-chocolate-bar"),
+    (["沙琪玛", "蛋黄派", "肉松饼", "铜锣烧"], "cake-slice"),
+    (["锅巴", "仙贝", "雪饼", "米饼", "威化饼", "薄脆饼干", "夹心饼干"], "cracker-stack"),
+    (["果丹皮", "山楂条", "山楂糕", "话梅", "陈皮梅", "蜜枣", "葡萄干", "芒果干", "香蕉片"], "fruit"),
+    (["海苔", "爆米花", "鱼皮花生", "辣条"], "snack"),
+    (["猪肉脯", "牛肉粒", "牛肉条"], "beef-jerky-pack"),
+    (["瓜子", "南瓜子", "混合坚果"], "nut-mix"),
     (["苏打饼干"], "cracker-stack"),
     (["薯片"], "potato-chips-bag"),
     (["牛肉干"], "beef-jerky-pack"),
@@ -691,6 +788,8 @@ def get_food_aliases(name: str, category: str) -> list[str]:
         aliases.update(["牛肉", "高蛋白"])
     if "蛋" in name:
         aliases.update(["蛋白质"])
+    if any(keyword in name for keyword in ("冰棍", "冰棒", "雪糕", "冰淇淋", "冰激凌", "冰糕")):
+        aliases.update(["冰棍", "冰棒", "雪糕", "冰淇淋", "冰激凌", "冰糕", "冷饮"])
     return sorted(aliases)
 
 
@@ -747,6 +846,9 @@ def get_food_image_key_for_food(
     brand: str | None = None,
     food_id: int | None = None,
 ) -> str:
+    exact_image_key = EXACT_IMAGE_KEYS.get(name)
+    if exact_image_key:
+        return exact_image_key
     product_key = get_product_level_image_key(name, category, brand, food_id)
     if product_key:
         return product_key
@@ -790,6 +892,24 @@ def get_food_image_key(name: str, category: str) -> str:
 
 def compact_search_text(text: str) -> str:
     return "".join(text.lower().split())
+
+
+SEARCH_TERM_FAMILIES = (
+    ("冰", "冰棍", "冰棒", "雪糕", "冰淇淋", "冰激凌", "冰糕", "冷饮"),
+)
+
+
+def expand_food_search_terms(query: str) -> list[str]:
+    """Return related search terms while keeping the user's original term first."""
+    normalized_query = compact_search_text(query)
+    if not normalized_query:
+        return []
+
+    terms = [normalized_query]
+    for family in SEARCH_TERM_FAMILIES:
+        if any(normalized_query in term or term in normalized_query for term in family):
+            terms.extend(family)
+    return list(dict.fromkeys(term for term in terms if term))
 
 
 def split_search_query_tokens(query: str) -> list[str]:

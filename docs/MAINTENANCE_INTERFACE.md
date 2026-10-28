@@ -1,25 +1,31 @@
-# 轻量维护接口
+# 维护接口
 
-维护接口默认不开放。必须在 `.env` 设置：
+维护接口默认不开启。必须先在 `.env` 中设置：
 
 ```env
 MAINTENANCE_TOKEN=CHANGE_ME_LONG_RANDOM_MAINTENANCE_TOKEN
 ```
 
-然后重启 backend：
+然后重启后端：
 
 ```bash
 docker compose up -d --build backend
 ```
 
-访问：
+请求时需要在 header 中携带：
 
 ```http
-GET /maintenance/summary
 X-Maintenance-Token: <MAINTENANCE_TOKEN>
 ```
 
-返回内容包括：
+目前支持的维护接口：
+
+```http
+GET /maintenance/summary
+POST /maintenance/reset-password
+```
+
+`GET /maintenance/summary` 返回内容包括：
 
 - 用户数量
 - 食物库总数
@@ -31,4 +37,19 @@ X-Maintenance-Token: <MAINTENANCE_TOKEN>
 - 最近 500 类接口错误
 - 备份目录状态
 
-不要把维护 token 写入前端代码、小程序代码、截图、日志或文档示例的真实值中。
+`POST /maintenance/reset-password` 请求体示例：
+
+```json
+{
+  "username": "demo_user",
+  "new_password": "12345678"
+}
+```
+
+适用场景：
+
+- 用户确实忘记密码
+- 管理员需要人工重置为临时密码
+- 用户登录后再到“我的”页面自行修改
+
+不要把维护 token 写进前端代码、小程序代码、截图、日志或任何公开文档里。

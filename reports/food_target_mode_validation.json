@@ -1,0 +1,32 @@
+{
+  "generated_at": "2026-09-04T08:11:51.305Z",
+  "standard": {
+    "size": "750x750",
+    "format": "webp",
+    "max_bytes": 307200
+  },
+  "frontend": {
+    "manifest_keys": 861,
+    "raster": 861,
+    "fallback": 0,
+    "legacy_duplicates": 0,
+    "failures": []
+  },
+  "miniprogram": {
+    "manifest_keys": 861,
+    "raster": 861,
+    "fallback": 0,
+    "legacy_duplicates": 0,
+    "failures": []
+  },
+  "manifest_key_diff": {
+    "frontend_only": [],
+    "miniprogram_only": []
+  },
+  "source_ledger": {
+    "rows": 453,
+    "unique_keys": 453,
+    "duplicate_keys": [],
+    "missing_cache_paths": []
+  }
+}

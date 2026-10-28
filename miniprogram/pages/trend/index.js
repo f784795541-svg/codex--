@@ -20,6 +20,159 @@ function sortWeightsNewestFirst(weights = []) {
   return [...weights].sort((left, right) => buildWeightSortKey(right).localeCompare(buildWeightSortKey(left)));
 }
 
+function buildWeightLineChart(weights, key, days) {
+  const normalizedWeights = sortWeightsNewestFirst(Array.isArray(weights) ? weights : []);
+  const latestDate = normalizedWeights[0]?.record_date;
+  if (!latestDate) {
+    return {
+      key,
+      count: 0,
+      points: [],
+      rangeLabel: "--",
+    };
+  }
+
+  const cutoff = new Date(`${latestDate}T12:00:00`);
+  cutoff.setDate(cutoff.getDate() - (days - 1));
+  const cutoffDate = cutoff.toISOString().slice(0, 10);
+  const latestByDate = new Map();
+  normalizedWeights.forEach((item) => {
+    if (item.record_date >= cutoffDate && !latestByDate.has(item.record_date)) {
+      latestByDate.set(item.record_date, item);
+    }
+  });
+
+  const points = [...latestByDate.values()]
+    .reverse()
+    .map((item, index) => ({
+      id: item.id || `${item.record_date}-${item.record_time || index}`,
+      value: Number(item.weight_kg),
+      date: item.record_date,
+      label: formatShortDateLabel(item.record_date),
+    }))
+    .filter((item) => Number.isFinite(item.value));
+
+  return {
+    key,
+    count: points.length,
+    points,
+    rangeLabel: points.length ? formatDateRange(points[0].date, points[points.length - 1].date) : "--",
+  };
+}
+
+function traceSmoothLine(context, coordinates) {
+  if (!coordinates.length) {
+    return;
+  }
+
+  context.moveTo(coordinates[0].x, coordinates[0].y);
+  if (coordinates.length === 1) {
+    return;
+  }
+
+  for (let index = 1; index < coordinates.length - 1; index += 1) {
+    const current = coordinates[index];
+    const next = coordinates[index + 1];
+    context.quadraticCurveTo(current.x, current.y, (current.x + next.x) / 2, (current.y + next.y) / 2);
+  }
+
+  const last = coordinates[coordinates.length - 1];
+  context.lineTo(last.x, last.y);
+}
+
+function drawWeightLineCanvas(canvas, chart, selectedIndex, width, height) {
+  const context = canvas.getContext("2d");
+  const pixelRatio = wx.getSystemInfoSync().pixelRatio || 1;
+  const padding = { top: 24, right: 18, bottom: 34, left: 46 };
+  const values = chart.points.map((item) => item.value);
+  const minimum = Math.min(...values);
+  const maximum = Math.max(...values);
+  const dataRange = Math.max(maximum - minimum, 0.4);
+  const valuePadding = Math.max(dataRange * 0.18, 0.2);
+  const lowerBound = minimum - valuePadding;
+  const upperBound = maximum + valuePadding;
+  const plotWidth = Math.max(width - padding.left - padding.right, 1);
+  const plotHeight = Math.max(height - padding.top - padding.bottom, 1);
+  const valueRange = Math.max(upperBound - lowerBound, 0.1);
+  const coordinates = chart.points.map((item, index) => ({
+    ...item,
+    x: padding.left + (chart.points.length === 1 ? plotWidth / 2 : (index / (chart.points.length - 1)) * plotWidth),
+    y: padding.top + ((upperBound - item.value) / valueRange) * plotHeight,
+  }));
+
+  canvas.width = Math.round(width * pixelRatio);
+  canvas.height = Math.round(height * pixelRatio);
+  context.scale(pixelRatio, pixelRatio);
+  context.clearRect(0, 0, width, height);
+
+  context.strokeStyle = "rgba(111, 145, 151, 0.16)";
+  context.lineWidth = 1;
+  context.setLineDash([3, 4]);
+  context.font = "11px sans-serif";
+  context.fillStyle = "#789196";
+  for (let index = 0; index < 3; index += 1) {
+    const ratio = index / 2;
+    const y = padding.top + ratio * plotHeight;
+    const value = upperBound - ratio * valueRange;
+    context.beginPath();
+    context.moveTo(padding.left, y);
+    context.lineTo(width - padding.right, y);
+    context.stroke();
+    context.fillText(`${value.toFixed(1)}`, 2, y + 4);
+  }
+  context.setLineDash([]);
+
+  const gradient = context.createLinearGradient(0, padding.top, 0, height - padding.bottom);
+  gradient.addColorStop(0, "rgba(64, 129, 139, 0.22)");
+  gradient.addColorStop(1, "rgba(64, 129, 139, 0.01)");
+  context.beginPath();
+  traceSmoothLine(context, coordinates);
+  context.lineTo(coordinates[coordinates.length - 1].x, height - padding.bottom);
+  context.lineTo(coordinates[0].x, height - padding.bottom);
+  context.closePath();
+  context.fillStyle = gradient;
+  context.fill();
+
+  context.beginPath();
+  traceSmoothLine(context, coordinates);
+  context.strokeStyle = "#2f6670";
+  context.lineWidth = 2.5;
+  context.lineCap = "round";
+  context.lineJoin = "round";
+  context.stroke();
+
+  coordinates.forEach((point, index) => {
+    const isSelected = index === selectedIndex;
+    context.beginPath();
+    context.arc(point.x, point.y, isSelected ? 5 : 2.2, 0, Math.PI * 2);
+    context.fillStyle = isSelected ? "#1d4f58" : "#6f9ea5";
+    context.fill();
+    if (isSelected) {
+      context.beginPath();
+      context.arc(point.x, point.y, 8, 0, Math.PI * 2);
+      context.strokeStyle = "rgba(47, 102, 112, 0.22)";
+      context.lineWidth = 4;
+      context.stroke();
+      context.beginPath();
+      context.moveTo(point.x, padding.top);
+      context.lineTo(point.x, height - padding.bottom);
+      context.setLineDash([3, 4]);
+      context.strokeStyle = "rgba(47, 102, 112, 0.36)";
+      context.lineWidth = 1;
+      context.stroke();
+      context.setLineDash([]);
+    }
+  });
+
+  const labels = [coordinates[0], coordinates[Math.floor((coordinates.length - 1) / 2)], coordinates[coordinates.length - 1]];
+  context.fillStyle = "#799197";
+  context.font = "11px sans-serif";
+  labels.forEach((point, index) => {
+    context.textAlign = index === 0 ? "left" : index === labels.length - 1 ? "right" : "center";
+    context.fillText(point.label, point.x, height - 10);
+  });
+}
+
 function clampPercent(actual, target) {
   const value = (Number(actual || 0) / Math.max(Number(target || 0), 1)) * 100;
   if (!Number.isFinite(value) || value <= 0) {
@@ -124,7 +277,7 @@ function buildTrendView(user, dailyReport, weeklyReport, weights) {
   const normalizedWeights = sortWeightsNewestFirst(Array.isArray(weights) ? weights : []);
   const latestWeight = normalizedWeights.length ? normalizedWeights[0] : null;
   const assessment = buildAssessment(user);
-  const weightInsights = buildWeightInsights(normalizedWeights);
+  const weightInsights = buildWeightInsights(normalizedWeights.slice(0, 30));
   const macroItems = dailyReport ? [
     {
       label: "蛋白质",
@@ -160,20 +313,8 @@ function buildTrendView(user, dailyReport, weeklyReport, weights) {
     status: item.sleep_status,
     conclusion: item.conclusion,
   }));
-  const weightBars = normalizedWeights.slice(0, 7).reverse().map((item, index, list) => {
-    const values = list.map((entry) => Number(entry.weight_kg || 0)).filter((value) => Number.isFinite(value));
-    const minValue = Math.min(...values);
-    const maxValue = Math.max(...values);
-    const currentValue = Number(item.weight_kg || 0);
-    const range = Math.max(maxValue - minValue, 0.1);
-    const heightPercent = Math.max(26, Math.round(((currentValue - minValue) / range) * 74 + 26));
-    return {
-      id: item.id || `${item.record_date}-${index}`,
-      date: formatShortDateLabel(item.record_date),
-      value: `${currentValue.toFixed(1)} kg`,
-      heightPercent,
-    };
-  });
+  const monthWeightChart = buildWeightLineChart(normalizedWeights, "month", 30);
+  const halfYearWeightChart = buildWeightLineChart(normalizedWeights, "halfYear", 180);
 
   return {
     heroPills: [
@@ -239,7 +380,8 @@ function buildTrendView(user, dailyReport, weeklyReport, weights) {
     weeklyDetails,
     weightSummary: weightInsights.weightSummary,
     weightStats: weightInsights.weightStats,
-    weightBars,
+    monthWeightChart,
+    halfYearWeightChart,
     assessment,
     suggestionItems: (dailyReport?.suggestions || []).slice(0, 2),
     warningItems: (dailyReport?.warnings || []).slice(0, 2),
@@ -259,7 +401,10 @@ Page({
     weeklyDetails: [],
     weightSummary: null,
     weightStats: [],
-    weightBars: [],
+    monthWeightChart: null,
+    halfYearWeightChart: null,
+    activeWeightChartKey: "",
+    activeWeightPoint: null,
     assessment: null,
     suggestionItems: [],
     warningItems: [],
@@ -294,7 +439,7 @@ Page({
       const [dailyReport, weeklyReport, weights] = await Promise.all([
         get("/report/daily", { user_id: userId }),
         get("/report/weekly", { user_id: userId }),
-        get("/weight/history", { user_id: userId, limit: 14 }),
+        get("/weight/history", { user_id: userId, limit: 180 }),
       ]);
       if (requestId !== this.trendRequestId) {
         return;
@@ -313,11 +458,14 @@ Page({
         weeklyDetails: view.weeklyDetails,
         weightSummary: view.weightSummary,
         weightStats: view.weightStats,
-        weightBars: view.weightBars,
+        monthWeightChart: view.monthWeightChart,
+        halfYearWeightChart: view.halfYearWeightChart,
+        activeWeightChartKey: "",
+        activeWeightPoint: null,
         assessment: view.assessment,
         suggestionItems: view.suggestionItems,
         warningItems: view.warningItems,
-      });
+      }, () => this.drawWeightLineCharts());
     } catch (error) {
       if (requestId !== this.trendRequestId) {
         return;
@@ -337,5 +485,67 @@ Page({
         });
       }
     }
+  },
+
+  drawWeightLineCharts() {
+    ["month", "halfYear"].forEach((key) => {
+      const chart = this.data[`${key}WeightChart`];
+      if (!chart?.points?.length) {
+        return;
+      }
+      wx.createSelectorQuery()
+        .in(this)
+        .select(`#weight-line-${key}`)
+        .fields({ node: true, size: true, rect: true }, (result) => {
+          if (!result?.node || !result.width || !result.height) {
+            return;
+          }
+          this.weightChartCanvases = this.weightChartCanvases || {};
+          this.weightChartCanvases[key] = {
+            canvas: result.node,
+            width: result.width,
+            height: result.height,
+            left: result.left,
+          };
+          const selectedIndex = this.data.activeWeightChartKey === key ? this.data.activeWeightPoint?.index : -1;
+          drawWeightLineCanvas(result.node, chart, selectedIndex, result.width, result.height);
+        })
+        .exec();
+    });
+  },
+
+  handleWeightChartTouch(event) {
+    const key = event.currentTarget.dataset.chartKey;
+    const chart = this.data[`${key}WeightChart`];
+    const canvasInfo = this.weightChartCanvases?.[key];
+    const touch = event.touches?.[0] || event.changedTouches?.[0];
+    if (!chart?.points?.length || !canvasInfo || !touch) {
+      return;
+    }
+
+    const clientX = Number(touch.clientX);
+    const localX = Number.isFinite(clientX) ? clientX - canvasInfo.left : Number(touch.x || 0);
+    const ratio = Math.max(0, Math.min(1, (localX - 46) / Math.max(canvasInfo.width - 64, 1)));
+    const index = Math.round(ratio * (chart.points.length - 1));
+    const point = chart.points[index];
+    this.setData({
+      activeWeightChartKey: key,
+      activeWeightPoint: {
+        index,
+        date: point.date,
+        value: `${point.value.toFixed(1)} kg`,
+        leftPercent: Math.max(13, Math.min(87, 8 + ratio * 84)).toFixed(1),
+      },
+    }, () => this.drawWeightLineCharts());
+  },
+
+  handleWeightChartTouchEnd() {
+    if (!this.data.activeWeightChartKey) {
+      return;
+    }
+    this.setData({
+      activeWeightChartKey: "",
+      activeWeightPoint: null,
+    }, () => this.drawWeightLineCharts());
   },
 });

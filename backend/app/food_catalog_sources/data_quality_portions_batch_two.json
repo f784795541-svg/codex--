@@ -1,0 +1,22 @@
+[
+  {"name":"鳕鱼","category":"海鲜","serving_size_g":150,"portion_hint":"熟鳕鱼一份可食部分常见约 120-180g；按去骨净重记录","source":"fixed_rule_portion_v1","source_updated_at":"2026-09-02"},
+  {"name":"虾仁","category":"海鲜","serving_size_g":120,"portion_hint":"熟虾仁一份常见约 100-140g；按去壳净重记录","source":"fixed_rule_portion_v1","source_updated_at":"2026-09-02"},
+  {"name":"带鱼","category":"海鲜","serving_size_g":150,"portion_hint":"带鱼去骨后的可食部分一份常见约 120-180g；按净重记录","source":"fixed_rule_portion_v1","source_updated_at":"2026-09-02"},
+  {"name":"鲈鱼","category":"海鲜","serving_size_g":150,"portion_hint":"鲈鱼去骨后的可食部分一份常见约 120-180g；按净重记录","source":"fixed_rule_portion_v1","source_updated_at":"2026-09-02"},
+  {"name":"牛奶","category":"乳制品","serving_size_g":250,"portion_hint":"常见一杯牛奶约 200-250ml；按包装净含量或实际倒入量记录","source":"fixed_rule_portion_v1","source_updated_at":"2026-09-02"},
+  {"name":"低脂牛奶","category":"乳制品","serving_size_g":250,"portion_hint":"常见一杯低脂牛奶约 200-250ml；按包装净含量或实际倒入量记录","source":"fixed_rule_portion_v1","source_updated_at":"2026-09-02"},
+  {"name":"无糖酸奶","category":"乳制品","serving_size_g":200,"portion_hint":"常见一杯无糖酸奶约 150-200g；按包装净含量记录","source":"fixed_rule_portion_v1","source_updated_at":"2026-09-02"},
+  {"name":"希腊酸奶","category":"乳制品","serving_size_g":200,"portion_hint":"常见一杯希腊酸奶约 150-200g；按包装净含量记录","source":"fixed_rule_portion_v1","source_updated_at":"2026-09-02"},
+  {"name":"奶酪","category":"乳制品","serving_size_g":30,"portion_hint":"奶酪单次常见一片或一小块约 20-30g；按包装净含量记录","source":"fixed_rule_portion_v1","source_updated_at":"2026-09-02"},
+  {"name":"豆腐","category":"豆制品","serving_size_g":150,"portion_hint":"豆腐一份常见约 120-180g；按烹调前净重记录","source":"fixed_rule_portion_v1","source_updated_at":"2026-09-02"},
+  {"name":"北豆腐","category":"豆制品","serving_size_g":150,"portion_hint":"北豆腐一份常见约 120-180g；按烹调前净重记录","source":"fixed_rule_portion_v1","source_updated_at":"2026-09-02"},
+  {"name":"豆浆","category":"豆制品","serving_size_g":250,"portion_hint":"常见一杯豆浆约 200-300ml；按实际饮用量记录","source":"fixed_rule_portion_v1","source_updated_at":"2026-09-02"},
+  {"name":"毛豆","category":"豆制品","serving_size_g":100,"portion_hint":"去荚毛豆仁一份常见约 80-120g；带荚购买时按可食豆仁估算","source":"fixed_rule_portion_v1","source_updated_at":"2026-09-02"},
+  {"name":"黄豆","category":"豆制品","serving_size_g":30,"portion_hint":"干黄豆一份常见约 25-35g；泡发或煮熟后仍按干重换算记录","source":"fixed_rule_portion_v1","source_updated_at":"2026-09-02"},
+  {"name":"红豆","category":"豆制品","serving_size_g":30,"portion_hint":"干红豆一份常见约 25-35g；泡发或煮熟后仍按干重换算记录","source":"fixed_rule_portion_v1","source_updated_at":"2026-09-02"},
+  {"name":"绿豆","category":"豆制品","serving_size_g":30,"portion_hint":"干绿豆一份常见约 25-35g；煮熟后仍按干重换算记录","source":"fixed_rule_portion_v1","source_updated_at":"2026-09-02"},
+  {"name":"橙子","category":"水果","serving_size_g":180,"portion_hint":"一个中等橙子去皮后可食部分常见约 150-200g；按可食部分记录","source":"fixed_rule_portion_v1","source_updated_at":"2026-09-02"},
+  {"name":"梨","category":"水果","serving_size_g":180,"portion_hint":"一个中等梨去核后可食部分常见约 150-220g；按可食部分记录","source":"fixed_rule_portion_v1","source_updated_at":"2026-09-02"},
+  {"name":"葡萄","category":"水果","serving_size_g":150,"portion_hint":"葡萄单次常见一小碗约 120-180g；按去枝后的可食部分记录","source":"fixed_rule_portion_v1","source_updated_at":"2026-09-02"},
+  {"name":"草莓","category":"水果","serving_size_g":150,"portion_hint":"草莓单次常见 6-10 颗约 120-180g；按实际可食部分记录","source":"fixed_rule_portion_v1","source_updated_at":"2026-09-02"}
+]

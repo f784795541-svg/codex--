@@ -1,0 +1,67 @@
+priority,group,query_term,matched_food_count,matched_food_names,status
+P0,百事薯片各口味,百事薯片,3,百事 原味薯片 | 百事 黄瓜味薯片 | 百事 番茄味薯片,catalog_has_match_review_images
+P0,百事薯片各口味,百事 原味薯片,1,百事 原味薯片,catalog_has_match_review_images
+P0,百事薯片各口味,百事 黄瓜味薯片,1,百事 黄瓜味薯片,catalog_has_match_review_images
+P0,百事薯片各口味,百事 番茄味薯片,1,百事 番茄味薯片,catalog_has_match_review_images
+P0,可爱多各口味,可爱多,7,和路雪 可爱多榛子牛奶巧克力口味冰淇淋 | 和路雪 可爱多柿柿如意甜筒冰淇淋 | 和路雪 迷你可爱多缤纷口味甜筒冰淇淋 | 和路雪 可爱多椰子布朗尼甜筒冰淇淋 | 和路雪 可爱多巧克力甜筒冰淇淋 | 和路雪 可爱多香草甜筒冰淇淋 | 和路雪 可爱多草莓甜筒冰淇淋,catalog_has_match_review_images
+P0,可爱多各口味,可爱多香草,1,和路雪 可爱多香草甜筒冰淇淋,catalog_has_match_review_images
+P0,可爱多各口味,可爱多巧克力,1,和路雪 可爱多巧克力甜筒冰淇淋,catalog_has_match_review_images
+P0,可爱多各口味,可爱多草莓,1,和路雪 可爱多草莓甜筒冰淇淋,catalog_has_match_review_images
+P0,八喜各口味,八喜,3,八喜 香草冰淇淋 | 八喜 巧克力冰淇淋 | 八喜 草莓冰淇淋,catalog_has_match_review_images
+P0,八喜各口味,八喜香草,1,八喜 香草冰淇淋,catalog_has_match_review_images
+P0,八喜各口味,八喜巧克力,1,八喜 巧克力冰淇淋,catalog_has_match_review_images
+P0,八喜各口味,八喜草莓,1,八喜 草莓冰淇淋,catalog_has_match_review_images
+P0,常见雪糕与冰淇淋,雪糕,39,伊利 巧乐兹经典巧脆棒 | 伊利 巧乐兹草莓脆皮雪糕 | 伊利 须尽欢香草巧克力冰淇淋 | 伊利 甄稀生巧冰淇淋 | 蒙牛 随变香草三层巧克力冰淇淋 | 蒙牛 绿色心情绿莎莎绿豆雪糕 | 哈根达斯 香草杯装冰淇淋 | 哈根达斯 草莓杯装冰淇淋,catalog_has_match_review_images
+P0,常见雪糕与冰淇淋,冰淇淋,42,麦当劳 奥利奥麦旋风 | 伊利 巧乐兹经典巧脆棒 | 伊利 巧乐兹草莓脆皮雪糕 | 伊利 须尽欢香草巧克力冰淇淋 | 伊利 甄稀生巧冰淇淋 | 蒙牛 随变香草三层巧克力冰淇淋 | 蒙牛 绿色心情绿莎莎绿豆雪糕 | 哈根达斯 香草杯装冰淇淋,catalog_has_match_review_images
+P0,常见雪糕与冰淇淋,老冰棍,1,伊利 老冰棍,catalog_has_match_review_images
+P0,常见雪糕与冰淇淋,小布丁,1,伊利 小布丁牛奶口味雪糕,catalog_has_match_review_images
+P0,常见雪糕与冰淇淋,梦龙,4,和路雪 梦龙松露巧克力口味冰淇淋 | 和路雪 梦龙巴旦木黑巧克力冰淇淋 | 和路雪 迷你梦龙缤纷口味冰淇淋 | 和路雪 梦龙经典香草冰淇淋,catalog_has_match_review_images
+P0,常见薯片与膨化零食,薯片,11,薯片 | 赛百味 海盐薯片 | 乐事原味薯片 | 乐事番茄味薯片 | 乐事黄瓜味薯片 | 乐事烧烤味薯片 | 百事 原味薯片 | 百事 黄瓜味薯片,catalog_has_match_review_images
+P0,常见薯片与膨化零食,乐事薯片,4,乐事原味薯片 | 乐事番茄味薯片 | 乐事黄瓜味薯片 | 乐事烧烤味薯片,catalog_has_match_review_images
+P0,常见薯片与膨化零食,品客,1,品客原味薯片,catalog_has_match_review_images
+P0,常见薯片与膨化零食,妙脆角,1,妙脆角原味玉米脆片,catalog_has_match_review_images
+P1,常见饮料与能量饮料,可口可乐,3,麦当劳 可口可乐 中杯 | 可口可乐 | 零度可口可乐,catalog_has_match_review_images
+P1,常见饮料与能量饮料,百事可乐,2,肯德基 百事可乐 中杯 | 百事可乐,catalog_has_match_review_images
+P1,常见饮料与能量饮料,红牛,1,红牛 维生素牛磺酸饮料,catalog_has_match_review_images
+P1,常见饮料与能量饮料,东鹏,1,东鹏特饮,catalog_has_match_review_images
+P1,常见饮料与能量饮料,茶饮料,1,常见茶饮料（含糖）,catalog_has_match_review_images
+P1,连锁餐厅单品,麦当劳,30,麦当劳 巨无霸 | 麦当劳 双层吉士汉堡 | 麦当劳 中薯条 | 麦当劳 麦辣鸡腿堡 | 麦当劳 麦辣鸡翅 | 麦当劳 麦乐鸡块 4块 | 麦当劳 麦乐鸡块 10块 | 麦当劳 麦香鸡,catalog_has_match_review_images
+P1,连锁餐厅单品,肯德基,24,肯德基 原味鸡 | 肯德基 薯条 | 肯德基 香辣鸡腿堡 | 肯德基 老北京鸡肉卷 | 肯德基 葡式蛋挞 | 肯德基 吮指原味鸡 2块 | 肯德基 新奥尔良烤翅 2块 | 肯德基 香辣鸡翅 2块,catalog_has_match_review_images
+P1,连锁餐厅单品,必胜客,7,必胜客 榴莲多多披萨 普通装 | 必胜客 超级至尊披萨 普通装 | 必胜客 鸡茸蘑菇汤 | 必胜客 夏威夷风情披萨 普通装 | 必胜客 黑椒牛肉意面 | 必胜客 香草凤尾虾 | 必胜客 奥尔良烤翅,catalog_has_match_review_images
+P1,连锁餐厅单品,赛百味,11,赛百味 火鸡胸三明治 6英寸 | 赛百味 香烤鸡肉三明治 6英寸 | 赛百味 金枪鱼三明治 6英寸 | 赛百味 意式BMT三明治 6英寸 | 赛百味 蔬菜三明治 6英寸 | 赛百味 经典牛排芝士三明治 6英寸 | 赛百味 巧克力曲奇 | 赛百味 冰拿铁 中杯,catalog_has_match_review_images
+P1,连锁餐厅单品,汉堡王,6,汉堡王 皇堡 | 汉堡王 天椒皇堡 | 汉堡王 薯霸王 中份 | 汉堡王 经典皇堡 | 汉堡王 双层芝士皇堡 | 汉堡王 薯霸王,catalog_has_match_review_images
+P1,便利店即食,7-11,26,7-11 即食鸡胸肉 | 7-11 金枪鱼饭团 | 7-11 茶叶蛋 | 7-11 低糖豆浆 | 7-11 全麦火腿蛋三明治 | 7-11 照烧鸡腿便当 | 7-11 鸡胸肉沙拉 | 7-11 关东煮海带结,catalog_has_match_review_images
+P1,便利店即食,全家,18,全家 沙拉鸡胸肉 | 全家 烤鸡胸饭团 | 全家 关东煮萝卜 | 全家 鸡肉卷 | 全家 无糖酸奶 | 全家 奥尔良鸡肉卷 | 全家 低糖鸡胸肉沙拉 | 全家 溏心蛋饭团,catalog_has_match_review_images
+P1,便利店即食,罗森,25,罗森 沙拉鸡胸肉 | 罗森 金枪鱼饭团 | 罗森 全麦鸡蛋三明治 | 罗森 茶叶蛋 | 罗森 无糖豆浆 | 罗森 火腿鸡蛋三明治 | 罗森 日式照烧鸡腿便当 | 罗森 关东煮海带结,catalog_has_match_review_images
+P1,便利店即食,便利店,8,7-11 黑椒牛肉意面 | 罗森 奥尔良鸡肉卷 | 罗森 照烧鸡排饭团 | 罗森 烤肠 | 罗森 关东煮萝卜 | 罗森 冰皮月亮蛋糕 | 罗森 无糖茉莉花茶 | 罗森 烤肠饭团,catalog_has_match_review_images
+P1,奶茶咖啡,喜茶,1,喜茶 多肉葡萄,catalog_has_match_review_images
+P1,奶茶咖啡,霸王茶姬,3,霸王茶姬 伯牙绝弦 | 霸王茶姬 万里木兰 | 霸王茶姬 桂馥兰香,catalog_has_match_review_images
+P1,奶茶咖啡,奈雪,1,奈雪 芋泥宝藏茶,catalog_has_match_review_images
+P1,奶茶咖啡,瑞幸,6,瑞幸 生椰拿铁 标准杯 | 瑞幸 厚乳拿铁 标准杯 | 瑞幸 冰美式 标准杯 | 瑞幸 橙C美式 标准杯 | 瑞幸 椰云拿铁 标准杯 | 瑞幸 茉莉轻乳茶 标准杯,catalog_has_match_review_images
+P1,奶茶咖啡,星巴克,7,星巴克 拿铁 中杯 | 星巴克 美式咖啡 中杯 | 星巴克 星冰乐 摩卡风味中杯 | 星巴克 蓝莓麦芬 | 星巴克 香草拿铁 中杯 | 星巴克 抹茶星冰乐 中杯 | 星巴克 冷萃咖啡 中杯,catalog_has_match_review_images
+P1,奶茶咖啡,奶茶,11,统一 阿萨姆奶茶 | 珍珠奶茶 | 蜜雪冰城 珍珠奶茶 | 茶百道 豆乳玉麒麟 | 古茗 云岭茉莉白 | 霸王茶姬 伯牙绝弦 | 霸王茶姬 万里木兰 | 霸王茶姬 桂馥兰香,catalog_has_match_review_images
+P1,奶茶咖啡,拿铁,10,拿铁 | 赛百味 冰拿铁 中杯 | 生椰拿铁 | 全家 冰拿铁 | 麦当劳 冰拿铁 中杯 | 瑞幸 生椰拿铁 标准杯 | 瑞幸 厚乳拿铁 标准杯 | 星巴克 拿铁 中杯,catalog_has_match_review_images
+P1,家常炒菜,宫保鸡丁,4,宫保鸡丁 | 宫保鸡丁饭 | 南城香 宫保鸡丁饭 | 家常 宫保鸡丁,catalog_has_match_review_images
+P1,家常炒菜,番茄炒蛋,2,番茄炒蛋 | 家常 番茄炒蛋,catalog_has_match_review_images
+P1,家常炒菜,鱼香肉丝,5,鱼香肉丝 | 鱼香肉丝饭 | 南城香 鱼香肉丝饭 | 留学生餐厅 鱼香肉丝饭 | 家常 鱼香肉丝,catalog_has_match_review_images
+P1,家常炒菜,回锅肉,3,回锅肉饭 | 南城香 回锅肉饭 | 回锅肉,catalog_has_match_review_images
+P1,家常炒菜,红烧肉,2,红烧肉 | 家常 红烧肉,catalog_has_match_review_images
+P1,家常炒菜,麻婆豆腐,3,麻婆豆腐 | 麻婆豆腐饭 | 家常 麻婆豆腐,catalog_has_match_review_images
+P1,地方菜与小吃,沙县,10,沙县小吃 香菇鸡腿饭 | 沙县小吃 卤鸡腿饭 | 沙县小吃 扁肉 | 沙县小吃 扁肉拌面 | 沙县小吃 花生酱拌面 | 沙县小吃 蒸饺 | 沙县小吃 鸡腿炖罐 | 沙县小吃 乌鸡炖罐,catalog_has_match_review_images
+P1,地方菜与小吃,兰州拉面,1,兰州拉面 牛肉面,catalog_has_match_review_images
+P1,地方菜与小吃,螺蛳粉,1,柳州螺蛳粉,catalog_has_match_review_images
+P1,地方菜与小吃,煎饼果子,2,煎饼果子 | 早餐摊 煎饼果子 鸡蛋版,catalog_has_match_review_images
+P1,地方菜与小吃,肉夹馍,1,肉夹馍,catalog_has_match_review_images
+P1,地方菜与小吃,烧烤,30,牛肋条 | 牛小排 | 羊肉串 | 牛肉串 | 鸡翅中 烧烤 | 烤鸡皮 | 烤五花肉 | 烤茄子,catalog_has_match_review_images
+P2,基础主食与早餐,米饭,4,米饭 | 糙米饭 | 黄焖鸡米饭 | 肯德基 香辣鸡排饭,catalog_has_match_review_images
+P2,基础主食与早餐,面条,1,面条,catalog_has_match_review_images
+P2,基础主食与早餐,馒头,2,馒头 | 早餐摊 花卷,catalog_has_match_review_images
+P2,基础主食与早餐,包子,3,包子 | 早餐摊 鲜肉包 | 早餐摊 青菜包,catalog_has_match_review_images
+P2,基础主食与早餐,饺子,3,饺子 | 味千拉面 日式煎饺 6只 | 沙县小吃 蒸饺,catalog_has_match_review_images
+P2,基础主食与早餐,全麦面包,1,全麦面包,catalog_has_match_review_images
+P2,水果蔬菜,苹果,2,苹果 | 麦当劳 苹果派,catalog_has_match_review_images
+P2,水果蔬菜,香蕉,3,香蕉 | 和路雪 迷你可爱多缤纷口味甜筒冰淇淋 | 香蕉片,catalog_has_match_review_images
+P2,水果蔬菜,橙子,1,橙子,catalog_has_match_review_images
+P2,水果蔬菜,西红柿,2,西红柿炒鸡蛋 | 家常 番茄炒蛋,catalog_has_match_review_images
+P2,水果蔬菜,西兰花,4,西兰花 | 西兰花炒牛肉 | 西兰花炒虾仁 | 蒜蓉西兰花,catalog_has_match_review_images
+P2,水果蔬菜,黄瓜,4,黄瓜 | 凉拌黄瓜 | 乐事黄瓜味薯片 | 百事 黄瓜味薯片,catalog_has_match_review_images

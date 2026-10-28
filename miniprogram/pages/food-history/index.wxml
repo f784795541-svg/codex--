@@ -1,0 +1,74 @@
+<view class="screen screen-food-history">
+  <view class="hero-panel food-history-hero">
+    <view class="food-history-topbar">
+      <view class="food-history-back" bindtap="goBack" hover-class="tap-feedback-hover" hover-stay-time="70">返回</view>
+      <view class="food-history-date">{{reportDateLabel}}</view>
+    </view>
+    <view class="hero-kicker">TODAY FOOD LOG</view>
+    <view class="hero-title">今天吃了什么</view>
+    <view class="hero-subtitle">{{summaryText}}</view>
+    <view class="hero-pill-row">
+      <view class="hero-pill">
+        <text class="hero-pill-label">记录条数</text>
+        <text class="hero-pill-value">{{foodItems.length}} 条</text>
+      </view>
+      <view class="hero-pill">
+        <text class="hero-pill-label">累计热量</text>
+        <text class="hero-pill-value">{{totalCalories}} kcal</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="card" wx:if="{{foodItems.length}}">
+    <view class="card-head">
+      <view>
+        <view class="section-title">今日饮食明细</view>
+        <view class="section-caption">每一条都保留时间、克数、热量和三大营养素。</view>
+      </view>
+      <view class="card-badge">长期查看</view>
+    </view>
+    <view class="food-history-list">
+      <view class="food-history-item" wx:for="{{foodItems}}" wx:key="id">
+        <view class="food-history-item-head">
+          <view class="food-history-item-main">
+            <view class="food-history-item-title">{{item.food_name}}</view>
+            <view class="food-history-item-meta">{{item.weight_g}} g · {{item.time}}<text wx:if="{{item.cooking_method}}"> · {{item.cooking_method}}</text></view>
+          </view>
+          <view class="food-history-item-side">
+            <view class="food-history-calorie">{{item.calories}} kcal</view>
+            <button
+              class="food-history-delete-button"
+              bindtap="handleDeleteFoodLog"
+              data-log-id="{{item.id}}"
+              data-food-name="{{item.food_name}}"
+              disabled="{{deletingLogId === item.id}}"
+            >
+              {{deletingLogId === item.id ? "删除中" : "删除"}}
+            </button>
+          </view>
+        </view>
+        <view class="food-history-macro-grid">
+          <view class="food-history-macro-card">
+            <view class="food-history-macro-label">蛋白</view>
+            <view class="food-history-macro-value">{{item.protein}} g</view>
+          </view>
+          <view class="food-history-macro-card">
+            <view class="food-history-macro-label">脂肪</view>
+            <view class="food-history-macro-value">{{item.fat}} g</view>
+          </view>
+          <view class="food-history-macro-card">
+            <view class="food-history-macro-label">碳水</view>
+            <view class="food-history-macro-value">{{item.carbs}} g</view>
+          </view>
+        </view>
+      </view>
+    </view>
+    <button class="button food-history-back-button" bindtap="goBack">返回记录页</button>
+  </view>
+
+  <view class="empty" wx:else>
+    <text class="empty-title">还没有今天的饮食记录</text>
+    <text class="empty-copy">可以先回到记录页搜索食物，提交后这里就会长期保留今天已录入的内容。</text>
+    <button class="button food-history-back-button" bindtap="goBack">去记一条</button>
+  </view>
+</view>

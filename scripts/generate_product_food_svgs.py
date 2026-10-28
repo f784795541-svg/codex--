@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import argparse
 import html
 import json
 import sys
@@ -322,6 +323,13 @@ def ensure_asset(path: Path, content: str) -> None:
 
 
 def main() -> None:
+    parser = argparse.ArgumentParser(description="Generate local food illustration assets.")
+    parser.add_argument(
+        "--missing-only",
+        action="store_true",
+        help="Generate only image keys missing from at least one client asset directory.",
+    )
+    args = parser.parse_args()
     foods = load_foods()
     frontend_assets = list_assets(FRONTEND_ASSET_DIR)
     miniprogram_assets = list_assets(MINIPROGRAM_ASSET_DIR)
@@ -343,6 +351,9 @@ def main() -> None:
         frontend_asset = frontend_assets.get(image_key)
         miniprogram_asset = miniprogram_assets.get(image_key)
         if frontend_asset and miniprogram_asset:
+            if args.missing_only:
+                skipped += 1
+                continue
             should_overwrite = tier in {"A", "B"} and frontend_asset.suffix.lower() == ".svg" and miniprogram_asset.suffix.lower() == ".svg"
             if not should_overwrite:
                 skipped += 1

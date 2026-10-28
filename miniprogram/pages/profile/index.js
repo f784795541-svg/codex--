@@ -41,6 +41,7 @@ function buildPreviewState(user) {
 
   return {
     user,
+    username: user.username || "",
     name: user.name || "",
     age: String(user.age || ""),
     height_cm: String(user.height_cm || ""),
@@ -65,12 +66,15 @@ function buildPreviewState(user) {
 Page({
   data: {
     user: null,
+    username: "",
     name: "",
     age: "",
     height_cm: "",
     weight_kg: "",
     target_weight_kg: "",
     target_sleep_hours: "",
+    currentPassword: "",
+    newPassword: "",
     ageOptions: AGE_OPTIONS,
     heightOptions: HEIGHT_OPTIONS,
     weightOptions: WEIGHT_OPTIONS,
@@ -95,7 +99,9 @@ Page({
     showEmptyState: false,
     loading: true,
     saving: false,
+    passwordSaving: false,
     saveButtonText: "保存设置",
+    passwordSaveButtonText: "修改密码",
   },
 
   onLoad() {
@@ -248,6 +254,7 @@ Page({
       return;
     }
 
+    const username = this.data.username.trim();
     const name = this.data.name.trim();
     const age = asNumberInRange(this.data.age, 1, 120);
     const heightCm = asPositiveNumber(this.data.height_cm);
@@ -255,7 +262,7 @@ Page({
     const targetWeightKg = asPositiveNumber(this.data.target_weight_kg);
     const targetSleepHours = asNumberInRange(this.data.target_sleep_hours, 4, 12);
 
-    if (!isFilled(name) || !age || !heightCm || !weightKg || !targetWeightKg || !targetSleepHours) {
+    if (!isFilled(username) || username.length < 3 || !isFilled(name) || !age || !heightCm || !weightKg || !targetWeightKg || !targetSleepHours) {
       wx.showToast({
         title: "请检查资料填写是否完整有效",
         icon: "none",
@@ -270,6 +277,7 @@ Page({
       });
       const result = await post("/user/update", {
         user_id: this.data.user.id,
+        username,
         name,
         age,
         height_cm: heightCm,
@@ -305,6 +313,81 @@ Page({
       this.setData({
         saving: false,
         saveButtonText: "保存设置",
+      });
+    }
+  },
+
+  async submitPasswordChange() {
+    if (!this.data.user || this.data.passwordSaving) {
+      return;
+    }
+
+    const username = this.data.username.trim();
+    const name = this.data.name.trim();
+    const currentPassword = this.data.currentPassword.trim();
+    const newPassword = this.data.newPassword.trim();
+
+    if (!isFilled(username) || username.length < 3 || !isFilled(name)) {
+      wx.showToast({
+        title: "请输入至少 3 位账号和昵称",
+        icon: "none",
+      });
+      return;
+    }
+
+    if (!currentPassword || !newPassword) {
+      wx.showToast({
+        title: "请输入旧密码和新密码",
+        icon: "none",
+      });
+      return;
+    }
+
+    if (newPassword.length < 6) {
+      wx.showToast({
+        title: "新密码至少 6 位",
+        icon: "none",
+      });
+      return;
+    }
+
+    try {
+      this.setData({
+        passwordSaving: true,
+        passwordSaveButtonText: "修改中...",
+      });
+      const result = await post("/user/update", {
+        user_id: this.data.user.id,
+        username,
+        name,
+        current_password: currentPassword,
+        new_password: newPassword,
+      });
+      getApp().setCurrentUser(result.user);
+      const nextState = buildPreviewState(result.user);
+      this.setData({
+        ...nextState,
+        currentPassword: "",
+        newPassword: "",
+        showProfileContent: true,
+        showEmptyState: false,
+      });
+      wx.showToast({
+        title: "密码已更新",
+        icon: "success",
+      });
+    } catch (error) {
+      if (isUnauthorizedRedirectError(error)) {
+        return;
+      }
+      wx.showToast({
+        title: error.message,
+        icon: "none",
+      });
+    } finally {
+      this.setData({
+        passwordSaving: false,
+        passwordSaveButtonText: "修改密码",
       });
     }
   },

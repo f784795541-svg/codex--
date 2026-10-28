@@ -1,0 +1,89 @@
+<view class="screen screen-food-recent">
+  <view class="hero-panel food-recent-hero">
+    <view class="food-recent-topbar">
+      <view class="food-recent-back" bindtap="goBack" hover-class="tap-feedback-hover" hover-stay-time="70">返回</view>
+      <view class="food-recent-date">{{startDate}} - {{endDate}}</view>
+    </view>
+    <view class="hero-kicker">FOOD HISTORY</view>
+    <view class="hero-title">最近饮食记录</view>
+    <view class="hero-subtitle">按天回看摄入热量、蛋白质、脂肪和碳水，记录细节集中放在这里。</view>
+    <view class="food-recent-range-tabs">
+      <view
+        wx:for="{{rangeTabs}}"
+        wx:key="days"
+        class="food-recent-range-tab {{rangeDays === item.days ? 'food-recent-range-tab-active' : ''}}"
+        data-days="{{item.days}}"
+        bindtap="switchRange"
+      >{{item.label}}</view>
+    </view>
+  </view>
+
+  <view class="card food-recent-summary-card">
+    <view class="card-head">
+      <view>
+        <view class="card-kicker">区间汇总</view>
+        <view class="section-title">这段时间吃得怎么样</view>
+      </view>
+      <view class="card-badge">{{rangeDays}} 天</view>
+    </view>
+    <view class="food-recent-summary-grid">
+      <view class="food-recent-summary-item food-recent-summary-item-main">
+        <view class="food-recent-summary-label">总热量</view>
+        <view class="food-recent-summary-value">{{totalCalories}} kcal</view>
+      </view>
+      <view class="food-recent-summary-item">
+        <view class="food-recent-summary-label">蛋白质</view>
+        <view class="food-recent-summary-value">{{totalProtein}} g</view>
+      </view>
+      <view class="food-recent-summary-item">
+        <view class="food-recent-summary-label">脂肪</view>
+        <view class="food-recent-summary-value">{{totalFat}} g</view>
+      </view>
+      <view class="food-recent-summary-item">
+        <view class="food-recent-summary-label">碳水</view>
+        <view class="food-recent-summary-value">{{totalCarbs}} g</view>
+      </view>
+    </view>
+  </view>
+
+  <view class="card food-recent-record-card">
+    <view class="card-head">
+      <view>
+        <view class="card-kicker">每日明细</view>
+        <view class="section-title">按日期查看饮食数据</view>
+      </view>
+      <view class="card-badge">{{records.length}} 天</view>
+    </view>
+
+    <view wx:if="{{loading}}" class="empty food-recent-empty">
+      <text class="empty-title">饮食历史加载中</text>
+    </view>
+
+    <view wx:elif="{{records.length}}" class="food-recent-record-list">
+      <view class="food-recent-day" wx:for="{{records}}" wx:key="date">
+        <view class="food-recent-day-head">
+          <view>
+            <view class="food-recent-day-date">{{item.date}}</view>
+            <view class="food-recent-day-note">{{item.food_items.length ? item.food_items.length + ' 条饮食记录' : '当天暂无饮食记录'}}</view>
+          </view>
+          <view class="food-recent-day-calories">{{item.total_intake_kcal}} kcal</view>
+        </view>
+        <view class="food-recent-macro-grid">
+          <view class="food-recent-macro-item"><text>蛋白质</text><strong>{{item.protein}} g</strong></view>
+          <view class="food-recent-macro-item"><text>脂肪</text><strong>{{item.fat}} g</strong></view>
+          <view class="food-recent-macro-item"><text>碳水</text><strong>{{item.carbs}} g</strong></view>
+        </view>
+        <view wx:if="{{item.food_items.length}}" class="food-recent-food-list">
+          <view class="food-recent-food-chip" wx:for="{{item.food_items}}" wx:key="id" wx:for-item="food">
+            <text>{{food.food_name}}</text><text>{{food.weight_g}} g</text>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <view wx:else class="empty food-recent-empty">
+      <text class="empty-title">还没有饮食记录</text>
+      <text class="empty-copy">回到记录页搜索食物并提交后，这里会按日期自动汇总。</text>
+    </view>
+  </view>
+</view>

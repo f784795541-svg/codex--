@@ -98,24 +98,45 @@
       </view>
     </view>
 
-    <view class="card" wx:if="{{recentWeightItems.length}}">
+    <view class="card" wx:if="{{recentWeightItems.length || recentFoodItems.length}}">
       <view class="card-head">
         <view>
           <text class="card-kicker">近期变化</text>
           <view class="section-title">最近体重</view>
         </view>
-        <view class="card-badge">{{recentWeightItems.length}} 条</view>
+        <view class="card-badge">默认 7 条</view>
       </view>
       <view class="card-note">最近录入的体重会优先显示在这里，方便你快速确认趋势有没有回到预期节奏。</view>
-      <view class="support-inline-copy">只保留最近几条样本，避免首页被长列表拖长。</view>
       <view class="weight-list">
-        <view class="weight-row" wx:for="{{recentWeightItems}}" wx:key="id">
+        <view class="weight-row" wx:for="{{displayedRecentWeightItems}}" wx:key="id">
           <view>
             <view class="weight-value">{{item.weight_kg}} kg</view>
             <view class="weight-date">{{item.record_date}}{{item.record_time ? ' ' + item.record_time : ''}}</view>
           </view>
           <view class="weight-chip">已记录</view>
         </view>
+      </view>
+      <button class="button-secondary recent-expand-button" wx:if="{{recentWeightItems.length > 7}}" bindtap="toggleRecentWeights">
+        {{showAllRecentWeights ? '收起历史体重' : '展开更多体重'}}
+      </button>
+
+      <view class="recent-food-section" wx:if="{{recentFoodItems.length}}">
+        <view class="recent-food-section-head">
+          <view>
+            <view class="section-title">最近饮食</view>
+            <view class="support-inline-copy">近 7 天默认展示，按天查看核心摄入热量。</view>
+          </view>
+          <view class="card-badge">{{recentFoodItems.length}} 天</view>
+        </view>
+        <view class="weight-list">
+          <view class="weight-row" wx:for="{{displayedRecentFoodItems}}" wx:key="date">
+            <view class="weight-date weight-date-strong">{{item.date}}</view>
+            <view class="weight-value">{{item.intake_kcal}} kcal</view>
+          </view>
+        </view>
+        <button class="button-secondary recent-expand-button" wx:if="{{recentFoodItems.length > 7}}" bindtap="toggleRecentFoods">
+          {{showAllRecentFoods ? '收起历史饮食' : '展开更多饮食'}}
+        </button>
       </view>
     </view>
   </block>

@@ -1,0 +1,23 @@
+[
+  {"name":"面条","category":"主食","serving_size_g":200,"portion_hint":"熟面条常见一碗约 180-220g；按实际面量调整","source":"fixed_rule_portion_v1","source_updated_at":"2026-09-02"},
+  {"name":"全麦面包","category":"主食","serving_size_g":70,"portion_hint":"常见两片全麦面包约 60-80g；按包装净重调整","source":"fixed_rule_portion_v1","source_updated_at":"2026-09-02"},
+  {"name":"白面包","category":"主食","serving_size_g":70,"portion_hint":"常见两片白面包约 60-80g；按包装净重调整","source":"fixed_rule_portion_v1","source_updated_at":"2026-09-02"},
+  {"name":"燕麦片","category":"主食","serving_size_g":50,"portion_hint":"干燕麦常见一份约 40-60g；冲泡后按干重记录","source":"fixed_rule_portion_v1","source_updated_at":"2026-09-02"},
+  {"name":"红薯","category":"主食","serving_size_g":200,"portion_hint":"一根中等蒸/烤红薯可食部分常见约 180-220g","source":"fixed_rule_portion_v1","source_updated_at":"2026-09-02"},
+  {"name":"土豆","category":"主食","serving_size_g":200,"portion_hint":"一个中等土豆可食部分常见约 180-220g；去皮后记录","source":"fixed_rule_portion_v1","source_updated_at":"2026-09-02"},
+  {"name":"南瓜","category":"主食","serving_size_g":250,"portion_hint":"熟南瓜常见一小碗约 200-300g；去皮去籽后记录","source":"fixed_rule_portion_v1","source_updated_at":"2026-09-02"},
+  {"name":"山药","category":"主食","serving_size_g":150,"portion_hint":"蒸熟山药常见一段约 120-180g；去皮后记录","source":"fixed_rule_portion_v1","source_updated_at":"2026-09-02"},
+  {"name":"饺子","category":"主食","serving_size_g":180,"portion_hint":"常见水饺 8-10 只约 160-200g；按实际个数和净重调整","source":"fixed_rule_portion_v1","source_updated_at":"2026-09-02"},
+  {"name":"鸡蛋","category":"蛋类","serving_size_g":50,"portion_hint":"一枚中等鸡蛋去壳可食部分约 45-55g","source":"fixed_rule_portion_v1","source_updated_at":"2026-09-02"},
+  {"name":"鸭蛋","category":"蛋类","serving_size_g":60,"portion_hint":"一枚中等鸭蛋去壳可食部分约 55-65g","source":"fixed_rule_portion_v1","source_updated_at":"2026-09-02"},
+  {"name":"鸡腿肉","category":"肉类","serving_size_g":150,"portion_hint":"去骨熟鸡腿肉常见一份约 130-170g；带骨需按可食部分记录","source":"fixed_rule_portion_v1","source_updated_at":"2026-09-02"},
+  {"name":"鸡翅","category":"肉类","serving_size_g":120,"portion_hint":"常见鸡翅 3-4 只可食部分约 100-140g；按实际可食部分调整","source":"fixed_rule_portion_v1","source_updated_at":"2026-09-02"},
+  {"name":"牛里脊","category":"肉类","serving_size_g":150,"portion_hint":"熟牛里脊常见一份约 120-180g；按实际净重调整","source":"fixed_rule_portion_v1","source_updated_at":"2026-09-02"},
+  {"name":"牛腱","category":"肉类","serving_size_g":150,"portion_hint":"熟牛腱常见一份约 120-180g；卤制后按可食部分记录","source":"fixed_rule_portion_v1","source_updated_at":"2026-09-02"},
+  {"name":"瘦牛肉","category":"肉类","serving_size_g":150,"portion_hint":"熟瘦牛肉常见一份约 120-180g；按实际净重调整","source":"fixed_rule_portion_v1","source_updated_at":"2026-09-02"},
+  {"name":"猪里脊","category":"肉类","serving_size_g":150,"portion_hint":"熟猪里脊常见一份约 120-180g；按实际净重调整","source":"fixed_rule_portion_v1","source_updated_at":"2026-09-02"},
+  {"name":"瘦猪肉","category":"肉类","serving_size_g":150,"portion_hint":"熟瘦猪肉常见一份约 120-180g；按实际净重调整","source":"fixed_rule_portion_v1","source_updated_at":"2026-09-02"},
+  {"name":"羊腿肉","category":"肉类","serving_size_g":150,"portion_hint":"熟羊腿肉常见一份约 120-180g；去骨后按可食部分记录","source":"fixed_rule_portion_v1","source_updated_at":"2026-09-02"},
+  {"name":"金枪鱼","category":"海鲜","serving_size_g":120,"portion_hint":"熟金枪鱼常见一份约 100-140g；罐头按沥干后净重记录","source":"fixed_rule_portion_v1","source_updated_at":"2026-09-02"},
+  {"name":"三文鱼","category":"海鲜","serving_size_g":120,"portion_hint":"一块三文鱼常见可食部分约 100-140g；按实际净重调整","source":"fixed_rule_portion_v1","source_updated_at":"2026-09-02"}
+]

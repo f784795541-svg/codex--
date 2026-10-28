@@ -1,0 +1,20 @@
+HTTP/1.1 200 OK
+Date: Tue, 04 Aug 2026 18:54:06 GMT
+Content-Type: image/png
+Content-Length: 476680
+Connection: keep-alive
+Access-Control-Expose-Headers: Request-Context
+Cache-Control: public, max-age=31536000
+ETag: 231e9b7a7a284d9982360446b2a63233
+Last-Modified: Wed, 12 Oct 2022 10:03:34 GMT
+Set-Cookie: haagendazs-cn#lang=zh-CN; path=/; secure; SameSite=Lax
+Set-Cookie: ARRAffinity=84e417fbe3598de1eeeb66f5b2dc3c80b1781f2c5cb72064764f1e3eded7c177;Path=/;HttpOnly;Secure;Domain=www.haagendazs.com.cn
+Set-Cookie: ARRAffinitySameSite=84e417fbe3598de1eeeb66f5b2dc3c80b1781f2c5cb72064764f1e3eded7c177;Path=/;HttpOnly;SameSite=None;Secure;Domain=www.haagendazs.com.cn
+Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
+X-Frame-Options: SAMEORIGIN
+Request-Context: appId=cid-v1:7cb0f355-7315-4fed-8329-880e3b7148fa
+Content-Disposition: inline; filename="belgian-chocolate-pint-cn.png"
+x-azure-ref: 20260804T185406Z-17b78b64df7n4jjdhC1SELzpac0000000bgg000000002n0m
+X-Cache: CONFIG_NOCACHE
+Accept-Ranges: bytes
+

@@ -29,7 +29,7 @@ const DEFAULT_FOOD_WEIGHT = 100;
 const FOOD_WEIGHT_OPTIONS = buildNumberOptions({ start: FOOD_WEIGHT_STEP, end: 1000, step: FOOD_WEIGHT_STEP, suffix: " g" });
 const WORKOUT_DURATION_OPTIONS = buildNumberOptions({ start: 5, end: 240, step: 5, suffix: " 分钟" });
 const WORKOUT_CALORIE_OPTIONS = buildNumberOptions({ start: 10, end: 2000, step: 10, suffix: " kcal" });
-const BODY_WEIGHT_OPTIONS = buildNumberOptions({ start: 30, end: 180, step: 0.5, decimals: 1, suffix: " kg" });
+const BODY_WEIGHT_OPTIONS = buildNumberOptions({ start: 30, end: 180, step: 0.1, decimals: 1, suffix: " kg" });
 const PORTION_RANGE_PATTERN = /(\d+(?:\.\d+)?)\s*[-~至]\s*(\d+(?:\.\d+)?)\s*(?:g|克)/gi;
 const PORTION_SINGLE_PATTERN = /(\d+(?:\.\d+)?)\s*(?:g|克)/gi;
 
@@ -117,10 +117,10 @@ function inferFoodServingSize(food) {
   if (/米饭|糙米饭|寿司饭/.test(name)) {
     return 220;
   }
-  if (/面条|意面|意大利面|河粉|米线|粉丝|米粉|凉面|拌面|面片|刀削面|拉面|牛肉面|小面|螺蛳粉|酸辣粉|热干面|馄饨面|云吞面/.test(name)) {
+  if (/面条|意面|河粉|米线|粉丝|凉面|拌面|刀削面|拉面|小面|螺蛳粉|酸辣粉|热干面|馄饨面|云吞面/.test(name)) {
     return 350;
   }
-  if (/粥|汤面|汤粉/.test(name)) {
+  if (/汤面|汤粉/.test(name)) {
     return 300;
   }
   if (/燕麦|麦片/.test(name)) {
@@ -132,7 +132,7 @@ function inferFoodServingSize(food) {
   if (/玉米|红薯|紫薯|土豆|山药|南瓜|芋头/.test(name)) {
     return 180;
   }
-  if (/鸡胸|火鸡胸|牛肉|牛腱|牛排|猪里脊|猪肉|羊肉|鸭胸|鱼|三文鱼|鳕鱼|虾|虾仁|贝|鱿鱼|海参/.test(name)) {
+  if (/鸡胸|火鸡胸|牛肉|牛腩|牛排|猪里脊|猪肉|羊肉|鸭胸|鱼|三文鱼|鳕鱼|虾|虾仁|贝类|海参/.test(name)) {
     return 160;
   }
   if (/鸡蛋|炒蛋|蛋羹|蒸蛋/.test(name) || category === "蛋类") {
@@ -147,7 +147,7 @@ function inferFoodServingSize(food) {
   if (/香蕉/.test(name)) {
     return 120;
   }
-  if (/苹果|梨|橙|橘|柚|桃|李|猕猴桃|火龙果|芒果/.test(name)) {
+  if (/苹果|梨|橙|橘|桃|李|猕猴桃|火龙果|芒果/.test(name)) {
     return 180;
   }
   if (/葡萄|草莓|蓝莓|车厘子|樱桃/.test(name)) {
@@ -233,11 +233,32 @@ function enrichFoodSearchResult(food) {
   };
 }
 
+function formatFoodLogPreview(foodItems) {
+  if (!Array.isArray(foodItems) || !foodItems.length) {
+    return {
+      summary: "今天还没有饮食记录，可以先从下面搜索并录入第一条。",
+      count: 0,
+      preview: [],
+    };
+  }
+
+  const totalCalories = Math.round(
+    foodItems.reduce((sum, item) => sum + (Number(item.calories) || 0), 0)
+  );
+  const latestItem = foodItems[foodItems.length - 1];
+
+  return {
+    summary: `今天已记录 ${foodItems.length} 条，累计约 ${totalCalories} kcal，最新一条是 ${latestItem.food_name}。`,
+    count: foodItems.length,
+    preview: foodItems.slice(-3).reverse(),
+  };
+}
+
 const RECORD_SCROLL_TARGETS = {
-  food: { top: "#record-food-card", bottom: "#record-food-action" },
-  workout: { top: "#record-workout-card", bottom: "#record-workout-action" },
-  sleep: { top: "#record-sleep-card", bottom: "#record-sleep-action" },
-  weight: { top: "#record-weight-card", bottom: "#record-weight-action" },
+  food: { top: "#record-top-anchor", selected: "#record-food-selected", bottom: "#record-food-action" },
+  workout: { top: "#record-top-anchor", bottom: "#record-workout-action" },
+  sleep: { top: "#record-top-anchor", bottom: "#record-sleep-action" },
+  weight: { top: "#record-top-anchor", bottom: "#record-weight-action" },
 };
 
 function getRecordScrollSelector(tabKey, kind) {
@@ -254,7 +275,7 @@ Page({
       { key: "food", label: "饮食" },
       { key: "workout", label: "运动" },
       { key: "sleep", label: "睡眠" },
-      { key: "weight", label: "体重" }
+      { key: "weight", label: "体重" },
     ],
     foodQuery: "",
     foodResults: [],
@@ -283,6 +304,9 @@ Page({
     hasSearchedFood: false,
     foodResultSummary: "先搜食物，再从结果里点选。",
     foodPreview: "选中食物后会在这里预估本次摄入热量。",
+    dailyFoodSummary: "今天还没有饮食记录，可以先从下面搜索并录入第一条。",
+    dailyFoodCount: 0,
+    dailyFoodPreview: [],
     workoutPreview: "先选择运动类型，再补时长和热量。",
     sleepPreview: "按真实时间填写后会自动换算睡眠时长。",
     weightPreview: "输入体重后会在这里提示和当前档案的差值。",
@@ -309,10 +333,12 @@ Page({
       return;
     }
     this.refreshDynamicTimes(user);
+    this.loadTodayFoodHistory(user);
     if (!this.data.workoutOptions.length) {
       this.loadWorkoutOptions();
     }
     this.startAutoTimeTicker();
+    this.scrollToRecordSection(this.data.activeTab, "top");
   },
 
   onHide() {
@@ -441,16 +467,31 @@ Page({
   switchTab(event) {
     const activeTab = event.currentTarget.dataset.tab;
     this.syncActiveTabMeta(activeTab);
-    this.setData({
-      activeTab,
-    }, () => {
-      this.scrollToRecordSection(activeTab, "top");
-    });
+    this.setData(
+      {
+        activeTab,
+      },
+      () => {
+        this.scrollToRecordSection(activeTab, "top");
+      }
+    );
   },
 
   goTrend() {
     wx.switchTab({
       url: "/pages/trend/index",
+    });
+  },
+
+  goFoodHistory() {
+    wx.navigateTo({
+      url: "/pages/food-history/index",
+    });
+  },
+
+  goRecentFoodHistory() {
+    wx.navigateTo({
+      url: "/pages/food-recent/index",
     });
   },
 
@@ -469,10 +510,10 @@ Page({
     this.scrollTimer = setTimeout(() => {
       wx.pageScrollTo({
         selector,
-        duration: kind === "bottom" ? 300 : 260,
-        offsetTop: kind === "bottom" ? 16 : 12,
+        duration: kind === "bottom" ? 260 : 220,
+        offsetTop: kind === "bottom" ? 16 : 70,
       });
-    }, 56);
+    }, 24);
   },
 
   syncActiveTabMeta(tabKey) {
@@ -481,6 +522,46 @@ Page({
       activeTabLabel: meta.label,
       activeTabNote: meta.note,
     });
+  },
+
+  async loadTodayFoodHistory(user = null) {
+    const currentUser = user || ensureUser();
+    if (!currentUser || this.loadingTodayFoodHistory) {
+      return;
+    }
+
+    this.loadingTodayFoodHistory = true;
+
+    try {
+      const report = await get(
+        "/report/daily",
+        {
+          user_id: currentUser.id,
+          report_date: getCurrentDate(),
+        },
+        {
+          cacheMs: 0,
+        }
+      );
+      const foodItems = Array.isArray(report?.food_items) ? report.food_items : [];
+      const historyView = formatFoodLogPreview(foodItems);
+      this.setData({
+        dailyFoodSummary: historyView.summary,
+        dailyFoodCount: historyView.count,
+        dailyFoodPreview: historyView.preview,
+      });
+    } catch (error) {
+      if (isUnauthorizedRedirectError(error)) {
+        return;
+      }
+      this.setData({
+        dailyFoodSummary: "今天饮食记录暂时加载失败，可以稍后再看。",
+        dailyFoodCount: 0,
+        dailyFoodPreview: [],
+      });
+    } finally {
+      this.loadingTodayFoodHistory = false;
+    }
   },
 
   handleInput(event) {
@@ -499,16 +580,13 @@ Page({
       nextState.weightTimeAuto = false;
     }
 
-    this.setData(
-      nextState,
-      () => {
-        if (field === "foodQuery") {
-          this.scheduleFoodSearch();
-          return;
-        }
-        this.refreshDerivedState();
+    this.setData(nextState, () => {
+      if (field === "foodQuery") {
+        this.scheduleFoodSearch();
+        return;
       }
-    );
+      this.refreshDerivedState();
+    });
   },
 
   handleValuePicker(event) {
@@ -549,8 +627,10 @@ Page({
       foodResultSummary = "输入关键词后会自动匹配数据库里的相关食物。";
     } else if (this.data.hasSearchedFood && !foodCount) {
       foodResultSummary = "没有找到匹配结果，建议换更短的关键词。";
+    } else if (this.data.selectedFood) {
+      foodResultSummary = `已选择 ${this.data.selectedFood.name}，可直接填写克数和时间。`;
     } else if (foodCount) {
-      foodResultSummary = `共找到 ${foodCount} 条结果，已自动展开并默认选中第一项。`;
+      foodResultSummary = `共找到 ${foodCount} 条结果，请点选最符合的一项。`;
     }
 
     this.setData({
@@ -627,30 +707,29 @@ Page({
 
     const requestQuery = query;
     try {
-      const rawFoodResults = await get("/food/search", {
-        q: requestQuery,
-        limit: 12,
-        platform: "miniprogram",
-      }, {
-        cacheMs: 0,
-      });
+      const rawFoodResults = await get(
+        "/food/search",
+        {
+          q: requestQuery,
+          limit: 12,
+          platform: "miniprogram",
+        },
+        {
+          cacheMs: 0,
+        }
+      );
       const foodResults = Array.isArray(rawFoodResults) ? rawFoodResults.map(enrichFoodSearchResult) : [];
       if (requestQuery !== this.data.foodQuery.trim()) {
         return;
       }
-      const defaultFoodWeightState = foodResults.length
-        ? buildFoodWeightState(foodResults[0])
-        : {
-            foodWeight: String(DEFAULT_FOOD_WEIGHT),
-            foodWeightIndex: getOptionIndex(FOOD_WEIGHT_OPTIONS, DEFAULT_FOOD_WEIGHT),
-          };
       this.setData(
         {
           hasSearchedFood: true,
           foodResults,
-          selectedFoodIndex: foodResults.length ? 0 : -1,
-          selectedFood: foodResults.length ? foodResults[0] : null,
-          ...defaultFoodWeightState,
+          selectedFoodIndex: -1,
+          selectedFood: null,
+          foodWeight: String(DEFAULT_FOOD_WEIGHT),
+          foodWeightIndex: getOptionIndex(FOOD_WEIGHT_OPTIONS, DEFAULT_FOOD_WEIGHT),
         },
         () => {
           this.refreshDerivedState();
@@ -669,11 +748,10 @@ Page({
 
   selectFood(event) {
     const selectedFoodIndex = Number(event.currentTarget.dataset.index);
-    if (selectedFoodIndex === this.data.selectedFoodIndex) {
-      this.scrollToRecordSection("food", "bottom");
+    const selectedFood = this.data.foodResults[selectedFoodIndex] || null;
+    if (!selectedFood) {
       return;
     }
-    const selectedFood = this.data.foodResults[selectedFoodIndex] || null;
     this.setData(
       {
         selectedFoodIndex,
@@ -682,7 +760,19 @@ Page({
       },
       () => {
         this.refreshDerivedState();
-        this.scrollToRecordSection("food", "bottom");
+        this.scrollToRecordSection("food", "selected");
+      }
+    );
+  },
+
+  changeSelectedFood() {
+    this.setData(
+      {
+        selectedFoodIndex: -1,
+        selectedFood: null,
+      },
+      () => {
+        this.refreshDerivedState();
       }
     );
   },
@@ -696,7 +786,7 @@ Page({
       return;
     }
 
-    const selectedFood = this.data.foodResults[this.data.selectedFoodIndex];
+    const selectedFood = this.data.selectedFood;
     const weight = asPositiveNumber(this.data.foodWeight);
     if (!selectedFood) {
       wx.showToast({
@@ -741,6 +831,7 @@ Page({
         () => {
           this.setLastSubmission("food", `${selectedFood.name} 已记录`, `${weight} g · ${submitTime}`);
           this.refreshDerivedState();
+          this.loadTodayFoodHistory(user);
           this.scrollToRecordSection("food", "top");
         }
       );

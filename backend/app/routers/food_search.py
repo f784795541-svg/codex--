@@ -4,7 +4,7 @@ from sqlalchemy.orm import Session
 
 from .. import dependencies, models, schemas, services
 from ..database import get_db
-from ..food_metadata import compact_search_text, food_matches_query, split_search_query_tokens
+from ..food_metadata import compact_search_text, expand_food_search_terms, food_matches_query, split_search_query_tokens
 
 
 router = APIRouter()
@@ -53,17 +53,23 @@ def search_food(
     normalized_query = compact_search_text(query)
     if not normalized_query:
         return []
-    candidate_limit = max(limit * 5, 80)
-    like_query = f"%{query}%"
-    compact_like_query = f"%{normalized_query}%"
+    # A short query such as “冰” expands to a wide synonym family. Keep enough
+    # candidates for score ordering to put actual ice treats ahead of drinks.
+    candidate_limit = max(limit * 15, 300)
+    search_terms = expand_food_search_terms(query)
     query_tokens = split_search_query_tokens(query)
     candidate_filters = [
         or_(
-            models.FoodDatabase.search_text.ilike(compact_like_query),
-            models.FoodDatabase.aliases_text.ilike(like_query),
-            models.FoodDatabase.name.ilike(like_query),
-            models.FoodDatabase.brand.ilike(like_query),
-            models.FoodDatabase.category.ilike(like_query),
+            *[
+                or_(
+                    models.FoodDatabase.search_text.ilike(f"%{term}%"),
+                    models.FoodDatabase.aliases_text.ilike(f"%{term}%"),
+                    models.FoodDatabase.name.ilike(f"%{term}%"),
+                    models.FoodDatabase.brand.ilike(f"%{term}%"),
+                    models.FoodDatabase.category.ilike(f"%{term}%"),
+                )
+                for term in search_terms
+            ]
         )
     ]
     if query_tokens:
@@ -90,9 +96,23 @@ def search_food(
         .all()
     )
     matched: list[tuple[int, models.FoodDatabase]] = []
+    ice_treat_query = normalized_query in {"冰", "冰棍", "冰棒", "雪糕", "冰淇淋", "冰激凌", "冰糕", "冷饮"}
     for food in foods:
         is_match, score = food_matches_query(food.name, food.category, query, food.brand, food.aliases_text)
+        if not is_match:
+            related_scores = [
+                food_matches_query(food.name, food.category, term, food.brand, food.aliases_text)[1]
+                for term in search_terms[1:]
+            ]
+            score = max(related_scores, default=0) - 60
+            is_match = score > 0
         if is_match:
+            searchable_text = f"{food.name},{food.aliases_text or ''}"
+            if ice_treat_query:
+                if any(term in searchable_text for term in ("冰棍", "冰棒", "雪糕", "冰淇淋", "冰激凌", "冰糕")):
+                    score += 1000
+                else:
+                    score -= 1000
             matched.append((score, food))
 
     matched.sort(key=lambda item: (-item[0], item[1].food_id))

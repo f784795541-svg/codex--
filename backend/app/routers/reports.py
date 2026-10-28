@@ -41,3 +41,15 @@ def get_weekly_report(
 ):
     user = dependencies.resolve_user(db, user_id, current_user)
     return services.compute_weekly_report(db, user, start_date or services.local_today())
+
+
+@router.get("/report/food-history", response_model=schemas.FoodHistoryResponse)
+def get_food_history(
+    user_id: int | None = Query(None),
+    days: int = Query(7, ge=7, le=30),
+    end_date: date | None = Query(None),
+    db: Session = Depends(get_db),
+    current_user: models.User | None = Depends(dependencies.get_optional_current_user),
+):
+    user = dependencies.resolve_user(db, user_id, current_user)
+    return services.compute_food_history(db, user, end_date or services.local_today(), days)
