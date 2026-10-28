@@ -40,6 +40,565 @@
   --secondary-shadow: rgba(77, 126, 109, 0.18);
 }
 
+/* Friend PK bento workspace */
+.friend-pk-active .dashboard-tabs,
+.friend-pk-active .hero-panel {
+  display: none;
+}
+
+.friend-pk-active .dashboard {
+  max-width: 1240px;
+}
+
+.friend-pk-panel {
+  display: none;
+  min-height: 620px;
+  padding: 26px;
+  border: 1px solid rgba(94, 113, 131, 0.1);
+  border-radius: 24px;
+  background: #f3f6f8;
+  box-shadow: 0 16px 38px rgba(63, 86, 104, 0.08);
+}
+
+.friend-pk-panel.active {
+  display: block;
+}
+
+.friend-pk-page-head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 24px;
+  margin-bottom: 18px;
+}
+
+.friend-pk-kicker,
+.friend-pk-card-label {
+  display: block;
+  margin: 0 0 7px;
+  color: #67847f;
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  line-height: 1.2;
+  text-transform: uppercase;
+}
+
+.friend-pk-page-head h2,
+.mobile-friend-pk-head h2 {
+  margin: 0;
+  color: #11232f;
+  font-size: 3.2rem;
+  letter-spacing: -0.04em;
+  line-height: 0.98;
+}
+
+.friend-pk-page-head p:last-child,
+.mobile-friend-pk-head > p:last-child {
+  margin: 10px 0 0;
+  color: #60717f;
+  font-size: 0.92rem;
+}
+
+.friend-pk-page-actions,
+.friend-pk-match-foot {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+}
+
+.friend-pk-primary-btn,
+.friend-pk-secondary-btn,
+.friend-pk-entry-btn,
+.friend-pk-back-btn,
+.friend-pk-mobile-code-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  min-height: 40px;
+  padding: 0 15px;
+  border: 1px solid transparent;
+  border-radius: 13px;
+  font: inherit;
+  font-size: 0.78rem;
+  font-weight: 750;
+  line-height: 1;
+  cursor: pointer;
+  transition: transform 180ms ease, box-shadow 180ms ease, background 180ms ease;
+}
+
+.friend-pk-primary-btn {
+  color: #f9fffd;
+  background: #4c8278;
+  box-shadow: 0 9px 18px rgba(76, 130, 120, 0.2);
+}
+
+.friend-pk-secondary-btn,
+.friend-pk-mobile-code-btn {
+  color: #41625f;
+  border-color: rgba(76, 130, 120, 0.18);
+  background: rgba(255, 255, 255, 0.82);
+}
+
+.friend-pk-primary-btn:hover,
+.friend-pk-secondary-btn:hover,
+.friend-pk-entry-btn:hover,
+.friend-pk-back-btn:hover,
+.friend-pk-mobile-code-btn:hover {
+  transform: translateY(-2px);
+}
+
+.friend-pk-entry-btn {
+  min-height: 38px;
+  padding: 0 13px;
+  color: #315e59;
+  border-color: rgba(76, 130, 120, 0.18);
+  background: #e8f2ef;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.92);
+}
+
+.friend-pk-entry-mark {
+  display: inline-grid;
+  width: 19px;
+  height: 19px;
+  place-items: center;
+  border-radius: 7px;
+  color: #f6fffd;
+  background: #5b8f84;
+  font-size: 0.72rem;
+}
+
+.friend-pk-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-auto-rows: minmax(138px, auto);
+  gap: 12px;
+}
+
+.friend-pk-card {
+  min-width: 0;
+  padding: 20px;
+  border: 1px solid rgba(94, 113, 131, 0.11);
+  border-radius: 17px;
+  background: #ffffff;
+  box-shadow: 0 1px 2px rgba(58, 79, 94, 0.04);
+  transition: transform 180ms ease, box-shadow 180ms ease;
+}
+
+.friend-pk-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 22px rgba(58, 79, 94, 0.08);
+}
+
+.friend-pk-match-card {
+  display: flex;
+  grid-column: span 2;
+  grid-row: span 2;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 294px;
+  background: #e7f1f1;
+}
+
+.friend-pk-card-topline {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.friend-pk-card-topline strong,
+.friend-pk-action-card strong {
+  display: block;
+  color: #173039;
+  font-size: 1.05rem;
+  line-height: 1.22;
+}
+
+.friend-pk-status-dot {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: #4a746c;
+  font-size: 0.72rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.friend-pk-status-dot i {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #62a091;
+  box-shadow: 0 0 0 4px rgba(98, 160, 145, 0.13);
+}
+
+.friend-pk-versus {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(18px, 4vw, 54px);
+  padding: 12px 0 8px;
+}
+
+.friend-pk-person {
+  display: grid;
+  justify-items: center;
+  gap: 5px;
+  min-width: 76px;
+}
+
+.friend-pk-person strong {
+  color: #1a333a;
+  font-size: 0.84rem;
+}
+
+.friend-pk-person small {
+  color: #698087;
+  font-size: 0.72rem;
+}
+
+.friend-pk-avatar {
+  display: grid;
+  width: 58px;
+  height: 58px;
+  place-items: center;
+  border: 5px solid rgba(255, 255, 255, 0.8);
+  border-radius: 20px;
+  color: #305a55;
+  background: #b9ded6;
+  box-shadow: 0 7px 16px rgba(67, 114, 106, 0.12);
+  font-size: 1.08rem;
+  font-weight: 800;
+}
+
+.friend-pk-person-friend .friend-pk-avatar {
+  color: #514e6d;
+  background: #d6d4ef;
+}
+
+.friend-pk-vs-mark {
+  display: grid;
+  width: 34px;
+  height: 34px;
+  place-items: center;
+  border-radius: 50%;
+  color: #70908d;
+  background: rgba(255, 255, 255, 0.7);
+  font-size: 0.7rem;
+  font-weight: 850;
+  letter-spacing: 0.08em;
+}
+
+.friend-pk-lead-line {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 10px;
+  color: #668087;
+  font-size: 0.76rem;
+}
+
+.friend-pk-lead-line strong {
+  color: #2e6d63;
+  font-size: 0.86rem;
+}
+
+.friend-pk-progress-pair {
+  display: grid;
+  gap: 6px;
+  margin-top: 9px;
+}
+
+.friend-pk-progress-pair div {
+  height: 7px;
+  overflow: hidden;
+  border-radius: 99px;
+  background: rgba(255, 255, 255, 0.64);
+}
+
+.friend-pk-progress-pair span {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: #5b978b;
+}
+
+.friend-pk-progress-pair div:last-child span {
+  background: #9d9ad1;
+}
+
+.friend-pk-match-foot {
+  justify-content: space-between;
+  margin-top: 13px;
+  color: #6b8186;
+  font-size: 0.7rem;
+}
+
+.friend-pk-match-foot button {
+  min-height: 30px;
+  padding: 0 10px;
+  border: 1px solid rgba(76, 130, 120, 0.16);
+  border-radius: 10px;
+  color: #3f7169;
+  background: rgba(255, 255, 255, 0.66);
+  font: inherit;
+  font-weight: 750;
+  cursor: pointer;
+}
+
+.friend-pk-stat-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 138px;
+}
+
+.friend-pk-stat-workout { background: #eef0fb; }
+.friend-pk-stat-weight { background: #edf7f3; }
+
+.friend-pk-stat-card > strong {
+  display: block;
+  margin-top: 10px;
+  color: #182e38;
+  font-size: 2.25rem;
+  letter-spacing: -0.05em;
+  line-height: 0.96;
+}
+
+.friend-pk-stat-card > strong em {
+  color: #6b7f88;
+  font-size: 0.92rem;
+  font-style: normal;
+  letter-spacing: 0;
+}
+
+.friend-pk-stat-card p,
+.friend-pk-action-card p {
+  margin: 6px 0 0;
+  color: #6d7f87;
+  font-size: 0.72rem;
+  line-height: 1.4;
+}
+
+.friend-pk-mini-bars,
+.friend-pk-sparkline {
+  display: flex;
+  align-items: flex-end;
+  gap: 5px;
+  height: 27px;
+  margin-top: 12px;
+}
+
+.friend-pk-mini-bars i {
+  display: block;
+  width: 12px;
+  height: 22px;
+  border-radius: 6px 6px 3px 3px;
+  background: #7d86d4;
+}
+
+.friend-pk-mini-bars i:nth-child(2) { height: 17px; }
+.friend-pk-mini-bars i:nth-child(3) { height: 24px; }
+.friend-pk-mini-bars i:nth-child(4) { height: 20px; }
+.friend-pk-mini-bars i.muted { height: 9px; background: rgba(125, 134, 212, 0.24); }
+
+.friend-pk-sparkline i {
+  width: 16px;
+  height: 12px;
+  border-radius: 5px 5px 2px 2px;
+  background: #69a393;
+}
+
+.friend-pk-sparkline i:nth-child(2) { height: 17px; }
+.friend-pk-sparkline i:nth-child(3) { height: 13px; }
+.friend-pk-sparkline i:nth-child(4) { height: 21px; }
+.friend-pk-sparkline i:nth-child(5) { height: 24px; }
+.friend-pk-sparkline i:nth-child(6) { height: 26px; }
+
+.friend-pk-trend-card { grid-column: span 2; }
+
+.friend-pk-trend-note {
+  color: #819098;
+  font-size: 0.7rem;
+}
+
+.friend-pk-week-grid {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: 8px;
+  margin-top: 20px;
+}
+
+.friend-pk-week-grid > div {
+  display: grid;
+  justify-items: center;
+  gap: 6px;
+  color: #809099;
+  font-size: 0.7rem;
+}
+
+.friend-pk-week-grid i {
+  display: block;
+  width: 21px;
+  height: 21px;
+  border: 1px solid rgba(94, 113, 131, 0.14);
+  border-radius: 8px;
+  background: #f1f4f5;
+}
+
+.friend-pk-week-grid i.done {
+  border-color: rgba(76, 130, 120, 0.32);
+  background: #79ad9f;
+  box-shadow: inset 0 0 0 5px #e0f0eb;
+}
+
+.friend-pk-week-grid i.friend-done {
+  border-color: rgba(118, 111, 174, 0.28);
+  background: #a5a1d8;
+  box-shadow: inset 0 0 0 5px #eeedfa;
+}
+
+.friend-pk-week-grid small {
+  min-height: 1em;
+  color: #91a0a5;
+  font-size: 0.64rem;
+}
+
+.friend-pk-action-card {
+  display: flex;
+  grid-column: span 2;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 20px;
+  background: #f0f5f3;
+}
+
+.friend-pk-inline-message {
+  min-height: 22px;
+  margin-top: 10px;
+  color: #4d786e;
+  font-size: 0.76rem;
+  opacity: 0;
+  transition: opacity 180ms ease;
+}
+
+.friend-pk-inline-message.is-visible { opacity: 1; }
+
+.friend-pk-code-sheet {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  margin-top: 4px;
+  padding: 15px 18px;
+  border: 1px solid rgba(76, 130, 120, 0.14);
+  border-radius: 15px;
+  background: #e8f2ef;
+}
+
+.friend-pk-code-sheet strong {
+  display: block;
+  color: #244d49;
+  font-size: 1.55rem;
+  letter-spacing: 0.16em;
+}
+
+.friend-pk-code-sheet p {
+  margin: 3px 0 0;
+  color: #6d8582;
+  font-size: 0.72rem;
+}
+
+.friend-pk-code-sheet.hidden { display: none; }
+
+.mobile-friend-pk-screen,
+.friend-pk-entry-btn-mobile { display: none; }
+
+@media (max-width: 860px) {
+  .friend-pk-entry-btn-mobile {
+    display: inline-flex;
+    min-height: 38px;
+    padding: 0 10px;
+    border-radius: 13px;
+  }
+
+  .mobile-friend-pk-screen.active {
+    display: flex;
+    gap: 10px;
+  }
+
+  .mobile-friend-pk-back-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+  }
+
+  .friend-pk-back-btn {
+    min-height: 34px;
+    padding: 0 4px;
+    border: 0;
+    color: #466c68;
+    background: transparent;
+  }
+
+  .friend-pk-mobile-state {
+    color: #88a09f;
+    font-size: 0.68rem;
+    font-weight: 750;
+  }
+
+  .mobile-friend-pk-head { padding: 5px 2px 3px; }
+  .mobile-friend-pk-head h2 { font-size: 1.74rem; }
+  .mobile-friend-pk-head > p:last-child { margin-top: 8px; font-size: 0.76rem; line-height: 1.42; }
+
+  #mobile-friend-pk-content {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  #mobile-friend-pk-content .friend-pk-card {
+    padding: 15px;
+    border-radius: 17px;
+  }
+
+  #mobile-friend-pk-content .friend-pk-match-card { min-height: 238px; }
+  #mobile-friend-pk-content .friend-pk-versus { gap: 21px; padding: 7px 0 4px; }
+  #mobile-friend-pk-content .friend-pk-avatar { width: 48px; height: 48px; border-radius: 16px; font-size: 0.94rem; }
+  #mobile-friend-pk-content .friend-pk-card-topline strong,
+  #mobile-friend-pk-content .friend-pk-action-card strong { font-size: 0.94rem; }
+
+  .mobile-friend-pk-stat-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+  }
+
+  .mobile-friend-pk-stat-grid .friend-pk-stat-card { min-height: 132px; }
+  #mobile-friend-pk-content .friend-pk-stat-card > strong { margin-top: 6px; font-size: 1.9rem; }
+  #mobile-friend-pk-content .friend-pk-mini-bars,
+  #mobile-friend-pk-content .friend-pk-sparkline { margin-top: 8px; }
+
+  #mobile-friend-pk-content .friend-pk-action-card {
+    align-items: stretch;
+    flex-direction: column;
+    gap: 13px;
+  }
+
+  #mobile-friend-pk-content .friend-pk-action-card .friend-pk-primary-btn { width: 100%; }
+  .friend-pk-mobile-code-btn { width: 100%; min-height: 42px; }
+  .friend-pk-active .dashboard { display: none; }
+}
+
+@media (max-width: 390px) {
+  .friend-pk-entry-btn-mobile { padding: 0 8px; }
+  .friend-pk-entry-btn-mobile .friend-pk-entry-mark { display: none; }
+  #mobile-friend-pk-content .friend-pk-versus { gap: 14px; }
+}
+
 * {
   box-sizing: border-box;
 }
@@ -6064,4 +6623,47 @@ select:focus {
   .interactive-glow.is-hovered::before {
     opacity: 0;
   }
+}
+
+/* Keep the independent Friend PK surface above the legacy dashboard defaults. */
+body .friend-pk-panel.active {
+  display: block;
+  background: #f3f6f8;
+}
+
+body.friend-pk-active .topbar {
+  margin-bottom: 14px;
+}
+
+body.friend-pk-active {
+  background: #edf3f5;
+  background-image: none;
+}
+
+body.friend-pk-active .topbar .eyebrow {
+  color: #67847f;
+}
+
+body.friend-pk-active .topbar h1 {
+  color: #173039;
+  font-size: 2.2rem;
+}
+
+body.friend-pk-active .topbar-actions {
+  border-color: rgba(76, 130, 120, 0.12);
+  background: #e8f0f2;
+  box-shadow: 0 10px 24px rgba(63, 86, 104, 0.07);
+  backdrop-filter: none;
+}
+
+body.friend-pk-active .date-control,
+body.friend-pk-active #refresh-dashboard-btn,
+body.friend-pk-active #friend-pk-btn {
+  display: none;
+}
+
+body.friend-pk-active .user-pill {
+  border-color: rgba(76, 130, 120, 0.12);
+  background: #f7fbfc;
+  box-shadow: none;
 }

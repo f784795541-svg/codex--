@@ -804,18 +804,20 @@ const state = {
   mobileKeyboardOpen: false,
   mobileViewportBaseHeight: window.visualViewport?.height || window.innerHeight,
   mobileToastTimer: null,
+  friendPkCodeVisible: false,
   registerPicker: {
     fieldKey: "",
   },
   authTransitionMode: "",
 };
 
-const PANEL_NAMES = new Set(["overview", "food", "activity", "trend", "report", "assessment", "settings", "suggestion"]);
+const PANEL_NAMES = new Set(["overview", "food", "activity", "trend", "report", "assessment", "settings", "friend-pk", "suggestion"]);
 const MOBILE_SCREEN_META = {
   home: { kicker: "健康管理", title: "今日首页" },
   record: { kicker: "快速记录", title: "今日记录" },
   trend: { kicker: "趋势分析", title: "趋势与报告" },
   mine: { kicker: "个人中心", title: "我的资料" },
+  "friend-pk": { kicker: "好友邀战", title: "好友 PK" },
 };
 const MOBILE_RECORD_TABS = new Set(["food", "workout", "sleep", "weight"]);
 const MOBILE_RECORD_LABELS = {
@@ -932,6 +934,7 @@ const MOBILE_PANEL_ROUTES = {
   report: { screen: "trend" },
   assessment: { screen: "trend" },
   settings: { screen: "mine" },
+  "friend-pk": { screen: "friend-pk" },
 };
 const MOBILE_MODULES = {
   food: {
@@ -1141,6 +1144,54 @@ function showMobileToast(message, durationMs = 1000) {
     toast.classList.remove("is-visible");
     state.mobileToastTimer = null;
   }, durationMs);
+}
+
+function setFriendPkMessage(message) {
+  const node = $("friend-pk-inline-message");
+  if (node) {
+    node.textContent = String(message || "").trim();
+    node.classList.toggle("is-visible", Boolean(message));
+  }
+  if (message && isMobileAppLayout()) {
+    showMobileToast(message, 1200);
+  }
+}
+
+function toggleFriendPkCode() {
+  state.friendPkCodeVisible = !state.friendPkCodeVisible;
+  const sheet = $("friend-pk-code-sheet");
+  if (sheet) {
+    sheet.classList.toggle("hidden", !state.friendPkCodeVisible);
+  }
+  setFriendPkMessage(state.friendPkCodeVisible ? "匹配码已展开，分享给好友即可绑定。" : "");
+}
+
+async function copyFriendPkCode() {
+  const code = "F7K9Q2";
+  try {
+    await navigator.clipboard?.writeText(code);
+    setFriendPkMessage("匹配码已复制：F7K9Q2");
+  } catch {
+    setFriendPkMessage("匹配码：F7K9Q2");
+  }
+}
+
+function handleFriendPkAction(action) {
+  if (action === "code") {
+    toggleFriendPkCode();
+    return;
+  }
+  if (action === "copy-code") {
+    copyFriendPkCode();
+    return;
+  }
+  if (action === "invite") {
+    setFriendPkMessage("邀战已准备好，分享匹配码 F7K9Q2 给好友。 ");
+    return;
+  }
+  if (action === "nudge") {
+    setFriendPkMessage("已轻推林然，提醒他今天完成运动。");
+  }
 }
 
 function getFormData(form) {
@@ -1382,6 +1433,9 @@ function updateMobileTopbar() {
 }
 
 function inferPanelFromMobileState() {
+  if (state.mobileScreen === "friend-pk") {
+    return "friend-pk";
+  }
   if (state.mobileScreen === "record") {
     return state.mobileRecordTab === "food" ? "food" : state.mobileRecordTab === "weight" ? "trend" : "activity";
   }
@@ -1428,7 +1482,10 @@ function showMobileScreen(screen = "home", options = {}) {
   document.querySelectorAll(".mobile-nav-btn").forEach((button) => {
     button.classList.toggle("active", button.dataset.mobileScreen === safeScreen);
   });
-  if (safeScreen === "record") {
+  if (safeScreen === "friend-pk") {
+    renderMobileFriendPk();
+    updateMobileTopbar();
+  } else if (safeScreen === "record") {
     showMobileRecordTab(recordTab, { alignPane: alignRecordPane });
   } else {
     updateMobileTopbar();
@@ -1709,6 +1766,43 @@ function renderMobileDashboard(summary) {
       </div>
     `;
   }
+}
+
+function renderMobileFriendPk() {
+  const host = $("mobile-friend-pk-content");
+  if (!host) {
+    return;
+  }
+  host.innerHTML = `
+    <div class="mobile-friend-pk-head">
+      <p class="friend-pk-kicker">SOCIAL MODE / 07</p>
+      <h2>一起完成，今天更容易坚持。</h2>
+      <p>只比较运动打卡与体重趋势，不展示饮食内容。</p>
+    </div>
+    <article class="friend-pk-card friend-pk-match-card">
+      <div class="friend-pk-card-topline">
+        <div><span class="friend-pk-card-label">本周坚持赛</span><strong>还剩 4 天</strong></div>
+        <span class="friend-pk-status-dot"><i></i>进行中</span>
+      </div>
+      <div class="friend-pk-versus">
+        <div class="friend-pk-person friend-pk-person-self"><span class="friend-pk-avatar">你</span><strong>我</strong><small>4 / 7 天</small></div>
+        <div class="friend-pk-vs-mark">VS</div>
+        <div class="friend-pk-person friend-pk-person-friend"><span class="friend-pk-avatar">L</span><strong>林然</strong><small>3 / 7 天</small></div>
+      </div>
+      <div class="friend-pk-lead-line"><span>当前领先</span><strong>你领先 1 天</strong></div>
+      <div class="friend-pk-progress-pair"><div><span style="width:57%"></span></div><div><span style="width:43%"></span></div></div>
+      <div class="friend-pk-match-foot"><span>运动记录自动同步</span><button type="button" data-friend-pk-action="nudge">轻推一下</button></div>
+    </article>
+    <div class="mobile-friend-pk-stat-grid">
+      <article class="friend-pk-card friend-pk-stat-card friend-pk-stat-workout"><span class="friend-pk-card-label">运动打卡</span><strong>4 <em>/ 7</em></strong><p>本周已完成 4 天</p><div class="friend-pk-mini-bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i class="muted"></i><i class="muted"></i><i class="muted"></i></div></article>
+      <article class="friend-pk-card friend-pk-stat-card friend-pk-stat-weight"><span class="friend-pk-card-label">体重趋势</span><strong>-1.2 <em>kg</em></strong><p>从挑战开始到现在</p><div class="friend-pk-sparkline" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></div></article>
+    </div>
+    <article class="friend-pk-card friend-pk-action-card">
+      <div><span class="friend-pk-card-label">今日行动</span><strong>再运动 20 分钟，就能守住领先</strong><p>完成运动记录后，好友 PK 会自动更新。</p></div>
+      <button class="friend-pk-primary-btn" data-switch-panel="activity" type="button">去记录运动 <span aria-hidden="true">→</span></button>
+    </article>
+    <button class="friend-pk-mobile-code-btn" type="button" data-friend-pk-action="code">查看我的匹配码</button>
+  `;
 }
 
 function renderMobileMealRecommendation(recommendation) {
@@ -4728,6 +4822,10 @@ function showPanel(panelName, options = {}) {
 
   const applyPanelState = () => {
     state.activePanel = requestedPanel;
+    document.body.classList.toggle("friend-pk-active", requestedPanel === "friend-pk");
+    if ($("welcome-title")) {
+      $("welcome-title").textContent = requestedPanel === "friend-pk" ? "好友 PK" : `${state.currentUser?.name || "健康"} 的健康首页`;
+    }
     document.querySelectorAll(".dashboard-tab").forEach((button) => {
       button.classList.toggle("active", button.dataset.panel === requestedPanel);
     });
@@ -5543,7 +5641,7 @@ async function loadDashboard() {
       ...loadPreferences(),
       recommendation_mode: summary.user.recommendation_mode || "home",
     });
-    $("welcome-title").textContent = `${summary.user.name} 的健康首页`;
+    $("welcome-title").textContent = state.activePanel === "friend-pk" ? "好友 PK" : `${summary.user.name} 的健康首页`;
     $("user-pill").textContent = `${summary.user.username || summary.user.name} · ${goalLabel(summary.user.goal)}`;
     $("hero-goal-line").textContent = "根据固定公式和记录结果，快速查看今天的执行重点";
 
@@ -5657,7 +5755,7 @@ async function handleRegister(event) {
       await loadDashboard();
       setMessage("register-result", `${data.message}，已进入首页。`);
     } catch (dashboardError) {
-      $("welcome-title").textContent = `${data.user.name} 的健康首页`;
+      $("welcome-title").textContent = state.activePanel === "friend-pk" ? "好友 PK" : `${data.user.name} 的健康首页`;
       $("user-pill").textContent = `${data.user.username || data.user.name} · ${goalLabel(data.user.goal)}`;
       setMessage("register-result", `注册成功，已进入系统。首页数据正在同步，请点一次“刷新首页”重试。`);
       console.error(dashboardError);
@@ -5692,7 +5790,7 @@ async function handleLogin(event) {
     try {
       await loadDashboard();
     } catch (dashboardError) {
-      $("welcome-title").textContent = `${data.user.name} 的健康首页`;
+      $("welcome-title").textContent = state.activePanel === "friend-pk" ? "好友 PK" : `${data.user.name} 的健康首页`;
       $("user-pill").textContent = `${data.user.username || data.user.name} · ${goalLabel(data.user.goal)}`;
       setMessage("login-result", `登录成功，但首页数据暂时没有刷新出来，请点一次“刷新首页”。`);
       console.error(dashboardError);
@@ -6046,6 +6144,16 @@ function bindEvents() {
   $("assessment-form").addEventListener("submit", handleAssessmentSubmit);
   $("settings-form").addEventListener("submit", handleSettingsSave);
   $("refresh-dashboard-btn").addEventListener("click", loadDashboard);
+  $("friend-pk-btn")?.addEventListener("click", () => {
+    Promise.resolve(showPanel("friend-pk")).finally(() => {
+      window.scrollTo({ top: 0, behavior: isMobilePerformanceMode() ? "auto" : "smooth" });
+    });
+  });
+  $("mobile-friend-pk-btn")?.addEventListener("click", () => showMobileScreen("friend-pk", { syncPanel: true }));
+  $("friend-pk-code-btn")?.addEventListener("click", () => handleFriendPkAction("code"));
+  $("friend-pk-copy-code-btn")?.addEventListener("click", () => handleFriendPkAction("copy-code"));
+  $("friend-pk-invite-btn")?.addEventListener("click", () => handleFriendPkAction("invite"));
+  $("friend-pk-nudge-btn")?.addEventListener("click", () => handleFriendPkAction("nudge"));
   $("daily-report-btn").addEventListener("click", async () => {
     await loadDashboard();
     navigateToPanel("report", "panel-report");
@@ -6099,6 +6207,11 @@ function bindEvents() {
   });
 
   document.addEventListener("click", (event) => {
+    const friendPkTrigger = event.target.closest("[data-friend-pk-action]");
+    if (friendPkTrigger) {
+      handleFriendPkAction(friendPkTrigger.dataset.friendPkAction);
+      return;
+    }
     const mobileRecordTrigger = event.target.closest("[data-mobile-record-tab]");
     if (mobileRecordTrigger) {
       showMobileScreen("record", {

@@ -222,6 +222,10 @@
             <h1 class="mobile-topbar-title" id="mobile-title">今日首页</h1>
           </div>
           <div class="mobile-topbar-actions">
+            <button id="mobile-friend-pk-btn" class="friend-pk-entry-btn friend-pk-entry-btn-mobile" type="button">
+              <span class="friend-pk-entry-mark" aria-hidden="true">↗</span>
+              <span>好友邀战</span>
+            </button>
             <button id="mobile-settings-btn" class="ghost-btn mobile-icon-btn" type="button" aria-label="打开设置">设置</button>
           </div>
         </header>
@@ -294,6 +298,17 @@
               <div class="mobile-panel-shell" data-mobile-panel-host="settings"></div>
             </section>
           </section>
+        <section id="mobile-screen-friend-pk" class="mobile-screen mobile-friend-pk-screen">
+          <div class="mobile-friend-pk-back-row">
+            <button type="button" class="friend-pk-back-btn" data-mobile-screen-link="home">
+              <span aria-hidden="true">←</span>
+              <span>返回首页</span>
+            </button>
+            <span class="friend-pk-mobile-state">演示对战</span>
+          </div>
+          <div id="mobile-friend-pk-content"></div>
+        </section>
+
         </main>
 
         <nav class="mobile-bottom-nav" aria-label="移动端主导航">
@@ -328,6 +343,10 @@
             <input id="dashboard-date" type="date" />
           </label>
           <button id="refresh-dashboard-btn" class="secondary-btn" type="button">刷新首页</button>
+          <button id="friend-pk-btn" class="friend-pk-entry-btn" type="button">
+            <span class="friend-pk-entry-mark" aria-hidden="true">↗</span>
+            <span>好友邀战</span>
+          </button>
           <button id="settings-btn" class="ghost-btn settings-btn" type="button">设置</button>
           <div class="user-pill" id="user-pill"></div>
           <button id="logout-btn" class="ghost-btn" type="button">退出登录</button>
@@ -966,6 +985,107 @@
             </form>
             <div id="settings-result" class="inline-message"></div>
           </article>
+        </section>
+
+        <section id="panel-friend-pk" class="dashboard-panel friend-pk-panel">
+          <div class="friend-pk-page-head">
+            <div>
+              <p class="friend-pk-kicker">SOCIAL MODE / 07</p>
+              <h2>好友 PK</h2>
+              <p>一起完成，今天更容易坚持。</p>
+            </div>
+            <div class="friend-pk-page-actions">
+              <button id="friend-pk-code-btn" class="friend-pk-secondary-btn" type="button">查看匹配码</button>
+              <button id="friend-pk-invite-btn" class="friend-pk-primary-btn" type="button">发起邀战</button>
+            </div>
+          </div>
+          <div class="friend-pk-grid">
+            <article class="friend-pk-card friend-pk-match-card">
+              <div class="friend-pk-card-topline">
+                <div>
+                  <span class="friend-pk-card-label">本周坚持赛</span>
+                  <strong>还剩 4 天</strong>
+                </div>
+                <span class="friend-pk-status-dot"><i></i>进行中</span>
+              </div>
+              <div class="friend-pk-versus">
+                <div class="friend-pk-person friend-pk-person-self">
+                  <span class="friend-pk-avatar">你</span>
+                  <strong id="friend-pk-self-name">我</strong>
+                  <small>4 / 7 天</small>
+                </div>
+                <div class="friend-pk-vs-mark">VS</div>
+                <div class="friend-pk-person friend-pk-person-friend">
+                  <span class="friend-pk-avatar">L</span>
+                  <strong>林然</strong>
+                  <small>3 / 7 天</small>
+                </div>
+              </div>
+              <div class="friend-pk-lead-line">
+                <span>当前领先</span>
+                <strong>你领先 1 天</strong>
+              </div>
+              <div class="friend-pk-progress-pair">
+                <div><span style="width: 57%"></span></div>
+                <div><span style="width: 43%"></span></div>
+              </div>
+              <div class="friend-pk-match-foot">
+                <span>只比较运动打卡与体重趋势</span>
+                <button id="friend-pk-nudge-btn" type="button">轻推一下</button>
+              </div>
+            </article>
+
+            <article class="friend-pk-card friend-pk-stat-card friend-pk-stat-workout">
+              <span class="friend-pk-card-label">运动打卡</span>
+              <strong>4 <em>/ 7</em></strong>
+              <p>本周已完成 4 天</p>
+              <div class="friend-pk-mini-bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i class="muted"></i><i class="muted"></i><i class="muted"></i></div>
+            </article>
+
+            <article class="friend-pk-card friend-pk-stat-card friend-pk-stat-weight">
+              <span class="friend-pk-card-label">体重趋势</span>
+              <strong>-1.2 <em>kg</em></strong>
+              <p>从挑战开始到现在</p>
+              <div class="friend-pk-sparkline" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+            </article>
+
+            <article class="friend-pk-card friend-pk-trend-card">
+              <div class="friend-pk-card-topline">
+                <div>
+                  <span class="friend-pk-card-label">7 日坚持轨迹</span>
+                  <strong>今天也别断</strong>
+                </div>
+                <span class="friend-pk-trend-note">运动记录自动同步</span>
+              </div>
+              <div class="friend-pk-week-grid">
+                <div><span>一</span><i class="done"></i><small>你</small></div>
+                <div><span>二</span><i class="done"></i><small>你</small></div>
+                <div><span>三</span><i class="done"></i><small>你</small></div>
+                <div><span>四</span><i class="done"></i><small>你</small></div>
+                <div><span>五</span><i class="friend-done"></i><small>林然</small></div>
+                <div><span>六</span><i></i><small>待完成</small></div>
+                <div><span>日</span><i></i><small>待完成</small></div>
+              </div>
+            </article>
+
+            <article class="friend-pk-card friend-pk-action-card">
+              <div>
+                <span class="friend-pk-card-label">今日行动</span>
+                <strong>再运动 20 分钟，就能守住领先</strong>
+                <p>完成运动记录后，好友 PK 会自动更新。</p>
+              </div>
+              <button class="friend-pk-primary-btn" data-switch-panel="activity" type="button">去记录运动 <span aria-hidden="true">→</span></button>
+            </article>
+          </div>
+          <div id="friend-pk-inline-message" class="friend-pk-inline-message" aria-live="polite"></div>
+          <div id="friend-pk-code-sheet" class="friend-pk-code-sheet hidden" aria-live="polite">
+            <div>
+              <span class="friend-pk-card-label">我的匹配码</span>
+              <strong>F7K9Q2</strong>
+              <p>分享给好友，绑定后即可发起 7 天坚持赛。</p>
+            </div>
+            <button id="friend-pk-copy-code-btn" class="friend-pk-secondary-btn" type="button">复制匹配码</button>
+          </div>
         </section>
       </main>
     </div>
