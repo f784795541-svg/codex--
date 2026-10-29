@@ -1,6 +1,22 @@
 .hero-panel-home {
+  position: relative;
   margin-top: 4rpx;
 }
+
+.home-friend-pk {
+  position: absolute;
+  top: 20rpx;
+  right: 20rpx;
+  z-index: 2;
+  padding: 0 18rpx;
+  border: 1rpx solid #c7ded6;
+  border-radius: 18rpx;
+  background: #e9f4ef;
+  color: #315e59;
+  font-size: 23rpx;
+  line-height: 60rpx;
+}
+.home-friend-pk::after { border: 0; }
 
 .screen-home .hero-subtitle {
   max-width: 620rpx;

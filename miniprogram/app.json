@@ -3,6 +3,7 @@
     "pages/login/index",
     "pages/register/index",
     "pages/home/index",
+    "pages/friend-pk/index",
     "pages/record/index",
     "pages/food-history/index",
     "pages/food-recent/index",

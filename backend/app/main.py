@@ -7,7 +7,7 @@ from . import dependencies, models, schemas, services
 from .database import get_db
 from .food_metadata import build_aliases_text, build_food_search_text
 from .error_tracking import record_api_error
-from .routers import auth, food_search, maintenance, reports
+from .routers import auth, food_search, friend_pk, maintenance, reports
 from .seed import init_database
 from .workout_metadata import get_workout_option, get_workout_option_list
 
@@ -49,6 +49,7 @@ app.include_router(auth.router)
 app.include_router(food_search.router)
 app.include_router(reports.router)
 app.include_router(maintenance.router)
+app.include_router(friend_pk.router)
 
 
 @app.post("/user/create", response_model=schemas.UserResponse)

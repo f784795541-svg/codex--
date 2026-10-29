@@ -332,6 +332,12 @@ Page({
     if (!user) {
       return;
     }
+    const requestedTab = getApp().globalData.recordTab;
+    if (requestedTab && TAB_META[requestedTab]) {
+      getApp().globalData.recordTab = "";
+      this.syncActiveTabMeta(requestedTab);
+      this.setData({ activeTab: requestedTab });
+    }
     this.refreshDynamicTimes(user);
     this.loadTodayFoodHistory(user);
     if (!this.data.workoutOptions.length) {

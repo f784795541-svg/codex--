@@ -502,6 +502,9 @@ function buildSummaryView(summary) {
 }
 
 Page({
+  goFriendPk() {
+    wx.navigateTo({ url: "/pages/friend-pk/index" });
+  },
   data: {
     loading: true,
     summary: null,

@@ -805,6 +805,7 @@ const state = {
   mobileViewportBaseHeight: window.visualViewport?.height || window.innerHeight,
   mobileToastTimer: null,
   friendPkCodeVisible: false,
+  friendPkData: null,
   registerPicker: {
     fieldKey: "",
   },
@@ -1362,6 +1363,7 @@ function loadCurrentUser() {
 function clearCurrentUser() {
   state.currentUser = null;
   state.authToken = null;
+  state.friendPkData = null;
   state.selectedFood = null;
   storageRemove(STORAGE_KEY);
   storageRemove(AUTH_TOKEN_KEY);
@@ -1483,7 +1485,8 @@ function showMobileScreen(screen = "home", options = {}) {
     button.classList.toggle("active", button.dataset.mobileScreen === safeScreen);
   });
   if (safeScreen === "friend-pk") {
-    renderMobileFriendPk();
+    renderFriendPk();
+    loadFriendPk();
     updateMobileTopbar();
   } else if (safeScreen === "record") {
     showMobileRecordTab(recordTab, { alignPane: alignRecordPane });
@@ -1769,6 +1772,8 @@ function renderMobileDashboard(summary) {
 }
 
 function renderMobileFriendPk() {
+  renderFriendPk();
+  return;
   const host = $("mobile-friend-pk-content");
   if (!host) {
     return;
@@ -1803,6 +1808,96 @@ function renderMobileFriendPk() {
     </article>
     <button class="friend-pk-mobile-code-btn" type="button" data-friend-pk-action="code">查看我的匹配码</button>
   `;
+}
+
+function friendPkCalendar(data) {
+  const end = new Date(`${data.today}T12:00:00`);
+  const cells = [];
+  for (let i = 29; i >= 0; i -= 1) {
+    const day = new Date(end);
+    day.setDate(day.getDate() - i);
+    const key = `${day.getFullYear()}-${String(day.getMonth() + 1).padStart(2, "0")}-${String(day.getDate()).padStart(2, "0")}`;
+    const minutes = data.calendar[key] || 0;
+    cells.push(`<div class="pk-day ${minutes ? "is-done" : ""}" tabindex="0" title="${key}：${minutes ? `${minutes} 分钟` : "未记录运动"}" aria-label="${key}，${minutes ? `运动 ${minutes} 分钟` : "未记录运动"}"><span>${day.getDate()}</span><small>${minutes ? `${minutes}分` : ""}</small></div>`);
+  }
+  return cells.join("");
+}
+
+function renderFriendPk() {
+  const data = state.friendPkData;
+  const html = !data ? `<div class="pk-loading">正在加载好友挑战...</div>` : (() => {
+    const c = data.challenge;
+    let match;
+    if (!c) {
+      match = `<span class="friend-pk-card-label">7 天坚持赛</span><h3>邀请一个人，一起坚持。</h3><p>输入好友的匹配码发起挑战，对方确认后开始。</p><button type="button" class="friend-pk-primary-btn" data-pk-action="invite-form">发起邀战 →</button>`;
+    } else if (c.status === "pending") {
+      match = `<span class="friend-pk-card-label">等待确认</span><h3>${c.incoming ? `${escapeHtml(c.peer_name)} 邀请你挑战` : `已向 ${escapeHtml(c.peer_name)} 发出邀战`}</h3><p>${c.incoming ? "接受后从今天开始，连续 7 天记录运动。" : "等待对方在好友 PK 页面确认。"}</p><div class="pk-actions">${c.incoming ? '<button type="button" class="friend-pk-primary-btn" data-pk-action="accept">接受挑战</button><button type="button" class="friend-pk-secondary-btn" data-pk-action="decline">婉拒</button>' : '<button type="button" class="friend-pk-secondary-btn" data-pk-action="leave">撤回邀战</button>'}</div>`;
+    } else {
+      match = `<div class="friend-pk-card-topline"><div><span class="friend-pk-card-label">7 天坚持赛</span><strong>${c.start_date} 至 ${c.end_date}</strong></div><span class="friend-pk-status-dot"><i></i>进行中</span></div><div class="friend-pk-versus"><div class="friend-pk-person"><span class="friend-pk-avatar">你</span><strong>我</strong><small>${c.own_days} 天 · ${c.own_minutes} 分钟</small></div><div class="friend-pk-vs-mark">VS</div><div class="friend-pk-person friend-pk-person-friend"><span class="friend-pk-avatar">${escapeHtml(c.peer_name.slice(0, 1))}</span><strong>${escapeHtml(c.peer_name)}</strong><small>${c.peer_days} 天 · ${c.peer_minutes} 分钟</small></div></div><div class="friend-pk-match-foot"><span>先比打卡天数，同分比总时长</span><button type="button" data-pk-action="leave">退出挑战</button></div>`;
+    }
+    return `<div class="friend-pk-page-head"><div><button type="button" class="friend-pk-back-btn" data-switch-panel="overview">← 返回首页</button><p class="friend-pk-kicker">SOCIAL MODE / 07</p><h2>好友 PK</h2><p>一起完成，今天更容易坚持。</p></div><div class="friend-pk-page-actions"><button type="button" class="friend-pk-secondary-btn" data-pk-action="code">查看匹配码</button>${!c ? '<button type="button" class="friend-pk-primary-btn" data-pk-action="invite-form">发起邀战</button>' : ""}</div></div>
+      <div id="pk-dialog" class="pk-dialog" hidden></div><div class="friend-pk-grid pk-live-grid"><article class="friend-pk-card friend-pk-match-card pk-match">${match}</article>
+      <article class="friend-pk-card friend-pk-stat-card friend-pk-stat-workout"><span class="friend-pk-card-label">本次运动打卡</span><strong>${c && c.status === "active" ? c.own_days : "—"} <em>/ 7 天</em></strong><p>每天有运动记录即点亮</p></article>
+      <article class="friend-pk-card friend-pk-stat-card friend-pk-stat-weight"><span class="friend-pk-card-label">体重变化</span><strong>${c && c.weight_change != null ? (c.weight_change > 0 ? "+" : "") + c.weight_change : "—"} <em>kg</em></strong><p>挑战期间的个人记录</p></article>
+      <article class="friend-pk-card friend-pk-calendar"><div class="friend-pk-card-topline"><div><span class="friend-pk-card-label">近 30 天</span><strong>运动打卡日历</strong></div><span class="friend-pk-trend-note">${Object.keys(data.calendar).length} 天已点亮</span></div><div class="pk-calendar-grid">${friendPkCalendar(data)}</div><p>当天有运动记录即点亮；悬停查看累计时长。</p></article>
+      <article class="friend-pk-card pk-rules"><span class="friend-pk-card-label">对战规则</span><strong>运动记录自动计入</strong><p>7 天内按运动天数排名，天数相同时比较总时长。体重变化仅供自己参考，不计胜负。</p><button type="button" class="friend-pk-secondary-btn" data-switch-panel="activity">去记录运动 →</button><p class="pk-reminder">微信提醒尚未接入，目前不会向对方发送微信消息。</p></article></div><div id="pk-message" class="pk-message" aria-live="polite"></div>`;
+  })();
+  const desktop = $("panel-friend-pk");
+  const mobile = $("mobile-friend-pk-content");
+  if (desktop) desktop.innerHTML = html;
+  if (mobile) mobile.innerHTML = html;
+}
+
+async function loadFriendPk() {
+  try {
+    state.friendPkData = await apiRequest("/friend-pk/state");
+    renderFriendPk();
+  } catch (error) {
+    state.friendPkData = null;
+    for (const host of [$("panel-friend-pk"), $("mobile-friend-pk-content")]) {
+      if (host) host.innerHTML = `<div class="pk-loading">${escapeHtml(error.message)} <button type="button" data-pk-action="reload">重试</button></div>`;
+    }
+  }
+}
+
+async function friendPkAction(action, host) {
+  const dialog = host.querySelector("#pk-dialog");
+  const message = host.querySelector("#pk-message");
+  const challenge = state.friendPkData?.challenge;
+  try {
+    if (action === "reload") return loadFriendPk();
+    if (action === "close") { dialog.hidden = true; return; }
+    if (action === "code") {
+      const result = await apiRequest("/friend-pk/code", { method: "POST" });
+      dialog.innerHTML = `<div><span class="friend-pk-card-label">我的匹配码 · 24 小时有效</span><strong class="pk-code">${result.code}</strong><p>把匹配码发给好友，对方输入后即可向你发起邀战。</p></div><div class="pk-actions"><button type="button" class="friend-pk-primary-btn" data-pk-action="copy" data-code="${result.code}">复制匹配码</button><button type="button" class="friend-pk-secondary-btn" data-pk-action="close">关闭</button></div>`;
+      dialog.hidden = false;
+      return;
+    }
+    if (action === "invite-form") {
+      dialog.innerHTML = `<div><span class="friend-pk-card-label">发起邀战</span><strong>输入好友的匹配码</strong><p>对方确认后开始 7 天挑战。</p><label for="pk-code-input">好友匹配码</label><input id="pk-code-input" maxlength="16" autocomplete="off" placeholder="输入 8 位匹配码"></div><div class="pk-actions"><button type="button" class="friend-pk-primary-btn" data-pk-action="send">发送邀战</button><button type="button" class="friend-pk-secondary-btn" data-pk-action="close">取消</button></div>`;
+      dialog.hidden = false; dialog.querySelector("input").focus(); return;
+    }
+    if (action === "copy") {
+      const code = host.querySelector('[data-pk-action="copy"]').dataset.code;
+      if (!navigator.clipboard) throw new Error("无法自动复制，请手动复制匹配码");
+      await navigator.clipboard.writeText(code); message.textContent = "匹配码已复制"; return;
+    }
+    if (action === "send") {
+      const code = dialog.querySelector("input").value.trim();
+      await apiRequest("/friend-pk/invite", { method: "POST", body: JSON.stringify({ code }) });
+    } else if (["accept", "decline", "leave"].includes(action)) {
+      if (action === "leave" && !window.confirm(challenge.status === "active" ? "确定退出本次挑战？" : "确定撤回邀战？")) return;
+      await apiRequest(`/friend-pk/challenge/${challenge.id}/${action}`, { method: "POST" });
+    }
+    await loadFriendPk();
+  } catch (error) {
+    if (message) message.textContent = error.message;
+    if (dialog && !dialog.hidden) {
+      let errorNode = dialog.querySelector(".pk-error");
+      if (!errorNode) { errorNode = document.createElement("p"); errorNode.className = "pk-error"; dialog.appendChild(errorNode); }
+      errorNode.textContent = error.message;
+    }
+  }
 }
 
 function renderMobileMealRecommendation(recommendation) {
@@ -4810,6 +4905,7 @@ function showApp() {
   $("auth-shell").classList.add("hidden");
   $("app-shell").classList.remove("hidden");
   syncResponsiveAppShell({ syncFromPanel: true });
+  if (state.activePanel === "friend-pk") loadFriendPk();
 }
 
 function showPanel(panelName, options = {}) {
@@ -4845,6 +4941,10 @@ function showPanel(panelName, options = {}) {
     }
     if (safePanel === "activity") {
       refreshWorkoutEstimate();
+    }
+    if (safePanel === "friend-pk" && !isMobileAppLayout() && state.authToken) {
+      renderFriendPk();
+      loadFriendPk();
     }
     syncPanelHash(safePanel);
     if (isMobileAppLayout()) {
@@ -6207,6 +6307,11 @@ function bindEvents() {
   });
 
   document.addEventListener("click", (event) => {
+    const pkTrigger = event.target.closest("[data-pk-action]");
+    if (pkTrigger) {
+      friendPkAction(pkTrigger.dataset.pkAction, pkTrigger.closest("#panel-friend-pk, #mobile-friend-pk-content"));
+      return;
+    }
     const friendPkTrigger = event.target.closest("[data-friend-pk-action]");
     if (friendPkTrigger) {
       handleFriendPkAction(friendPkTrigger.dataset.friendPkAction);

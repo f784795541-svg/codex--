@@ -1,0 +1,28 @@
+page { background: #edf3f5; color: #173039; }
+.pk-page { padding: 32rpx 26rpx 60rpx; }
+.pk-kicker,.pk-label { color: #668881; font-size: 21rpx; font-weight: 700; }
+.pk-title { margin-top: 8rpx; font-size: 58rpx; font-weight: 800; }
+.pk-subtitle,.pk-note { color: #698080; font-size: 23rpx; line-height: 1.6; }
+.pk-subtitle { margin: 6rpx 0 24rpx; }
+.pk-toolbar { display: flex; gap: 12rpx; margin: 14rpx 0; }
+.pk-toolbar button { flex: 1; }
+button { margin: 12rpx 0 0; padding: 0 20rpx; border-radius: 16rpx; background: #fff; color: #416c64; font-size: 24rpx; line-height: 72rpx; }
+button::after { border: 0; }
+button.primary { background: #4c8278; color: white; }
+.pk-card,.pk-dialog { margin-top: 16rpx; padding: 26rpx; border: 1rpx solid #dce8e7; border-radius: 20rpx; background: #fff; }
+.pk-dialog { background: #e2f0ea; }
+.pk-dialog input { margin: 15rpx 0; padding: 15rpx; border: 1rpx solid #b8d0cb; border-radius: 12rpx; background: white; }
+.pk-dialog-title,.pk-match-title { margin: 10rpx 0; font-size: 30rpx; font-weight: 700; }
+.pk-code { font-size: 48rpx; font-weight: 800; color: #245c53; }
+.pk-match { min-height: 260rpx; background: #e1efed; }
+.pk-versus { display: flex; align-items: center; justify-content: space-around; margin: 30rpx 0; text-align: center; }
+.pk-avatar { display: grid; width: 92rpx; height: 92rpx; margin: 0 auto 8rpx; place-items: center; border: 7rpx solid white; border-radius: 28rpx; background: #b9ded6; font-weight: 700; }
+.pk-avatar.peer { background: #d6d4ef; }
+.pk-vs { color: #86a19d; font-weight: 700; }
+.pk-stat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16rpx; }
+.pk-purple { background: #eef0fb; }.pk-green { background: #edf7f3; }
+.pk-value { margin: 20rpx 0 8rpx; font-size: 52rpx; font-weight: 800; }.pk-value text { font-size: 23rpx; color: #718783; }
+.pk-calendar-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 9rpx; margin: 20rpx 0; }
+.pk-day { display: flex; flex-direction: column; justify-content: space-between; min-height: 65rpx; padding: 8rpx; border-radius: 10rpx; background: #f0f5f4; color: #7e9190; font-size: 20rpx; }
+.pk-day.done { background: #a9d4c6; color: #214d44; }.pk-day text:last-child { font-size: 18rpx; }
+.pk-rules { background: #f0f5f3; }.pk-error { margin-top: 16rpx; color: #a44646; font-size: 24rpx; }

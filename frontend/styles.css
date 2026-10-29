@@ -6667,3 +6667,33 @@ body.friend-pk-active .user-pill {
   background: #f7fbfc;
   box-shadow: none;
 }
+
+.pk-live-grid .pk-match { justify-content: space-between; }
+.pk-match h3 { margin: 12px 0; color: #173039; font-size: 1.5rem; line-height: 1.3; }
+.pk-match > p, .pk-rules p, .friend-pk-calendar p, .pk-dialog p { color: #627c80; font-size: 0.8rem; line-height: 1.6; }
+.pk-match > .friend-pk-primary-btn { align-self: flex-start; }
+.pk-actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+.pk-dialog { display: flex; justify-content: space-between; align-items: center; gap: 20px; margin: 0 0 12px; padding: 20px; border: 1px solid #c8ddd8; border-radius: 12px; background: #e9f4f0; }
+.pk-dialog[hidden] { display: none; }
+.pk-dialog label { display: block; margin: 8px 0 4px; font-size: 0.75rem; color: #496d67; }
+.pk-dialog input { min-height: 42px; width: min(260px, 100%); padding: 0 12px; border: 1px solid #b8d0cb; border-radius: 8px; background: white; }
+.pk-code { display: block; font-size: 1.7rem; color: #245c53; }
+.pk-error, .pk-message { color: #a44646; font-size: 0.8rem; }
+.pk-message { margin-top: 10px; }
+.friend-pk-calendar { grid-column: span 2; grid-row: span 2; }
+.pk-calendar-grid { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 8px; margin-top: 18px; }
+.pk-day { display: flex; flex-direction: column; justify-content: space-between; min-height: 48px; padding: 6px; border: 1px solid #e5eceb; border-radius: 7px; background: #f4f7f7; color: #7b8e90; font-size: 0.75rem; transition: transform 180ms ease, box-shadow 180ms ease, background 180ms ease; }
+.pk-day.is-done { background: #a9d4c6; color: #214d44; border-color: #8fc1b1; }
+.pk-day small { font-size: 0.65rem; }
+.pk-day:hover, .pk-day:focus { transform: translateY(-3px); box-shadow: 0 6px 12px rgba(45, 100, 85, 0.15); outline: 2px solid #7caf9e; }
+.pk-rules { grid-column: span 2; background: #f0f5f3; }
+.pk-rules strong { color: #173039; }
+.pk-reminder { margin-top: 14px; }
+.pk-loading { padding: 32px; color: #607c79; }
+@media (max-width: 860px) {
+  .pk-live-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); grid-auto-rows: auto; }
+  #mobile-friend-pk-content .friend-pk-page-head .friend-pk-back-btn { display: none; }
+  .pk-live-grid .pk-match, .pk-live-grid .friend-pk-calendar, .pk-live-grid .pk-rules { grid-column: span 2; grid-row: auto; }
+  .pk-dialog { align-items: stretch; flex-direction: column; }
+  .pk-day { min-height: 42px; }
+}

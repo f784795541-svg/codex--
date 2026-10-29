@@ -1,6 +1,7 @@
 <view class="screen screen-home">
   <block wx:if="{{summary}}">
     <view class="hero-panel hero-panel-home">
+      <button class="home-friend-pk" bindtap="goFriendPk">好友邀战 ↗</button>
       <view class="hero-kicker">TODAY FOCUS</view>
       <view class="hero-title">你好，{{summary.user.name}}</view>
       <view class="hero-summary-card">{{heroSummary}}</view>
