@@ -25,5 +25,13 @@ def test_invitation_and_workout_calendar(registered_user):
     state = api_request("GET", "/friend-pk/state", token=own_token)
     assert state["calendar"][today] >= 17
     assert state["challenge"]["own_days"] >= 1
+    habit = api_request("POST", "/friend-pk/habits", {"name": "早睡"}, own_token)
+    api_request("POST", f"/friend-pk/habits/{habit['id']}/toggle", token=own_token)
+    state = api_request("GET", f"/friend-pk/state?month={today[:7]}", token=own_token)
+    assert state["habits"][0]["today_checked"]
+    assert today in state["habits"][0]["dates"]
+    assert api_request("GET", "/friend-pk/state", token=other_token)["habits"] == []
+    api_request("POST", f"/friend-pk/habits/{habit['id']}/toggle", token=own_token)
+    assert not api_request("GET", "/friend-pk/state", token=own_token)["habits"][0]["today_checked"]
     api_request("POST", f"/friend-pk/challenge/{challenge_id}/leave", token=own_token)
     assert api_request("GET", "/friend-pk/state", token=other_token)["challenge"] is None

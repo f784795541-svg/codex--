@@ -59,6 +59,12 @@ def seed_food_database(db: Session) -> None:
 def run_schema_migrations() -> None:
     inspector = inspect(engine)
     with engine.begin() as connection:
+        if inspector.has_table("friend_challenges"):
+            challenge_columns = {column["name"] for column in inspector.get_columns("friend_challenges")}
+            if "stage" not in challenge_columns:
+                connection.execute(text("ALTER TABLE friend_challenges ADD COLUMN stage INTEGER NOT NULL DEFAULT 0"))
+            if "renewal_requested_by" not in challenge_columns:
+                connection.execute(text("ALTER TABLE friend_challenges ADD COLUMN renewal_requested_by INTEGER REFERENCES users(id)"))
         if inspector.has_table("users"):
             user_columns = {column["name"] for column in inspector.get_columns("users")}
             if "username" not in user_columns:

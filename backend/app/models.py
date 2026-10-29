@@ -1,6 +1,6 @@
 from datetime import date, datetime, time
 
-from sqlalchemy import Boolean, Date, DateTime, Float, ForeignKey, Integer, String, Time
+from sqlalchemy import Boolean, Date, DateTime, Float, ForeignKey, Integer, String, Time, UniqueConstraint
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from .database import Base
@@ -145,3 +145,21 @@ class FriendChallenge(Base):
     created_at: Mapped[datetime] = mapped_column(DateTime, default=datetime.utcnow, nullable=False)
     start_date: Mapped[date | None] = mapped_column(Date, nullable=True)
     ended_at: Mapped[datetime | None] = mapped_column(DateTime, nullable=True)
+    stage: Mapped[int] = mapped_column(Integer, nullable=False, default=0, server_default="0")
+    renewal_requested_by: Mapped[int | None] = mapped_column(ForeignKey("users.id"), nullable=True)
+
+
+class FriendHabit(Base):
+    __tablename__ = "friend_habits"
+    id: Mapped[int] = mapped_column(Integer, primary_key=True)
+    user_id: Mapped[int] = mapped_column(ForeignKey("users.id"), nullable=False, index=True)
+    name: Mapped[str] = mapped_column(String(40), nullable=False)
+    created_at: Mapped[datetime] = mapped_column(DateTime, default=datetime.utcnow, nullable=False)
+
+
+class FriendHabitCheckin(Base):
+    __tablename__ = "friend_habit_checkins"
+    __table_args__ = (UniqueConstraint("habit_id", "checkin_date"),)
+    id: Mapped[int] = mapped_column(Integer, primary_key=True)
+    habit_id: Mapped[int] = mapped_column(ForeignKey("friend_habits.id"), nullable=False, index=True)
+    checkin_date: Mapped[date] = mapped_column(Date, nullable=False)

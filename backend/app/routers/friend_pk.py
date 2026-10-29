@@ -1,4 +1,5 @@
-from datetime import datetime, timedelta
+from datetime import date, datetime, timedelta
+import calendar
 import secrets
 
 from fastapi import APIRouter, Depends, HTTPException
@@ -23,16 +24,28 @@ class InviteRequest(BaseModel):
     code: str = Field(min_length=6, max_length=16)
 
 
+class HabitRequest(BaseModel):
+    name: str = Field(min_length=1, max_length=40)
+
+
+STAGES = [("7 天", 0), ("1 个月", 1), ("3 个月", 3), ("半年", 6), ("1 年", 12)]
+
+
+def challenge_end(start, stage):
+    months = STAGES[stage][1]
+    if not months:
+        return start + timedelta(days=6)
+    month_index = start.year * 12 + start.month - 1 + months
+    year, month = divmod(month_index, 12)
+    month += 1
+    return date(year, month, min(start.day, calendar.monthrange(year, month)[1])) - timedelta(days=1)
+
+
 def open_challenge(db, user_id):
     challenge = db.query(models.FriendChallenge).filter(
         or_(models.FriendChallenge.sender_id == user_id, models.FriendChallenge.recipient_id == user_id),
         models.FriendChallenge.status.in_(["pending", "active"]),
     ).order_by(models.FriendChallenge.id.desc()).first()
-    if challenge and challenge.status == "active" and services.local_today() > challenge.start_date + timedelta(days=6):
-        challenge.status = "completed"
-        challenge.ended_at = datetime.utcnow()
-        db.commit()
-        return None
     return challenge
 
 
@@ -50,8 +63,13 @@ def stats(db, user_id, start, end):
 
 
 @router.get("/state")
-def get_state(db: Session = Depends(get_db), user=Depends(authenticated)):
+def get_state(month: str | None = None, db: Session = Depends(get_db), user=Depends(authenticated)):
     today = services.local_today()
+    try:
+        month_start = date.fromisoformat(f"{month}-01") if month else today.replace(day=1)
+    except ValueError:
+        raise HTTPException(status_code=400, detail="月份格式应为 YYYY-MM")
+    month_end = month_start.replace(day=calendar.monthrange(month_start.year, month_start.month)[1])
     challenge = open_challenge(db, user.id)
     code = db.query(models.FriendInviteCode).filter(
         models.FriendInviteCode.user_id == user.id,
@@ -59,23 +77,67 @@ def get_state(db: Session = Depends(get_db), user=Depends(authenticated)):
     ).order_by(models.FriendInviteCode.id.desc()).first()
     result = {"code": code.code if code else None, "code_expires_at": code.expires_at.isoformat() + "Z" if code else None,
               "today": today.isoformat(), "calendar": stats(db, user.id, today - timedelta(days=29), today), "challenge": None}
+    habits = db.query(models.FriendHabit).filter_by(user_id=user.id).order_by(models.FriendHabit.id).all()
+    result["habit_month"] = month_start.strftime("%Y-%m")
+    result["habits"] = []
+    for habit in habits:
+        checkins = db.query(models.FriendHabitCheckin).filter(models.FriendHabitCheckin.habit_id == habit.id,
+            models.FriendHabitCheckin.checkin_date >= month_start, models.FriendHabitCheckin.checkin_date <= month_end).all()
+        dates = [item.checkin_date.isoformat() for item in checkins]
+        today_checked = db.query(models.FriendHabitCheckin).filter_by(habit_id=habit.id, checkin_date=today).first() is not None
+        result["habits"].append({"id": habit.id, "name": habit.name, "dates": dates, "today_checked": today_checked})
     if challenge:
         peer_id = challenge.recipient_id if challenge.sender_id == user.id else challenge.sender_id
         peer = db.get(models.User, peer_id)
         entry = {"id": challenge.id, "status": challenge.status, "incoming": challenge.recipient_id == user.id,
                  "peer_name": peer.name, "start_date": challenge.start_date.isoformat() if challenge.start_date else None}
         if challenge.status == "active":
-            end = min(today, challenge.start_date + timedelta(days=6))
+            stage = challenge.stage
+            deadline = challenge_end(challenge.start_date, stage)
+            end = min(today, deadline)
             own = stats(db, user.id, challenge.start_date, end)
             other = stats(db, peer_id, challenge.start_date, end)
             entry.update({"own_days": len(own), "peer_days": len(other), "own_minutes": sum(own.values()),
-                          "peer_minutes": sum(other.values()), "end_date": (challenge.start_date + timedelta(days=6)).isoformat()})
+                          "peer_minutes": sum(other.values()), "end_date": deadline.isoformat(),
+                          "stage_label": STAGES[stage][0], "next_stage_label": STAGES[stage + 1][0] if stage < 4 else None,
+                          "renewal_due": stage < 4 and today >= deadline - timedelta(days=2),
+                          "renewal_pending": bool(challenge.renewal_requested_by),
+                          "renewal_incoming": bool(challenge.renewal_requested_by and challenge.renewal_requested_by != user.id),
+                          "expired": today > deadline})
             weights = db.query(models.WeightLog).filter(models.WeightLog.user_id == user.id,
                 models.WeightLog.record_date >= challenge.start_date, models.WeightLog.record_date <= end).order_by(
                     models.WeightLog.record_date, models.WeightLog.record_time, models.WeightLog.id).all()
             entry["weight_change"] = round(weights[-1].weight_kg - weights[0].weight_kg, 1) if len(weights) >= 2 else None
         result["challenge"] = entry
     return result
+
+
+@router.post("/habits")
+def create_habit(payload: HabitRequest, db: Session = Depends(get_db), user=Depends(authenticated)):
+    name = payload.name.strip()
+    if not name:
+        raise HTTPException(status_code=400, detail="请输入习惯名称")
+    if db.query(models.FriendHabit).filter_by(user_id=user.id, name=name).first():
+        raise HTTPException(status_code=409, detail="这个习惯已经存在")
+    habit = models.FriendHabit(user_id=user.id, name=name)
+    db.add(habit)
+    db.commit()
+    return {"id": habit.id}
+
+
+@router.post("/habits/{habit_id}/toggle")
+def toggle_habit(habit_id: int, db: Session = Depends(get_db), user=Depends(authenticated)):
+    habit = db.query(models.FriendHabit).filter_by(id=habit_id, user_id=user.id).first()
+    if not habit:
+        raise HTTPException(status_code=404, detail="习惯不存在")
+    today = services.local_today()
+    checkin = db.query(models.FriendHabitCheckin).filter_by(habit_id=habit.id, checkin_date=today).first()
+    if checkin:
+        db.delete(checkin)
+    else:
+        db.add(models.FriendHabitCheckin(habit_id=habit.id, checkin_date=today))
+    db.commit()
+    return {"checked": checkin is None}
 
 
 @router.post("/code")
@@ -119,6 +181,13 @@ def change_challenge(challenge_id: int, action: str, db: Session = Depends(get_d
     if action == "accept" and challenge.status == "pending" and challenge.recipient_id == user.id:
         challenge.status = "active"
         challenge.start_date = services.local_today()
+    elif action == "renew" and challenge.status == "active" and challenge.stage < 4 and not challenge.renewal_requested_by and services.local_today() >= challenge_end(challenge.start_date, challenge.stage) - timedelta(days=2):
+        challenge.renewal_requested_by = user.id
+    elif action == "renew-accept" and challenge.status == "active" and challenge.renewal_requested_by and challenge.renewal_requested_by != user.id and challenge.stage < 4:
+        challenge.stage += 1
+        challenge.renewal_requested_by = None
+    elif action == "renew-decline" and challenge.status == "active" and challenge.renewal_requested_by and challenge.renewal_requested_by != user.id:
+        challenge.renewal_requested_by = None
     elif action == "decline" and challenge.status == "pending" and challenge.recipient_id == user.id:
         challenge.status = "declined"
         challenge.ended_at = datetime.utcnow()

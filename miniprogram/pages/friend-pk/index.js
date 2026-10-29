@@ -13,15 +13,25 @@ function calendarDays(data) {
   return days;
 }
 
+function habitDays(habit, month) {
+  const [year, number] = month.split("-").map(Number);
+  const count = new Date(year, number, 0).getDate();
+  return Array.from({ length: count }, (_, i) => {
+    const key = `${month}-${String(i + 1).padStart(2, "0")}`;
+    return { day: i + 1, done: habit.dates.includes(key) };
+  });
+}
+
 Page({
-  data: { loading: true, data: null, days: [], dialog: "", code: "", inputCode: "", error: "" },
+  data: { loading: true, data: null, days: [], habits: [], month: "", dialog: "", code: "", inputCode: "", habitName: "", error: "" },
   onShow() {
     if (ensureUser()) this.load();
   },
   async load() {
     try {
-      const data = await get("/friend-pk/state", {}, { cacheMs: 0 });
-      this.setData({ data, days: calendarDays(data), loading: false, dialog: "", error: "", count: Object.keys(data.calendar).length });
+      const data = await get("/friend-pk/state", this.data.month ? { month: this.data.month } : {}, { cacheMs: 0 });
+      const habits = data.habits.map(habit => ({ ...habit, days: habitDays(habit, data.habit_month) }));
+      this.setData({ data, habits, days: calendarDays(data), loading: false, dialog: "", error: "", count: Object.keys(data.calendar).length });
     } catch (error) {
       this.setData({ loading: false, error: error.message });
     }
@@ -36,6 +46,22 @@ Page({
   showInvite() { this.setData({ dialog: "invite", inputCode: "", error: "" }); },
   closeDialog() { this.setData({ dialog: "", error: "" }); },
   onCodeInput(event) { this.setData({ inputCode: event.detail.value }); },
+  showHabit() { this.setData({ dialog: "habit", habitName: "", error: "" }); },
+  onHabitInput(event) { this.setData({ habitName: event.detail.value }); },
+  async createHabit() {
+    try { await post("/friend-pk/habits", { name: this.data.habitName.trim() }); await this.load(); }
+    catch (error) { this.setData({ error: error.message }); }
+  },
+  async toggleHabit(event) {
+    try { await post(`/friend-pk/habits/${event.currentTarget.dataset.id}/toggle`, {}); await this.load(); }
+    catch (error) { this.setData({ error: error.message }); }
+  },
+  changeMonth(event) {
+    const [year, month] = this.data.data.habit_month.split("-").map(Number);
+    const day = new Date(year, month - 1 + Number(event.currentTarget.dataset.step), 1);
+    this.setData({ month: `${day.getFullYear()}-${String(day.getMonth() + 1).padStart(2, "0")}` });
+    this.load();
+  },
   async sendInvite() {
     try {
       await post("/friend-pk/invite", { code: this.data.inputCode.trim() });
@@ -51,6 +77,7 @@ Page({
     }
     try {
       await post(`/friend-pk/challenge/${challenge.id}/${action}`, {});
+      if (action.startsWith("renew") && wx.vibrateShort) wx.vibrateShort({ type: "light" });
       await this.load();
     } catch (error) { this.setData({ error: error.message }); }
   },

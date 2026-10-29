@@ -11,7 +11,8 @@ button::after { border: 0; }
 button.primary { background: #4c8278; color: white; }
 .pk-card,.pk-dialog { margin-top: 16rpx; padding: 26rpx; border: 1rpx solid #dce8e7; border-radius: 20rpx; background: #fff; }
 .pk-dialog { background: #e2f0ea; }
-.pk-dialog input { margin: 15rpx 0; padding: 15rpx; border: 1rpx solid #b8d0cb; border-radius: 12rpx; background: white; }
+.pk-dialog input { box-sizing: border-box; width: 100%; height: 88rpx; margin: 24rpx 0; padding: 0 20rpx; border: 1rpx solid #b8d0cb; border-radius: 12rpx; background: white; }
+.pk-dialog button { display: inline-block; width: auto; min-width: 150rpx; margin: 4rpx 12rpx 0 0; padding: 0 22rpx; line-height: 62rpx; }
 .pk-dialog-title,.pk-match-title { margin: 10rpx 0; font-size: 30rpx; font-weight: 700; }
 .pk-code { font-size: 48rpx; font-weight: 800; color: #245c53; }
 .pk-match { min-height: 260rpx; background: #e1efed; }
@@ -26,3 +27,11 @@ button.primary { background: #4c8278; color: white; }
 .pk-day { display: flex; flex-direction: column; justify-content: space-between; min-height: 65rpx; padding: 8rpx; border-radius: 10rpx; background: #f0f5f4; color: #7e9190; font-size: 20rpx; }
 .pk-day.done { background: #a9d4c6; color: #214d44; }.pk-day text:last-child { font-size: 18rpx; }
 .pk-rules { background: #f0f5f3; }.pk-error { margin-top: 16rpx; color: #a44646; font-size: 24rpx; }
+.pk-renewal { margin-top: 16rpx; padding: 24rpx; border: 1rpx solid #bbdad0; border-radius: 20rpx; background: #e0f2e9; animation: pk-arrive .4s cubic-bezier(.2,1.25,.4,1); }
+.pk-habit-head { display: flex; align-items: center; justify-content: space-between; gap: 12rpx; }
+.pk-habit-head > view { min-width: 0; }
+.pk-small { flex: none; width: auto; margin: 0; padding: 0 18rpx; line-height: 60rpx; font-size: 22rpx; }
+.pk-month { display: flex; justify-content: center; align-items: center; gap: 28rpx; margin: 16rpx 0; color: #426c62; }
+.pk-month button { width: 60rpx; margin: 0; padding: 0; line-height: 58rpx; }
+.pk-habit { border-top: 1rpx solid #e0eae6; padding-top: 18rpx; margin-top: 18rpx; }
+@keyframes pk-arrive { from { opacity: 0; transform: translateY(-12rpx) scale(.98); } to { opacity: 1; transform: translateY(0) scale(1); } }

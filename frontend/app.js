@@ -806,6 +806,7 @@ const state = {
   mobileToastTimer: null,
   friendPkCodeVisible: false,
   friendPkData: null,
+  friendPkMonth: "",
   registerPicker: {
     fieldKey: "",
   },
@@ -1823,6 +1824,15 @@ function friendPkCalendar(data) {
   return cells.join("");
 }
 
+function habitCalendar(habit, month) {
+  const [year, number] = month.split("-").map(Number);
+  const count = new Date(year, number, 0).getDate();
+  return Array.from({ length: count }, (_, index) => {
+    const key = `${month}-${String(index + 1).padStart(2, "0")}`;
+    return `<div class="pk-day ${habit.dates.includes(key) ? "is-done" : ""}" title="${key}：${habit.dates.includes(key) ? "已打卡" : "未打卡"}"><span>${index + 1}</span></div>`;
+  }).join("");
+}
+
 function renderFriendPk() {
   const data = state.friendPkData;
   const html = !data ? `<div class="pk-loading">正在加载好友挑战...</div>` : (() => {
@@ -1833,14 +1843,16 @@ function renderFriendPk() {
     } else if (c.status === "pending") {
       match = `<span class="friend-pk-card-label">等待确认</span><h3>${c.incoming ? `${escapeHtml(c.peer_name)} 邀请你挑战` : `已向 ${escapeHtml(c.peer_name)} 发出邀战`}</h3><p>${c.incoming ? "接受后从今天开始，连续 7 天记录运动。" : "等待对方在好友 PK 页面确认。"}</p><div class="pk-actions">${c.incoming ? '<button type="button" class="friend-pk-primary-btn" data-pk-action="accept">接受挑战</button><button type="button" class="friend-pk-secondary-btn" data-pk-action="decline">婉拒</button>' : '<button type="button" class="friend-pk-secondary-btn" data-pk-action="leave">撤回邀战</button>'}</div>`;
     } else {
-      match = `<div class="friend-pk-card-topline"><div><span class="friend-pk-card-label">7 天坚持赛</span><strong>${c.start_date} 至 ${c.end_date}</strong></div><span class="friend-pk-status-dot"><i></i>进行中</span></div><div class="friend-pk-versus"><div class="friend-pk-person"><span class="friend-pk-avatar">你</span><strong>我</strong><small>${c.own_days} 天 · ${c.own_minutes} 分钟</small></div><div class="friend-pk-vs-mark">VS</div><div class="friend-pk-person friend-pk-person-friend"><span class="friend-pk-avatar">${escapeHtml(c.peer_name.slice(0, 1))}</span><strong>${escapeHtml(c.peer_name)}</strong><small>${c.peer_days} 天 · ${c.peer_minutes} 分钟</small></div></div><div class="friend-pk-match-foot"><span>先比打卡天数，同分比总时长</span><button type="button" data-pk-action="leave">退出挑战</button></div>`;
+      match = `<div class="friend-pk-card-topline"><div><span class="friend-pk-card-label">${c.stage_label}坚持赛</span><strong>${c.start_date} 至 ${c.end_date}</strong></div><span class="friend-pk-status-dot"><i></i>${c.expired ? "已到期" : "进行中"}</span></div><div class="friend-pk-versus"><div class="friend-pk-person"><span class="friend-pk-avatar">你</span><strong>我</strong><small>${c.own_days} 天 · ${c.own_minutes} 分钟</small></div><div class="friend-pk-vs-mark">VS</div><div class="friend-pk-person friend-pk-person-friend"><span class="friend-pk-avatar">${escapeHtml(c.peer_name.slice(0, 1))}</span><strong>${escapeHtml(c.peer_name)}</strong><small>${c.peer_days} 天 · ${c.peer_minutes} 分钟</small></div></div><div class="friend-pk-match-foot"><span>先比打卡天数，同分比总时长</span><button type="button" data-pk-action="leave">退出挑战</button></div>`;
     }
+    const renewal = c && c.status === "active" && (c.renewal_due || c.renewal_pending) ? `<div class="pk-renewal" role="status"><div><strong>${c.renewal_pending ? (c.renewal_incoming ? `好友提议续到 ${c.next_stage_label}` : "续期申请已发送") : (c.expired ? "本阶段已到期" : "本阶段即将结束")}</strong><p>${c.renewal_pending ? "双方确认后才会延长挑战期限。" : `可邀请好友续到 ${c.next_stage_label}，双方确认后生效。`}</p></div><div class="pk-actions">${c.renewal_incoming ? '<button class="friend-pk-primary-btn" data-pk-action="renew-accept">同意续期</button><button class="friend-pk-secondary-btn" data-pk-action="renew-decline">暂不续期</button>' : c.renewal_pending ? "" : '<button class="friend-pk-primary-btn" data-pk-action="renew">邀请续期</button>'}</div></div>` : "";
+    const habits = (data.habits || []).map(h => `<section class="pk-habit"><div class="friend-pk-card-topline"><strong>${escapeHtml(h.name)}</strong><button type="button" class="${h.today_checked ? "friend-pk-secondary-btn" : "friend-pk-primary-btn"}" data-pk-action="habit-toggle" data-id="${h.id}">${h.today_checked ? "已打卡 · 撤销" : "今日打卡"}</button></div><div class="pk-calendar-grid">${habitCalendar(h, data.habit_month)}</div></section>`).join("");
     return `<div class="friend-pk-page-head"><div><button type="button" class="friend-pk-back-btn" data-switch-panel="overview">← 返回首页</button><p class="friend-pk-kicker">SOCIAL MODE / 07</p><h2>好友 PK</h2><p>一起完成，今天更容易坚持。</p></div><div class="friend-pk-page-actions"><button type="button" class="friend-pk-secondary-btn" data-pk-action="code">查看匹配码</button>${!c ? '<button type="button" class="friend-pk-primary-btn" data-pk-action="invite-form">发起邀战</button>' : ""}</div></div>
-      <div id="pk-dialog" class="pk-dialog" hidden></div><div class="friend-pk-grid pk-live-grid"><article class="friend-pk-card friend-pk-match-card pk-match">${match}</article>
-      <article class="friend-pk-card friend-pk-stat-card friend-pk-stat-workout"><span class="friend-pk-card-label">本次运动打卡</span><strong>${c && c.status === "active" ? c.own_days : "—"} <em>/ 7 天</em></strong><p>每天有运动记录即点亮</p></article>
+      <div id="pk-dialog" class="pk-dialog" hidden></div>${renewal}<div class="friend-pk-grid pk-live-grid"><article class="friend-pk-card friend-pk-match-card pk-match">${match}</article>
+      <article class="friend-pk-card friend-pk-stat-card friend-pk-stat-workout"><span class="friend-pk-card-label">本次运动打卡</span><strong>${c && c.status === "active" ? c.own_days : "—"} <em>天</em></strong><p>每天有运动记录即点亮</p></article>
       <article class="friend-pk-card friend-pk-stat-card friend-pk-stat-weight"><span class="friend-pk-card-label">体重变化</span><strong>${c && c.weight_change != null ? (c.weight_change > 0 ? "+" : "") + c.weight_change : "—"} <em>kg</em></strong><p>挑战期间的个人记录</p></article>
       <article class="friend-pk-card friend-pk-calendar"><div class="friend-pk-card-topline"><div><span class="friend-pk-card-label">近 30 天</span><strong>运动打卡日历</strong></div><span class="friend-pk-trend-note">${Object.keys(data.calendar).length} 天已点亮</span></div><div class="pk-calendar-grid">${friendPkCalendar(data)}</div><p>当天有运动记录即点亮；悬停查看累计时长。</p></article>
-      <article class="friend-pk-card pk-rules"><span class="friend-pk-card-label">对战规则</span><strong>运动记录自动计入</strong><p>7 天内按运动天数排名，天数相同时比较总时长。体重变化仅供自己参考，不计胜负。</p><button type="button" class="friend-pk-secondary-btn" data-switch-panel="activity">去记录运动 →</button><p class="pk-reminder">微信提醒尚未接入，目前不会向对方发送微信消息。</p></article></div><div id="pk-message" class="pk-message" aria-live="polite"></div>`;
+      <article class="friend-pk-card pk-rules"><span class="friend-pk-card-label">对战规则</span><strong>运动记录自动计入</strong><p>挑战期间按运动天数排名，天数相同时比较总时长。体重变化和自定义习惯不计胜负。</p><button type="button" class="friend-pk-secondary-btn" data-switch-panel="activity">去记录运动 →</button><p class="pk-reminder">微信提醒尚未接入，目前不会向对方发送微信消息。</p></article><article class="friend-pk-card pk-habits"><div class="friend-pk-card-topline"><div><span class="friend-pk-card-label">自定义习惯 · 仅自己可见</span><strong>每天，做一件想坚持的事</strong></div><button type="button" class="friend-pk-primary-btn" data-pk-action="habit-form">添加习惯</button></div><div class="pk-month"><button type="button" data-pk-action="month-prev" aria-label="上个月">←</button><strong>${data.habit_month}</strong><button type="button" data-pk-action="month-next" aria-label="下个月">→</button></div>${habits || '<p>添加一个习惯，从今天开始记录。</p>'}</article></div><div id="pk-message" class="pk-message" aria-live="polite"></div>`;
   })();
   const desktop = $("panel-friend-pk");
   const mobile = $("mobile-friend-pk-content");
@@ -1850,7 +1862,7 @@ function renderFriendPk() {
 
 async function loadFriendPk() {
   try {
-    state.friendPkData = await apiRequest("/friend-pk/state");
+    state.friendPkData = await apiRequest(`/friend-pk/state${state.friendPkMonth ? `?month=${encodeURIComponent(state.friendPkMonth)}` : ""}`);
     renderFriendPk();
   } catch (error) {
     state.friendPkData = null;
@@ -1860,12 +1872,27 @@ async function loadFriendPk() {
   }
 }
 
-async function friendPkAction(action, host) {
+async function friendPkAction(action, host, trigger) {
   const dialog = host.querySelector("#pk-dialog");
   const message = host.querySelector("#pk-message");
   const challenge = state.friendPkData?.challenge;
   try {
     if (action === "reload") return loadFriendPk();
+    if (action === "month-prev" || action === "month-next") {
+      const [year, month] = state.friendPkData.habit_month.split("-").map(Number);
+      const d = new Date(year, month - 1 + (action === "month-prev" ? -1 : 1), 1);
+      state.friendPkMonth = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}`;
+      return loadFriendPk();
+    }
+    if (action === "habit-form") {
+      dialog.innerHTML = `<div><span class="friend-pk-card-label">添加习惯</span><label for="pk-habit-input">习惯名称</label><input id="pk-habit-input" maxlength="40" placeholder="例如：早睡、喝水、散步"></div><div class="pk-actions"><button class="friend-pk-primary-btn" data-pk-action="habit-create">添加</button><button class="friend-pk-secondary-btn" data-pk-action="close">取消</button></div>`;
+      dialog.hidden = false; dialog.querySelector("input").focus(); return;
+    }
+    if (action === "habit-create") {
+      await apiRequest("/friend-pk/habits", { method: "POST", body: JSON.stringify({ name: dialog.querySelector("input").value.trim() }) });
+    } else if (action === "habit-toggle") {
+      await apiRequest(`/friend-pk/habits/${trigger.dataset.id}/toggle`, { method: "POST" });
+    } else
     if (action === "close") { dialog.hidden = true; return; }
     if (action === "code") {
       const result = await apiRequest("/friend-pk/code", { method: "POST" });
@@ -1885,7 +1912,7 @@ async function friendPkAction(action, host) {
     if (action === "send") {
       const code = dialog.querySelector("input").value.trim();
       await apiRequest("/friend-pk/invite", { method: "POST", body: JSON.stringify({ code }) });
-    } else if (["accept", "decline", "leave"].includes(action)) {
+    } else if (["accept", "decline", "leave", "renew", "renew-accept", "renew-decline"].includes(action)) {
       if (action === "leave" && !window.confirm(challenge.status === "active" ? "确定退出本次挑战？" : "确定撤回邀战？")) return;
       await apiRequest(`/friend-pk/challenge/${challenge.id}/${action}`, { method: "POST" });
     }
@@ -6309,7 +6336,7 @@ function bindEvents() {
   document.addEventListener("click", (event) => {
     const pkTrigger = event.target.closest("[data-pk-action]");
     if (pkTrigger) {
-      friendPkAction(pkTrigger.dataset.pkAction, pkTrigger.closest("#panel-friend-pk, #mobile-friend-pk-content"));
+      friendPkAction(pkTrigger.dataset.pkAction, pkTrigger.closest("#panel-friend-pk, #mobile-friend-pk-content"), pkTrigger);
       return;
     }
     const friendPkTrigger = event.target.closest("[data-friend-pk-action]");
