@@ -8,17 +8,17 @@ function calendarDays(data) {
     const day = new Date(end);
     day.setDate(day.getDate() - i);
     const key = `${day.getFullYear()}-${String(day.getMonth() + 1).padStart(2, "0")}-${String(day.getDate()).padStart(2, "0")}`;
-    days.push({ date: key, day: day.getDate(), minutes: data.calendar[key] || 0 });
+    days.push({ date: key, day: day.getDate(), minutes: data.calendar[key] || 0, peer: (data.peer_calendar || {})[key] || 0 });
   }
   return days;
 }
 
-function habitDays(habit, month) {
+function habitDays(habit, month, peer) {
   const [year, number] = month.split("-").map(Number);
   const count = new Date(year, number, 0).getDate();
   return Array.from({ length: count }, (_, i) => {
     const key = `${month}-${String(i + 1).padStart(2, "0")}`;
-    return { day: i + 1, done: habit.dates.includes(key) };
+    return { day: i + 1, done: habit.dates.includes(key), peer: !!(peer && peer.dates.includes(key)) };
   });
 }
 
@@ -30,7 +30,7 @@ Page({
   async load() {
     try {
       const data = await get("/friend-pk/state", this.data.month ? { month: this.data.month } : {}, { cacheMs: 0 });
-      const habits = data.habits.map(habit => ({ ...habit, days: habitDays(habit, data.habit_month) }));
+      const habits = data.habits.slice(0, 1).map(habit => ({ ...habit, days: habitDays(habit, data.habit_month, data.peer_habit) }));
       this.setData({ data, habits, days: calendarDays(data), loading: false, dialog: "", error: "", count: Object.keys(data.calendar).length });
     } catch (error) {
       this.setData({ loading: false, error: error.message });

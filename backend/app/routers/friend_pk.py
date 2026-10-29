@@ -62,6 +62,15 @@ def stats(db, user_id, start, end):
     return days
 
 
+def streak(dates, today):
+    days = set(dates)
+    count = 0
+    while today.isoformat() in days:
+        count += 1
+        today -= timedelta(days=1)
+    return count
+
+
 @router.get("/state")
 def get_state(month: str | None = None, db: Session = Depends(get_db), user=Depends(authenticated)):
     today = services.local_today()
@@ -85,7 +94,12 @@ def get_state(month: str | None = None, db: Session = Depends(get_db), user=Depe
             models.FriendHabitCheckin.checkin_date >= month_start, models.FriendHabitCheckin.checkin_date <= month_end).all()
         dates = [item.checkin_date.isoformat() for item in checkins]
         today_checked = db.query(models.FriendHabitCheckin).filter_by(habit_id=habit.id, checkin_date=today).first() is not None
-        result["habits"].append({"id": habit.id, "name": habit.name, "dates": dates, "today_checked": today_checked})
+        all_dates = [item.checkin_date.isoformat() for item in db.query(models.FriendHabitCheckin).filter(
+            models.FriendHabitCheckin.habit_id == habit.id, models.FriendHabitCheckin.checkin_date <= today).all()]
+        result["habits"].append({"id": habit.id, "name": habit.name, "dates": dates, "today_checked": today_checked,
+                                 "streak": streak(all_dates, today)})
+    result["peer_calendar"] = {}
+    result["peer_habit"] = None
     if challenge:
         peer_id = challenge.recipient_id if challenge.sender_id == user.id else challenge.sender_id
         peer = db.get(models.User, peer_id)
@@ -97,6 +111,13 @@ def get_state(month: str | None = None, db: Session = Depends(get_db), user=Depe
             end = min(today, deadline)
             own = stats(db, user.id, challenge.start_date, end)
             other = stats(db, peer_id, challenge.start_date, end)
+            result["peer_calendar"] = stats(db, peer_id, max(today - timedelta(days=29), challenge.start_date), end)
+            peer_habit = db.query(models.FriendHabit).filter_by(user_id=peer_id).order_by(models.FriendHabit.id).first()
+            if peer_habit:
+                peer_dates = db.query(models.FriendHabitCheckin).filter(models.FriendHabitCheckin.habit_id == peer_habit.id,
+                    models.FriendHabitCheckin.checkin_date >= max(month_start, challenge.start_date),
+                    models.FriendHabitCheckin.checkin_date <= min(month_end, end)).all()
+                result["peer_habit"] = {"name": peer_habit.name, "dates": [item.checkin_date.isoformat() for item in peer_dates]}
             entry.update({"own_days": len(own), "peer_days": len(other), "own_minutes": sum(own.values()),
                           "peer_minutes": sum(other.values()), "end_date": deadline.isoformat(),
                           "stage_label": STAGES[stage][0], "next_stage_label": STAGES[stage + 1][0] if stage < 4 else None,
@@ -117,8 +138,8 @@ def create_habit(payload: HabitRequest, db: Session = Depends(get_db), user=Depe
     name = payload.name.strip()
     if not name:
         raise HTTPException(status_code=400, detail="请输入习惯名称")
-    if db.query(models.FriendHabit).filter_by(user_id=user.id, name=name).first():
-        raise HTTPException(status_code=409, detail="这个习惯已经存在")
+    if db.query(models.FriendHabit).filter_by(user_id=user.id).first():
+        raise HTTPException(status_code=409, detail="已设置一个习惯")
     habit = models.FriendHabit(user_id=user.id, name=name)
     db.add(habit)
     db.commit()

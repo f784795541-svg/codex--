@@ -31,6 +31,12 @@ def test_invitation_and_workout_calendar(registered_user):
     assert state["habits"][0]["today_checked"]
     assert today in state["habits"][0]["dates"]
     assert api_request("GET", "/friend-pk/state", token=other_token)["habits"] == []
+    peer_habit = api_request("POST", "/friend-pk/habits", {"name": "散步"}, other_token)
+    api_request("POST", f"/friend-pk/habits/{peer_habit['id']}/toggle", token=other_token)
+    state = api_request("GET", f"/friend-pk/state?month={today[:7]}", token=own_token)
+    assert state["peer_habit"]["name"] == "散步"
+    assert today in state["peer_habit"]["dates"]
+    assert state["habits"][0]["streak"] == 1
     api_request("POST", f"/friend-pk/habits/{habit['id']}/toggle", token=own_token)
     assert not api_request("GET", "/friend-pk/state", token=own_token)["habits"][0]["today_checked"]
     api_request("POST", f"/friend-pk/challenge/{challenge_id}/leave", token=own_token)

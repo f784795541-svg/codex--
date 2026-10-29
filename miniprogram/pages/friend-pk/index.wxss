@@ -1,7 +1,7 @@
 page { background: #edf3f5; color: #173039; }
 .pk-page { padding: 32rpx 26rpx 60rpx; }
 .pk-kicker,.pk-label { color: #668881; font-size: 21rpx; font-weight: 700; }
-.pk-title { margin-top: 8rpx; font-size: 58rpx; font-weight: 800; }
+.pk-title { margin-top: 8rpx; font-size: 44rpx; font-weight: 800; }
 .pk-subtitle,.pk-note { color: #698080; font-size: 23rpx; line-height: 1.6; }
 .pk-subtitle { margin: 6rpx 0 24rpx; }
 .pk-toolbar { display: flex; gap: 12rpx; margin: 14rpx 0; }
@@ -26,6 +26,10 @@ button.primary { background: #4c8278; color: white; }
 .pk-calendar-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 9rpx; margin: 20rpx 0; }
 .pk-day { display: flex; flex-direction: column; justify-content: space-between; min-height: 65rpx; padding: 8rpx; border-radius: 10rpx; background: #f0f5f4; color: #7e9190; font-size: 20rpx; }
 .pk-day.done { background: #a9d4c6; color: #214d44; }.pk-day text:last-child { font-size: 18rpx; }
+.pk-workout-split, .pk-habit-split { position: relative; overflow: hidden; background: #f0f4f2; }
+.pk-workout-split.own, .pk-habit-split.own { background: linear-gradient(135deg, #8fc5b4 0 49%, transparent 50%); }
+.pk-workout-split.peer, .pk-habit-split.peer { background: linear-gradient(315deg, #9dadd5 0 49%, transparent 50%); }
+.pk-workout-split.own.peer, .pk-habit-split.own.peer { background: linear-gradient(135deg, #b9a6dc 0 49%, #9dadd5 50%); }
 .pk-rules { background: #f0f5f3; }.pk-error { margin-top: 16rpx; color: #a44646; font-size: 24rpx; }
 .pk-renewal { margin-top: 16rpx; padding: 24rpx; border: 1rpx solid #bbdad0; border-radius: 20rpx; background: #e0f2e9; animation: pk-arrive .4s cubic-bezier(.2,1.25,.4,1); }
 .pk-habit-head { display: flex; align-items: center; justify-content: space-between; gap: 12rpx; }
@@ -39,7 +43,14 @@ button.primary { background: #4c8278; color: white; }
 .pk-habit-row { display: flex; align-items: center; justify-content: space-between; gap: 12rpx; border-top: 1rpx solid #e0eae6; padding-top: 14rpx; margin-top: 14rpx; }
 .pk-habit-row .pk-match-title { min-width: 0; overflow-wrap: anywhere; }
 .pk-habit-calendar { background: #f2f4fb; }
+.pk-habits { order: 1; }.pk-habit-calendar { order: 2; }.pk-stat-grid { order: 3; }.pk-calendar { order: 4; }.pk-rules { order: 5; }
 .pk-habit-calendar .pk-day { background: #e9edf5; color: #71808c; }
 .pk-habit-calendar .pk-day.done { background: #aabde0; color: #243c62; }
+.pk-workout-split.own { background: linear-gradient(to bottom, #8fc5b4 0 50%, #f0f4f2 50%); }
+.pk-workout-split.peer { background: linear-gradient(to bottom, #f0f4f2 0 50%, #9dadd5 50%); }
+.pk-workout-split.own.peer { background: linear-gradient(to bottom, #8fc5b4 0 50%, #9dadd5 50%); }
+.pk-habit-calendar .pk-habit-split.own { background: linear-gradient(135deg, #b9a6dc 0 49%, #e9edf5 50%); }
+.pk-habit-calendar .pk-habit-split.peer { background: linear-gradient(135deg, #e9edf5 0 49%, #9dadd5 50%); }
+.pk-habit-calendar .pk-habit-split.own.peer { background: linear-gradient(135deg, #b9a6dc 0 49%, #9dadd5 50%); }
 .pk-habit-calendar-entry + .pk-habit-calendar-entry { margin-top: 16rpx; padding-top: 14rpx; border-top: 1rpx solid #dce3ec; }
 @keyframes pk-arrive { from { opacity: 0; transform: translateY(-12rpx) scale(.98); } to { opacity: 1; transform: translateY(0) scale(1); } }
