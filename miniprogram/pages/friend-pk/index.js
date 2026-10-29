@@ -23,7 +23,7 @@ function habitDays(habit, month) {
 }
 
 Page({
-  data: { loading: true, data: null, days: [], habits: [], month: "", dialog: "", code: "", inputCode: "", habitName: "", error: "" },
+  data: { loading: true, data: null, days: [], habits: [], month: "", dialog: "", code: "", inputCode: "", habitName: "", habitFormOpen: false, habitError: "", error: "" },
   onShow() {
     if (ensureUser()) this.load();
   },
@@ -46,11 +46,12 @@ Page({
   showInvite() { this.setData({ dialog: "invite", inputCode: "", error: "" }); },
   closeDialog() { this.setData({ dialog: "", error: "" }); },
   onCodeInput(event) { this.setData({ inputCode: event.detail.value }); },
-  showHabit() { this.setData({ dialog: "habit", habitName: "", error: "" }); },
+  showHabit() { this.setData({ habitFormOpen: true, habitName: "", habitError: "" }); },
+  cancelHabit() { this.setData({ habitFormOpen: false, habitError: "" }); },
   onHabitInput(event) { this.setData({ habitName: event.detail.value }); },
   async createHabit() {
-    try { await post("/friend-pk/habits", { name: this.data.habitName.trim() }); await this.load(); }
-    catch (error) { this.setData({ error: error.message }); }
+    try { await post("/friend-pk/habits", { name: this.data.habitName.trim() }); this.setData({ habitFormOpen: false, habitError: "" }); await this.load(); }
+    catch (error) { this.setData({ habitError: error.message }); }
   },
   async toggleHabit(event) {
     try { await post(`/friend-pk/habits/${event.currentTarget.dataset.id}/toggle`, {}); await this.load(); }
