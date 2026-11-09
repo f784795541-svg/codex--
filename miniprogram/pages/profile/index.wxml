@@ -12,7 +12,7 @@
       <view class="hero-pill-row">
         <view class="hero-pill">
           <text class="hero-pill-label">账号</text>
-          <text class="hero-pill-value">{{user.username}}</text>
+          <text class="hero-pill-value">{{user.username || '微信账号'}}</text>
         </view>
         <view class="hero-pill">
           <text class="hero-pill-label">当前体重</text>
@@ -40,11 +40,12 @@
       <view class="profile-account-row">
         <view class="profile-account-copy">
           <view class="profile-name">{{displayName}}</view>
-          <view class="section-caption">用户名：{{user.username}}</view>
+          <view class="section-caption">用户名：{{user.username || '未设置'}}</view>
         </view>
         <button class="profile-logout-btn" bindtap="logout">退出登录</button>
       </view>
       <view class="support-inline-copy">优先维护这里的基础资料，其他页面的数据解释会跟着同步。</view>
+      <button class="button-secondary" bindtap="bindWechat">绑定当前微信</button>
       <view class="field profile-username-field">
         <text class="field-label">账号</text>
         <input class="input" value="{{username}}" placeholder="请输入至少 3 位账号" data-field="username" bindinput="handleInput" />
@@ -171,9 +172,9 @@
         </view>
         <view class="card-badge">已登录修改</view>
       </view>
-      <view class="card-note">这里用于登录后的正常改密，需要先输入当前密码，再设置新的密码。</view>
+      <view class="card-note">{{user.has_password ? '修改密码需要输入当前密码。' : '首次设置账号密码后，也可以使用账号密码登录。'}}</view>
 
-      <view class="field">
+      <view wx:if="{{user.has_password}}" class="field">
         <text class="field-label">当前密码</text>
         <input class="input" password placeholder="请输入当前密码" value="{{currentPassword}}" data-field="currentPassword" bindinput="handleInput" />
       </view>

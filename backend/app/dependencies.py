@@ -39,13 +39,7 @@ def resolve_user(
             raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="不能访问其他用户的数据")
         return current_user
 
-    if requested_user_id is None:
-        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="请先登录")
-
-    user = db.get(models.User, requested_user_id)
-    if not user:
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="用户不存在")
-    return user
+    raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="请先登录")
 
 
 def resolve_optional_user_id(requested_user_id: int | None, current_user: models.User | None) -> int | None:
@@ -53,4 +47,6 @@ def resolve_optional_user_id(requested_user_id: int | None, current_user: models
         if requested_user_id is not None and requested_user_id != current_user.id:
             raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="不能访问其他用户的数据")
         return current_user.id
-    return requested_user_id
+    if requested_user_id is not None:
+        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="请先登录")
+    return None

@@ -740,6 +740,10 @@ def compute_daily_report(
             )
         )
 
+    step_log = db.query(models.WechatStepLog).filter_by(user_id=user.id, log_date=report_date).first()
+    step_calories = step_log.calories if step_log else 0
+    # TDEE already includes ordinary daily activity, so adding all steps again
+    # would overstate expenditure even when there is no manual walking log.
     total_burned = round(sum(item.calories_burned for item in workout_logs), 2)
     base_calorie_target = targets["calorie_target"]
     workout_flex_calories = round(total_burned * 0.4, 2)
@@ -779,6 +783,9 @@ def compute_daily_report(
         calorie_target_kcal=base_calorie_target,
         base_calorie_target_kcal=base_calorie_target,
         workout_flex_calories_kcal=workout_flex_calories,
+        wechat_steps=step_log.steps if step_log else None,
+        wechat_step_calories_kcal=step_calories,
+        wechat_steps_excluded=bool(step_log),
         recommended_calorie_target_kcal=recommended_calorie_target,
         bmr_kcal=targets["bmr"],
         protein=schemas.MacroStatus(

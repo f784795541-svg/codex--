@@ -22,17 +22,17 @@
     </view>
 
     <view class="auth-section-label">账户信息</view>
-    <view class="field">
+    <view wx:if="{{!wechat}}" class="field">
       <text class="field-label">用户名</text>
       <input class="input" placeholder="至少 3 位" value="{{username}}" data-field="username" bindinput="handleInput" />
     </view>
 
-    <view class="auth-inline-note">
+    <view wx:if="{{!wechat}}" class="auth-inline-note">
       <text class="auth-inline-note-title">用户名规则</text>
       <text class="auth-inline-note-copy">用户名至少 3 位，且不能和已有用户名重复。若提示“用户名已存在”，请更换后再注册。</text>
     </view>
 
-    <view class="field">
+    <view wx:if="{{!wechat}}" class="field">
       <text class="field-label">密码</text>
       <input class="input" password placeholder="至少 6 位" value="{{password}}" data-field="password" bindinput="handleInput" />
     </view>
@@ -133,7 +133,7 @@
       <text class="auth-inline-note-copy">低：日常久坐，运动较少。中：每周规律训练 3 到 5 次。高：训练频率高或体力活动较大。</text>
     </view>
 
-    <button class="button auth-primary-button" loading="{{loading}}" disabled="{{loading}}" bindtap="submit">注册并进入</button>
+    <button class="button auth-primary-button" loading="{{loading}}" disabled="{{loading}}" bindtap="submit">{{wechat ? '创建微信账号并进入' : '注册并进入'}}</button>
     <button class="button-secondary auth-secondary-button" bindtap="goLogin">已有账号，去登录</button>
   </view>
 </view>

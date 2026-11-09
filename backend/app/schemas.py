@@ -21,6 +21,7 @@ class UserCreate(BaseModel):
 
 class UserResponse(UserCreate):
     id: int
+    has_password: bool = True
 
     model_config = ConfigDict(from_attributes=True)
 
@@ -193,6 +194,9 @@ class DailyReportResponse(BaseModel):
     calorie_target_kcal: float
     base_calorie_target_kcal: float
     workout_flex_calories_kcal: float
+    wechat_steps: int | None = None
+    wechat_step_calories_kcal: float = 0
+    wechat_steps_excluded: bool = False
     recommended_calorie_target_kcal: float
     bmr_kcal: float
     protein: MacroStatus

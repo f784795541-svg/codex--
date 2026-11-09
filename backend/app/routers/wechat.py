@@ -1,0 +1,164 @@
+import base64
+import json
+import os
+from datetime import datetime, timedelta
+from urllib.parse import urlencode
+from urllib.request import urlopen
+
+from cryptography.hazmat.primitives.ciphers import Cipher, algorithms, modes
+from cryptography.hazmat.primitives.padding import PKCS7
+from fastapi import APIRouter, Depends, HTTPException
+from pydantic import BaseModel, Field
+from sqlalchemy.exc import IntegrityError
+from sqlalchemy.orm import Session
+
+from .. import dependencies, models, schemas, services
+from ..database import get_db
+
+router = APIRouter(prefix="/wechat")
+
+
+class CodeRequest(BaseModel):
+    code: str = Field(min_length=1, max_length=256)
+
+
+class StepsRequest(CodeRequest):
+    encrypted_data: str = Field(min_length=1, max_length=16384)
+    iv: str = Field(min_length=1, max_length=128)
+    bind: bool = False
+
+
+class RegisterRequest(schemas.UserCreate):
+    code: str = Field(min_length=1, max_length=256)
+
+
+def current_user(user=Depends(dependencies.get_optional_current_user)):
+    if user is None:
+        raise HTTPException(status_code=401, detail="请先登录")
+    return user
+
+
+@router.post("/login", response_model=None)
+def login(payload: CodeRequest, db: Session = Depends(get_db)):
+    result = exchange(payload.code)
+    identity = db.query(models.WechatIdentity).filter_by(openid=result["openid"]).first()
+    if not identity:
+        raise HTTPException(status_code=404, detail="微信尚未绑定账号")
+    user = db.get(models.User, identity.user_id)
+    if not user:
+        raise HTTPException(status_code=401, detail="账号不可用")
+    from ..schemas import UserResponse
+    return {"user": UserResponse.model_validate(user), "access_token": services.create_access_token(user.id)}
+
+
+@router.post("/register")
+def register(payload: RegisterRequest, db: Session = Depends(get_db)):
+    result = exchange(payload.code)
+    if db.query(models.WechatIdentity).filter_by(openid=result["openid"]).first():
+        raise HTTPException(status_code=409, detail="该微信已绑定账号，请直接登录")
+    values = payload.model_dump(exclude={"code", "username"})
+    values["name"] = values["name"].strip()
+    if not values["name"]:
+        raise HTTPException(status_code=400, detail="请输入昵称")
+    user = models.User(**values)
+    db.add(user)
+    try:
+        db.flush()
+        db.add(models.WechatIdentity(user_id=user.id, openid=result["openid"]))
+        db.add(models.WeightLog(user_id=user.id, weight_kg=user.weight_kg, record_date=services.local_today()))
+        db.commit()
+    except IntegrityError:
+        db.rollback()
+        raise HTTPException(status_code=409, detail="该微信已绑定账号，请直接登录") from None
+    db.refresh(user)
+    return {"user": schemas.UserResponse.model_validate(user), "access_token": services.create_access_token(user.id)}
+
+
+@router.post("/bind")
+def bind(payload: CodeRequest, db: Session = Depends(get_db), user=Depends(current_user)):
+    result = exchange(payload.code)
+    by_user = db.query(models.WechatIdentity).filter_by(user_id=user.id).first()
+    by_openid = db.query(models.WechatIdentity).filter_by(openid=result["openid"]).first()
+    if by_user and by_openid and by_user.id == by_openid.id:
+        return {"message": "微信已绑定"}
+    if by_user or by_openid:
+        raise HTTPException(status_code=409, detail="微信或当前账号已绑定其他账号")
+    db.add(models.WechatIdentity(user_id=user.id, openid=result["openid"]))
+    try:
+        db.commit()
+    except IntegrityError:
+        db.rollback()
+        raise HTTPException(status_code=409, detail="微信或当前账号已绑定其他账号") from None
+    return {"message": "微信绑定成功"}
+
+
+def exchange(code):
+    appid = os.getenv("WECHAT_APP_ID", "")
+    secret = os.getenv("WECHAT_APP_SECRET", "")
+    if not appid or not secret:
+        raise HTTPException(status_code=503, detail="微信服务尚未配置")
+    signing_secret = os.getenv("APP_SECRET_KEY", "")
+    if not signing_secret or signing_secret == "CHANGE_ME_DEV_ONLY_HEALTH_MANAGER_SECRET":
+        raise HTTPException(status_code=503, detail="账号安全配置尚未完成")
+    query = urlencode({"appid": appid, "secret": secret, "js_code": code, "grant_type": "authorization_code"})
+    try:
+        with urlopen("https://api.weixin.qq.com/sns/jscode2session?" + query, timeout=8) as response:
+            result = json.load(response)
+        if not result.get("openid") or not result.get("session_key"):
+            raise ValueError("invalid response")
+        return result
+    except Exception:
+        raise HTTPException(status_code=502, detail="微信登录暂时不可用，请重试") from None
+
+
+def decode_steps(encrypted, iv, session_key):
+    try:
+        decryptor = Cipher(algorithms.AES(base64.b64decode(session_key, validate=True)),
+                           modes.CBC(base64.b64decode(iv, validate=True))).decryptor()
+        padded = decryptor.update(base64.b64decode(encrypted, validate=True)) + decryptor.finalize()
+        unpadder = PKCS7(128).unpadder()
+        result = json.loads(unpadder.update(padded) + unpadder.finalize())
+        if result["watermark"]["appid"] != os.environ["WECHAT_APP_ID"]:
+            raise ValueError("invalid watermark")
+        return result["stepInfoList"]
+    except Exception:
+        raise HTTPException(status_code=400, detail="微信运动数据无效，请重新同步") from None
+
+
+@router.post("/steps")
+def sync_steps(payload: StepsRequest, db: Session = Depends(get_db), user=Depends(current_user)):
+    result = exchange(payload.code)
+    identity = db.query(models.WechatIdentity).filter_by(user_id=user.id, openid=result["openid"]).first()
+    entries = decode_steps(payload.encrypted_data, payload.iv, result["session_key"])
+    if not identity:
+        if not payload.bind:
+            raise HTTPException(status_code=403, detail="请先绑定当前微信账号")
+        if db.query(models.WechatIdentity).filter_by(user_id=user.id).first() or db.query(models.WechatIdentity).filter_by(openid=result["openid"]).first():
+            raise HTTPException(status_code=409, detail="微信或当前账号已绑定其他账号")
+        db.add(models.WechatIdentity(user_id=user.id, openid=result["openid"]))
+    today = services.local_today()
+    daily_steps = {}
+    for item in entries:
+        try:
+            day = datetime.fromtimestamp(int(item["timestamp"]), services.APP_TIMEZONE).date()
+            steps = int(item["step"])
+        except (KeyError, ValueError, TypeError, OverflowError, OSError):
+            continue
+        if not today - timedelta(days=30) <= day <= today or not 0 <= steps <= 100000:
+            continue
+        daily_steps[day] = steps
+    for day, steps in daily_steps.items():
+        distance_km = steps * user.height_cm * 0.00415 / 1000
+        calories = round(distance_km * user.weight_kg * 0.5, 2)
+        row = db.query(models.WechatStepLog).filter_by(user_id=user.id, log_date=day).first()
+        if not row:
+            row = models.WechatStepLog(user_id=user.id, log_date=day, steps=steps, calories=calories)
+            db.add(row)
+        else:
+            row.steps, row.calories = steps, calories
+    try:
+        db.commit()
+    except IntegrityError:
+        db.rollback()
+        raise HTTPException(status_code=409, detail="同步正在进行，请稍后重试") from None
+    return {"synced_days": len(daily_steps)}

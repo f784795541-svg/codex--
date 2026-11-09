@@ -3,6 +3,8 @@
   margin-top: 4rpx;
 }
 
+.wechat-step-note { margin: 8rpx 0 12rpx; color: #587773; font-size: 22rpx; line-height: 1.5; }
+
 .home-friend-pk {
   position: absolute;
   top: 20rpx;

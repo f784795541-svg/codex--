@@ -1,5 +1,6 @@
 const { get, isUnauthorizedRedirectError } = require("../../utils/request");
 const { ensureUser } = require("../../utils/session");
+const wechatSteps = require("../../utils/wechat-steps");
 
 const FOOD_LIBRARY_LIMIT = 500;
 
@@ -523,12 +524,33 @@ Page({
     mealRecommendation: null,
   },
 
-  onShow() {
+  async onShow() {
     const user = ensureUser();
     if (!user) {
       return;
     }
-    this.loadSummary(user.id);
+    await this.loadSummary(user.id);
+    if (wx.getStorageSync(`health_werun_enabled_${user.id}`)) {
+      wx.getSetting({ success: result => {
+        if (result.authSetting["scope.werun"]) {
+          wechatSteps.sync(false).then(() => this.loadSummary(user.id)).catch(() => {});
+        }
+      }});
+    }
+  },
+
+  async enableWechatSteps() {
+    const user = ensureUser();
+    if (!user || this.syncingSteps) return;
+    this.syncingSteps = true;
+    try {
+      await wechatSteps.sync(true);
+      wx.setStorageSync(`health_werun_enabled_${user.id}`, true);
+      wx.showToast({ title: "步数已同步", icon: "success" });
+      await this.loadSummary(user.id);
+    } catch (error) {
+      wx.showToast({ title: error.message || "同步失败，请检查微信运动授权", icon: "none" });
+    } finally { this.syncingSteps = false; }
   },
 
   async ensureFoodLibrary() {

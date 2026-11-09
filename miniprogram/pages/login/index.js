@@ -64,6 +64,29 @@ Page({
     }
   },
 
+  async wechatLogin() {
+    if (this.data.loading) return;
+    this.setData({ loading: true });
+    try {
+      const result = await new Promise((resolve, reject) => wx.login({ success: resolve, fail: reject }));
+      if (!result.code) throw new Error("微信登录失败，请重试");
+      const auth = await post("/wechat/login", { code: result.code }, { redirectOnUnauthorized: false });
+      getApp().setCurrentUser(auth.user, auth.access_token);
+      wx.switchTab({ url: "/pages/home/index" });
+    } catch (error) {
+      if (error.statusCode === 404) {
+        wx.showModal({
+          title: "首次使用微信登录",
+          content: "请先填写身体资料创建账号。已有账号可先使用账号密码登录，再到“我的”绑定微信。",
+          confirmText: "创建账号",
+          success: result => { if (result.confirm) wx.navigateTo({ url: "/pages/register/index?wechat=1" }); },
+        });
+        return;
+      }
+      wx.showToast({ title: error.message || "微信登录暂不可用", icon: "none" });
+    } finally { this.setData({ loading: false }); }
+  },
+
   goRegister() {
     wx.navigateTo({
       url: "/pages/register/index",

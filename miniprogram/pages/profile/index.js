@@ -262,7 +262,7 @@ Page({
     const targetWeightKg = asPositiveNumber(this.data.target_weight_kg);
     const targetSleepHours = asNumberInRange(this.data.target_sleep_hours, 4, 12);
 
-    if (!isFilled(username) || username.length < 3 || !isFilled(name) || !age || !heightCm || !weightKg || !targetWeightKg || !targetSleepHours) {
+    if ((username && username.length < 3) || !isFilled(name) || !age || !heightCm || !weightKg || !targetWeightKg || !targetSleepHours) {
       wx.showToast({
         title: "请检查资料填写是否完整有效",
         icon: "none",
@@ -277,7 +277,7 @@ Page({
       });
       const result = await post("/user/update", {
         user_id: this.data.user.id,
-        username,
+        ...(username ? { username } : {}),
         name,
         age,
         height_cm: heightCm,
@@ -335,7 +335,7 @@ Page({
       return;
     }
 
-    if (!currentPassword || !newPassword) {
+    if ((this.data.user.has_password && !currentPassword) || !newPassword) {
       wx.showToast({
         title: "请输入旧密码和新密码",
         icon: "none",
@@ -360,7 +360,7 @@ Page({
         user_id: this.data.user.id,
         username,
         name,
-        current_password: currentPassword,
+        ...(currentPassword ? { current_password: currentPassword } : {}),
         new_password: newPassword,
       });
       getApp().setCurrentUser(result.user);
@@ -389,6 +389,17 @@ Page({
         passwordSaving: false,
         passwordSaveButtonText: "修改密码",
       });
+    }
+  },
+
+  async bindWechat() {
+    try {
+      const result = await new Promise((resolve, reject) => wx.login({ success: resolve, fail: reject }));
+      if (!result.code) throw new Error("微信登录失败，请重试");
+      await post("/wechat/bind", { code: result.code });
+      wx.showToast({ title: "微信已绑定", icon: "success" });
+    } catch (error) {
+      if (!isUnauthorizedRedirectError(error)) wx.showToast({ title: error.message || "绑定失败", icon: "none" });
     }
   },
 

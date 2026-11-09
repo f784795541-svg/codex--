@@ -38,6 +38,7 @@
     <view class="auth-tip">先登录，再继续今天的首页查看、记录补齐和趋势回看。</view>
 
     <button class="button auth-primary-button" loading="{{loading}}" disabled="{{loading}}" bindtap="submit">进入健康系统</button>
+    <button class="button-secondary auth-secondary-button" disabled="{{loading}}" bindtap="wechatLogin">微信登录</button>
     <view class="auth-password-row">
       <text class="auth-password-link" bindtap="showPasswordResetHelp">忘记密码</text>
     </view>

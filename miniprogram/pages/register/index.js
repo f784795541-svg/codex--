@@ -56,6 +56,11 @@ Page({
     goalIndex: 0,
     activityIndex: 1,
     loading: false,
+    wechat: false,
+  },
+
+  onLoad(options) {
+    this.setData({ wechat: options.wechat === "1" });
   },
 
   onShow() {
@@ -116,11 +121,8 @@ Page({
     const targetSleepHours = asNumberInRange(this.data.target_sleep_hours, 4, 12);
 
     if (
-      !isFilled(username) ||
-      !isFilled(password) ||
+      (!this.data.wechat && (!isFilled(username) || !isFilled(password) || username.trim().length < 3 || password.length < 6)) ||
       !isFilled(name) ||
-      username.trim().length < 3 ||
-      password.length < 6 ||
       !age ||
       !heightCm ||
       !weightKg ||
@@ -137,9 +139,7 @@ Page({
     this.setData({ loading: true });
 
     try {
-      const result = await post("/auth/register", {
-        username: username.trim(),
-        password,
+      const data = {
         name: name.trim(),
         age,
         gender: GENDERS[this.data.genderIndex].value,
@@ -149,7 +149,15 @@ Page({
         target_sleep_hours: targetSleepHours,
         goal: GOALS[this.data.goalIndex].value,
         activity_level: ACTIVITY_LEVELS[this.data.activityIndex].value,
-      });
+      };
+      let result;
+      if (this.data.wechat) {
+        const login = await new Promise((resolve, reject) => wx.login({ success: resolve, fail: reject }));
+        if (!login.code) throw new Error("微信登录失败，请重试");
+        result = await post("/wechat/register", { ...data, code: login.code }, { redirectOnUnauthorized: false });
+      } else {
+        result = await post("/auth/register", { ...data, username: username.trim(), password });
+      }
       getApp().setCurrentUser(result.user, result.access_token);
       wx.showToast({
         title: "注册成功",

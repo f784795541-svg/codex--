@@ -6,3 +6,4 @@ pydantic==2.11.7
 bcrypt==4.2.1
 alembic==1.14.0
 pytest==8.3.4
+cryptography==44.0.3

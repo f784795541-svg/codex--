@@ -31,6 +31,10 @@ class User(Base):
     sleep_logs: Mapped[list["SleepLog"]] = relationship(back_populates="user")
     weight_logs: Mapped[list["WeightLog"]] = relationship(back_populates="user")
 
+    @property
+    def has_password(self) -> bool:
+        return bool(self.password_hash)
+
 
 class FoodDatabase(Base):
     __tablename__ = "food_database"
@@ -98,6 +102,23 @@ class WorkoutLog(Base):
     created_at: Mapped[datetime] = mapped_column(DateTime, default=datetime.utcnow, nullable=False)
 
     user: Mapped["User"] = relationship(back_populates="workout_logs")
+
+
+class WechatIdentity(Base):
+    __tablename__ = "wechat_identities"
+    id: Mapped[int] = mapped_column(Integer, primary_key=True)
+    user_id: Mapped[int] = mapped_column(ForeignKey("users.id"), unique=True, nullable=False)
+    openid: Mapped[str] = mapped_column(String(128), unique=True, nullable=False)
+
+
+class WechatStepLog(Base):
+    __tablename__ = "wechat_step_logs"
+    __table_args__ = (UniqueConstraint("user_id", "log_date"),)
+    id: Mapped[int] = mapped_column(Integer, primary_key=True)
+    user_id: Mapped[int] = mapped_column(ForeignKey("users.id"), nullable=False, index=True)
+    log_date: Mapped[date] = mapped_column(Date, nullable=False)
+    steps: Mapped[int] = mapped_column(Integer, nullable=False)
+    calories: Mapped[float] = mapped_column(Float, nullable=False)
 
 
 class SleepLog(Base):

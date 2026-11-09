@@ -94,7 +94,10 @@ def run_schema_migrations() -> None:
                 )
             )
 
-            legacy_ids = connection.execute(text("SELECT id FROM users WHERE username IS NULL")).fetchall()
+            legacy_ids = connection.execute(text(
+                "SELECT id FROM users WHERE username IS NULL "
+                "AND NOT EXISTS (SELECT 1 FROM wechat_identities WHERE wechat_identities.user_id = users.id)"
+            )).fetchall()
             for row in legacy_ids:
                 connection.execute(
                     text(
