@@ -116,6 +116,7 @@
   color: #385e63;
   font-size: 24rpx;
   line-height: 1.45;
+  text-align: center;
 }
 
 .device-link-connect {

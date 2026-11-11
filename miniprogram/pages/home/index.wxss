@@ -10,7 +10,7 @@
   z-index: 2;
   box-sizing: border-box;
   min-width: 0;
-  width: 108rpx;
+  width: 92rpx;
   padding: 0;
   border: 1rpx solid #c7ded6;
   border-radius: 16rpx;
