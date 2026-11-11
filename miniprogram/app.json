@@ -1,7 +1,5 @@
 {
   "pages": [
-    "pages/login/index",
-    "pages/register/index",
     "pages/home/index",
     "pages/friend-pk/index",
     "pages/record/index",

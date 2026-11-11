@@ -40,35 +40,24 @@ function shouldRedirectOnUnauthorized(url, redirectOnUnauthorized) {
   return !String(url || "").startsWith("/auth/");
 }
 
-function redirectToLoginOnUnauthorized() {
+function restoreSessionOnUnauthorized() {
   if (unauthorizedRedirectPending) {
     return;
   }
 
   unauthorizedRedirectPending = true;
-  const pages = typeof getCurrentPages === "function" ? getCurrentPages() : [];
-  const currentRoute = pages.length ? `/${pages[pages.length - 1].route}` : "";
-
-  if (currentRoute === "/pages/login/index") {
-    unauthorizedRedirectPending = false;
-    return;
-  }
-
   wx.showToast({
-    title: "Session expired",
+    title: "正在恢复账户",
     icon: "none",
     duration: 1500,
   });
 
   setTimeout(() => {
-    wx.reLaunch({
-      url: "/pages/login/index",
-      complete: () => {
-        setTimeout(() => {
-          unauthorizedRedirectPending = false;
-        }, 300);
-      },
-    });
+    const app = getApp();
+    app.bootstrapSession(true)
+      .then(() => wx.reLaunch({ url: "/pages/home/index" }))
+      .catch(() => wx.showToast({ title: "账户恢复失败，请重试", icon: "none" }))
+      .finally(() => { unauthorizedRedirectPending = false; });
   }, 220);
 }
 
@@ -126,7 +115,7 @@ function request({ url, method = "GET", data, header = {}, cacheMs = 0, redirect
           if (app && typeof app.clearCurrentUser === "function") {
             app.clearCurrentUser();
           }
-          redirectToLoginOnUnauthorized();
+          restoreSessionOnUnauthorized();
           reject(createRequestError("Session expired", statusCode, true));
           return;
         }

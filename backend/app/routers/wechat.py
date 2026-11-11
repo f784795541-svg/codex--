@@ -51,6 +51,42 @@ def login(payload: CodeRequest, db: Session = Depends(get_db)):
     return {"user": UserResponse.model_validate(user), "access_token": services.create_access_token(user.id)}
 
 
+@router.post("/session", response_model=None)
+def open_session(payload: CodeRequest, db: Session = Depends(get_db)):
+    """Open the mini-program's own data session without asking for a username or password."""
+    result = exchange(payload.code)
+    identity = db.query(models.WechatIdentity).filter_by(openid=result["openid"]).first()
+    if identity:
+        user = db.get(models.User, identity.user_id)
+        if user:
+            return {"user": schemas.UserResponse.model_validate(user), "access_token": services.create_access_token(user.id)}
+
+    user = models.User(
+        name="轻养用户",
+        age=25,
+        gender="female",
+        height_cm=165,
+        weight_kg=60,
+        target_weight_kg=55,
+        target_sleep_hours=8,
+    )
+    db.add(user)
+    try:
+        db.flush()
+        user.name = f"轻养用户{user.id:04d}"
+        db.add(models.WechatIdentity(user_id=user.id, openid=result["openid"]))
+        db.add(models.WeightLog(user_id=user.id, weight_kg=user.weight_kg, record_date=services.local_today()))
+        db.commit()
+    except IntegrityError:
+        db.rollback()
+        identity = db.query(models.WechatIdentity).filter_by(openid=result["openid"]).first()
+        user = db.get(models.User, identity.user_id) if identity else None
+        if not user:
+            raise HTTPException(status_code=409, detail="账户初始化失败，请重试") from None
+    db.refresh(user)
+    return {"user": schemas.UserResponse.model_validate(user), "access_token": services.create_access_token(user.id)}
+
+
 @router.post("/register")
 def register(payload: RegisterRequest, db: Session = Depends(get_db)):
     result = exchange(payload.code)

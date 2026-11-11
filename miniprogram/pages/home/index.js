@@ -525,7 +525,7 @@ Page({
   },
 
   async onShow() {
-    const user = ensureUser();
+    const user = await ensureUser();
     if (!user) {
       return;
     }
@@ -540,7 +540,7 @@ Page({
   },
 
   async enableWechatSteps() {
-    const user = ensureUser();
+    const user = await ensureUser();
     if (!user || this.syncingSteps) return;
     this.syncingSteps = true;
     try {

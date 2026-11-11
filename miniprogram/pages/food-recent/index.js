@@ -73,7 +73,7 @@ Page({
   },
 
   async loadHistory() {
-    const user = ensureUser();
+    const user = await ensureUser();
     if (!user) {
       return;
     }

@@ -42,34 +42,11 @@
   color: #1b3f46;
 }
 
-.profile-logout-btn {
-  flex-shrink: 0;
-  min-width: 156rpx;
-  margin: 0;
-  border: 1rpx solid #c9dadd;
-  border-radius: 999rpx;
-  background: rgba(255, 255, 255, 0.86);
-  color: #335d63;
-  font-size: 23rpx;
-  font-weight: 600;
-}
-
 .support-inline-copy {
   margin-top: 12rpx;
   color: #738d92;
   font-size: 21rpx;
   line-height: 1.56;
-}
-
-.profile-username-field {
-  margin-top: 18rpx;
-}
-
-.profile-field-note {
-  margin-top: 8rpx;
-  color: #7a9296;
-  font-size: 21rpx;
-  line-height: 1.5;
 }
 
 .profile-save-notice {

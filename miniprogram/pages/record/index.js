@@ -327,8 +327,8 @@ Page({
     this.refreshDerivedState();
   },
 
-  onShow() {
-    const user = ensureUser();
+  async onShow() {
+    const user = await ensureUser();
     if (!user) {
       return;
     }
@@ -531,7 +531,7 @@ Page({
   },
 
   async loadTodayFoodHistory(user = null) {
-    const currentUser = user || ensureUser();
+    const currentUser = user || await ensureUser();
     if (!currentUser || this.loadingTodayFoodHistory) {
       return;
     }
@@ -784,7 +784,7 @@ Page({
   },
 
   async submitFood() {
-    const user = ensureUser();
+    const user = await ensureUser();
     if (!user) {
       return;
     }
@@ -861,7 +861,7 @@ Page({
   },
 
   async estimateWorkout() {
-    const user = ensureUser();
+    const user = await ensureUser();
     if (!user) {
       return;
     }
@@ -923,7 +923,7 @@ Page({
   },
 
   async submitWorkout() {
-    const user = ensureUser();
+    const user = await ensureUser();
     if (!user) {
       return;
     }
@@ -996,7 +996,7 @@ Page({
   },
 
   async submitSleep() {
-    const user = ensureUser();
+    const user = await ensureUser();
     if (!user) {
       return;
     }
@@ -1037,7 +1037,7 @@ Page({
   },
 
   async submitWeight() {
-    const user = ensureUser();
+    const user = await ensureUser();
     if (!user) {
       return;
     }

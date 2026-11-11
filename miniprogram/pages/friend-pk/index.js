@@ -24,8 +24,8 @@ function habitDays(habit, month, peer) {
 
 Page({
   data: { loading: true, data: null, days: [], habits: [], month: "", dialog: "", code: "", inputCode: "", habitName: "", habitFormOpen: false, habitError: "", error: "" },
-  onShow() {
-    if (ensureUser()) this.load();
+  async onShow() {
+    if (await ensureUser()) this.load();
   },
   async load() {
     try {

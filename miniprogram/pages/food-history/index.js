@@ -63,7 +63,7 @@ Page({
   },
 
   async loadTodayFoodHistory() {
-    const user = ensureUser();
+    const user = await ensureUser();
     if (!user) {
       return;
     }
@@ -123,7 +123,7 @@ Page({
   },
 
   async deleteFoodLog(logId, foodName = "") {
-    const user = ensureUser();
+    const user = await ensureUser();
     if (!user) {
       return;
     }

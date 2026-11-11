@@ -11,8 +11,8 @@
       <view class="hero-subtitle">把账户、目标和基础设置放在一个更清楚的层级里。先把当前身体数据和节奏目标放稳，后面再细修偏好项。</view>
       <view class="hero-pill-row">
         <view class="hero-pill">
-          <text class="hero-pill-label">账号</text>
-          <text class="hero-pill-value">{{user.username || '微信账号'}}</text>
+          <text class="hero-pill-label">小程序账户</text>
+          <text class="hero-pill-value">已自动保存</text>
         </view>
         <view class="hero-pill">
           <text class="hero-pill-label">当前体重</text>
@@ -31,33 +31,26 @@
     <view class="card">
       <view class="card-head">
         <view>
-          <text class="card-kicker">账户概览</text>
-          <view class="section-title">账户信息</view>
+          <text class="card-kicker">个人资料</text>
+          <view class="section-title">昵称与身体资料</view>
         </view>
-        <view class="card-badge">资料可编辑</view>
+        <view class="card-badge">自动保存</view>
       </view>
-      <view class="card-note">这里放的是会直接影响首页摘要、趋势解释和记录默认值的核心资料。</view>
+      <view class="card-note">小程序已自动为你建立账户；设置昵称后，好友 PK 会显示这个昵称。</view>
       <view class="profile-account-row">
         <view class="profile-account-copy">
           <view class="profile-name">{{displayName}}</view>
-          <view class="section-caption">用户名：{{user.username || '未设置'}}</view>
+          <view class="section-caption">数据会随当前微信小程序账户保存</view>
         </view>
-        <button class="profile-logout-btn" bindtap="logout">退出登录</button>
       </view>
       <view class="support-inline-copy">优先维护这里的基础资料，其他页面的数据解释会跟着同步。</view>
-      <button class="button-secondary" bindtap="bindWechat">绑定当前微信</button>
-      <view class="field profile-username-field">
-        <text class="field-label">账号</text>
-        <input class="input" value="{{username}}" placeholder="请输入至少 3 位账号" data-field="username" bindinput="handleInput" />
-        <view class="profile-field-note">修改后，下次登录请使用新账号。</view>
-      </view>
 
       <view class="profile-section-row">
         <view class="profile-section-title">基础资料</view>
         <view class="profile-section-note">优先保证体重、身高和年龄准确。</view>
       </view>
       <view class="field">
-        <text class="field-label">昵称</text>
+        <text class="field-label">昵称（用于好友 PK 展示）</text>
         <input class="input" value="{{name}}" data-field="name" bindinput="handleInput" />
       </view>
 
@@ -164,32 +157,10 @@
       <button class="button" loading="{{saving}}" disabled="{{saving}}" bindtap="submit">{{saveButtonText}}</button>
     </view>
 
-    <view class="card">
-      <view class="card-head">
-        <view>
-          <text class="card-kicker">账户安全</text>
-          <view class="section-title">修改密码</view>
-        </view>
-        <view class="card-badge">已登录修改</view>
-      </view>
-      <view class="card-note">{{user.has_password ? '修改密码需要输入当前密码。' : '首次设置账号密码后，也可以使用账号密码登录。'}}</view>
-
-      <view wx:if="{{user.has_password}}" class="field">
-        <text class="field-label">当前密码</text>
-        <input class="input" password placeholder="请输入当前密码" value="{{currentPassword}}" data-field="currentPassword" bindinput="handleInput" />
-      </view>
-
-      <view class="field">
-        <text class="field-label">新密码</text>
-        <input class="input" password placeholder="至少 6 位" value="{{newPassword}}" data-field="newPassword" bindinput="handleInput" />
-      </view>
-
-      <button class="button" loading="{{passwordSaving}}" disabled="{{passwordSaving}}" bindtap="submitPasswordChange">{{passwordSaveButtonText}}</button>
-    </view>
   </block>
 
   <view wx:else class="empty">
-    <text class="empty-title">还没有拿到账户资料</text>
-    请先确认登录状态和接口联调，再回来编辑个人资料。
+    <text class="empty-title">账户资料暂时未就绪</text>
+    请稍后重试，账户建立后即可编辑个人资料。
   </view>
 </view>

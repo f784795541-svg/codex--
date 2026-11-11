@@ -411,8 +411,8 @@ Page({
     loading: true,
   },
 
-  onShow() {
-    const user = ensureUser();
+  async onShow() {
+    const user = await ensureUser();
     if (!user) {
       return;
     }
