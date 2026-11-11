@@ -109,12 +109,13 @@
   width: 100%;
   height: 108rpx;
   margin-top: 8rpx;
-  padding: 0 18rpx;
+  padding: 14rpx 18rpx;
   border: 2rpx solid #82a8b2;
   border-radius: 16rpx;
   background: #fff;
   color: #385e63;
-  font-size: 22rpx;
+  font-size: 24rpx;
+  line-height: 1.45;
 }
 
 .device-link-connect {

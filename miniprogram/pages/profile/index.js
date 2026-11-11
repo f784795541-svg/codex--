@@ -97,6 +97,7 @@ Page({
     saving: false,
     deviceLinkCode: "",
     deviceLinkInput: "",
+    deviceLinkPlaceholder: "输入另一台设备显示的\n8 位码",
     deviceLinkCountdown: "",
     deviceLinkLoading: false,
     saveButtonText: "保存设置",

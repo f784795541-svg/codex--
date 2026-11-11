@@ -8,14 +8,16 @@
   top: 10rpx;
   right: 0;
   z-index: 2;
-  width: 124rpx;
+  box-sizing: border-box;
+  min-width: 0;
+  width: 108rpx;
   padding: 0;
   border: 1rpx solid #c7ded6;
   border-radius: 16rpx;
   background: #e9f4ef;
   color: #315e59;
-  font-size: 19rpx;
-  line-height: 48rpx;
+  font-size: 21rpx;
+  line-height: 52rpx;
   text-align: center;
 }
 .home-friend-pk::after { border: 0; }

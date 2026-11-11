@@ -48,7 +48,7 @@
       <view class="device-link-row device-link-input-row">
         <view class="device-link-input-copy">
           <view class="device-link-label">输入连接码</view>
-          <input class="input device-link-input" maxlength="8" placeholder="输入另一台设备显示的 8 位码" value="{{deviceLinkInput}}" bindinput="handleDeviceLinkInput" />
+          <textarea class="input device-link-input" maxlength="8" placeholder="{{deviceLinkPlaceholder}}" value="{{deviceLinkInput}}" bindinput="handleDeviceLinkInput" />
         </view>
         <button class="device-link-button device-link-connect" loading="{{deviceLinkLoading}}" disabled="{{deviceLinkLoading}}" bindtap="connectDevice">连接</button>
       </view>
