@@ -539,13 +539,11 @@ Page({
       return;
     }
     await this.loadSummary(user.id);
-    if (wx.getStorageSync(`health_werun_enabled_${user.id}`)) {
-      wx.getSetting({ success: result => {
-        if (result.authSetting["scope.werun"]) {
-          wechatSteps.sync(false).then(() => this.loadSummary(user.id)).catch(() => {});
-        }
-      }});
-    }
+    wx.getSetting({ success: result => {
+      if (result.authSetting["scope.werun"]) {
+        wechatSteps.sync(false).then(() => this.loadSummary(user.id)).catch(() => {});
+      }
+    }});
   },
 
   async enableWechatSteps() {

@@ -116,7 +116,7 @@ def create_device_link_code(db: Session = Depends(get_db), user=Depends(current_
         expires_at=datetime.utcnow() + timedelta(minutes=10),
     ))
     db.commit()
-    return {"code": code}
+    return {"code": code, "expires_in_seconds": 600}
 
 
 @router.post("/device-link/connect", response_model=None)

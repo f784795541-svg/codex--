@@ -34,7 +34,7 @@
           <text class="card-kicker">MULTI-DEVICE</text>
           <view class="section-title">连接另一台设备</view>
         </view>
-        <view class="card-badge">10 分钟有效</view>
+        <view class="card-badge">{{deviceLinkCode ? deviceLinkCountdown + ' 后失效' : '10 分钟有效'}}</view>
       </view>
       <view class="card-note">在保存主数据的设备显示连接码，再到另一台设备输入。连接后，另一台设备会使用这份数据账户。</view>
       <view class="device-link-row">

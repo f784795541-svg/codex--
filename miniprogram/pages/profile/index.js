@@ -97,6 +97,7 @@ Page({
     saving: false,
     deviceLinkCode: "",
     deviceLinkInput: "",
+    deviceLinkCountdown: "",
     deviceLinkLoading: false,
     saveButtonText: "保存设置",
   },
@@ -127,14 +128,17 @@ Page({
     }
 
     this.loadUser(user.id);
+    this.updateDeviceLinkCountdown();
   },
 
   onHide() {
     this.clearHomeSwitchTimer();
+    this.clearDeviceLinkTimer();
   },
 
   onUnload() {
     this.clearHomeSwitchTimer();
+    this.clearDeviceLinkTimer();
   },
 
   async loadUser(userId) {
@@ -206,6 +210,35 @@ Page({
     this.setData({ deviceLinkInput: event.detail.value.toUpperCase().replace(/\s/g, "") });
   },
 
+  clearDeviceLinkTimer() {
+    if (this.deviceLinkTimer) {
+      clearInterval(this.deviceLinkTimer);
+      this.deviceLinkTimer = null;
+    }
+  },
+
+  updateDeviceLinkCountdown() {
+    this.clearDeviceLinkTimer();
+    if (!this.deviceLinkExpiresAt || !this.data.deviceLinkCode) {
+      return;
+    }
+
+    const refresh = () => {
+      const seconds = Math.max(0, Math.ceil((this.deviceLinkExpiresAt - Date.now()) / 1000));
+      if (!seconds) {
+        this.clearDeviceLinkTimer();
+        this.deviceLinkExpiresAt = 0;
+        this.setData({ deviceLinkCode: "", deviceLinkCountdown: "" });
+        return;
+      }
+      const minutes = Math.floor(seconds / 60);
+      this.setData({ deviceLinkCountdown: `${minutes}:${String(seconds % 60).padStart(2, "0")}` });
+    };
+
+    refresh();
+    this.deviceLinkTimer = setInterval(refresh, 1000);
+  },
+
   async showDeviceLinkCode() {
     if (this.data.deviceLinkLoading) {
       return;
@@ -214,6 +247,8 @@ Page({
       this.setData({ deviceLinkLoading: true });
       const result = await post("/wechat/device-link/code", {});
       this.setData({ deviceLinkCode: result.code });
+      this.deviceLinkExpiresAt = Date.now() + (Number(result.expires_in_seconds) || 600) * 1000;
+      this.updateDeviceLinkCountdown();
     } catch (error) {
       if (!isUnauthorizedRedirectError(error)) wx.showToast({ title: error.message || "连接码生成失败", icon: "none" });
     } finally {
@@ -235,8 +270,11 @@ Page({
         ...buildPreviewState(result.user),
         deviceLinkCode: "",
         deviceLinkInput: "",
+        deviceLinkCountdown: "",
         showProfileContent: true,
       });
+      this.clearDeviceLinkTimer();
+      this.deviceLinkExpiresAt = 0;
       wx.showToast({ title: "设备连接成功", icon: "success" });
       await this.loadUser(result.user.id);
     } catch (error) {

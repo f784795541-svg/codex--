@@ -5,21 +5,23 @@
 
 .home-friend-pk {
   position: absolute;
-  top: 12rpx;
-  right: 8rpx;
+  top: 10rpx;
+  right: 0;
   z-index: 2;
-  padding: 0 12rpx;
+  width: 124rpx;
+  padding: 0;
   border: 1rpx solid #c7ded6;
   border-radius: 16rpx;
   background: #e9f4ef;
   color: #315e59;
-  font-size: 21rpx;
-  line-height: 52rpx;
+  font-size: 19rpx;
+  line-height: 48rpx;
+  text-align: center;
 }
 .home-friend-pk::after { border: 0; }
 
 .hero-panel-home .hero-title {
-  padding-right: 184rpx;
+  padding-right: 136rpx;
 }
 
 .screen-home .hero-subtitle {
