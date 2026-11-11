@@ -1,10 +1,14 @@
-const { post } = require("../../utils/request");
+const { get, post } = require("../../utils/request");
 
 Page({
   data: {
     username: "",
     password: "",
     loading: false,
+    foodQuery: "",
+    foodResults: [],
+    foodLoading: false,
+    foodSearched: false,
   },
 
   onShow() {
@@ -21,6 +25,39 @@ Page({
     this.setData({
       [field]: event.detail.value,
     });
+  },
+
+  handleFoodQuery(event) {
+    this.setData({ foodQuery: event.detail.value });
+  },
+
+  async searchFoods() {
+    const query = this.data.foodQuery.trim();
+    if (!query || this.data.foodLoading) {
+      return;
+    }
+
+    this.setData({ foodLoading: true, foodSearched: true });
+    try {
+      const foods = await get(
+        "/food/search",
+        { q: query, limit: 6, platform: "mini_program_guest" },
+        { redirectOnUnauthorized: false, cacheMs: 0 }
+      );
+      this.setData({
+        foodResults: (foods || []).map((food) => ({
+          id: food.id || food.food_id,
+          name: food.name,
+          category: food.category || "食物",
+          calories: Math.round(Number(food.calories_per_100g) || 0),
+          protein: Number(food.protein || 0).toFixed(1),
+        })),
+      });
+    } catch (error) {
+      wx.showToast({ title: error.message || "暂时无法搜索", icon: "none" });
+    } finally {
+      this.setData({ foodLoading: false });
+    }
   },
 
   async submit() {

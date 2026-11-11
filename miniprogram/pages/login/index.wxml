@@ -5,7 +5,7 @@
       <text class="auth-brand-pill auth-brand-pill-soft">固定公式 + 规则引擎</text>
     </view>
     <view class="hero-title">轻养</view>
-    <view class="hero-subtitle">把记录、目标和建议收进同一个入口。先登录，再继续今天的健康节奏。</view>
+    <view class="hero-subtitle">先浏览食物热量和健康管理方法；需要保存记录、同步微信运动或参加好友挑战时，再自主选择登录。</view>
     <view class="auth-highlight-grid">
       <view class="auth-highlight-card">
         <text class="auth-highlight-title">记录一体</text>
@@ -18,11 +18,37 @@
     </view>
   </view>
 
+  <view class="card guest-card">
+    <view class="auth-form-head">
+      <text class="auth-form-kicker">先体验</text>
+      <view class="section-title">食物热量浏览</view>
+      <view class="section-caption">无需登录即可搜索常见食物，查看每 100 克热量和蛋白质。</view>
+    </view>
+    <view class="guest-search-row">
+      <input class="input guest-search-input" placeholder="例如：米饭、鸡蛋、苹果" value="{{foodQuery}}" bindinput="handleFoodQuery" confirm-type="search" bindconfirm="searchFoods" />
+      <button class="guest-search-button" loading="{{foodLoading}}" disabled="{{foodLoading}}" bindtap="searchFoods">搜索</button>
+    </view>
+    <view class="guest-result-list" wx:if="{{foodResults.length}}">
+      <view class="guest-result" wx:for="{{foodResults}}" wx:key="id">
+        <view>
+          <view class="guest-result-name">{{item.name}}</view>
+          <view class="guest-result-meta">{{item.category}} · 蛋白质 {{item.protein}}g / 100g</view>
+        </view>
+        <view class="guest-result-kcal">{{item.calories}}<text> kcal</text></view>
+      </view>
+    </view>
+    <view class="guest-empty" wx:elif="{{foodSearched}}">没有找到匹配食物，换一个名称试试。</view>
+    <view class="guest-tips" wx:else>
+      <view class="guest-tip"><text class="guest-tip-number">01</text><text>记录以长期趋势为准，不用追求每一餐都完美。</text></view>
+      <view class="guest-tip"><text class="guest-tip-number">02</text><text>规律睡眠和日常步行，同样会影响体重管理。</text></view>
+    </view>
+  </view>
+
   <view class="card auth-form-card">
     <view class="auth-form-head">
-      <text class="auth-form-kicker">欢迎回来</text>
-      <view class="section-title">登录后继续今天的记录</view>
-      <view class="section-caption">已有账户直接进入首页；第一次使用就在下方去注册。</view>
+      <text class="auth-form-kicker">登录后保存</text>
+      <view class="section-title">保存你的健康记录</view>
+      <view class="section-caption">登录后可记录饮食、运动、睡眠和体重；微信运动同步与好友挑战也在登录后由你主动开启。</view>
     </view>
 
     <view class="field">
@@ -35,13 +61,13 @@
       <input class="input" password placeholder="请输入密码" value="{{password}}" data-field="password" bindinput="handleInput" />
     </view>
 
-    <view class="auth-tip">先登录，再继续今天的首页查看、记录补齐和趋势回看。</view>
+    <view class="auth-tip">账号密码登录完全可选；不会在打开小程序时自动请求微信授权、头像、昵称或手机号。</view>
 
-    <button class="button auth-primary-button" loading="{{loading}}" disabled="{{loading}}" bindtap="submit">进入健康系统</button>
-    <button class="button-secondary auth-secondary-button" disabled="{{loading}}" bindtap="wechatLogin">微信登录</button>
+    <button class="button auth-primary-button" loading="{{loading}}" disabled="{{loading}}" bindtap="submit">账号密码登录</button>
+    <button class="button-secondary auth-secondary-button" disabled="{{loading}}" bindtap="wechatLogin">微信登录（可选）</button>
     <view class="auth-password-row">
       <text class="auth-password-link" bindtap="showPasswordResetHelp">忘记密码</text>
     </view>
-    <button class="button-secondary auth-secondary-button" bindtap="goRegister">没有账号，去注册</button>
+    <button class="button-secondary auth-secondary-button" bindtap="goRegister">没有账号，创建健康档案</button>
   </view>
 </view>
