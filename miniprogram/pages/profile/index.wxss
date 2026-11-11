@@ -49,6 +49,77 @@
   line-height: 1.56;
 }
 
+.device-link-card {
+  margin-top: 20rpx;
+}
+
+.device-link-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18rpx;
+  padding: 16rpx 0;
+}
+
+.device-link-input-row {
+  border-top: 1rpx solid #e4eeee;
+}
+
+.device-link-label {
+  color: #214d55;
+  font-size: 24rpx;
+  font-weight: 700;
+}
+
+.device-link-value {
+  margin-top: 6rpx;
+  color: #1b7377;
+  font-size: 30rpx;
+  font-weight: 700;
+  letter-spacing: 3rpx;
+}
+
+.device-link-note {
+  margin-top: 6rpx;
+  color: #7a9296;
+  font-size: 21rpx;
+}
+
+.device-link-button {
+  flex-shrink: 0;
+  min-width: 140rpx;
+  margin: 0;
+  padding: 0 20rpx;
+  border: 1rpx solid #c9dadd;
+  border-radius: 999rpx;
+  background: #f5faf9;
+  color: #285d62;
+  font-size: 23rpx;
+  font-weight: 600;
+  line-height: 62rpx;
+}
+
+.device-link-input-copy {
+  flex: 1;
+  min-width: 0;
+}
+
+.device-link-input {
+  height: 56rpx;
+  margin-top: 8rpx;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: #385e63;
+  font-size: 22rpx;
+}
+
+.device-link-connect {
+  background: #214d55;
+  border-color: #214d55;
+  color: #fff;
+}
+
 .profile-save-notice {
   margin-top: 12rpx;
   padding: 14rpx 16rpx;

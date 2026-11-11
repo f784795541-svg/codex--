@@ -1,6 +1,7 @@
 import base64
 import json
 import os
+import secrets
 from datetime import datetime, timedelta
 from urllib.parse import urlencode
 from urllib.request import urlopen
@@ -32,10 +33,27 @@ class RegisterRequest(schemas.UserCreate):
     code: str = Field(min_length=1, max_length=256)
 
 
+class DeviceLinkRequest(BaseModel):
+    code: str = Field(min_length=8, max_length=8)
+
+
 def current_user(user=Depends(dependencies.get_optional_current_user)):
     if user is None:
         raise HTTPException(status_code=401, detail="请先登录")
     return user
+
+
+def remove_expired_device_link_codes(db: Session) -> None:
+    db.query(models.DeviceLinkCode).filter(models.DeviceLinkCode.expires_at <= datetime.utcnow()).delete()
+
+
+def new_device_link_code(db: Session) -> str:
+    alphabet = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789"
+    for _ in range(10):
+        code = "".join(secrets.choice(alphabet) for _ in range(8))
+        if not db.query(models.DeviceLinkCode).filter_by(code=code).first():
+            return code
+    raise HTTPException(status_code=503, detail="连接码生成失败，请重试")
 
 
 @router.post("/login", response_model=None)
@@ -85,6 +103,48 @@ def open_session(payload: CodeRequest, db: Session = Depends(get_db)):
             raise HTTPException(status_code=409, detail="账户初始化失败，请重试") from None
     db.refresh(user)
     return {"user": schemas.UserResponse.model_validate(user), "access_token": services.create_access_token(user.id)}
+
+
+@router.post("/device-link/code")
+def create_device_link_code(db: Session = Depends(get_db), user=Depends(current_user)):
+    remove_expired_device_link_codes(db)
+    db.query(models.DeviceLinkCode).filter_by(user_id=user.id).delete()
+    code = new_device_link_code(db)
+    db.add(models.DeviceLinkCode(
+        user_id=user.id,
+        code=code,
+        expires_at=datetime.utcnow() + timedelta(minutes=10),
+    ))
+    db.commit()
+    return {"code": code}
+
+
+@router.post("/device-link/connect", response_model=None)
+def connect_device(payload: DeviceLinkRequest, db: Session = Depends(get_db), user=Depends(current_user)):
+    remove_expired_device_link_codes(db)
+    link = db.query(models.DeviceLinkCode).filter_by(code=payload.code.strip().upper()).first()
+    if not link:
+        db.commit()
+        raise HTTPException(status_code=400, detail="连接码无效或已过期")
+    if link.user_id == user.id:
+        db.delete(link)
+        db.commit()
+        return {"message": "当前设备已连接", "user": schemas.UserResponse.model_validate(user), "access_token": services.create_access_token(user.id)}
+
+    identity = db.query(models.WechatIdentity).filter_by(user_id=user.id).first()
+    target_user = db.get(models.User, link.user_id)
+    if not identity or not target_user:
+        raise HTTPException(status_code=400, detail="当前设备无法连接，请重新打开小程序后再试")
+
+    identity.user_id = target_user.id
+    db.delete(link)
+    db.commit()
+    db.refresh(target_user)
+    return {
+        "message": "已连接到另一台设备的数据账户",
+        "user": schemas.UserResponse.model_validate(target_user),
+        "access_token": services.create_access_token(target_user.id),
+    }
 
 
 @router.post("/register")

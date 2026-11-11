@@ -95,6 +95,9 @@ Page({
     showEmptyState: false,
     loading: true,
     saving: false,
+    deviceLinkCode: "",
+    deviceLinkInput: "",
+    deviceLinkLoading: false,
     saveButtonText: "保存设置",
   },
 
@@ -197,6 +200,50 @@ Page({
       nextState.displayWeight = `${value || "-"} kg`;
     }
     this.setData(nextState);
+  },
+
+  handleDeviceLinkInput(event) {
+    this.setData({ deviceLinkInput: event.detail.value.toUpperCase().replace(/\s/g, "") });
+  },
+
+  async showDeviceLinkCode() {
+    if (this.data.deviceLinkLoading) {
+      return;
+    }
+    try {
+      this.setData({ deviceLinkLoading: true });
+      const result = await post("/wechat/device-link/code", {});
+      this.setData({ deviceLinkCode: result.code });
+    } catch (error) {
+      if (!isUnauthorizedRedirectError(error)) wx.showToast({ title: error.message || "连接码生成失败", icon: "none" });
+    } finally {
+      this.setData({ deviceLinkLoading: false });
+    }
+  },
+
+  async connectDevice() {
+    const code = this.data.deviceLinkInput.trim();
+    if (code.length !== 8 || this.data.deviceLinkLoading) {
+      wx.showToast({ title: "请输入 8 位连接码", icon: "none" });
+      return;
+    }
+    try {
+      this.setData({ deviceLinkLoading: true });
+      const result = await post("/wechat/device-link/connect", { code });
+      getApp().setCurrentUser(result.user, result.access_token);
+      this.setData({
+        ...buildPreviewState(result.user),
+        deviceLinkCode: "",
+        deviceLinkInput: "",
+        showProfileContent: true,
+      });
+      wx.showToast({ title: "设备连接成功", icon: "success" });
+      await this.loadUser(result.user.id);
+    } catch (error) {
+      if (!isUnauthorizedRedirectError(error)) wx.showToast({ title: error.message || "设备连接失败", icon: "none" });
+    } finally {
+      this.setData({ deviceLinkLoading: false });
+    }
   },
 
   handlePicker(event) {

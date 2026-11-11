@@ -107,8 +107,16 @@ class WorkoutLog(Base):
 class WechatIdentity(Base):
     __tablename__ = "wechat_identities"
     id: Mapped[int] = mapped_column(Integer, primary_key=True)
-    user_id: Mapped[int] = mapped_column(ForeignKey("users.id"), unique=True, nullable=False)
+    user_id: Mapped[int] = mapped_column(ForeignKey("users.id"), nullable=False, index=True)
     openid: Mapped[str] = mapped_column(String(128), unique=True, nullable=False)
+
+
+class DeviceLinkCode(Base):
+    __tablename__ = "device_link_codes"
+    id: Mapped[int] = mapped_column(Integer, primary_key=True)
+    user_id: Mapped[int] = mapped_column(ForeignKey("users.id"), nullable=False, index=True)
+    code: Mapped[str] = mapped_column(String(8), unique=True, nullable=False, index=True)
+    expires_at: Mapped[datetime] = mapped_column(DateTime, nullable=False)
 
 
 class WechatStepLog(Base):

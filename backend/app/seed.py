@@ -59,6 +59,8 @@ def seed_food_database(db: Session) -> None:
 def run_schema_migrations() -> None:
     inspector = inspect(engine)
     with engine.begin() as connection:
+        if inspector.has_table("wechat_identities") and connection.dialect.name == "postgresql":
+            connection.execute(text("ALTER TABLE wechat_identities DROP CONSTRAINT IF EXISTS wechat_identities_user_id_key"))
         if inspector.has_table("friend_challenges"):
             challenge_columns = {column["name"] for column in inspector.get_columns("friend_challenges")}
             if "stage" not in challenge_columns:
