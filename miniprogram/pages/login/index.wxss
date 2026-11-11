@@ -91,6 +91,7 @@
 .guest-search-button {
   flex: 0 0 132rpx;
   margin: 0;
+  padding: 0;
   min-height: 88rpx;
   border: 0;
   border-radius: 22rpx;
@@ -98,6 +99,7 @@
   color: #ffffff;
   font-size: 26rpx;
   line-height: 88rpx;
+  white-space: nowrap;
 }
 
 .guest-result-list {
