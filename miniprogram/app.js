@@ -39,6 +39,25 @@ async function openWechatSession() {
   }, { redirectOnUnauthorized: false });
 }
 
+async function restoreStoredAccount(app) {
+  if (!app.globalData.currentUser || !app.globalData.authToken) {
+    return null;
+  }
+
+  try {
+    await post("/wechat/bind", { code: await getWechatCode() }, { redirectOnUnauthorized: false });
+    return {
+      user: app.globalData.currentUser,
+      access_token: app.globalData.authToken,
+    };
+  } catch (error) {
+    if (error.statusCode === 401 || error.statusCode === 409) {
+      return null;
+    }
+    throw error;
+  }
+}
+
 App({
   globalData: {
     currentUser: null,
@@ -56,7 +75,8 @@ App({
       return this.globalData.bootstrapPromise;
     }
 
-    this.globalData.bootstrapPromise = openWechatSession()
+    this.globalData.bootstrapPromise = restoreStoredAccount(this)
+      .then(auth => auth || openWechatSession())
       .then((auth) => {
         this.setCurrentUser(auth.user, auth.access_token);
         return auth.user;

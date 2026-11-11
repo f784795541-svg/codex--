@@ -1,7 +1,5 @@
 <view class="screen screen-home">
   <block wx:if="{{summary}}">
-    <button class="button-secondary" bindtap="enableWechatSteps">同步微信运动步数</button>
-    <view class="wechat-step-note" wx:if="{{summary.daily_report.wechat_steps !== null && summary.daily_report.wechat_steps !== undefined}}">微信运动 {{summary.daily_report.wechat_steps}} 步 · 估算步行消耗 {{summary.daily_report.wechat_step_calories_kcal}} kcal（未重复计入总消耗）</view>
     <view class="hero-panel hero-panel-home">
       <button class="home-friend-pk" bindtap="goFriendPk">好友邀战 ↗</button>
       <view class="hero-kicker">TODAY FOCUS</view>
@@ -26,6 +24,11 @@
           <view class="metric-label">{{item.label}}</view>
           <view class="metric-value">{{item.value}}</view>
           <view class="metric-note">{{item.note}}</view>
+        </view>
+        <view class="metric-card metric-card-wechat" bindtap="enableWechatSteps">
+          <view class="metric-label">{{wechatStepMetric.label}}</view>
+          <view class="metric-value">{{wechatStepMetric.value}}</view>
+          <view class="metric-note">{{wechatStepMetric.note}}</view>
         </view>
       </view>
     </view>

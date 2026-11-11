@@ -3,22 +3,24 @@
   margin-top: 4rpx;
 }
 
-.wechat-step-note { margin: 8rpx 0 12rpx; color: #587773; font-size: 22rpx; line-height: 1.5; }
-
 .home-friend-pk {
   position: absolute;
-  top: 20rpx;
-  right: 20rpx;
+  top: 12rpx;
+  right: 8rpx;
   z-index: 2;
-  padding: 0 18rpx;
+  padding: 0 12rpx;
   border: 1rpx solid #c7ded6;
-  border-radius: 18rpx;
+  border-radius: 16rpx;
   background: #e9f4ef;
   color: #315e59;
-  font-size: 23rpx;
-  line-height: 60rpx;
+  font-size: 21rpx;
+  line-height: 52rpx;
 }
 .home-friend-pk::after { border: 0; }
+
+.hero-panel-home .hero-title {
+  padding-right: 184rpx;
+}
 
 .screen-home .hero-subtitle {
   max-width: 620rpx;
@@ -52,6 +54,22 @@
 
 .metric-grid-dense .metric-card {
   min-height: 150rpx;
+}
+
+.metric-card-wechat {
+  background: #e6f0f8;
+}
+
+.metric-card-wechat .metric-label {
+  color: #56768d;
+}
+
+.metric-card-wechat .metric-value {
+  color: #254d68;
+}
+
+.metric-card-wechat .metric-note {
+  color: #66879d;
 }
 
 .support-inline-copy {

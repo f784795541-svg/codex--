@@ -401,6 +401,7 @@ function buildSummaryView(summary) {
   const workoutFlexCalories = asNumber(summary.daily_report.workout_flex_calories_kcal);
   const goalTotalCalories = asNumber(summary.targets?.goal_total_calories);
   const remainingCalories = roundValue(calorieTarget - asNumber(summary.daily_report.total_intake_kcal));
+  const wechatSteps = summary.daily_report.wechat_steps;
   const caloriePill =
     remainingCalories >= 0
       ? {
@@ -462,6 +463,13 @@ function buildSummaryView(summary) {
         note: "基础预算 + 运动消耗的 40%",
       },
     ],
+    wechatStepMetric: {
+      label: "同步微信运动步数",
+      value: wechatSteps === null || wechatSteps === undefined ? "点击同步" : `${wechatSteps} 步`,
+      note: wechatSteps === null || wechatSteps === undefined
+        ? "授权后同步今日步数"
+        : `已折算 ${Math.round(asNumber(summary.daily_report.wechat_step_calories_kcal))} kcal`,
+    },
     goalItems: [
       {
         label: "热量",
@@ -512,6 +520,7 @@ Page({
     heroSummary: "",
     heroPills: [],
     homeMetrics: [],
+    wechatStepMetric: null,
     goalItems: [],
     suggestionItems: [],
     warningItems: [],
@@ -639,6 +648,7 @@ Page({
         heroSummary: view.heroSummary,
         heroPills: view.heroPills,
         homeMetrics: view.homeMetrics,
+        wechatStepMetric: view.wechatStepMetric,
         goalItems: view.goalItems,
         suggestionItems: view.suggestionItems,
         warningItems: view.warningItems,

@@ -173,11 +173,10 @@ def register(payload: RegisterRequest, db: Session = Depends(get_db)):
 @router.post("/bind")
 def bind(payload: CodeRequest, db: Session = Depends(get_db), user=Depends(current_user)):
     result = exchange(payload.code)
-    by_user = db.query(models.WechatIdentity).filter_by(user_id=user.id).first()
     by_openid = db.query(models.WechatIdentity).filter_by(openid=result["openid"]).first()
-    if by_user and by_openid and by_user.id == by_openid.id:
+    if by_openid and by_openid.user_id == user.id:
         return {"message": "微信已绑定"}
-    if by_user or by_openid:
+    if by_openid:
         raise HTTPException(status_code=409, detail="微信或当前账号已绑定其他账号")
     db.add(models.WechatIdentity(user_id=user.id, openid=result["openid"]))
     try:
@@ -229,7 +228,7 @@ def sync_steps(payload: StepsRequest, db: Session = Depends(get_db), user=Depend
     if not identity:
         if not payload.bind:
             raise HTTPException(status_code=403, detail="请先绑定当前微信账号")
-        if db.query(models.WechatIdentity).filter_by(user_id=user.id).first() or db.query(models.WechatIdentity).filter_by(openid=result["openid"]).first():
+        if db.query(models.WechatIdentity).filter_by(openid=result["openid"]).first():
             raise HTTPException(status_code=409, detail="微信或当前账号已绑定其他账号")
         db.add(models.WechatIdentity(user_id=user.id, openid=result["openid"]))
     today = services.local_today()
