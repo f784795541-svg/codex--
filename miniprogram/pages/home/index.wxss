@@ -5,25 +5,27 @@
 
 .home-friend-pk {
   position: absolute;
-  top: 10rpx;
-  right: 0;
+  top: 26rpx;
+  right: 20rpx;
   z-index: 2;
   box-sizing: border-box;
-  min-width: 0;
-  width: 92rpx;
+  min-width: 186rpx;
+  width: 186rpx;
+  max-width: 186rpx;
+  height: 74rpx;
   padding: 0;
   border: 1rpx solid #c7ded6;
-  border-radius: 16rpx;
+  border-radius: 20rpx;
   background: #e9f4ef;
   color: #315e59;
-  font-size: 21rpx;
-  line-height: 52rpx;
+  font-size: 28rpx;
+  line-height: 74rpx;
   text-align: center;
 }
 .home-friend-pk::after { border: 0; }
 
 .hero-panel-home .hero-title {
-  padding-right: 136rpx;
+  padding-right: 226rpx;
 }
 
 .screen-home .hero-subtitle {

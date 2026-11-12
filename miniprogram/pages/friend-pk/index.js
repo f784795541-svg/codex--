@@ -23,7 +23,7 @@ function habitDays(habit, month, peer) {
 }
 
 Page({
-  data: { loading: true, data: null, days: [], habits: [], month: "", dialog: "", code: "", inputCode: "", habitName: "", habitFormOpen: false, habitError: "", error: "" },
+  data: { loading: true, data: null, days: [], habits: [], month: "", dialog: "", code: "", codeOpening: false, inputCode: "", inviteSending: false, habitName: "", habitFormOpen: false, habitError: "", error: "" },
   async onShow() {
     if (await ensureUser()) this.load();
   },
@@ -37,13 +37,20 @@ Page({
     }
   },
   async showCode() {
+    if (this.data.codeOpening) return;
+    this.setData({ codeOpening: true });
+    if (wx.vibrateShort) wx.vibrateShort({ type: "light" });
     try {
       const result = await post("/friend-pk/code", {});
       this.setData({ dialog: "code", code: result.code, error: "" });
     } catch (error) { this.setData({ error: error.message }); }
+    finally { this.setData({ codeOpening: false }); }
   },
   copyCode() { wx.setClipboardData({ data: this.data.code }); },
-  showInvite() { this.setData({ dialog: "invite", inputCode: "", error: "" }); },
+  showInvite() {
+    if (wx.vibrateShort) wx.vibrateShort({ type: "light" });
+    this.setData({ dialog: "invite", inputCode: "", error: "" });
+  },
   closeDialog() { this.setData({ dialog: "", error: "" }); },
   onCodeInput(event) { this.setData({ inputCode: event.detail.value }); },
   showHabit() { this.setData({ habitFormOpen: true, habitName: "", habitError: "" }); },
@@ -64,10 +71,13 @@ Page({
     this.load();
   },
   async sendInvite() {
+    if (this.data.inviteSending) return;
+    this.setData({ inviteSending: true });
     try {
       await post("/friend-pk/invite", { code: this.data.inputCode.trim() });
       await this.load();
     } catch (error) { this.setData({ error: error.message }); }
+    finally { this.setData({ inviteSending: false }); }
   },
   async changeChallenge(event) {
     const action = event.currentTarget.dataset.action;

@@ -54,7 +54,7 @@
       </view>
     </view>
 
-    <view class="card device-unbind-card">
+    <view class="card device-unbind-card" wx:if="{{deviceLinkBound}}">
       <view>
         <text class="card-kicker">DEVICE CONTROL</text>
         <view class="section-title">解除当前设备连接</view>

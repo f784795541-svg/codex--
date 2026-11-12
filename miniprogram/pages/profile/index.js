@@ -100,6 +100,7 @@ Page({
     deviceLinkPlaceholder: "输入另一台设备显示的\n8 位码",
     deviceLinkCountdown: "",
     deviceLinkLoading: false,
+    deviceLinkBound: false,
     saveButtonText: "保存设置",
   },
 
@@ -130,6 +131,7 @@ Page({
 
     this.loadUser(user.id);
     this.updateDeviceLinkCountdown();
+    this.refreshDeviceLinkStatus();
   },
 
   onHide() {
@@ -211,6 +213,19 @@ Page({
     this.setData({ deviceLinkInput: event.detail.value.toUpperCase().replace(/\s/g, "") });
   },
 
+  async refreshDeviceLinkStatus() {
+    try {
+      const login = await new Promise((resolve, reject) => wx.login({ success: resolve, fail: reject }));
+      if (!login.code) {
+        return;
+      }
+      const result = await post("/wechat/device-link/status", { code: login.code });
+      this.setData({ deviceLinkBound: !!result.is_linked });
+    } catch (error) {
+      this.setData({ deviceLinkBound: false });
+    }
+  },
+
   clearDeviceLinkTimer() {
     if (this.deviceLinkTimer) {
       clearInterval(this.deviceLinkTimer);
@@ -272,6 +287,7 @@ Page({
         deviceLinkCode: "",
         deviceLinkInput: "",
         deviceLinkCountdown: "",
+        deviceLinkBound: true,
         showProfileContent: true,
       });
       this.clearDeviceLinkTimer();
@@ -286,7 +302,7 @@ Page({
   },
 
   async unbindCurrentDevice() {
-    if (this.data.deviceLinkLoading) {
+    if (this.data.deviceLinkLoading || !this.data.deviceLinkBound) {
       return;
     }
     const confirmation = await new Promise(resolve => wx.showModal({
@@ -312,6 +328,7 @@ Page({
         deviceLinkCode: "",
         deviceLinkInput: "",
         deviceLinkCountdown: "",
+        deviceLinkBound: false,
         showProfileContent: true,
       });
       this.clearDeviceLinkTimer();

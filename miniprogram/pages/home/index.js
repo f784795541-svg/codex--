@@ -512,10 +512,39 @@ function buildSummaryView(summary) {
 
 Page({
   goFriendPk() {
-    wx.navigateTo({ url: "/pages/friend-pk/index" });
+    if (this.friendPkNavigating) {
+      return;
+    }
+    this.friendPkNavigating = true;
+    this.setData({ friendPkOpening: true });
+
+    const finish = () => {
+      this.friendPkNavigating = false;
+      this.setData({ friendPkOpening: false });
+    };
+    const fail = () => {
+      finish();
+      this.setData({ friendPkOpening: false });
+      wx.showToast({ title: "好友邀战暂时无法打开，请重试", icon: "none" });
+    };
+    const open = (method) => {
+      method({
+        url: "/pages/friend-pk/index",
+        success: finish,
+        fail,
+      });
+    };
+
+    // 微信二级页最多保留 10 层。接近上限时替换当前页，避免点击没有反应。
+    if (getCurrentPages().length >= 9) {
+      open(wx.redirectTo);
+      return;
+    }
+    open(wx.navigateTo);
   },
   data: {
     loading: true,
+    friendPkOpening: false,
     summary: null,
     heroSummary: "",
     heroPills: [],
@@ -534,6 +563,7 @@ Page({
   },
 
   async onShow() {
+    this.setData({ friendPkOpening: false });
     const user = await ensureUser();
     if (!user) {
       return;
