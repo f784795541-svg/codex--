@@ -54,6 +54,15 @@
       </view>
     </view>
 
+    <view class="card device-unbind-card">
+      <view>
+        <text class="card-kicker">DEVICE CONTROL</text>
+        <view class="section-title">解除当前设备连接</view>
+      </view>
+      <view class="card-note">仅解除这台设备的关联，不会删除原数据账户内的健康记录。</view>
+      <button class="device-unbind-button" loading="{{deviceLinkLoading}}" disabled="{{deviceLinkLoading}}" bindtap="unbindCurrentDevice">立即解绑</button>
+    </view>
+
     <view class="card">
       <view class="card-head">
         <view>

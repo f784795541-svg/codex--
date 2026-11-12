@@ -274,8 +274,14 @@ textarea {
 .button-secondary,
 .tab,
 .status-banner-action,
-.food-history-back {
-  transition: transform 160ms ease, opacity 160ms ease, box-shadow 180ms ease, background-color 180ms ease;
+.food-history-back,
+.home-friend-pk,
+.device-link-button,
+.device-unbind-button,
+.metric-card,
+.meal-card,
+.hero-pill {
+  transition: transform 160ms cubic-bezier(0.2, 0.8, 0.2, 1), opacity 160ms ease, box-shadow 180ms ease, background-color 180ms ease;
 }
 
 .button {
@@ -285,9 +291,18 @@ textarea {
 }
 
 .button:active,
-.button-secondary:active {
-  transform: scale(0.985);
+.button-secondary:active,
+.home-friend-pk:active,
+.device-link-button:active,
+.device-unbind-button:active {
+  transform: scale(0.965);
   opacity: 0.96;
+}
+
+.metric-card:active,
+.meal-card:active,
+.hero-pill:active {
+  transform: scale(0.985);
 }
 
 .button[disabled] {

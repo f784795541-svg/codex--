@@ -147,6 +147,17 @@ def connect_device(payload: DeviceLinkRequest, db: Session = Depends(get_db), us
     }
 
 
+@router.post("/device-link/unbind")
+def unbind_current_device(payload: CodeRequest, db: Session = Depends(get_db), user=Depends(current_user)):
+    result = exchange(payload.code)
+    identity = db.query(models.WechatIdentity).filter_by(openid=result["openid"], user_id=user.id).first()
+    if not identity:
+        raise HTTPException(status_code=400, detail="当前设备没有可解除的连接")
+    db.delete(identity)
+    db.commit()
+    return {"message": "当前设备已解除连接"}
+
+
 @router.post("/register")
 def register(payload: RegisterRequest, db: Session = Depends(get_db)):
     result = exchange(payload.code)

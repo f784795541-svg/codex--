@@ -285,6 +285,46 @@ Page({
     }
   },
 
+  async unbindCurrentDevice() {
+    if (this.data.deviceLinkLoading) {
+      return;
+    }
+    const confirmation = await new Promise(resolve => wx.showModal({
+      title: "解除当前设备连接",
+      content: "只会解除当前设备与数据账户的连接，不会删除原账户中的健康记录。解除后可重新输入正确的连接码。",
+      confirmText: "立即解绑",
+      confirmColor: "#b24b48",
+      success: resolve,
+    }));
+    if (!confirmation.confirm) {
+      return;
+    }
+    try {
+      this.setData({ deviceLinkLoading: true });
+      const login = await new Promise((resolve, reject) => wx.login({ success: resolve, fail: reject }));
+      if (!login.code) throw new Error("当前设备识别失败，请重试");
+      await post("/wechat/device-link/unbind", { code: login.code });
+      getApp().clearCurrentUser();
+      const user = await getApp().bootstrapSession(true);
+      const nextState = buildPreviewState(user);
+      this.setData({
+        ...nextState,
+        deviceLinkCode: "",
+        deviceLinkInput: "",
+        deviceLinkCountdown: "",
+        showProfileContent: true,
+      });
+      this.clearDeviceLinkTimer();
+      this.deviceLinkExpiresAt = 0;
+      wx.showToast({ title: "当前设备已解绑", icon: "success" });
+      await this.loadUser(user.id);
+    } catch (error) {
+      if (!isUnauthorizedRedirectError(error)) wx.showToast({ title: error.message || "解绑失败", icon: "none" });
+    } finally {
+      this.setData({ deviceLinkLoading: false });
+    }
+  },
+
   handlePicker(event) {
     const field = event.currentTarget.dataset.field;
     this.setData({
