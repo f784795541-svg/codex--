@@ -23,7 +23,7 @@
           <text class="hero-pill-value">{{recommendationLabels[recommendationModeIndex]}}</text>
         </view>
       </view>
-      <view class="profile-focus-row">
+      <view class="profile-focus-row" id="onboarding-profile-plan">
         <view class="profile-focus-chip" wx:for="{{profileFocus}}" wx:key="*this">{{item}}</view>
       </view>
     </view>
@@ -72,7 +72,7 @@
         <view class="card-badge">自动保存</view>
       </view>
       <view class="card-note">小程序已自动为你建立账户；设置昵称后，好友 PK 会显示这个昵称。</view>
-      <view class="profile-account-row">
+      <view class="profile-account-row" id="onboarding-profile-basics">
         <view class="profile-account-copy">
           <view class="profile-name">{{displayName}}</view>
           <view class="section-caption">数据会随当前微信小程序账户保存</view>
@@ -192,6 +192,17 @@
       <button class="button" loading="{{saving}}" disabled="{{saving}}" bindtap="submit">{{saveButtonText}}</button>
     </view>
 
+  </block>
+
+  <block wx:if="{{onboardingVisible}}">
+    <view class="onboarding-mask" catchtouchmove="noop"></view>
+    <view class="onboarding-focus" style="{{onboardingFocusStyle}}"></view>
+    <view class="onboarding-card">
+      <view class="onboarding-step">新手引导 {{onboardingStep}} / {{onboardingTotal}}</view>
+      <view class="onboarding-title">{{onboardingTitle}}</view>
+      <view class="onboarding-copy">{{onboardingCopy}}</view>
+      <button class="onboarding-next" bindtap="nextOnboarding">下一步</button>
+    </view>
   </block>
 
   <view class="unbind-modal-mask" wx:if="{{unbindConfirmOpen}}" catchtouchmove="noop">

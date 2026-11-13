@@ -4,6 +4,7 @@ const { getCurrentDate, getCurrentTime } = require("../../utils/date");
 const { asPositiveNumber } = require("../../utils/validators");
 const { buildNumberOptions, getOptionIndex, getOptionValue } = require("../../utils/picker");
 const foodImageAssets = require("../../utils/foodImageAssets");
+const onboarding = require("../../utils/onboarding");
 
 const TAB_META = {
   food: {
@@ -319,6 +320,12 @@ Page({
     submittingWorkout: false,
     submittingSleep: false,
     submittingWeight: false,
+    onboardingVisible: false,
+    onboardingStep: 0,
+    onboardingTotal: 0,
+    onboardingTitle: "",
+    onboardingCopy: "",
+    onboardingFocusStyle: "",
   },
 
   onLoad() {
@@ -345,6 +352,7 @@ Page({
     }
     this.startAutoTimeTicker();
     this.scrollToRecordSection(this.data.activeTab, "top");
+    this._onboardingPageTimer = setTimeout(() => this.showOnboarding(user.id), 320);
   },
 
   onHide() {
@@ -352,6 +360,7 @@ Page({
     this.clearFoodSearchTimer();
     this.clearScrollTimer();
     this.clearHomeSwitchTimer();
+    onboarding.clearTimer(this);
   },
 
   onUnload() {
@@ -359,7 +368,18 @@ Page({
     this.clearFoodSearchTimer();
     this.clearScrollTimer();
     this.clearHomeSwitchTimer();
+    onboarding.clearTimer(this);
   },
+
+  nextOnboarding() {
+    onboarding.next(this, "record", getApp().globalData.currentUser?.id);
+  },
+
+  showOnboarding(userId = getApp().globalData.currentUser?.id) {
+    onboarding.show(this, "record", userId);
+  },
+
+  noop() {},
 
   resetDynamicDefaults(user = null, callback = null) {
     const currentUser = user || getApp().globalData.currentUser;

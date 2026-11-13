@@ -2,6 +2,7 @@ const { get, post, isUnauthorizedRedirectError } = require("../../utils/request"
 const { ensureUser } = require("../../utils/session");
 const { asPositiveNumber, asNumberInRange, isFilled } = require("../../utils/validators");
 const { buildNumberOptions, getOptionIndex, getOptionValue } = require("../../utils/picker");
+const onboarding = require("../../utils/onboarding");
 
 const GOALS = [
   { label: "减脂", value: "fat_loss" },
@@ -102,6 +103,12 @@ Page({
     deviceLinkLoading: false,
     wechatBound: false,
     unbindConfirmOpen: false,
+    onboardingVisible: false,
+    onboardingStep: 0,
+    onboardingTotal: 0,
+    onboardingTitle: "",
+    onboardingCopy: "",
+    onboardingFocusStyle: "",
     saveButtonText: "保存设置",
   },
 
@@ -133,16 +140,27 @@ Page({
     this.loadUser(user.id);
     this.updateDeviceLinkCountdown();
     this.refreshWechatBindingStatus();
+    this._onboardingPageTimer = setTimeout(() => this.showOnboarding(user.id), 320);
   },
 
   onHide() {
     this.clearHomeSwitchTimer();
     this.clearDeviceLinkTimer();
+    onboarding.clearTimer(this);
   },
 
   onUnload() {
     this.clearHomeSwitchTimer();
     this.clearDeviceLinkTimer();
+    onboarding.clearTimer(this);
+  },
+
+  nextOnboarding() {
+    onboarding.next(this, "profile", getApp().globalData.currentUser?.id);
+  },
+
+  showOnboarding(userId = getApp().globalData.currentUser?.id) {
+    onboarding.show(this, "profile", userId);
   },
 
   async loadUser(userId) {

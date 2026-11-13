@@ -1,5 +1,6 @@
 const { get, isUnauthorizedRedirectError } = require("../../utils/request");
 const { ensureUser } = require("../../utils/session");
+const onboarding = require("../../utils/onboarding");
 
 function formatDateRange(startDate, endDate) {
   if (!startDate || !endDate) {
@@ -409,6 +410,12 @@ Page({
     suggestionItems: [],
     warningItems: [],
     loading: true,
+    onboardingVisible: false,
+    onboardingStep: 0,
+    onboardingTotal: 0,
+    onboardingTitle: "",
+    onboardingCopy: "",
+    onboardingFocusStyle: "",
   },
 
   async onShow() {
@@ -417,7 +424,26 @@ Page({
       return;
     }
     this.loadTrendData(user.id);
+    this._onboardingPageTimer = setTimeout(() => this.showOnboarding(user.id), 320);
   },
+
+  onHide() {
+    onboarding.clearTimer(this);
+  },
+
+  onUnload() {
+    onboarding.clearTimer(this);
+  },
+
+  nextOnboarding() {
+    onboarding.next(this, "trend", getApp().globalData.currentUser?.id);
+  },
+
+  showOnboarding(userId = getApp().globalData.currentUser?.id) {
+    onboarding.show(this, "trend", userId);
+  },
+
+  noop() {},
 
   async loadTrendData(userId) {
     if (this.trendLoadingUserId === userId) {

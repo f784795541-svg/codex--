@@ -1,5 +1,5 @@
 <view class="screen screen-trend">
-  <view class="hero-panel">
+  <view class="hero-panel" id="onboarding-trend-overview">
     <view class="hero-kicker">TREND VIEW</view>
     <view class="hero-title">趋势</view>
     <view class="hero-pill-row">
@@ -226,6 +226,17 @@
       </view>
     </view>
   </view>
+
+  <block wx:if="{{onboardingVisible}}">
+    <view class="onboarding-mask" catchtouchmove="noop"></view>
+    <view class="onboarding-focus" style="{{onboardingFocusStyle}}"></view>
+    <view class="onboarding-card">
+      <view class="onboarding-step">新手引导 {{onboardingStep}} / {{onboardingTotal}}</view>
+      <view class="onboarding-title">{{onboardingTitle}}</view>
+      <view class="onboarding-copy">{{onboardingCopy}}</view>
+      <button class="onboarding-next" bindtap="nextOnboarding">下一步</button>
+    </view>
+  </block>
 
   <view wx:if="{{loading}}" class="empty">
     <text class="empty-title">趋势数据加载中</text>

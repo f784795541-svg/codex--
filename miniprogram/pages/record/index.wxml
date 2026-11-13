@@ -4,6 +4,17 @@
     <view class="hero-title" id="record-top-anchor">记录</view>
   </view>
 
+  <block wx:if="{{onboardingVisible}}">
+    <view class="onboarding-mask" catchtouchmove="noop"></view>
+    <view class="onboarding-focus" style="{{onboardingFocusStyle}}"></view>
+    <view class="onboarding-card">
+      <view class="onboarding-step">新手引导 {{onboardingStep}} / {{onboardingTotal}}</view>
+      <view class="onboarding-title">{{onboardingTitle}}</view>
+      <view class="onboarding-copy">{{onboardingCopy}}</view>
+      <button class="onboarding-next" bindtap="nextOnboarding">下一步</button>
+    </view>
+  </block>
+
   <view class="record-tabs-shell">
     <view
       wx:for="{{tabs}}"

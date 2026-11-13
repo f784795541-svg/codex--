@@ -1,6 +1,7 @@
 const { get, isUnauthorizedRedirectError } = require("../../utils/request");
 const { ensureUser } = require("../../utils/session");
 const wechatSteps = require("../../utils/wechat-steps");
+const onboarding = require("../../utils/onboarding");
 
 const FOOD_LIBRARY_LIMIT = 500;
 
@@ -560,6 +561,12 @@ Page({
     displayedRecentFoodItems: [],
     showAllRecentFoods: false,
     mealRecommendation: null,
+    onboardingVisible: false,
+    onboardingStep: 0,
+    onboardingTotal: 0,
+    onboardingTitle: "",
+    onboardingCopy: "",
+    onboardingFocusStyle: "",
   },
 
   async onShow() {
@@ -569,12 +576,31 @@ Page({
       return;
     }
     await this.loadSummary(user.id);
+    this.showOnboarding(user.id);
     wx.getSetting({ success: result => {
       if (result.authSetting["scope.werun"]) {
         wechatSteps.sync(false).then(() => this.loadSummary(user.id)).catch(() => {});
       }
     }});
   },
+
+  onHide() {
+    onboarding.clearTimer(this);
+  },
+
+  onUnload() {
+    onboarding.clearTimer(this);
+  },
+
+  nextOnboarding() {
+    onboarding.next(this, "home", getApp().globalData.currentUser?.id);
+  },
+
+  showOnboarding(userId = getApp().globalData.currentUser?.id) {
+    onboarding.show(this, "home", userId, true);
+  },
+
+  noop() {},
 
   async enableWechatSteps() {
     const user = await ensureUser();

@@ -1,6 +1,6 @@
 <view class="screen screen-home">
   <block wx:if="{{summary}}">
-    <view class="hero-panel hero-panel-home">
+    <view class="hero-panel hero-panel-home" id="onboarding-home-overview">
       <button class="home-friend-pk" loading="{{friendPkOpening}}" disabled="{{friendPkOpening}}" bindtap="goFriendPk">{{friendPkOpening ? '打开中' : '好友邀战'}}</button>
       <view class="hero-kicker">TODAY FOCUS</view>
       <view class="hero-title">你好，{{summary.user.name}}</view>
@@ -156,4 +156,14 @@
     <text class="empty-title">首页还没拿到数据</text>
     当前接口或域名配置还没有顺利返回首页汇总，请先检查联调环境。
   </view>
+  <block wx:if="{{onboardingVisible}}">
+    <view class="onboarding-mask" catchtouchmove="noop"></view>
+    <view class="onboarding-focus" style="{{onboardingFocusStyle}}"></view>
+    <view class="onboarding-card">
+      <view class="onboarding-step">新手引导 {{onboardingStep}} / {{onboardingTotal}}</view>
+      <view class="onboarding-title">{{onboardingTitle}}</view>
+      <view class="onboarding-copy">{{onboardingCopy}}</view>
+      <button class="onboarding-next" bindtap="nextOnboarding">下一步</button>
+    </view>
+  </block>
 </view>

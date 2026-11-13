@@ -1,3 +1,5 @@
+@import "../../styles/onboarding.wxss";
+
 .screen-profile .hero-panel {
   margin-top: 4rpx;
   padding-bottom: 24rpx;
@@ -134,12 +136,12 @@
 .device-unbind-button {
   width: 100%;
   min-height: 68rpx;
-  margin-top: 16rpx;
+  margin-top: 6rpx;
   border: 1rpx solid #e3c7c2;
   border-radius: 999rpx;
   background: #fffafa;
   color: #a94d49;
-  font-size: 24rpx;
+  font-size: 28rpx;
   font-weight: 600;
   line-height: 68rpx;
 }
