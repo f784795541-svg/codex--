@@ -18,7 +18,10 @@
   border-radius: 20rpx;
   background: #e9f4ef;
   color: #315e59;
-  font-size: 28rpx;
+  font-family: "Songti SC", STSong, SimSun, serif;
+  font-size: 29rpx;
+  font-weight: 600;
+  letter-spacing: .4rpx;
   line-height: 74rpx;
   text-align: center;
 }
