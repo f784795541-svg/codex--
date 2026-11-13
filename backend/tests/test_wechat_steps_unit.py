@@ -11,7 +11,18 @@ from sqlalchemy.orm import Session
 from app import dependencies, models, schemas, seed, services
 from app.database import Base
 from app.main import update_user_info
-from app.routers.wechat import decode_steps, sync_steps, login, register, bind, CodeRequest, StepsRequest, RegisterRequest
+from app.routers.wechat import (
+    CodeRequest,
+    RegisterRequest,
+    StepsRequest,
+    bind,
+    decode_steps,
+    device_link_status,
+    login,
+    register,
+    sync_steps,
+    unbind_current_device,
+)
 
 
 def test_decode_steps_checks_appid(monkeypatch):
@@ -98,3 +109,30 @@ def test_sync_updates_same_day_and_report_excludes_manual_walk(monkeypatch):
         assert report.wechat_steps_excluded
         assert report.wechat_step_calories_kcal > 0
         assert report.total_burned_kcal == 30
+
+
+def test_step_sync_claims_current_account_and_unbind_keeps_account(monkeypatch):
+    engine = create_engine("sqlite:///:memory:")
+    Base.metadata.create_all(engine)
+    monkeypatch.setattr("app.routers.wechat.exchange", lambda code: {"openid": "phone-openid", "session_key": "fake"})
+    monkeypatch.setattr("app.routers.wechat.decode_steps", lambda *args: [
+        {"timestamp": int(__import__("datetime").datetime.now(services.APP_TIMEZONE).timestamp()), "step": 6000},
+    ])
+    with Session(engine) as db:
+        current_user = models.User(name="轻养用户0145", age=30, gender="male", height_cm=170, weight_kg=70)
+        mistaken_user = models.User(name="自动账号", age=30, gender="male", height_cm=170, weight_kg=70)
+        db.add_all([current_user, mistaken_user])
+        db.commit()
+        db.add(models.WechatIdentity(user_id=mistaken_user.id, openid="phone-openid"))
+        db.commit()
+
+        payload = StepsRequest(code="fake", encrypted_data="fake", iv="fake", bind=True)
+        assert sync_steps(payload, db, current_user)["synced_days"] == 1
+        identity = db.query(models.WechatIdentity).filter_by(openid="phone-openid").one()
+        assert identity.user_id == current_user.id
+        assert db.query(models.WechatStepLog).filter_by(user_id=current_user.id).count() == 1
+        assert device_link_status(CodeRequest(code="fake"), db, current_user)["is_linked"]
+
+        unbind_current_device(CodeRequest(code="fake"), db, current_user)
+        assert db.get(models.User, current_user.id) is not None
+        assert not db.query(models.WechatIdentity).filter_by(openid="phone-openid").first()

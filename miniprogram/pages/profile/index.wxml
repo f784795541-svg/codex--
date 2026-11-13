@@ -54,13 +54,13 @@
       </view>
     </view>
 
-    <view class="card device-unbind-card" wx:if="{{deviceLinkBound}}">
+    <view class="card device-unbind-card" wx:if="{{wechatBound}}">
       <view>
-        <text class="card-kicker">DEVICE CONTROL</text>
-        <view class="section-title">解除当前设备连接</view>
+        <text class="card-kicker">WECHAT ACCOUNT</text>
+        <view class="section-title">当前微信已绑定</view>
       </view>
-      <view class="card-note">仅解除这台设备的关联，不会删除原数据账户内的健康记录。</view>
-      <button class="device-unbind-button" loading="{{deviceLinkLoading}}" disabled="{{deviceLinkLoading}}" bindtap="unbindCurrentDevice">立即解绑</button>
+      <view class="card-note">解除后仍保留当前账号和所有健康记录；下次同步步数时可重新绑定。</view>
+      <button class="device-unbind-button" loading="{{deviceLinkLoading}}" disabled="{{deviceLinkLoading}}" bindtap="unbindCurrentDevice">解除当前微信绑定</button>
     </view>
 
     <view class="card">

@@ -151,16 +151,14 @@ def connect_device(payload: DeviceLinkRequest, db: Session = Depends(get_db), us
 def device_link_status(payload: CodeRequest, db: Session = Depends(get_db), user=Depends(current_user)):
     result = exchange(payload.code)
     identity = db.query(models.WechatIdentity).filter_by(openid=result["openid"], user_id=user.id).first()
-    identity_count = db.query(models.WechatIdentity).filter_by(user_id=user.id).count()
-    return {"is_linked": bool(identity and identity_count > 1)}
+    return {"is_linked": bool(identity)}
 
 
 @router.post("/device-link/unbind")
 def unbind_current_device(payload: CodeRequest, db: Session = Depends(get_db), user=Depends(current_user)):
     result = exchange(payload.code)
     identity = db.query(models.WechatIdentity).filter_by(openid=result["openid"], user_id=user.id).first()
-    identity_count = db.query(models.WechatIdentity).filter_by(user_id=user.id).count()
-    if not identity or identity_count < 2:
+    if not identity:
         raise HTTPException(status_code=400, detail="当前设备没有可解除的连接")
     db.delete(identity)
     db.commit()
@@ -248,9 +246,11 @@ def sync_steps(payload: StepsRequest, db: Session = Depends(get_db), user=Depend
     if not identity:
         if not payload.bind:
             raise HTTPException(status_code=403, detail="请先绑定当前微信账号")
-        if db.query(models.WechatIdentity).filter_by(openid=result["openid"]).first():
-            raise HTTPException(status_code=409, detail="微信或当前账号已绑定其他账号")
-        db.add(models.WechatIdentity(user_id=user.id, openid=result["openid"]))
+        existing_identity = db.query(models.WechatIdentity).filter_by(openid=result["openid"]).first()
+        if existing_identity:
+            existing_identity.user_id = user.id
+        else:
+            db.add(models.WechatIdentity(user_id=user.id, openid=result["openid"]))
     today = services.local_today()
     daily_steps = {}
     for item in entries:

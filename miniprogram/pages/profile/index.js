@@ -100,7 +100,7 @@ Page({
     deviceLinkPlaceholder: "输入另一台设备显示的\n8 位码",
     deviceLinkCountdown: "",
     deviceLinkLoading: false,
-    deviceLinkBound: false,
+    wechatBound: false,
     saveButtonText: "保存设置",
   },
 
@@ -131,7 +131,7 @@ Page({
 
     this.loadUser(user.id);
     this.updateDeviceLinkCountdown();
-    this.refreshDeviceLinkStatus();
+    this.refreshWechatBindingStatus();
   },
 
   onHide() {
@@ -213,16 +213,16 @@ Page({
     this.setData({ deviceLinkInput: event.detail.value.toUpperCase().replace(/\s/g, "") });
   },
 
-  async refreshDeviceLinkStatus() {
+  async refreshWechatBindingStatus() {
     try {
       const login = await new Promise((resolve, reject) => wx.login({ success: resolve, fail: reject }));
       if (!login.code) {
         return;
       }
       const result = await post("/wechat/device-link/status", { code: login.code });
-      this.setData({ deviceLinkBound: !!result.is_linked });
+      this.setData({ wechatBound: !!result.is_linked });
     } catch (error) {
-      this.setData({ deviceLinkBound: false });
+      this.setData({ wechatBound: false });
     }
   },
 
@@ -287,7 +287,7 @@ Page({
         deviceLinkCode: "",
         deviceLinkInput: "",
         deviceLinkCountdown: "",
-        deviceLinkBound: true,
+        wechatBound: true,
         showProfileContent: true,
       });
       this.clearDeviceLinkTimer();
@@ -302,13 +302,13 @@ Page({
   },
 
   async unbindCurrentDevice() {
-    if (this.data.deviceLinkLoading || !this.data.deviceLinkBound) {
+    if (this.data.deviceLinkLoading || !this.data.wechatBound) {
       return;
     }
     const confirmation = await new Promise(resolve => wx.showModal({
-      title: "解除当前设备连接",
-      content: "只会解除当前设备与数据账户的连接，不会删除原账户中的健康记录。解除后可重新输入正确的连接码。",
-      confirmText: "立即解绑",
+      title: "解除当前微信绑定",
+      content: "只会解除当前微信与本机账号的绑定，不会删除当前账号和健康记录；之后可在同步步数时重新绑定。",
+      confirmText: "解除绑定",
       confirmColor: "#b24b48",
       success: resolve,
     }));
@@ -320,21 +320,16 @@ Page({
       const login = await new Promise((resolve, reject) => wx.login({ success: resolve, fail: reject }));
       if (!login.code) throw new Error("当前设备识别失败，请重试");
       await post("/wechat/device-link/unbind", { code: login.code });
-      getApp().clearCurrentUser();
-      const user = await getApp().bootstrapSession(true);
-      const nextState = buildPreviewState(user);
       this.setData({
-        ...nextState,
         deviceLinkCode: "",
         deviceLinkInput: "",
         deviceLinkCountdown: "",
-        deviceLinkBound: false,
+        wechatBound: false,
         showProfileContent: true,
       });
       this.clearDeviceLinkTimer();
       this.deviceLinkExpiresAt = 0;
-      wx.showToast({ title: "当前设备已解绑", icon: "success" });
-      await this.loadUser(user.id);
+      wx.showToast({ title: "当前微信已解除绑定", icon: "success" });
     } catch (error) {
       if (!isUnauthorizedRedirectError(error)) wx.showToast({ title: error.message || "解绑失败", icon: "none" });
     } finally {

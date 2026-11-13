@@ -44,18 +44,12 @@ async function restoreStoredAccount(app) {
     return null;
   }
 
-  try {
-    await post("/wechat/bind", { code: await getWechatCode() }, { redirectOnUnauthorized: false });
-    return {
-      user: app.globalData.currentUser,
-      access_token: app.globalData.authToken,
-    };
-  } catch (error) {
-    if (error.statusCode === 401 || error.statusCode === 409) {
-      return null;
-    }
-    throw error;
-  }
+  // A device's saved health account takes priority over automatic WeChat session creation.
+  // Explicit actions such as step sync or device linking decide when to bind WeChat again.
+  return {
+    user: app.globalData.currentUser,
+    access_token: app.globalData.authToken,
+  };
 }
 
 App({
