@@ -1,6 +1,19 @@
 from datetime import datetime
 
+from app import models, services
+from app.database import SessionLocal
 from conftest import api_request
+
+
+def test_friend_pk_calendar_ignores_wechat_steps(registered_user):
+    user_id = registered_user["user"]["id"]
+    today = services.local_today()
+    with SessionLocal() as db:
+        db.add(models.WechatStepLog(user_id=user_id, log_date=today, steps=8000, calories=280))
+        db.commit()
+
+    state = api_request("GET", "/friend-pk/state", token=registered_user["token"])
+    assert today.isoformat() not in state["calendar"]
 
 
 def test_invitation_and_workout_calendar(registered_user):

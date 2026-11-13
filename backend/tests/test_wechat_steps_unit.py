@@ -40,6 +40,11 @@ def test_decode_steps_checks_appid(monkeypatch):
         decode_steps(encrypted, base64.b64encode(iv).decode(), base64.b64encode(key).decode())
 
 
+def test_wechat_step_calories_use_height_and_weight():
+    steps = 5000
+    assert services.estimate_wechat_step_calories(180, 85, steps) > services.estimate_wechat_step_calories(155, 50, steps)
+
+
 def test_wechat_registration_and_binding_conflicts(monkeypatch):
     engine = create_engine("sqlite:///:memory:")
     Base.metadata.create_all(engine)
@@ -103,6 +108,12 @@ def test_sync_updates_same_day_and_report_includes_step_calories(monkeypatch):
         assert report.wechat_step_calories_kcal > 0
         assert not report.wechat_steps_excluded
         assert report.total_burned_kcal == report.wechat_step_calories_kcal
+        original_step_calories = report.wechat_step_calories_kcal
+        user.height_cm = 180
+        user.weight_kg = 85
+        services.refresh_wechat_step_calories(db, user)
+        db.commit()
+        assert db.query(models.WechatStepLog).one().calories > original_step_calories
         db.add(models.WorkoutLog(user_id=user.id, type="walking", duration_min=10, calories_burned=30, log_date=today))
         db.commit()
         report = services.compute_daily_report(db, user, today)

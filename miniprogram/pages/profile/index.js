@@ -101,6 +101,7 @@ Page({
     deviceLinkCountdown: "",
     deviceLinkLoading: false,
     wechatBound: false,
+    unbindConfirmOpen: false,
     saveButtonText: "保存设置",
   },
 
@@ -301,18 +302,22 @@ Page({
     }
   },
 
+  openUnbindConfirm() {
+    if (!this.data.deviceLinkLoading && this.data.wechatBound) {
+      this.setData({ unbindConfirmOpen: true });
+    }
+  },
+
+  closeUnbindConfirm() {
+    if (!this.data.deviceLinkLoading) {
+      this.setData({ unbindConfirmOpen: false });
+    }
+  },
+
+  noop() {},
+
   async unbindCurrentDevice() {
     if (this.data.deviceLinkLoading || !this.data.wechatBound) {
-      return;
-    }
-    const confirmation = await new Promise(resolve => wx.showModal({
-      title: "解除当前微信绑定",
-      content: "只会解除当前微信与本机账号的绑定，不会删除当前账号和健康记录；之后可在同步步数时重新绑定。",
-      confirmText: "解除绑定",
-      confirmColor: "#b24b48",
-      success: resolve,
-    }));
-    if (!confirmation.confirm) {
       return;
     }
     try {
@@ -325,6 +330,7 @@ Page({
         deviceLinkInput: "",
         deviceLinkCountdown: "",
         wechatBound: false,
+        unbindConfirmOpen: false,
         showProfileContent: true,
       });
       this.clearDeviceLinkTimer();

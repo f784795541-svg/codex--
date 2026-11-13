@@ -345,6 +345,17 @@ def estimate_workout_calories(weight_kg: float, workout_type: str, duration_min:
     return round(met, 2), round(calories, 2)
 
 
+def estimate_wechat_step_calories(height_cm: float, weight_kg: float, steps: int) -> float:
+    distance_km = steps * height_cm * 0.00415 / 1000
+    return round(distance_km * weight_kg * 0.5, 2)
+
+
+def refresh_wechat_step_calories(db: Session, user: models.User) -> None:
+    logs = db.query(models.WechatStepLog).filter_by(user_id=user.id).all()
+    for log in logs:
+        log.calories = estimate_wechat_step_calories(user.height_cm, user.weight_kg, log.steps)
+
+
 def recommended_sleep_hours(age: int) -> float:
     if age <= 17:
         return 8.5

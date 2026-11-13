@@ -263,8 +263,7 @@ def sync_steps(payload: StepsRequest, db: Session = Depends(get_db), user=Depend
             continue
         daily_steps[day] = steps
     for day, steps in daily_steps.items():
-        distance_km = steps * user.height_cm * 0.00415 / 1000
-        calories = round(distance_km * user.weight_kg * 0.5, 2)
+        calories = services.estimate_wechat_step_calories(user.height_cm, user.weight_kg, steps)
         row = db.query(models.WechatStepLog).filter_by(user_id=user.id, log_date=day).first()
         if not row:
             row = models.WechatStepLog(user_id=user.id, log_date=day, steps=steps, calories=calories)

@@ -60,7 +60,7 @@
         <view class="section-title">当前微信已绑定</view>
       </view>
       <view class="card-note">解除后仍保留当前账号和所有健康记录；下次同步步数时可重新绑定。</view>
-      <button class="device-unbind-button" loading="{{deviceLinkLoading}}" disabled="{{deviceLinkLoading}}" bindtap="unbindCurrentDevice">解除当前微信绑定</button>
+      <button class="device-unbind-button" loading="{{deviceLinkLoading}}" disabled="{{deviceLinkLoading}}" bindtap="openUnbindConfirm">解除当前微信绑定</button>
     </view>
 
     <view class="card">
@@ -194,7 +194,18 @@
 
   </block>
 
-  <view wx:else class="empty">
+  <view class="unbind-modal-mask" wx:if="{{unbindConfirmOpen}}" catchtouchmove="noop">
+    <view class="unbind-modal" catchtap="noop">
+      <view class="unbind-modal-title">解除当前微信绑定</view>
+      <view class="unbind-modal-copy">只解除当前微信与本机账号的关联，不会删除账号和健康记录。之后同步步数时可以重新绑定。</view>
+      <view class="unbind-modal-actions">
+        <button class="unbind-modal-cancel" disabled="{{deviceLinkLoading}}" bindtap="closeUnbindConfirm">取消</button>
+        <button class="unbind-modal-confirm" loading="{{deviceLinkLoading}}" disabled="{{deviceLinkLoading}}" bindtap="unbindCurrentDevice">解除绑定</button>
+      </view>
+    </view>
+  </view>
+
+  <view wx:if="{{!showProfileContent && !(loading && !showProfileContent)}}" class="empty">
     <text class="empty-title">账户资料暂时未就绪</text>
     请稍后重试，账户建立后即可编辑个人资料。
   </view>

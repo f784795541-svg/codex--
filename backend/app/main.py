@@ -110,6 +110,9 @@ def update_user_info(
             )
         )
 
+    if payload.height_cm is not None or weight_changed:
+        services.refresh_wechat_step_calories(db, user)
+
     db.commit()
     db.refresh(user)
     return {"message": "设置已更新", "user": user}
@@ -308,6 +311,7 @@ def create_weight_log(
         record_time=payload.record_time,
     )
     user.weight_kg = payload.weight_kg
+    services.refresh_wechat_step_calories(db, user)
     db.add(log)
     db.commit()
     db.refresh(log)
