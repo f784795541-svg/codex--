@@ -21,7 +21,7 @@ button:active { transform: scale(.96); box-shadow: inset 0 2rpx 8rpx rgba(28, 72
 .pk-match-copy { flex: 1; min-width: 0; }
 .pk-match-copy .pk-note { padding-right: 4rpx; }
 .pk-match-actions { flex: 0 0 188rpx; width: 188rpx; margin-right: 34rpx; display: flex; flex-direction: column; gap: 20rpx; }
-.pk-match-action { box-sizing: border-box; flex: none; width: 188rpx; height: 82rpx; padding: 0; border: 2rpx solid #bed6d1; border-radius: 18rpx; background: rgba(255,255,255,.92); box-shadow: 0 6rpx 14rpx rgba(69, 113, 104, .1); color: #416c64; font-family: "Songti SC", STSong, SimSun, serif; font-size: 30rpx; font-weight: 500; letter-spacing: .4rpx; line-height: 78rpx; text-align: center; white-space: nowrap; }
+.pk-match-action { box-sizing: border-box; flex: none; width: 188rpx; height: 82rpx; padding: 0; border: 2rpx solid #bed6d1; border-radius: 18rpx; background: rgba(255,255,255,.92); box-shadow: 0 6rpx 14rpx rgba(69, 113, 104, .1); color: #416c64; font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif; font-size: 30rpx; font-weight: 700; letter-spacing: 0; line-height: 78rpx; text-align: center; white-space: nowrap; }
 .pk-match-action.primary { border-color: transparent; box-shadow: 0 8rpx 17rpx rgba(51, 111, 98, .22); }
 .pk-match-action-pressed { transform: scale(.94) translateY(2rpx); box-shadow: inset 0 3rpx 10rpx rgba(26, 72, 63, .24); }
 .pk-match-top { display: flex; align-items: center; justify-content: space-between; gap: 16rpx; }

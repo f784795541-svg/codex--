@@ -80,7 +80,7 @@ def test_wechat_registration_and_binding_conflicts(monkeypatch):
         assert error.value.status_code == 400
 
 
-def test_sync_updates_same_day_and_report_excludes_manual_walk(monkeypatch):
+def test_sync_updates_same_day_and_report_includes_step_calories(monkeypatch):
     engine = create_engine("sqlite:///:memory:")
     Base.metadata.create_all(engine)
     today = services.local_today()
@@ -101,14 +101,14 @@ def test_sync_updates_same_day_and_report_excludes_manual_walk(monkeypatch):
         report = services.compute_daily_report(db, user, today)
         assert report.wechat_steps == 5000
         assert report.wechat_step_calories_kcal > 0
-        assert report.wechat_steps_excluded
-        assert report.total_burned_kcal == 0
+        assert not report.wechat_steps_excluded
+        assert report.total_burned_kcal == report.wechat_step_calories_kcal
         db.add(models.WorkoutLog(user_id=user.id, type="walking", duration_min=10, calories_burned=30, log_date=today))
         db.commit()
         report = services.compute_daily_report(db, user, today)
-        assert report.wechat_steps_excluded
+        assert not report.wechat_steps_excluded
         assert report.wechat_step_calories_kcal > 0
-        assert report.total_burned_kcal == 30
+        assert report.total_burned_kcal == round(report.wechat_step_calories_kcal + 30, 2)
 
 
 def test_step_sync_claims_current_account_and_unbind_keeps_account(monkeypatch):

@@ -468,7 +468,7 @@ function buildSummaryView(summary) {
       value: wechatSteps === null || wechatSteps === undefined ? "点击同步" : `${wechatSteps} 步`,
       note: wechatSteps === null || wechatSteps === undefined
         ? "授权后同步今日步数"
-        : `已折算 ${Math.round(asNumber(summary.daily_report.wechat_step_calories_kcal))} kcal`,
+        : `已计入运动消耗 · ${Math.round(asNumber(summary.daily_report.wechat_step_calories_kcal))} kcal`,
     },
     goalItems: [
       {
