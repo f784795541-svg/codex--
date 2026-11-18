@@ -1,5 +1,6 @@
 const { get } = require("../../utils/request");
 const { ensureUser } = require("../../utils/session");
+const { onShareAppMessage } = require("../../utils/share");
 
 function normalizeDailyRecords(records) {
   if (!Array.isArray(records)) {
@@ -33,6 +34,8 @@ function buildRangeSummary(records) {
 }
 
 Page({
+  onShareAppMessage,
+
   data: {
     rangeDays: 7,
     rangeTabs: [

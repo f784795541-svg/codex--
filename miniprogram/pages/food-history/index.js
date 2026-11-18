@@ -1,5 +1,6 @@
 const { get, del } = require("../../utils/request");
 const { ensureUser } = require("../../utils/session");
+const { onShareAppMessage } = require("../../utils/share");
 const { getCurrentDate } = require("../../utils/date");
 
 function normalizeFoodItems(foodItems) {
@@ -39,6 +40,8 @@ function buildSummary(foodItems) {
 }
 
 Page({
+  onShareAppMessage,
+
   data: {
     reportDateLabel: "今天",
     summaryText: "加载中...",

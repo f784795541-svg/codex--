@@ -1,5 +1,6 @@
 const { get, post, isUnauthorizedRedirectError } = require("../../utils/request");
 const { ensureUser } = require("../../utils/session");
+const { onShareAppMessage } = require("../../utils/share");
 const { getCurrentDate, getCurrentTime } = require("../../utils/date");
 const { asPositiveNumber } = require("../../utils/validators");
 const { buildNumberOptions, getOptionIndex, getOptionValue } = require("../../utils/picker");
@@ -268,6 +269,8 @@ function getRecordScrollSelector(tabKey, kind) {
 }
 
 Page({
+  onShareAppMessage,
+
   data: {
     activeTab: "food",
     activeTabLabel: "饮食",

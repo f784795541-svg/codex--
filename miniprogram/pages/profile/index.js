@@ -1,5 +1,6 @@
 const { get, post, isUnauthorizedRedirectError } = require("../../utils/request");
 const { ensureUser } = require("../../utils/session");
+const { onShareAppMessage } = require("../../utils/share");
 const { asPositiveNumber, asNumberInRange, isFilled } = require("../../utils/validators");
 const { buildNumberOptions, getOptionIndex, getOptionValue } = require("../../utils/picker");
 const onboarding = require("../../utils/onboarding");
@@ -64,6 +65,8 @@ function buildPreviewState(user) {
 }
 
 Page({
+  onShareAppMessage,
+
   data: {
     user: null,
     name: "",
