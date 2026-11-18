@@ -147,7 +147,12 @@ def estimate_workout(
 
 
 @app.post("/food/create", response_model=schemas.FoodResponse)
-def create_food(payload: schemas.FoodCreate, db: Session = Depends(get_db)):
+def create_food(
+    payload: schemas.FoodCreate,
+    db: Session = Depends(get_db),
+    current_user: models.User | None = Depends(dependencies.get_optional_current_user),
+):
+    dependencies.resolve_user(db, None, current_user)
     existing = db.query(models.FoodDatabase).filter(models.FoodDatabase.name == payload.name).first()
     if existing:
         raise HTTPException(status_code=400, detail="食物已存在")
@@ -310,9 +315,21 @@ def create_weight_log(
         record_date=payload.record_date or services.local_today(),
         record_time=payload.record_time,
     )
-    user.weight_kg = payload.weight_kg
-    services.refresh_wechat_step_calories(db, user)
     db.add(log)
+    db.flush()
+    latest = (
+        db.query(models.WeightLog)
+        .filter(models.WeightLog.user_id == user.id)
+        .order_by(
+            models.WeightLog.record_date.desc(),
+            nulls_last(models.WeightLog.record_time.desc()),
+            models.WeightLog.id.desc(),
+        )
+        .first()
+    )
+    if latest.id == log.id:
+        user.weight_kg = payload.weight_kg
+        services.refresh_wechat_step_calories(db, user)
     db.commit()
     db.refresh(log)
     return log
@@ -330,7 +347,7 @@ def get_weight_history(
     logs = (
         db.query(models.WeightLog)
         .filter(models.WeightLog.user_id == user.id)
-        .order_by(models.WeightLog.record_date.desc(), nulls_last(models.WeightLog.record_time.desc()))
+        .order_by(models.WeightLog.record_date.desc(), nulls_last(models.WeightLog.record_time.desc()), models.WeightLog.id.desc())
         .limit(limit)
         .all()
     )

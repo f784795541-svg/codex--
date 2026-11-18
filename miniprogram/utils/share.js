@@ -15,6 +15,18 @@ function onShareAppMessage() {
   }
 }
 
+function onShareTimeline() {
+  const { title, imageUrl } = onShareAppMessage();
+  // Timeline always opens the current page; never inherit private page parameters.
+  return { title, imageUrl, query: "" };
+}
+
+function setupSharePage() {
+  this.setData({ timelinePreview: !!getApp().globalData.timelinePreview });
+}
+
 module.exports = {
   onShareAppMessage,
+  onShareTimeline,
+  setupSharePage,
 };

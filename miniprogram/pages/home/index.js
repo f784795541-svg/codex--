@@ -1,6 +1,6 @@
 const { get, isUnauthorizedRedirectError } = require("../../utils/request");
 const { ensureUser } = require("../../utils/session");
-const { onShareAppMessage } = require("../../utils/share");
+const { onShareAppMessage, onShareTimeline, setupSharePage } = require("../../utils/share");
 const wechatSteps = require("../../utils/wechat-steps");
 const onboarding = require("../../utils/onboarding");
 
@@ -514,6 +514,8 @@ function buildSummaryView(summary) {
 
 Page({
   onShareAppMessage,
+  onShareTimeline,
+  onLoad: setupSharePage,
 
   goFriendPk() {
     if (this.friendPkNavigating) {

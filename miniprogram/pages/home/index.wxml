@@ -1,4 +1,6 @@
-<view class="screen screen-home">
+<import src="../../templates/timeline-preview.wxml" />
+<template wx:if="{{timelinePreview}}" is="timeline-preview" />
+<view wx:else class="screen screen-home">
   <block wx:if="{{summary}}">
     <view class="hero-panel hero-panel-home" id="onboarding-home-overview">
       <button class="home-friend-pk" loading="{{friendPkOpening}}" disabled="{{friendPkOpening}}" bindtap="goFriendPk">{{friendPkOpening ? '打开中' : '好友邀战'}}</button>

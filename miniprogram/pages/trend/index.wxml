@@ -1,4 +1,6 @@
-<view class="screen screen-trend">
+<import src="../../templates/timeline-preview.wxml" />
+<template wx:if="{{timelinePreview}}" is="timeline-preview" />
+<view wx:else class="screen screen-trend">
   <view class="hero-panel" id="onboarding-trend-overview">
     <view class="hero-kicker">TREND VIEW</view>
     <view class="hero-title">趋势</view>

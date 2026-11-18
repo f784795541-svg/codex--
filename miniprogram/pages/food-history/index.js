@@ -1,6 +1,6 @@
 const { get, del } = require("../../utils/request");
 const { ensureUser } = require("../../utils/session");
-const { onShareAppMessage } = require("../../utils/share");
+const { onShareAppMessage, onShareTimeline, setupSharePage } = require("../../utils/share");
 const { getCurrentDate } = require("../../utils/date");
 
 function normalizeFoodItems(foodItems) {
@@ -41,6 +41,8 @@ function buildSummary(foodItems) {
 
 Page({
   onShareAppMessage,
+  onShareTimeline,
+  onLoad: setupSharePage,
 
   data: {
     reportDateLabel: "今天",

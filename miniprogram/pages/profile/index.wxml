@@ -1,4 +1,6 @@
-<view class="screen screen-profile">
+<import src="../../templates/timeline-preview.wxml" />
+<template wx:if="{{timelinePreview}}" is="timeline-preview" />
+<view wx:else class="screen screen-profile">
   <view wx:if="{{loading && !showProfileContent}}" class="empty">
     <text class="empty-title">账户信息加载中</text>
     正在拉取你的资料和目标设置，稍后就能继续编辑。

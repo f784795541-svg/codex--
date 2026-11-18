@@ -1,4 +1,6 @@
-<view class="screen screen-record">
+<import src="../../templates/timeline-preview.wxml" />
+<template wx:if="{{timelinePreview}}" is="timeline-preview" />
+<view wx:else class="screen screen-record">
   <view class="hero-panel">
     <view class="hero-kicker">DAILY LOG</view>
     <view class="hero-title" id="record-top-anchor">记录</view>

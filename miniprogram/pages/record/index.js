@@ -1,8 +1,8 @@
 const { get, post, isUnauthorizedRedirectError } = require("../../utils/request");
 const { ensureUser } = require("../../utils/session");
-const { onShareAppMessage } = require("../../utils/share");
+const { onShareAppMessage, onShareTimeline, setupSharePage } = require("../../utils/share");
 const { getCurrentDate, getCurrentTime } = require("../../utils/date");
-const { asPositiveNumber } = require("../../utils/validators");
+const { asPositiveNumber, asNumberInRange } = require("../../utils/validators");
 const { buildNumberOptions, getOptionIndex, getOptionValue } = require("../../utils/picker");
 const foodImageAssets = require("../../utils/foodImageAssets");
 const onboarding = require("../../utils/onboarding");
@@ -270,6 +270,7 @@ function getRecordScrollSelector(tabKey, kind) {
 
 Page({
   onShareAppMessage,
+  onShareTimeline,
 
   data: {
     activeTab: "food",
@@ -332,6 +333,8 @@ Page({
   },
 
   onLoad() {
+    setupSharePage.call(this);
+    if (this.data.timelinePreview) return;
     this.resetDynamicDefaults();
     this.syncActiveTabMeta(this.data.activeTab);
     this.refreshDerivedState();
@@ -956,7 +959,9 @@ Page({
 
     const selectedOption = this.data.workoutOptions[this.data.workoutTypeIndex];
     const duration = asPositiveNumber(this.data.workoutDuration);
-    const calories = asPositiveNumber(this.data.workoutCalories);
+    const calories = String(this.data.workoutCalories).trim()
+      ? asNumberInRange(this.data.workoutCalories, 0, Infinity)
+      : null;
     if (!selectedOption) {
       wx.showToast({
         title: "请先选择运动类型",
@@ -1088,10 +1093,7 @@ Page({
         record_date: this.data.weightDate,
         record_time: this.data.weightTime,
       });
-      const nextUser = {
-        ...user,
-        weight_kg: weight,
-      };
+      const nextUser = await get("/user/info", { user_id: user.id }).catch(() => user);
       getApp().setCurrentUser(nextUser);
       const recordDate = this.data.weightDate;
       const recordTime = this.data.weightTime;

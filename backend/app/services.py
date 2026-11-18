@@ -892,7 +892,7 @@ def build_dashboard_summary(
     recent_weights = (
         db.query(models.WeightLog)
         .filter(models.WeightLog.user_id == user.id)
-        .order_by(models.WeightLog.record_date.desc(), nulls_last(models.WeightLog.record_time.desc()))
+        .order_by(models.WeightLog.record_date.desc(), nulls_last(models.WeightLog.record_time.desc()), models.WeightLog.id.desc())
         .limit(max(weight_limit, 1))
         .all()
     )

@@ -2,6 +2,7 @@ const { getStoredUser } = require("./auth");
 
 async function ensureUser() {
   const app = getApp();
+  if (app.globalData.timelinePreview) return null;
   const user = app.globalData.currentUser || getStoredUser();
   if (user) {
     app.setCurrentUser(user);

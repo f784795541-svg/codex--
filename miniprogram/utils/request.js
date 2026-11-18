@@ -4,12 +4,14 @@ const inflightRequests = new Map();
 const responseCache = new Map();
 const DEFAULT_GET_CACHE_MS = 900;
 let unauthorizedRedirectPending = false;
+let cacheGeneration = 0;
 
-function buildRequestKey(method, url, data) {
-  return `${method}:${url}:${JSON.stringify(data || {})}`;
+function buildRequestKey(method, url, data, authToken) {
+  return `${authToken}:${method}:${url}:${JSON.stringify(data || {})}`;
 }
 
 function clearRequestCache() {
+  cacheGeneration += 1;
   inflightRequests.clear();
   responseCache.clear();
 }
@@ -62,8 +64,11 @@ function restoreSessionOnUnauthorized() {
 }
 
 function request({ url, method = "GET", data, header = {}, cacheMs = 0, redirectOnUnauthorized }) {
+  const app = getApp();
+  const authToken = app && app.globalData ? app.globalData.authToken : "";
   const normalizedMethod = String(method || "GET").toUpperCase();
-  const requestKey = buildRequestKey(normalizedMethod, url, data);
+  const requestKey = buildRequestKey(normalizedMethod, url, data, authToken);
+  const generation = cacheGeneration;
   const effectiveCacheMs =
     normalizedMethod === "GET"
       ? (typeof cacheMs === "number" && Number.isFinite(cacheMs) ? Math.max(0, cacheMs) : DEFAULT_GET_CACHE_MS)
@@ -83,8 +88,6 @@ function request({ url, method = "GET", data, header = {}, cacheMs = 0, redirect
   }
 
   const requestPromise = new Promise((resolve, reject) => {
-    const app = getApp();
-    const authToken = app && app.globalData ? app.globalData.authToken : "";
     wx.request({
       url: `${API_BASE}${url}`,
       method: normalizedMethod,
@@ -98,7 +101,7 @@ function request({ url, method = "GET", data, header = {}, cacheMs = 0, redirect
       success: (response) => {
         const { statusCode, data: body } = response;
         if (statusCode >= 200 && statusCode < 300) {
-          if (normalizedMethod === "GET" && effectiveCacheMs > 0) {
+          if (normalizedMethod === "GET" && effectiveCacheMs > 0 && generation === cacheGeneration) {
             responseCache.set(requestKey, {
               value: body,
               expiresAt: Date.now() + effectiveCacheMs,
@@ -111,7 +114,7 @@ function request({ url, method = "GET", data, header = {}, cacheMs = 0, redirect
           return;
         }
 
-        if (statusCode === 401 && redirectUnauthorized) {
+        if (statusCode === 401 && redirectUnauthorized && authToken === app.globalData.authToken) {
           if (app && typeof app.clearCurrentUser === "function") {
             app.clearCurrentUser();
           }
@@ -129,7 +132,9 @@ function request({ url, method = "GET", data, header = {}, cacheMs = 0, redirect
       },
     });
   }).finally(() => {
-    inflightRequests.delete(requestKey);
+    if (inflightRequests.get(requestKey) === requestPromise) {
+      inflightRequests.delete(requestKey);
+    }
   });
 
   if (normalizedMethod === "GET") {

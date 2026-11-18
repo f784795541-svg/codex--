@@ -1,5 +1,5 @@
 const { getStoredUser, getStoredAuthToken, setStoredUser, clearStoredUser } = require("./utils/auth");
-const { post } = require("./utils/request");
+const { post, clearRequestCache } = require("./utils/request");
 
 function getWechatCode() {
   return new Promise((resolve, reject) => {
@@ -56,12 +56,16 @@ App({
   globalData: {
     currentUser: null,
     authToken: "",
+    timelinePreview: false,
   },
 
-  onLaunch() {
+  onLaunch(options = {}) {
+    this.globalData.timelinePreview = options.scene === 1154;
+    // Timeline single-page mode cannot log in and has separate local storage.
+    if (this.globalData.timelinePreview) return;
     this.globalData.currentUser = getStoredUser();
     this.globalData.authToken = getStoredAuthToken();
-    this.bootstrapSession();
+    this.bootstrapSession().catch(() => {});
   },
 
   bootstrapSession(force = false) {
@@ -74,11 +78,18 @@ App({
       .then((auth) => {
         this.setCurrentUser(auth.user, auth.access_token);
         return auth.user;
+      })
+      .catch((error) => {
+        this.globalData.bootstrapPromise = null;
+        throw error;
       });
     return this.globalData.bootstrapPromise;
   },
 
   setCurrentUser(user, token = "") {
+    if (user?.id !== this.globalData.currentUser?.id || (token && token !== this.globalData.authToken)) {
+      clearRequestCache();
+    }
     this.globalData.currentUser = user;
     if (token) {
       this.globalData.authToken = token;
@@ -89,6 +100,8 @@ App({
   clearCurrentUser() {
     this.globalData.currentUser = null;
     this.globalData.authToken = "";
+    this.globalData.bootstrapPromise = null;
+    clearRequestCache();
     clearStoredUser();
   },
 });

@@ -1,3 +1,47 @@
+.timeline-preview {
+  padding-bottom: 48rpx;
+  background: #f1f7f8;
+}
+
+.timeline-cover {
+  display: block;
+  width: 100%;
+}
+
+.timeline-journal {
+  padding: 24rpx 36rpx;
+}
+
+.timeline-label,
+.timeline-time,
+.timeline-detail {
+  color: #607d83;
+  font-size: 26rpx;
+  line-height: 1.6;
+}
+
+.timeline-heading {
+  margin: 8rpx 0 16rpx;
+  font-size: 36rpx;
+  font-weight: 600;
+}
+
+.timeline-row {
+  display: flex;
+  gap: 28rpx;
+  padding: 24rpx 0;
+  border-bottom: 1rpx solid #d8e5e7;
+}
+
+.timeline-time {
+  flex: 0 0 84rpx;
+}
+
+.timeline-name {
+  margin-bottom: 8rpx;
+  font-size: 28rpx;
+}
+
 page {
   min-height: 100%;
   background: #dfecee;

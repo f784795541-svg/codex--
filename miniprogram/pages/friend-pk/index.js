@@ -1,6 +1,6 @@
 const { get, post } = require("../../utils/request");
 const { ensureUser } = require("../../utils/session");
-const { onShareAppMessage } = require("../../utils/share");
+const { onShareAppMessage, onShareTimeline, setupSharePage } = require("../../utils/share");
 
 function calendarDays(data) {
   const end = new Date(`${data.today}T12:00:00`);
@@ -25,6 +25,8 @@ function habitDays(habit, month, peer) {
 
 Page({
   onShareAppMessage,
+  onShareTimeline,
+  onLoad: setupSharePage,
 
   data: { loading: true, data: null, days: [], habits: [], month: "", dialog: "", code: "", codeOpening: false, inputCode: "", inviteSending: false, habitName: "", habitFormOpen: false, habitError: "", error: "" },
   async onShow() {

@@ -1,6 +1,6 @@
 const { get } = require("../../utils/request");
 const { ensureUser } = require("../../utils/session");
-const { onShareAppMessage } = require("../../utils/share");
+const { onShareAppMessage, onShareTimeline, setupSharePage } = require("../../utils/share");
 
 function normalizeDailyRecords(records) {
   if (!Array.isArray(records)) {
@@ -35,6 +35,8 @@ function buildRangeSummary(records) {
 
 Page({
   onShareAppMessage,
+  onShareTimeline,
+  onLoad: setupSharePage,
 
   data: {
     rangeDays: 7,

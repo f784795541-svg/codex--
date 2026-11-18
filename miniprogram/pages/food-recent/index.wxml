@@ -1,4 +1,6 @@
-<view class="screen screen-food-recent">
+<import src="../../templates/timeline-preview.wxml" />
+<template wx:if="{{timelinePreview}}" is="timeline-preview" />
+<view wx:else class="screen screen-food-recent">
   <view class="hero-panel food-recent-hero">
     <view class="food-recent-topbar">
       <view class="food-recent-back" bindtap="goBack" hover-class="tap-feedback-hover" hover-stay-time="70">返回</view>

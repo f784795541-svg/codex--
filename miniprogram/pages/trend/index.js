@@ -1,6 +1,6 @@
 const { get, isUnauthorizedRedirectError } = require("../../utils/request");
 const { ensureUser } = require("../../utils/session");
-const { onShareAppMessage } = require("../../utils/share");
+const { onShareAppMessage, onShareTimeline, setupSharePage } = require("../../utils/share");
 const onboarding = require("../../utils/onboarding");
 
 function formatDateRange(startDate, endDate) {
@@ -392,6 +392,8 @@ function buildTrendView(user, dailyReport, weeklyReport, weights) {
 
 Page({
   onShareAppMessage,
+  onShareTimeline,
+  onLoad: setupSharePage,
 
   data: {
     dailyReport: null,

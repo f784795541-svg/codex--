@@ -1,4 +1,6 @@
-<view class="pk-page">
+<import src="../../templates/timeline-preview.wxml" />
+<template wx:if="{{timelinePreview}}" is="timeline-preview" />
+<view wx:else class="pk-page">
   <view class="pk-heading"><view class="pk-title">好友 PK</view></view>
   <view class="pk-loading" wx:if="{{loading}}">正在加载...</view>
   <block wx:if="{{data}}">

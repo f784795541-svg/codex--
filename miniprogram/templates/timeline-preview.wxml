@@ -1,0 +1,12 @@
+<template name="timeline-preview">
+  <view class="timeline-preview">
+    <image class="timeline-cover" src="/assets/share-cover.png" mode="widthFix" />
+    <view class="timeline-journal">
+      <text class="timeline-label">记录示例</text>
+      <view class="timeline-heading">一天的生活手记</view>
+      <view class="timeline-row"><text class="timeline-time">08:00</text><view><view class="timeline-name">早餐</view><text class="timeline-detail">鸡蛋、牛奶、馒头</text></view></view>
+      <view class="timeline-row"><text class="timeline-time">18:30</text><view><view class="timeline-name">晚间散步</view><text class="timeline-detail">记录活动时长 30 分钟</text></view></view>
+      <view class="timeline-row"><text class="timeline-time">23:00</text><view><view class="timeline-name">睡眠</view><text class="timeline-detail">记下入睡与起床的时间</text></view></view>
+    </view>
+  </view>
+</template>
