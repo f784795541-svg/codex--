@@ -194,6 +194,36 @@
       <button class="button" loading="{{saving}}" disabled="{{saving}}" bindtap="submit">{{saveButtonText}}</button>
     </view>
 
+    <view class="card profile-support-card">
+      <view class="card-head">
+        <view>
+          <text class="card-kicker">数据与支持</text>
+          <view class="section-title">版本更新与问题反馈</view>
+        </view>
+        <view class="card-badge">v{{appVersion}}</view>
+      </view>
+      <view class="card-note">可导出当前账号资料与记录；反馈会安全保存，管理员可及时查看。</view>
+      <view class="support-action-row">
+        <view class="support-action-copy">
+          <view class="support-action-title">导出我的数据</view>
+          <view class="support-action-note">生成包含资料和记录的本地文件</view>
+        </view>
+        <button class="support-action-button" loading="{{exportLoading}}" disabled="{{exportLoading}}" bindtap="exportMyData">导出</button>
+      </view>
+      <view class="support-action-row">
+        <view class="support-action-copy">
+          <view class="support-action-title">检查新版本</view>
+          <view class="support-action-note">发现正式版更新后可直接重启使用</view>
+        </view>
+        <button class="support-action-button" loading="{{updateChecking}}" disabled="{{updateChecking}}" bindtap="checkForUpdate">检查</button>
+      </view>
+      <view class="feedback-field">
+        <text class="field-label">问题反馈</text>
+        <textarea class="feedback-input" value="{{feedbackContent}}" maxlength="1000" placeholder="描述你遇到的问题或希望新增的功能" bindinput="handleFeedbackInput" auto-height />
+      </view>
+      <button class="feedback-submit-button" loading="{{feedbackSubmitting}}" disabled="{{feedbackSubmitting}}" bindtap="submitFeedback">提交反馈</button>
+    </view>
+
   </block>
 
   <block wx:if="{{onboardingVisible}}">
@@ -203,7 +233,7 @@
       <view class="onboarding-step">新手引导 {{onboardingStep}} / {{onboardingTotal}}</view>
       <view class="onboarding-title">{{onboardingTitle}}</view>
       <view class="onboarding-copy">{{onboardingCopy}}</view>
-      <button class="onboarding-next" bindtap="nextOnboarding">下一步</button>
+      <button class="onboarding-next" bindtap="nextOnboarding">{{onboardingStep === 4 ? '确认资料并继续' : '下一步'}}</button>
     </view>
   </block>
 

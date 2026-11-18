@@ -171,6 +171,13 @@ class UserUpdateResponse(BaseModel):
     user: UserResponse
 
 
+class FeedbackCreate(BaseModel):
+    user_id: int | None = None
+    content: str = Field(min_length=1, max_length=1000)
+    client_platform: str = Field(default="miniprogram", min_length=1, max_length=30)
+    app_version: str | None = Field(default=None, max_length=40)
+
+
 class FoodItemReport(BaseModel):
     id: int
     food_name: str

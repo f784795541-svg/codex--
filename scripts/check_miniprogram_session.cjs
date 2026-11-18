@@ -185,3 +185,56 @@ test("backdated weight submission keeps the server's current account weight", as
   assert.equal(savedUser.weight_kg, 72);
   assert.equal(page.data.submittingWeight, false);
 });
+
+function loadProfile(post) {
+  const filename = path.join(root, "pages/profile/index.js");
+  const requirePage = createRequire(filename);
+  let page;
+  const onboardingCalls = [];
+  const app = { setCurrentUser() {}, globalData: { currentUser: { id: 1 } } };
+  vm.runInNewContext(fs.readFileSync(filename, "utf8"), {
+    Page(definition) { page = definition; },
+    require: name => name === "../../utils/session"
+      ? { ensureUser: async () => ({ id: 1 }) }
+      : name === "../../utils/request"
+        ? { get: async () => ({}), post, isUnauthorizedRedirectError: () => false }
+        : name === "../../utils/share"
+          ? { onShareAppMessage() {}, onShareTimeline() {}, setupSharePage() {} }
+          : name === "../../utils/onboarding"
+            ? { next(...args) { onboardingCalls.push(args); }, show() {}, clearTimer() {} }
+            : requirePage(name),
+    getApp: () => app,
+    wx: { showToast() {}, getUpdateManager() {} },
+  });
+  page.data = { ...page.data };
+  page.setData = data => Object.assign(page.data, data);
+  return { page, onboardingCalls };
+}
+
+test("profile feedback is submitted with the active account and cleared after success", async () => {
+  const submissions = [];
+  const { page } = loadProfile(async (url, data) => {
+    submissions.push({ url, data });
+    return { id: 1 };
+  });
+  page.data.user = { id: 88 };
+  page.data.feedbackContent = "The feedback flow works.";
+  await page.submitFeedback();
+  assert.equal(submissions.length, 1);
+  assert.equal(submissions[0].url, "/feedback");
+  assert.equal(submissions[0].data.user_id, 88);
+  assert.equal(submissions[0].data.content, "The feedback flow works.");
+  assert.equal(submissions[0].data.client_platform, "miniprogram");
+  assert.equal(submissions[0].data.app_version, "1.1.0");
+  assert.equal(page.data.feedbackContent, "");
+  assert.equal(page.data.feedbackSubmitting, false);
+});
+
+test("onboarding step four saves profile data before advancing", async () => {
+  const { page } = loadProfile(async () => ({ id: 1 }));
+  let submitOptions;
+  page.data.onboardingStep = 4;
+  page.submit = async options => { submitOptions = options; };
+  await page.nextOnboarding();
+  assert.equal(submitOptions.continueOnboarding, true);
+});

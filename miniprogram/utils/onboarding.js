@@ -26,8 +26,8 @@ const STEPS = [
     page: "profile",
     path: "/pages/profile/index",
     target: "#onboarding-profile-basics",
-    title: "先补齐身体基础资料",
-    copy: "在“我的”里填写昵称、身高、当前体重和目标体重。它们会直接影响热量估算和好友 PK 展示。",
+    title: "确认身体基础资料",
+    copy: "首次进入时系统会使用默认资料。请确认昵称、身高、当前体重和目标体重；点击“确认资料并继续”保存后，热量估算和好友 PK 才会按你的实际情况计算。",
   },
   {
     page: "profile",

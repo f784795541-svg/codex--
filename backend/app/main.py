@@ -1,9 +1,9 @@
 from sqlalchemy import nulls_last
 from fastapi import Depends, FastAPI, HTTPException, Query
 from fastapi.middleware.cors import CORSMiddleware
-from sqlalchemy.orm import Session
+from sqlalchemy.orm import Session, joinedload
 
-from . import dependencies, models, schemas, services
+from . import dependencies, feedback_mail, models, schemas, services
 from .database import get_db
 from .food_metadata import build_aliases_text, build_food_search_text
 from .error_tracking import record_api_error
@@ -15,7 +15,7 @@ from .workout_metadata import get_workout_option, get_workout_option_list
 app = FastAPI(
     title="Health Manager",
     description="基于数据库、固定公式和规则引擎的轻量级健康管理系统",
-    version="1.0.0",
+    version="1.1.0",
 )
 
 app.add_middleware(
@@ -70,6 +70,88 @@ def get_user_info(
 ):
     user = dependencies.resolve_user(db, user_id, current_user)
     return user
+
+
+@app.get("/user/data-export")
+def export_user_data(
+    user_id: int | None = Query(None),
+    db: Session = Depends(get_db),
+    current_user: models.User | None = Depends(dependencies.get_optional_current_user),
+):
+    user = dependencies.resolve_user(db, user_id, current_user)
+    food_logs = (
+        db.query(models.FoodLog)
+        .options(joinedload(models.FoodLog.food))
+        .filter(models.FoodLog.user_id == user.id)
+        .order_by(models.FoodLog.log_date.desc(), models.FoodLog.time.desc(), models.FoodLog.id.desc())
+        .all()
+    )
+    workouts = db.query(models.WorkoutLog).filter(models.WorkoutLog.user_id == user.id).order_by(
+        models.WorkoutLog.log_date.desc(), nulls_last(models.WorkoutLog.workout_time.desc()), models.WorkoutLog.id.desc()
+    ).all()
+    sleep_logs = db.query(models.SleepLog).filter(models.SleepLog.user_id == user.id).order_by(
+        models.SleepLog.log_date.desc(), models.SleepLog.id.desc()
+    ).all()
+    weight_logs = db.query(models.WeightLog).filter(models.WeightLog.user_id == user.id).order_by(
+        models.WeightLog.record_date.desc(), nulls_last(models.WeightLog.record_time.desc()), models.WeightLog.id.desc()
+    ).all()
+    return {
+        "exported_at": services.local_now().isoformat(),
+        "user": schemas.UserResponse.model_validate(user),
+        "food_logs": [{
+            "id": item.id,
+            "food_name": item.food.name,
+            "weight_g": item.weight_g,
+            "cooking_method": item.cooking_method,
+            "time": item.time.strftime("%H:%M"),
+            "log_date": item.log_date.isoformat(),
+        } for item in food_logs],
+        "workout_logs": [{
+            "id": item.id,
+            "type": item.type,
+            "duration_min": item.duration_min,
+            "calories_burned": item.calories_burned,
+            "workout_time": item.workout_time.strftime("%H:%M") if item.workout_time else None,
+            "log_date": item.log_date.isoformat(),
+        } for item in workouts],
+        "sleep_logs": [{
+            "id": item.id,
+            "sleep_start": item.sleep_start.strftime("%H:%M"),
+            "sleep_end": item.sleep_end.strftime("%H:%M"),
+            "log_date": item.log_date.isoformat(),
+        } for item in sleep_logs],
+        "weight_logs": [{
+            "id": item.id,
+            "weight_kg": item.weight_kg,
+            "record_time": item.record_time.strftime("%H:%M") if item.record_time else None,
+            "record_date": item.record_date.isoformat(),
+        } for item in weight_logs],
+    }
+
+
+@app.post("/feedback")
+def create_feedback(
+    payload: schemas.FeedbackCreate,
+    db: Session = Depends(get_db),
+    current_user: models.User | None = Depends(dependencies.get_optional_current_user),
+):
+    user = dependencies.resolve_user(db, payload.user_id, current_user)
+    content = payload.content.strip()
+    client_platform = payload.client_platform.strip() or "miniprogram"
+    if not content:
+        raise HTTPException(status_code=400, detail="反馈内容不能为空")
+    feedback = models.UserFeedback(
+        user_id=user.id,
+        content=content,
+        client_platform=client_platform,
+        app_version=payload.app_version.strip() if payload.app_version else None,
+    )
+    db.add(feedback)
+    db.commit()
+    db.refresh(feedback)
+    feedback.delivery_status = feedback_mail.send_feedback_notification(user, feedback)
+    db.commit()
+    return {"message": "反馈已收到，感谢你的帮助", "id": feedback.id}
 
 
 @app.post("/user/update", response_model=schemas.UserUpdateResponse)

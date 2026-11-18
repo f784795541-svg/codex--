@@ -69,3 +69,25 @@ def test_food_delete_cannot_remove_another_users_record(registered_user):
         api_request("DELETE", f"/food/log/{created['id']}", token=other["access_token"])
     report = api_request("GET", "/report/daily", token=token)
     assert any(item["id"] == created["id"] for item in report["food_items"])
+
+
+def test_user_can_export_own_data_and_submit_feedback(registered_user):
+    token = registered_user["token"]
+    user_id = registered_user["user"]["id"]
+
+    exported = api_request("GET", f"/user/data-export?{query_string({'user_id': user_id})}", token=token)
+    assert exported["user"]["id"] == user_id
+    assert {"food_logs", "workout_logs", "sleep_logs", "weight_logs"}.issubset(exported)
+
+    feedback = api_request("POST", "/feedback", {
+        "user_id": user_id,
+        "content": "Regression feedback message",
+        "client_platform": "miniprogram",
+        "app_version": "test",
+    }, token)
+    assert feedback["id"] > 0
+
+
+def test_feedback_requires_login():
+    with pytest.raises(AssertionError, match="failed with 401"):
+        api_request("POST", "/feedback", {"content": "Anonymous feedback is not accepted"})

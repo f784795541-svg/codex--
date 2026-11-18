@@ -172,6 +172,18 @@ def run_schema_migrations() -> None:
             if "created_at" not in weight_columns:
                 connection.execute(text("ALTER TABLE weight_logs ADD COLUMN created_at TIMESTAMP"))
                 connection.execute(text("UPDATE weight_logs SET created_at = CURRENT_TIMESTAMP WHERE created_at IS NULL"))
+        if inspector.has_table("user_feedback"):
+            feedback_columns = {column["name"] for column in inspector.get_columns("user_feedback")}
+            if "client_platform" not in feedback_columns:
+                connection.execute(text("ALTER TABLE user_feedback ADD COLUMN client_platform VARCHAR(30) DEFAULT 'miniprogram'"))
+            if "app_version" not in feedback_columns:
+                connection.execute(text("ALTER TABLE user_feedback ADD COLUMN app_version VARCHAR(40)"))
+            if "delivery_status" not in feedback_columns:
+                connection.execute(text("ALTER TABLE user_feedback ADD COLUMN delivery_status VARCHAR(20) DEFAULT 'stored'"))
+            if "created_at" not in feedback_columns:
+                connection.execute(text("ALTER TABLE user_feedback ADD COLUMN created_at TIMESTAMP"))
+                connection.execute(text("UPDATE user_feedback SET created_at = CURRENT_TIMESTAMP WHERE created_at IS NULL"))
+            connection.execute(text("CREATE INDEX IF NOT EXISTS idx_user_feedback_created_at ON user_feedback (created_at DESC)"))
 
 
 def init_database(max_retries: int = 10, retry_delay: int = 3) -> None:

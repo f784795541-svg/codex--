@@ -30,6 +30,7 @@ class User(Base):
     workout_logs: Mapped[list["WorkoutLog"]] = relationship(back_populates="user")
     sleep_logs: Mapped[list["SleepLog"]] = relationship(back_populates="user")
     weight_logs: Mapped[list["WeightLog"]] = relationship(back_populates="user")
+    feedback_items: Mapped[list["UserFeedback"]] = relationship(back_populates="user")
 
     @property
     def has_password(self) -> bool:
@@ -153,6 +154,20 @@ class WeightLog(Base):
     created_at: Mapped[datetime] = mapped_column(DateTime, default=datetime.utcnow, nullable=False)
 
     user: Mapped["User"] = relationship(back_populates="weight_logs")
+
+
+class UserFeedback(Base):
+    __tablename__ = "user_feedback"
+
+    id: Mapped[int] = mapped_column(Integer, primary_key=True, index=True)
+    user_id: Mapped[int] = mapped_column(ForeignKey("users.id"), nullable=False, index=True)
+    content: Mapped[str] = mapped_column(String(1000), nullable=False)
+    client_platform: Mapped[str] = mapped_column(String(30), nullable=False, default="miniprogram")
+    app_version: Mapped[str | None] = mapped_column(String(40), nullable=True)
+    delivery_status: Mapped[str] = mapped_column(String(20), nullable=False, default="stored")
+    created_at: Mapped[datetime] = mapped_column(DateTime, default=datetime.utcnow, nullable=False, index=True)
+
+    user: Mapped["User"] = relationship(back_populates="feedback_items")
 
 
 class FriendInviteCode(Base):

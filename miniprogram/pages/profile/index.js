@@ -5,6 +5,8 @@ const { asPositiveNumber, asNumberInRange, isFilled } = require("../../utils/val
 const { buildNumberOptions, getOptionIndex, getOptionValue } = require("../../utils/picker");
 const onboarding = require("../../utils/onboarding");
 
+const APP_VERSION = "1.1.0";
+
 const GOALS = [
   { label: "减脂", value: "fat_loss" },
   { label: "维持", value: "maintain" },
@@ -114,6 +116,11 @@ Page({
     onboardingCopy: "",
     onboardingFocusStyle: "",
     saveButtonText: "保存设置",
+    appVersion: APP_VERSION,
+    feedbackContent: "",
+    feedbackSubmitting: false,
+    exportLoading: false,
+    updateChecking: false,
   },
 
   onLoad() {
@@ -161,7 +168,11 @@ Page({
     onboarding.clearTimer(this);
   },
 
-  nextOnboarding() {
+  async nextOnboarding() {
+    if (this.data.onboardingStep === 4) {
+      await this.submit({ continueOnboarding: true });
+      return;
+    }
     onboarding.next(this, "profile", getApp().globalData.currentUser?.id);
   },
 
@@ -232,6 +243,96 @@ Page({
       nextState.displayWeight = `${value || "-"} kg`;
     }
     this.setData(nextState);
+  },
+
+  handleFeedbackInput(event) {
+    this.setData({ feedbackContent: event.detail.value });
+  },
+
+  async exportMyData() {
+    if (!this.data.user || this.data.exportLoading) {
+      return;
+    }
+    try {
+      this.setData({ exportLoading: true });
+      const payload = await get("/user/data-export", { user_id: this.data.user.id }, { cacheMs: 0 });
+      const safeTime = new Date().toISOString().replace(/[:.]/g, "-");
+      const filePath = `${wx.env.USER_DATA_PATH}/health-data-${safeTime}.txt`;
+      wx.getFileSystemManager().writeFileSync(filePath, JSON.stringify(payload, null, 2), "utf8");
+      wx.openDocument({
+        filePath,
+        fileType: "txt",
+        showMenu: true,
+        fail: () => wx.showToast({ title: "数据已导出到本机文件", icon: "none" }),
+      });
+    } catch (error) {
+      if (!isUnauthorizedRedirectError(error)) wx.showToast({ title: error.message || "导出失败，请重试", icon: "none" });
+    } finally {
+      this.setData({ exportLoading: false });
+    }
+  },
+
+  async submitFeedback() {
+    const content = this.data.feedbackContent.trim();
+    if (!content || this.data.feedbackSubmitting || !this.data.user) {
+      wx.showToast({ title: "请先填写反馈内容", icon: "none" });
+      return;
+    }
+    try {
+      this.setData({ feedbackSubmitting: true });
+      await post("/feedback", {
+        user_id: this.data.user.id,
+        content,
+        client_platform: "miniprogram",
+        app_version: APP_VERSION,
+      });
+      this.setData({ feedbackContent: "" });
+      wx.showToast({ title: "反馈已提交", icon: "success" });
+    } catch (error) {
+      if (!isUnauthorizedRedirectError(error)) wx.showToast({ title: error.message || "提交失败，请重试", icon: "none" });
+    } finally {
+      this.setData({ feedbackSubmitting: false });
+    }
+  },
+
+  checkForUpdate() {
+    if (this.data.updateChecking) {
+      return;
+    }
+    if (typeof wx.getUpdateManager !== "function") {
+      wx.showToast({ title: "当前环境不支持版本检查", icon: "none" });
+      return;
+    }
+    this.setData({ updateChecking: true });
+    const manager = wx.getUpdateManager();
+    let settled = false;
+    const finish = () => {
+      if (!settled) {
+        settled = true;
+        this.setData({ updateChecking: false });
+      }
+    };
+    manager.onCheckForUpdate((result) => {
+      if (!result.hasUpdate) {
+        wx.showToast({ title: "当前已是最新版本", icon: "none" });
+        finish();
+      }
+    });
+    manager.onUpdateReady(() => {
+      finish();
+      wx.showModal({
+        title: "发现新版本",
+        content: "新版本已下载完成，重启后即可使用。",
+        confirmText: "立即重启",
+        success: (result) => {
+          if (result.confirm) manager.applyUpdate();
+        },
+      });
+    });
+    manager.onUpdateFailed(() => {
+      finish();
+      wx.showToast({ title: "新版本下载失败，请稍后重试", icon: "none" });
+    });
   },
 
   handleDeviceLinkInput(event) {
@@ -411,7 +512,7 @@ Page({
     }, delay);
   },
 
-  async submit() {
+  async submit(options = {}) {
     if (!this.data.user) {
       return;
     }
@@ -460,7 +561,11 @@ Page({
         title: "资料已更新",
         icon: "success",
       });
-      this.goHomeAfterSuccess();
+      if (options.continueOnboarding) {
+        onboarding.next(this, "profile", result.user.id);
+      } else {
+        this.goHomeAfterSuccess();
+      }
     } catch (error) {
       if (isUnauthorizedRedirectError(error)) {
         return;

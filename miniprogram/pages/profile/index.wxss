@@ -51,6 +51,73 @@
   line-height: 1.56;
 }
 
+.profile-support-card {
+  margin-bottom: 30rpx;
+}
+
+.support-action-row {
+  display: flex;
+  align-items: center;
+  gap: 18rpx;
+  padding: 20rpx 0;
+  border-bottom: 1rpx solid #e4eeee;
+}
+
+.support-action-copy {
+  flex: 1;
+  min-width: 0;
+}
+
+.support-action-title {
+  color: #214d55;
+  font-size: 25rpx;
+  font-weight: 700;
+}
+
+.support-action-note {
+  margin-top: 5rpx;
+  color: #738d92;
+  font-size: 20rpx;
+  line-height: 1.45;
+}
+
+.support-action-button {
+  min-width: 112rpx;
+  margin: 0;
+  padding: 0 18rpx;
+  border-radius: 12rpx;
+  background: #e5f1f1;
+  color: #22666b;
+  font-size: 22rpx;
+  line-height: 60rpx;
+}
+
+.feedback-field {
+  margin-top: 22rpx;
+}
+
+.feedback-input {
+  box-sizing: border-box;
+  width: 100%;
+  min-height: 142rpx;
+  margin-top: 12rpx;
+  padding: 18rpx;
+  border: 1rpx solid #dbe9e9;
+  border-radius: 12rpx;
+  background: #f8fbfb;
+  color: #214d55;
+  font-size: 24rpx;
+  line-height: 1.5;
+}
+
+.feedback-submit-button {
+  margin-top: 18rpx;
+  border-radius: 12rpx;
+  background: #2f7f82;
+  color: #ffffff;
+  font-size: 24rpx;
+}
+
 .device-link-card {
   margin-top: 20rpx;
 }

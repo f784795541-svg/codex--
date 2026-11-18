@@ -96,7 +96,21 @@ def maintenance_summary(db: Session = Depends(get_db)):
         "abnormal_foods": quality["abnormal_foods"],
         "recent_api_errors": recent_api_errors(),
         "backup_status": backup_status(),
+        "feedback_count": db.query(func.count(models.UserFeedback.id)).scalar(),
     }
+
+
+@router.get("/feedback", dependencies=[Depends(require_maintenance_token)])
+def maintenance_feedback(limit: int = 50, db: Session = Depends(get_db)):
+    rows = db.query(models.UserFeedback).order_by(models.UserFeedback.created_at.desc()).limit(min(max(limit, 1), 200)).all()
+    return [{
+        "id": item.id,
+        "user_id": item.user_id,
+        "content": item.content,
+        "client_platform": item.client_platform,
+        "app_version": item.app_version,
+        "created_at": item.created_at.isoformat(),
+    } for item in rows]
 
 
 @router.post("/reset-password", dependencies=[Depends(require_maintenance_token)])
